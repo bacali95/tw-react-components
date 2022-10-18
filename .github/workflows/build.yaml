@@ -26,7 +26,6 @@ jobs:
         with:
           path: |
             **/node_modules
-            !**/node_modules/.cache/nx
             ~/.cache/Cypress
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
