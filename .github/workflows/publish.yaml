@@ -1,15 +1,18 @@
-name: Build Demo
+name: Publish library
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v*
 
 concurrency: ${{ github.ref }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Check out the code 🗄
         uses: actions/checkout@v3
@@ -46,8 +49,10 @@ jobs:
       - name: Build code 🛠
         run: yarn build --baseHref=/tw-react-components/
 
-      - name: Deploy the demo website 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist/apps/demo
+      - name: Publish the library 🚀
+        run: |
+          cp LICENCE README.md dist/libs/tw-react-components
+          cd dist/libs/tw-react-components
+          npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
