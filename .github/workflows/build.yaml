@@ -30,7 +30,7 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-modules-
+            ${{ runner.os }}-node_modules-
 
       - name: Install packages 🏭
         run: yarn install
