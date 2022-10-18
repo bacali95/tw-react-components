@@ -1,4 +1,6 @@
 {
   "name": "tw-react-components",
-  "version": "0.0.1"
+  "description": "A set of React components build with TailwindCSS to make a nice dashboard.",
+  "version": "0.0.1",
+  "license": "MIT"
 }
