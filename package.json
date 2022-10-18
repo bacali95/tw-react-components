@@ -9,7 +9,7 @@
     "lint": "nx affected:lint",
     "prettier": "nx format:check",
     "prettier:fix": "nx format:write",
-    "release": "standard-version --commit-all --bumpFiles=libs/tw-react-components/package.json"
+    "release": "standard-version"
   },
   "private": true,
   "dependencies": {
@@ -65,5 +65,10 @@
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
     "typescript": "~4.8.2"
+  },
+  "standard-version": {
+    "commitAll": true,
+    "packageFiles": "libs/tw-react-components/package.json",
+    "bumpFiles": "libs/tw-react-components/package.json"
   }
 }
