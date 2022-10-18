@@ -10,6 +10,9 @@ concurrency: ${{ github.ref }}
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Check out the code 🗄
         uses: actions/checkout@v3
@@ -51,3 +54,12 @@ jobs:
         with:
           branch: gh-pages
           folder: dist/apps/demo
+
+      - name: Publish 🚀
+        if: startsWith(github.event.head_commit.message, 'release')
+        run: |
+          cp LICENCE README.md dist/libs/tw-react-components
+          cd dist/libs/tw-react-components
+          npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
