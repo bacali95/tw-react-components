@@ -55,7 +55,7 @@ jobs:
           branch: gh-pages
           folder: dist/apps/demo
 
-      - name: Publish 🚀
+      - name: Publish the library 🚀
         if: startsWith(github.event.head_commit.message, 'release')
         run: |
           cp LICENCE README.md dist/libs/tw-react-components
