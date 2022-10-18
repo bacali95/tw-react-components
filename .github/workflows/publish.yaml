@@ -38,16 +38,16 @@ jobs:
         run: yarn install
 
       - name: Lint the code 🕵
-        run: yarn lint
+        run: yarn nx run tw-react-components:lint
 
       - name: Check the prettiness of the code 💅
-        run: yarn prettier
+        run: yarn prettier -c .
 
       - name: Run unit tests 🧪
-        run: yarn test
+        run: yarn nx run tw-react-components:test
 
       - name: Build code 🛠
-        run: yarn build --baseHref=/tw-react-components/
+        run: yarn nx run tw-react-components:build
 
       - name: Publish the library 🚀
         run: |

@@ -7,7 +7,7 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "nx lint",
-    "prettier": "nx format:check",
+    "prettier:check": "nx format:check",
     "prettier:fix": "nx format:write",
     "release": "standard-version"
   },
