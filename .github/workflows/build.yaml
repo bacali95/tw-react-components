@@ -56,7 +56,7 @@ jobs:
           folder: dist/apps/demo
 
       - name: Publish the library 🚀
-        if: startsWith(github.event.head_commit.message, 'release')
+        if: startsWith(github.event.head_commit.message, 'chore(release):')
         run: |
           cp LICENCE README.md dist/libs/tw-react-components
           cd dist/libs/tw-react-components
