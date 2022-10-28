@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.3...v0.0.4) (2022-10-28)
+
+
+### Features
+
+* refactor form controls components ([6da76b8](https://github.com/NaN-Projects/tw-react-components/commit/6da76b8ca142c392e346979f7bcbd79c700fed2e))
+
 ### [0.0.3](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.2...v0.0.3) (2022-10-18)
 
 
