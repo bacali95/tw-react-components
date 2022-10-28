@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@components": ["libs/tw-react-components/src/components/index.ts"],
+      "@helpers": ["libs/tw-react-components/src/helpers/index.ts"],
+      "@hooks": ["libs/tw-react-components/src/hooks/index.ts"],
       "tw-react-components": ["libs/tw-react-components/src/index.ts"]
     }
   },

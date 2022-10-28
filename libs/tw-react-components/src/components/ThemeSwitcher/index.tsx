@@ -1,13 +1,13 @@
 import { Switch } from '@headlessui/react';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
-import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi';
 
 type Theme = 'dark' | 'light';
 
 type Props = { className?: string };
 
-const ThemeSwitcher: FC<Props> = ({ className }) => {
+export const ThemeSwitcher: FC<Props> = ({ className }) => {
   const [theme, setTheme] = useState<Theme>();
   const darkMode = theme === 'dark';
 
@@ -56,13 +56,11 @@ const ThemeSwitcher: FC<Props> = ({ className }) => {
         })}
       >
         {darkMode ? (
-          <HiOutlineMoon className="h-6 w-6 rounded-full bg-gray-800 p-1 text-white" />
+          <MoonIcon className="h-6 w-6 rounded-full bg-gray-800 p-1 text-white" />
         ) : (
-          <HiOutlineSun className="h-6 w-6 rounded-full bg-gray-200 p-1 text-black" />
+          <SunIcon className="h-6 w-6 rounded-full bg-gray-200 p-1 text-black" />
         )}
       </div>
     </Switch>
   );
 };
-
-export default ThemeSwitcher;

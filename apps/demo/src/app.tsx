@@ -1,10 +1,9 @@
-import { FC, useMemo } from 'react';
+import { AdjustmentsHorizontalIcon, HomeIcon } from '@heroicons/react/24/outline';
 import {
-  HiAdjustmentsHorizontal,
-  HiHome,
-  HiOutlineAdjustmentsHorizontal,
-  HiOutlineHome,
-} from 'react-icons/hi2';
+  AdjustmentsHorizontalIcon as AdjustmentsHorizontalIconSolid,
+  HomeIcon as HomeIconSolid,
+} from '@heroicons/react/24/solid';
+import { FC, useMemo } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { Layout, SidebarProps } from 'tw-react-components';
@@ -19,14 +18,14 @@ export const App: FC = () => {
         {
           key: '',
           title: 'Home',
-          Icon: HiOutlineHome,
-          IconSelected: HiHome,
+          Icon: HomeIcon,
+          IconSelected: HomeIconSolid,
         },
         {
           key: 'form-controls',
           title: 'Form Controls',
-          Icon: HiOutlineAdjustmentsHorizontal,
-          IconSelected: HiAdjustmentsHorizontal,
+          Icon: AdjustmentsHorizontalIcon,
+          IconSelected: AdjustmentsHorizontalIconSolid,
         },
       ],
       smallLogo: 'SL',

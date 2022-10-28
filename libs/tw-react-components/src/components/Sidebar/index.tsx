@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { default as Tooltip } from '../Tooltip';
+import { Tooltip } from '../Tooltip';
 
 export type SidebarItem = {
   key: string;
@@ -22,7 +22,7 @@ type Props = SidebarProps & {
   visible: boolean;
 };
 
-const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
+export const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
   const navigate = useNavigate();
   const [currentTab, setCurrentTab] = useState(
     window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
@@ -106,5 +106,3 @@ const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
     </nav>
   );
 };
-
-export default Sidebar;

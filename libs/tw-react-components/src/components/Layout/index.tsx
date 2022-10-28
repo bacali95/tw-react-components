@@ -1,15 +1,19 @@
 import { FC, PropsWithChildren, ReactNode, useState } from 'react';
 
-import { default as Navbar } from '../Navbar';
-import { default as Sidebar, SidebarProps } from '../Sidebar';
-import { default as ThemeSwitcher } from '../ThemeSwitcher';
+import { Navbar } from '../Navbar';
+import { Sidebar, SidebarProps } from '../Sidebar';
+import { ThemeSwitcher } from '../ThemeSwitcher';
 
 type Props = {
   sidebarProps: SidebarProps;
   navbarChildren?: ReactNode;
 };
 
-const Layout: FC<PropsWithChildren<Props>> = ({ children, sidebarProps, navbarChildren }) => {
+export const Layout: FC<PropsWithChildren<Props>> = ({
+  children,
+  sidebarProps,
+  navbarChildren,
+}) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   return (
@@ -25,5 +29,3 @@ const Layout: FC<PropsWithChildren<Props>> = ({ children, sidebarProps, navbarCh
     </div>
   );
 };
-
-export default Layout;

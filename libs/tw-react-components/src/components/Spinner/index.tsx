@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 type Props = { className?: string; fullScreen?: boolean };
 
-const Spinner: FC<Props> = ({ className, fullScreen }) => (
+export const Spinner: FC<Props> = ({ className, fullScreen }) => (
   <div
     className={classNames(
       className,
@@ -28,5 +28,3 @@ const Spinner: FC<Props> = ({ className, fullScreen }) => (
     </svg>
   </div>
 );
-
-export default Spinner;
