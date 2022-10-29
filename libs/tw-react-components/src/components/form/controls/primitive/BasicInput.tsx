@@ -1,4 +1,4 @@
-import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import {
   ComponentProps,
@@ -31,7 +31,7 @@ const classes = {
   },
   withoutErrors: {
     input:
-      'border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-500 dark:placeholder-gray-400',
+      'border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:!border-blue-600 dark:placeholder-gray-500 dark:placeholder-gray-400',
     extension:
       'border-gray-300 text-gray-600 peer-focus:border-blue-600 peer-focus:ring-blue-600 dark:border-gray-600 dark:text-white',
   },
@@ -123,7 +123,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             hasErrors={hasErrors}
             onClick={!hasErrors ? onExtraIconClick : undefined}
           >
-            {hasErrors && !ExtraIcon && <ExclamationCircleIcon className="h-6 w-6" />}
+            {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-6 w-6" />}
             {ExtraIcon && <ExtraIcon className="h-6 w-6" />}
           </BasicInputExtension>
         )}

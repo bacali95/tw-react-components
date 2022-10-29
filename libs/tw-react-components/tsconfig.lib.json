@@ -13,13 +13,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": ".",
-    "paths": {
-      "@components": ["./src/components/index.ts"],
-      "@helpers": ["./src/helpers/index.ts"],
-      "@hooks": ["./src/hooks/index.ts"]
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
   "exclude": [

@@ -10,6 +10,7 @@ import {
   Flex,
   FormInputs,
   NumberInput,
+  SelectInput,
   TextInput,
   TextareaInput,
 } from 'tw-react-components';
@@ -20,6 +21,7 @@ type State = {
   number?: number;
   checkbox?: boolean;
   date?: Date;
+  country?: string;
 };
 
 export const FormControls: FC = () => {
@@ -33,11 +35,14 @@ export const FormControls: FC = () => {
   };
 
   const setFormField =
-    <T extends HTMLElement>(field: keyof typeof formState, attr: keyof ChangeEvent<T>['target']) =>
-    (event: ChangeEvent<T> | Date) =>
+    <T extends HTMLElement>(field: keyof typeof formState, attr?: keyof ChangeEvent<T>['target']) =>
+    (event: ChangeEvent<T> | Date | string | undefined) =>
       setFormState((state) => ({
         ...state,
-        [field]: 'target' in event ? event.target[attr] : event,
+        [field]:
+          event && attr && typeof event !== 'string' && 'target' in event
+            ? event.target[attr]
+            : event,
       }));
 
   return (
@@ -87,6 +92,31 @@ export const FormControls: FC = () => {
                   required
                   clearable
                 />
+                <FormInputs.Select
+                  className="w-full"
+                  name="country"
+                  label="Country"
+                  placeholder="Select country..."
+                  items={[
+                    {
+                      id: 'nl',
+                      value: 'Netherlands',
+                      label: 'Netherlands',
+                    },
+                    {
+                      id: 'de',
+                      value: 'Germany',
+                      label: 'Germany',
+                    },
+                    {
+                      id: 'fr',
+                      value: 'France',
+                      label: 'France',
+                    },
+                  ]}
+                  required
+                  clearable
+                />
                 <button type="submit">Submit</button>
               </Flex>
             </form>
@@ -95,8 +125,8 @@ export const FormControls: FC = () => {
       </Flex>
       <Flex className="w-1/2" direction="column" centered>
         <Card fullWidth>
-          <span className="underline decoration-wavy underline-offset-2">Without</span>{' '}
-          <code className="rounded bg-gray-100 p-1 dark:bg-gray-900">use-form-hook</code> context
+          Without <code className="rounded bg-gray-100 p-1 dark:bg-gray-900 ">use-form-hook</code>{' '}
+          context
         </Card>
         <Card fullWidth>
           <form
@@ -151,11 +181,38 @@ export const FormControls: FC = () => {
                 label="DateTime"
                 displayFormat="DD-MM-YYYY [at] HH:mm"
                 value={formState.date}
-                onChange={setFormField('date', 'value')}
+                onChange={setFormField('date')}
                 minDate={new Date(2010, 1, 5, 13, 44)}
                 maxDate={new Date(2030, 4, 5, 13, 44)}
                 required
                 clearable
+              />
+              <SelectInput
+                className="w-full"
+                label="Select"
+                placeholder="Select..."
+                items={[
+                  {
+                    id: 'nl',
+                    value: 'Netherlands',
+                    label: 'Netherlands',
+                  },
+                  {
+                    id: 'de',
+                    value: 'Germany',
+                    label: 'Germany',
+                  },
+                  {
+                    id: 'fr',
+                    value: 'France',
+                    label: 'France',
+                  },
+                ]}
+                value={formState.country}
+                onChange={setFormField('country')}
+                required
+                clearable
+                search
               />
               <button type="submit">Submit</button>
             </Flex>

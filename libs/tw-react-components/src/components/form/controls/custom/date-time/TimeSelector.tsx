@@ -2,8 +2,8 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 import { FC, WheelEvent } from 'react';
 
-import { compareDates } from '@helpers';
-import { useLongPress } from '@hooks';
+import { compareDates } from '../../../../../helpers';
+import { useLongPress } from '../../../../../hooks';
 
 type TimeSelectorProps = {
   date: Date;

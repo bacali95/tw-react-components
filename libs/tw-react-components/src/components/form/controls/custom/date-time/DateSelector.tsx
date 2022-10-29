@@ -1,8 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { FC, useEffect, useMemo, useState } from 'react';
 
-import { useMonths } from '@hooks';
-
+import { useMonths } from '../../../../../hooks';
 import { DaysView } from './DaysView';
 import { MonthsView } from './MonthsView';
 import { YearsView } from './YearsView';
@@ -97,6 +96,12 @@ export const DateSelector: FC<DateSelectorProps> = ({
     <div className="select-none">
       <div className="flex justify-between px-3 pt-2">
         <div
+          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          onClick={editCalendarViewPage('subtract')}
+        >
+          <ChevronLeftIcon className="h-5 w-5 text-gray-400" />
+        </div>
+        <div
           className="flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 transition duration-100 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
           onClick={nextCalendarView}
         >
@@ -109,19 +114,11 @@ export const DateSelector: FC<DateSelectorProps> = ({
             </span>
           )}
         </div>
-        <div className="flex">
-          <div
-            className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
-            onClick={editCalendarViewPage('subtract')}
-          >
-            <ChevronLeftIcon className="h-5 w-5 text-gray-400" />
-          </div>
-          <div
-            className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
-            onClick={editCalendarViewPage('add')}
-          >
-            <ChevronRightIcon className="h-5 w-5 text-gray-400" />
-          </div>
+        <div
+          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          onClick={editCalendarViewPage('add')}
+        >
+          <ChevronRightIcon className="h-5 w-5 text-gray-400" />
         </div>
       </div>
       {calendarView === 'days' ? (

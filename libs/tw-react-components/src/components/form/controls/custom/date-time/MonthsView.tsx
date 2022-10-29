@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { compareDates } from '@helpers';
-import { useMonths } from '@hooks';
+import { compareDates } from '../../../../../helpers';
+import { useMonths } from '../../../../../hooks';
 
 type MonthsViewProps = {
   date: Date;

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { compareDates } from '@helpers';
+import { compareDates } from '../../../../../helpers';
 
 type YearsViewProps = {
   date: Date;

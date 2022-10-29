@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { FC, useCallback, useMemo } from 'react';
 
-import { compareDates } from '@helpers';
-import { useDays } from '@hooks';
+import { compareDates } from '../../../../../helpers';
+import { useDays } from '../../../../../hooks';
 
 type DaysViewProps = {
   date: Date;
