@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.4...v0.0.5) (2022-10-29)
+
+
+### Features
+
+* add select component ([043c8a8](https://github.com/NaN-Projects/tw-react-components/commit/043c8a802550ca5fb981bc142d0f5f342dc189bd))
+
 ### [0.0.4](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.3...v0.0.4) (2022-10-28)
 
 
