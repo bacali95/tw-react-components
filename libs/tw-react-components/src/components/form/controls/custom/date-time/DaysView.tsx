@@ -197,16 +197,13 @@ const Day: FC<DayProps> = ({
 
   return (
     <div
-      className={classNames(
-        'mx-auto flex h-8 w-8 items-center justify-center rounded-full text-sm',
-        {
-          'border-2 border-blue-500': isEqualToday,
-          'bg-blue-500 text-white': isSelected,
-          'cursor-pointer': isSelectable,
-          'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
-          'text-gray-400 dark:text-gray-500': !isSelectable || !primary,
-        }
-      )}
+      className={classNames('mx-auto flex h-8 w-8 items-center justify-center rounded text-sm', {
+        'border-2 border-blue-500': isEqualToday,
+        'bg-blue-500 text-white': isSelected,
+        'cursor-pointer': isSelectable,
+        'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
+        'text-gray-400 dark:text-gray-500': !isSelectable || !primary,
+      })}
       onClick={isSelectable ? setDayNumber(day, month, year) : undefined}
     >
       {day}

@@ -96,13 +96,13 @@ export const DateSelector: FC<DateSelectorProps> = ({
     <div className="select-none">
       <div className="flex justify-between px-3 pt-2">
         <div
-          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center justify-center rounded px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
           onClick={editCalendarViewPage('subtract')}
         >
           <ChevronLeftIcon className="h-5 w-5 text-gray-400" />
         </div>
         <div
-          className="flex cursor-pointer items-center gap-1 rounded-lg px-2 py-1 transition duration-100 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition duration-100 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
           onClick={nextCalendarView}
         >
           {calendarView === 'days' && <span className="capitalize">{months[month].name}</span>}
@@ -115,7 +115,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
           )}
         </div>
         <div
-          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center justify-center rounded px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
           onClick={editCalendarViewPage('add')}
         >
           <ChevronRightIcon className="h-5 w-5 text-gray-400" />
