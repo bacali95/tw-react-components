@@ -208,6 +208,7 @@ export const FormControls: FC = () => {
               />
               <SelectInput
                 className="w-full"
+                name="countries"
                 label="Countries"
                 placeholder="Select..."
                 multiple

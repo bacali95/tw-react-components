@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.5...v0.0.6) (2023-01-14)
+
+
+### Features
+
+* add group headers to select input ([4db6b36](https://github.com/NaN-Projects/tw-react-components/commit/4db6b361301b0db0df0ed32da13240e66236095c))
+
+
+### Bug Fixes
+
+* update date picker styling ([a82d03a](https://github.com/NaN-Projects/tw-react-components/commit/a82d03a86e87611b644c506eee6aa84aabcb7018))
+
 ### [0.0.5](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.4...v0.0.5) (2022-10-29)
 
 

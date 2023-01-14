@@ -48,7 +48,10 @@ export type SelectInputProps<T = any> = {
       onChange?: (item: T[] | undefined) => void;
     }
 ) &
-  Pick<BasicInputProps<'text'>, 'className' | 'label' | 'placeholder' | 'required' | 'hasErrors'>;
+  Pick<
+    BasicInputProps<'text'>,
+    'className' | 'name' | 'label' | 'placeholder' | 'required' | 'hasErrors'
+  >;
 
 export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
   <T,>(
