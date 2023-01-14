@@ -1147,6 +1147,8 @@ var es_regexp_exec = __webpack_require__(4916);
 var es_string_search = __webpack_require__(4765);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
 var es_array_reduce = __webpack_require__(5827);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reverse.js
+var es_array_reverse = __webpack_require__(5069);
 ;// CONCATENATED MODULE: ./node_modules/@heroicons/react/24/outline/esm/CheckIcon.js
 
 
@@ -1177,7 +1179,8 @@ const CheckIcon_ForwardRef = react.forwardRef(CheckIcon);
 /* harmony default export */ const esm_CheckIcon = (CheckIcon_ForwardRef);
 ;// CONCATENATED MODULE: ./libs/tw-react-components/src/components/form/controls/custom/select/index.tsx
 
-const select_excluded = ["className", "items", "renderItem", "value", "multiple", "clearable", "search", "onChange", "onBlur", "predicate"];
+const select_excluded = ["className", "items", "renderItem", "value", "multiple", "clearable", "search", "onChange", "predicate"];
+
 
 
 
@@ -1203,17 +1206,22 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
       clearable,
       search,
       onChange,
-      onBlur,
       predicate
     } = _ref,
     props = _objectWithoutPropertiesLoose(_ref, select_excluded);
-  const [isOpen, setIsOpen] = (0,react.useState)();
+  const [isOpen, setIsOpen] = (0,react.useState)(false);
   const [hoverIndex, setHoverIndex] = (0,react.useState)(undefined);
   const [searchValue, setSearchValue] = (0,react.useState)('');
-  const [selectedItems, setSelectedItems] = (0,react.useState)(value ? !multiple ? items.find(item => predicate ? predicate(item.value, value) : item.value === value) ? [items.find(item => predicate ? predicate(item.value, value) : item.value === value)] : [] : value.map(v => items.find(item => predicate ? predicate(item.value, v) : item.value === v)).filter(Boolean) : []);
+  const pureItems = (0,react.useMemo)(() => items.filter(item => !item.groupHeader), [items]);
+  const [selectedItems, setSelectedItems] = (0,react.useState)(value ? !multiple ? pureItems.find(item => predicate ? predicate(item.value, value) : item.value === value) ? [pureItems.find(item => predicate ? predicate(item.value, value) : item.value === value)] : [] : value.map(v => pureItems.find(item => predicate ? predicate(item.value, v) : item.value === v)).filter(Boolean) : []);
   const dropdownRef = (0,react.useRef)(null);
   useOutsideClick(dropdownRef, () => setIsOpen(false));
-  const filteredItems = (0,react.useMemo)(() => !search || !searchValue ? items : items.filter(item => item.label.toLowerCase().includes(searchValue.toLowerCase())), [items, search, searchValue]);
+  (0,react.useEffect)(() => {
+    return () => {
+      setHoverIndex(undefined);
+    };
+  }, []);
+  const filteredItems = (0,react.useMemo)(() => !search || !searchValue ? items : pureItems.filter(item => item.label.toLowerCase().includes(searchValue.toLowerCase())), [items, pureItems, search, searchValue]);
   const text = (0,react.useMemo)(() => selectedItems.length ? !multiple ? selectedItems[0].label : selectedItems.map(item => item.label).join(', ') : undefined, [multiple, selectedItems]);
   const selectedMap = (0,react.useMemo)(() => selectedItems.reduce((prev, curr) => Object.assign({}, prev, {
     [curr.id]: curr.value
@@ -1238,18 +1246,14 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
     setIsOpen(open => !open);
     (_dropdownRef$current = dropdownRef.current) == null ? void 0 : _dropdownRef$current.focus();
   };
-  const handleOnBlur = event => {
-    setIsOpen(false);
-    onBlur == null ? void 0 : onBlur(event);
-  };
   const handleOnSearchValueChange = event => setSearchValue(event.target.value);
   const handleOnKeyDown = event => {
     switch (event.key) {
       case 'ArrowDown':
-        setHoverIndex(index => index === undefined ? 0 : (index + 1) % filteredItems.length);
+        setHoverIndex(getNextIndex(filteredItems, 1));
         break;
       case 'ArrowUp':
-        setHoverIndex(index => index === undefined ? filteredItems.length - 1 : (index - 1 + filteredItems.length) % filteredItems.length);
+        setHoverIndex(getNextIndex(filteredItems, -1));
         break;
       case 'Home':
         setHoverIndex(0);
@@ -1261,7 +1265,12 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
       case 'Enter':
         event.preventDefault();
         event.stopPropagation();
-        if (!isOpen) setIsOpen(true);else if (hoverIndex !== undefined) selectItem(filteredItems[hoverIndex])();
+        if (!isOpen) {
+          setIsOpen(true);
+        } else if (hoverIndex !== undefined) {
+          const item = filteredItems[hoverIndex];
+          !item.groupHeader && selectItem(item)();
+        }
         break;
       case 'Escape':
         setIsOpen(false);
@@ -1274,7 +1283,7 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
     className: classnames_default()(className, 'relative'),
     onKeyDown: handleOnKeyDown,
-    ref: ref,
+    ref: dropdownRef,
     children: [/*#__PURE__*/(0,jsx_runtime.jsx)(TextInput, Object.assign({
       className: "[&>div>*]:cursor-pointer"
     }, props, {
@@ -1282,12 +1291,11 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
       ExtraIcon: clearable && selectedItems.length ? esm_XMarkIcon : esm_ChevronDownIcon,
       onExtraIconClick: clearable && selectedItems.length ? handleOnClear : undefined,
       onClick: handleOnClick,
+      ref: ref,
       readOnly: true
     })), isOpen && /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
       className: "absolute z-10 mt-2 flex w-full flex-col gap-1 rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white",
       tabIndex: 0,
-      onBlur: handleOnBlur,
-      ref: dropdownRef,
       children: [search && /*#__PURE__*/(0,jsx_runtime.jsx)(TextInput, {
         className: "px-1 pb-1",
         value: searchValue,
@@ -1297,19 +1305,33 @@ const SelectInput = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
         className: "p-2 text-center text-gray-500",
         children: "No items."
       }), filteredItems.map((item, index) => /*#__PURE__*/(0,jsx_runtime.jsxs)("div", {
-        className: classnames_default()('relative flex cursor-pointer items-center p-2 hover:bg-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700', {
+        className: classnames_default()('relative flex items-center', {
+          'cursor-pointer p-2 hover:bg-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700': !item.groupHeader,
+          'bg-gray-900/40 px-2 py-1.5 text-sm': item.groupHeader,
           'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
           'bg-gray-300 dark:!bg-gray-900': hoverIndex === index
         }),
         onMouseEnter: () => setHoverIndex(undefined),
-        onClick: selectItem(item),
-        children: [renderItem(item, !!selectedMap[item.id]), selectedMap[item.id] && /*#__PURE__*/(0,jsx_runtime.jsx)(esm_CheckIcon, {
+        onClick: !item.groupHeader ? selectItem(item) : undefined,
+        children: [item.groupHeader ? item.label : renderItem(item, !!selectedMap[item.id]), selectedMap[item.id] && /*#__PURE__*/(0,jsx_runtime.jsx)(esm_CheckIcon, {
           className: "absolute right-0 mr-2 h-6 w-6"
         })]
       }, item.id))]
     })]
   });
 });
+function getNextIndex(items, step) {
+  return index => {
+    if (items.every(item => item.groupHeader)) return index;
+    const [newIndex, newItems] = step === 1 ? [index === undefined ? 0 : index + step, items] : [items.length - 1 - (index === undefined ? 0 : index + step), [...items].reverse()];
+    let nextPureItemIndex;
+    nextPureItemIndex = newItems.findIndex((item, _index) => _index >= newIndex && !item.groupHeader);
+    if (nextPureItemIndex === -1) {
+      nextPureItemIndex = newItems.findIndex((item, _index) => _index < newIndex && !item.groupHeader);
+    }
+    return nextPureItemIndex === -1 ? undefined : step === 1 ? nextPureItemIndex : items.length - 1 - nextPureItemIndex;
+  };
+}
 ;// CONCATENATED MODULE: ./libs/tw-react-components/src/components/form/controls/custom/index.ts
 
 
@@ -4048,8 +4070,6 @@ const Card = _ref => {
     children: children
   }));
 };
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reverse.js
-var es_array_reverse = __webpack_require__(5069);
 ;// CONCATENATED MODULE: ./libs/tw-react-components/src/components/Flex/index.tsx
 
 const Flex_excluded = ["children", "className", "reverse", "wrap", "direction", "align", "justify"];
@@ -4626,12 +4646,39 @@ const CurrencyDollarIcon_ForwardRef = react.forwardRef(CurrencyDollarIcon);
 
 
 
+const countries = [{
+  groupHeader: true,
+  id: 'africa',
+  label: 'Africa'
+}, {
+  id: 'tn',
+  value: 'Tunisia',
+  label: 'Tunisia'
+}, {
+  groupHeader: true,
+  id: 'europe',
+  label: 'Europe'
+}, {
+  id: 'nl',
+  value: 'Netherlands',
+  label: 'Netherlands'
+}, {
+  id: 'de',
+  value: 'Germany',
+  label: 'Germany'
+}, {
+  id: 'fr',
+  value: 'France',
+  label: 'France'
+}];
 const FormControls = () => {
   var _formState$text, _formState$textarea, _formState$number, _formState$number2, _formState$checkbox;
   const form = useForm({
     defaultValues: {}
   });
-  const [formState, setFormState] = (0,react.useState)({});
+  const [formState, setFormState] = (0,react.useState)({
+    countries: []
+  });
   const onSubmit = data => alert(JSON.stringify(data, null, 2));
   const onInvalid = data => {
     console.log({
@@ -4640,7 +4687,7 @@ const FormControls = () => {
     }, form.formState.errors);
   };
   const setFormField = (field, attr) => event => setFormState(state => Object.assign({}, state, {
-    [field]: event && attr && typeof event !== 'string' && 'target' in event ? event.target[attr] : event
+    [field]: event && attr && typeof event === 'object' && 'target' in event ? event.target[attr] : event
   }));
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(Flex, {
     children: [/*#__PURE__*/(0,jsx_runtime.jsxs)(Flex, {
@@ -4698,22 +4745,11 @@ const FormControls = () => {
                 clearable: true
               }), /*#__PURE__*/(0,jsx_runtime.jsx)(FormInputs.Select, {
                 className: "w-full",
-                name: "country",
-                label: "Country",
+                name: "countries",
+                label: "Countries",
                 placeholder: "Select country...",
-                items: [{
-                  id: 'nl',
-                  value: 'Netherlands',
-                  label: 'Netherlands'
-                }, {
-                  id: 'de',
-                  value: 'Germany',
-                  label: 'Germany'
-                }, {
-                  id: 'fr',
-                  value: 'France',
-                  label: 'France'
-                }],
+                multiple: true,
+                items: countries,
                 required: true,
                 clearable: true
               }), /*#__PURE__*/(0,jsx_runtime.jsx)("button", {
@@ -4791,23 +4827,12 @@ const FormControls = () => {
               clearable: true
             }), /*#__PURE__*/(0,jsx_runtime.jsx)(SelectInput, {
               className: "w-full",
-              label: "Select",
+              label: "Countries",
               placeholder: "Select...",
-              items: [{
-                id: 'nl',
-                value: 'Netherlands',
-                label: 'Netherlands'
-              }, {
-                id: 'de',
-                value: 'Germany',
-                label: 'Germany'
-              }, {
-                id: 'fr',
-                value: 'France',
-                label: 'France'
-              }],
-              value: formState.country,
-              onChange: setFormField('country'),
+              multiple: true,
+              items: countries,
+              value: formState.countries,
+              onChange: setFormField('countries'),
               required: true,
               clearable: true,
               search: true
