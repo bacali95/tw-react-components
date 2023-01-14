@@ -11,6 +11,7 @@ import {
   FormInputs,
   NumberInput,
   SelectInput,
+  SelectInputProps,
   TextInput,
   TextareaInput,
 } from 'tw-react-components';
@@ -21,12 +22,45 @@ type State = {
   number?: number;
   checkbox?: boolean;
   date?: Date;
-  country?: string;
+  countries: string[];
 };
+
+const countries: SelectInputProps['items'] = [
+  {
+    groupHeader: true,
+    id: 'africa',
+    label: 'Africa',
+  },
+  {
+    id: 'tn',
+    value: 'Tunisia',
+    label: 'Tunisia',
+  },
+  {
+    groupHeader: true,
+    id: 'europe',
+    label: 'Europe',
+  },
+  {
+    id: 'nl',
+    value: 'Netherlands',
+    label: 'Netherlands',
+  },
+  {
+    id: 'de',
+    value: 'Germany',
+    label: 'Germany',
+  },
+  {
+    id: 'fr',
+    value: 'France',
+    label: 'France',
+  },
+];
 
 export const FormControls: FC = () => {
   const form = useForm<State>({ defaultValues: {} });
-  const [formState, setFormState] = useState<State>({});
+  const [formState, setFormState] = useState<State>({ countries: [] });
 
   const onSubmit: SubmitHandler<State> = (data) => alert(JSON.stringify(data, null, 2));
 
@@ -36,11 +70,11 @@ export const FormControls: FC = () => {
 
   const setFormField =
     <T extends HTMLElement>(field: keyof typeof formState, attr?: keyof ChangeEvent<T>['target']) =>
-    (event: ChangeEvent<T> | Date | string | undefined) =>
+    (event: ChangeEvent<T> | Date | string | string[] | undefined) =>
       setFormState((state) => ({
         ...state,
         [field]:
-          event && attr && typeof event !== 'string' && 'target' in event
+          event && attr && typeof event === 'object' && 'target' in event
             ? event.target[attr]
             : event,
       }));
@@ -94,26 +128,11 @@ export const FormControls: FC = () => {
                 />
                 <FormInputs.Select
                   className="w-full"
-                  name="country"
-                  label="Country"
+                  name="countries"
+                  label="Countries"
                   placeholder="Select country..."
-                  items={[
-                    {
-                      id: 'nl',
-                      value: 'Netherlands',
-                      label: 'Netherlands',
-                    },
-                    {
-                      id: 'de',
-                      value: 'Germany',
-                      label: 'Germany',
-                    },
-                    {
-                      id: 'fr',
-                      value: 'France',
-                      label: 'France',
-                    },
-                  ]}
+                  multiple
+                  items={countries}
                   required
                   clearable
                 />
@@ -189,27 +208,12 @@ export const FormControls: FC = () => {
               />
               <SelectInput
                 className="w-full"
-                label="Select"
+                label="Countries"
                 placeholder="Select..."
-                items={[
-                  {
-                    id: 'nl',
-                    value: 'Netherlands',
-                    label: 'Netherlands',
-                  },
-                  {
-                    id: 'de',
-                    value: 'Germany',
-                    label: 'Germany',
-                  },
-                  {
-                    id: 'fr',
-                    value: 'France',
-                    label: 'France',
-                  },
-                ]}
-                value={formState.country}
-                onChange={setFormField('country')}
+                multiple
+                items={countries}
+                value={formState.countries}
+                onChange={setFormField('countries')}
                 required
                 clearable
                 search

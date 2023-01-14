@@ -2,12 +2,12 @@ import { CheckIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outli
 import classNames from 'classnames';
 import {
   ChangeEvent,
-  FocusEvent,
   ForwardedRef,
   KeyboardEvent,
   ReactNode,
   forwardRef,
   useCallback,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -21,11 +21,17 @@ export type SelectInputType = 'select';
 export type SelectItem<T> = {
   id: string | number;
   label: string;
+  groupHeader?: false;
   value: T;
 };
 
+export type GroupHeader = Pick<SelectItem<any>, 'id'> & {
+  label: ReactNode;
+  groupHeader: true;
+};
+
 export type SelectInputProps<T = any> = {
-  items: SelectItem<T>[];
+  items: (SelectItem<T> | GroupHeader)[];
   renderItem?: (item: SelectItem<T>, selected?: boolean) => ReactNode;
   clearable?: boolean;
   search?: boolean;
@@ -42,12 +48,9 @@ export type SelectInputProps<T = any> = {
       onChange?: (item: T[] | undefined) => void;
     }
 ) &
-  Pick<
-    BasicInputProps<'text'>,
-    'className' | 'label' | 'placeholder' | 'required' | 'hasErrors' | 'onBlur'
-  >;
+  Pick<BasicInputProps<'text'>, 'className' | 'label' | 'placeholder' | 'required' | 'hasErrors'>;
 
-export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
+export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
   <T,>(
     {
       className,
@@ -58,21 +61,26 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
       clearable,
       search,
       onChange,
-      onBlur,
       predicate,
       ...props
     }: SelectInputProps<T>,
-    ref: ForwardedRef<HTMLDivElement>
+    ref: ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
-    const [isOpen, setIsOpen] = useState<boolean>();
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [hoverIndex, setHoverIndex] = useState<number | undefined>(undefined);
     const [searchValue, setSearchValue] = useState('');
+    const pureItems = useMemo(
+      () => items.filter((item) => !item.groupHeader) as SelectItem<T>[],
+      [items]
+    );
     const [selectedItems, setSelectedItems] = useState<SelectItem<T>[]>(
       value
         ? !multiple
-          ? items.find((item) => (predicate ? predicate(item.value, value) : item.value === value))
+          ? pureItems.find((item) =>
+              predicate ? predicate(item.value, value) : item.value === value
+            )
             ? [
-                items.find((item) =>
+                pureItems.find((item) =>
                   predicate ? predicate(item.value, value) : item.value === value
                 )!,
               ]
@@ -80,7 +88,9 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
           : value
               .map<SelectItem<T>>(
                 (v) =>
-                  items.find((item) => (predicate ? predicate(item.value, v) : item.value === v))!
+                  pureItems.find((item) =>
+                    predicate ? predicate(item.value, v) : item.value === v
+                  )!
               )
               .filter(Boolean)
         : []
@@ -90,12 +100,20 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
 
     useOutsideClick(dropdownRef, () => setIsOpen(false));
 
+    useEffect(() => {
+      return () => {
+        setHoverIndex(undefined);
+      };
+    }, []);
+
     const filteredItems = useMemo(
       () =>
         !search || !searchValue
           ? items
-          : items.filter((item) => item.label.toLowerCase().includes(searchValue.toLowerCase())),
-      [items, search, searchValue]
+          : pureItems.filter((item) =>
+              item.label.toLowerCase().includes(searchValue.toLowerCase())
+            ),
+      [items, pureItems, search, searchValue]
     );
 
     const text = useMemo(
@@ -141,25 +159,16 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
       dropdownRef.current?.focus();
     };
 
-    const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
-      setIsOpen(false);
-      onBlur?.(event);
-    };
-
     const handleOnSearchValueChange = (event: ChangeEvent<HTMLInputElement>) =>
       setSearchValue(event.target.value);
 
     const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       switch (event.key) {
         case 'ArrowDown':
-          setHoverIndex((index) => (index === undefined ? 0 : (index + 1) % filteredItems.length));
+          setHoverIndex(getNextIndex(filteredItems, 1));
           break;
         case 'ArrowUp':
-          setHoverIndex((index) =>
-            index === undefined
-              ? filteredItems.length - 1
-              : (index - 1 + filteredItems.length) % filteredItems.length
-          );
+          setHoverIndex(getNextIndex(filteredItems, -1));
           break;
         case 'Home':
           setHoverIndex(0);
@@ -171,8 +180,12 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
         case 'Enter':
           event.preventDefault();
           event.stopPropagation();
-          if (!isOpen) setIsOpen(true);
-          else if (hoverIndex !== undefined) selectItem(filteredItems[hoverIndex])();
+          if (!isOpen) {
+            setIsOpen(true);
+          } else if (hoverIndex !== undefined) {
+            const item = filteredItems[hoverIndex];
+            !item.groupHeader && selectItem(item)();
+          }
           break;
         case 'Escape':
           setIsOpen(false);
@@ -185,7 +198,11 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
     };
 
     return (
-      <div className={classNames(className, 'relative')} onKeyDown={handleOnKeyDown} ref={ref}>
+      <div
+        className={classNames(className, 'relative')}
+        onKeyDown={handleOnKeyDown}
+        ref={dropdownRef}
+      >
         <TextInput
           className="[&>div>*]:cursor-pointer"
           {...props}
@@ -193,14 +210,13 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
           ExtraIcon={clearable && selectedItems.length ? XMarkIcon : ChevronDownIcon}
           onExtraIconClick={clearable && selectedItems.length ? handleOnClear : undefined}
           onClick={handleOnClick}
+          ref={ref}
           readOnly
         />
         {isOpen && (
           <div
             className="absolute z-10 mt-2 flex w-full flex-col gap-1 rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             tabIndex={0}
-            onBlur={handleOnBlur}
-            ref={dropdownRef}
           >
             {search && (
               <TextInput
@@ -216,17 +232,17 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
             {filteredItems.map((item, index) => (
               <div
                 key={item.id}
-                className={classNames(
-                  'relative flex cursor-pointer items-center p-2 hover:bg-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700',
-                  {
-                    'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
-                    'bg-gray-300 dark:!bg-gray-900': hoverIndex === index,
-                  }
-                )}
+                className={classNames('relative flex items-center', {
+                  'cursor-pointer p-2 hover:bg-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700':
+                    !item.groupHeader,
+                  'bg-gray-900/40 px-2 py-1.5 text-sm': item.groupHeader,
+                  'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
+                  'bg-gray-300 dark:!bg-gray-900': hoverIndex === index,
+                })}
                 onMouseEnter={() => setHoverIndex(undefined)}
-                onClick={selectItem(item)}
+                onClick={!item.groupHeader ? selectItem(item) : undefined}
               >
-                {renderItem(item, !!selectedMap[item.id])}
+                {item.groupHeader ? item.label : renderItem(item, !!selectedMap[item.id])}
                 {selectedMap[item.id] && <CheckIcon className="absolute right-0 mr-2 h-6 w-6" />}
               </div>
             ))}
@@ -236,3 +252,34 @@ export const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>(
     );
   }
 ) as <T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+
+function getNextIndex(
+  items: (SelectItem<any> | GroupHeader)[],
+  step: 1 | -1
+): (index: number | undefined) => number | undefined {
+  return (index) => {
+    if (items.every((item) => item.groupHeader)) return index;
+
+    const [newIndex, newItems] =
+      step === 1
+        ? [index === undefined ? 0 : index + step, items]
+        : [items.length - 1 - (index === undefined ? 0 : index + step), [...items].reverse()];
+    let nextPureItemIndex: number | undefined;
+
+    nextPureItemIndex = newItems.findIndex(
+      (item, _index) => _index >= newIndex && !item.groupHeader
+    );
+
+    if (nextPureItemIndex === -1) {
+      nextPureItemIndex = newItems.findIndex(
+        (item, _index) => _index < newIndex && !item.groupHeader
+      );
+    }
+
+    return nextPureItemIndex === -1
+      ? undefined
+      : step === 1
+      ? nextPureItemIndex
+      : items.length - 1 - nextPureItemIndex;
+  };
+}
