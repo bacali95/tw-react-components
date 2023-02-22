@@ -1,40 +1,15 @@
 import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-type Theme = 'dark' | 'light';
+import { useLayoutContext } from '../../contexts';
 
 type Props = { className?: string };
 
 export const ThemeSwitcher: FC<Props> = ({ className }) => {
-  const [theme, setTheme] = useState<Theme>();
+  const { theme, toggleTheme } = useLayoutContext();
   const darkMode = theme === 'dark';
-
-  useEffect(() => {
-    if (
-      localStorage.getItem('color-theme') === 'dark' ||
-      (!('color-theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (theme) {
-      localStorage.setItem('color-theme', theme);
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-    }
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   return (
     <Switch

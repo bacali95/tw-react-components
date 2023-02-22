@@ -1,11 +1,11 @@
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import { FC, PropsWithChildren } from 'react';
 
-type Props = {
-  toggleSidebar: () => void;
-};
+import { useLayoutContext } from '../../contexts';
 
-export const Navbar: FC<PropsWithChildren<Props>> = ({ children, toggleSidebar }) => {
+export const Navbar: FC<PropsWithChildren> = ({ children }) => {
+  const { toggleSidebar } = useLayoutContext();
+
   return (
     <div className="p-3 pb-0">
       <div className="flex w-full select-none items-center justify-between rounded-lg bg-white p-1 px-3 text-black shadow dark:bg-gray-800 dark:text-white">

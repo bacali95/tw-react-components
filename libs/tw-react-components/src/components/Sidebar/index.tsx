@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useLayoutContext } from '../../contexts';
 import { Tooltip } from '../Tooltip';
 
 export type SidebarItem = {
@@ -18,25 +19,21 @@ export type SidebarProps = {
   fullLogo: ReactNode;
 };
 
-type Props = SidebarProps & {
-  visible: boolean;
-};
-
-export const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
+export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   const navigate = useNavigate();
   const [currentTab, setCurrentTab] = useState(
     window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
   );
-
-  const [completelyVisible, setCompletelyVisible] = useState(visible);
+  const { sidebar } = useLayoutContext();
+  const [completelyVisible, setCompletelyVisible] = useState(sidebar);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
-    if (visible) timeout = setTimeout(() => setCompletelyVisible(true), 200);
+    if (sidebar) timeout = setTimeout(() => setCompletelyVisible(true), 200);
     else timeout = setTimeout(() => setCompletelyVisible(false), 50);
 
     return () => timeout && clearTimeout(timeout);
-  }, [visible]);
+  }, [sidebar]);
 
   const onLinkClick = (tab: string) => () => {
     setCurrentTab(tab);
@@ -44,7 +41,7 @@ export const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
   };
 
   const ItemWrapper = ({ title, children }: { title: string; children: ReactNode }) =>
-    !visible ? (
+    sidebar ? (
       <div>
         <Tooltip className="!z-50" content={title} placement="right">
           {children}
@@ -58,8 +55,8 @@ export const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
     <nav className="p-3 pr-0 text-black dark:text-white">
       <div
         className={classNames('h-full flex-col transition-all duration-200 ease-in-out', {
-          'w-72': visible,
-          'w-16': !visible,
+          'w-72': sidebar,
+          'w-16': !sidebar,
         })}
       >
         <div className="h-full rounded-lg bg-white p-2 shadow dark:bg-gray-800">
@@ -78,7 +75,7 @@ export const Sidebar: FC<Props> = ({ visible, items, smallLogo, fullLogo }) => {
                       'bg-gray-100 dark:bg-gray-900 dark:text-white': currentTab === key,
                       'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700':
                         currentTab !== key,
-                      'justify-center': !visible,
+                      'justify-center': !sidebar,
                     }
                   )}
                   onClick={onLinkClick(key)}

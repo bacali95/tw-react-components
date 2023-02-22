@@ -34,12 +34,12 @@ export type WithFormProps<
   name: string;
   pattern?: RegExp;
   validate?: Type extends 'number'
-    ? Validate<number>
+    ? Validate<number, any>
     : Type extends DateTimeInputType
-    ? Validate<Date>
+    ? Validate<Date, any>
     : Type extends SelectInputType
-    ? Validate<any>
-    : Validate<string>;
+    ? Validate<any, any>
+    : Validate<string, any>;
 } & Omit<Props, 'pattern' | keyof ControllerRenderProps>;
 
 function withForm<
