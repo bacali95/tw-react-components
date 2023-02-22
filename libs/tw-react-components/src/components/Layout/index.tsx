@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode, useState } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Navbar } from '../Navbar';
 import { Sidebar, SidebarProps } from '../Sidebar';
@@ -14,13 +14,11 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   sidebarProps,
   navbarChildren,
 }) => {
-  const [sidebarVisible, setSidebarVisible] = useState(false);
-
   return (
     <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
-      <Sidebar visible={sidebarVisible} {...sidebarProps} />
+      <Sidebar {...sidebarProps} />
       <div className="flex w-full flex-col overflow-hidden">
-        <Navbar toggleSidebar={() => setSidebarVisible(!sidebarVisible)}>
+        <Navbar>
           {navbarChildren}
           <ThemeSwitcher />
         </Navbar>

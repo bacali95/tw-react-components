@@ -2,7 +2,7 @@ import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 
-import { Spinner } from 'tw-react-components';
+import { LayoutContextProvider, Spinner } from 'tw-react-components';
 
 import { App } from './app';
 
@@ -11,7 +11,9 @@ root.render(
   <StrictMode>
     <Suspense fallback={<Spinner fullScreen />}>
       <HashRouter>
-        <App />
+        <LayoutContextProvider>
+          <App />
+        </LayoutContextProvider>
       </HashRouter>
     </Suspense>
   </StrictMode>
