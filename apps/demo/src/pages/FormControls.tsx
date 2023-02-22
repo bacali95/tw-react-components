@@ -11,10 +11,12 @@ import {
   FormInputs,
   NumberInput,
   SelectInput,
-  SelectInputProps,
+  SelectItem,
   TextInput,
   TextareaInput,
 } from 'tw-react-components';
+
+import { countriesByContinent } from '../data';
 
 type State = {
   text?: string;
@@ -25,38 +27,15 @@ type State = {
   countries: string[];
 };
 
-const countries: SelectInputProps['items'] = [
-  {
-    groupHeader: true,
-    id: 'africa',
-    label: 'Africa',
-  },
-  {
-    id: 'tn',
-    value: 'Tunisia',
-    label: 'Tunisia',
-  },
-  {
-    groupHeader: true,
-    id: 'europe',
-    label: 'Europe',
-  },
-  {
-    id: 'nl',
-    value: 'Netherlands',
-    label: 'Netherlands',
-  },
-  {
-    id: 'de',
-    value: 'Germany',
-    label: 'Germany',
-  },
-  {
-    id: 'fr',
-    value: 'France',
-    label: 'France',
-  },
-];
+const countriesItems: SelectItem<string>[] = Object.entries(countriesByContinent).map(
+  ([continent, countries]) => ({
+    id: continent,
+    label: continent,
+    group: true,
+    value: continent,
+    items: countries.map((country) => ({ id: country, value: country, label: country })),
+  })
+);
 
 export const FormControls: FC = () => {
   const form = useForm<State>({ defaultValues: {} });
@@ -131,10 +110,11 @@ export const FormControls: FC = () => {
                   name="countries"
                   label="Countries"
                   placeholder="Select country..."
+                  items={countriesItems}
                   multiple
-                  items={countries}
                   required
                   clearable
+                  search
                 />
                 <button type="submit">Submit</button>
               </Flex>
@@ -211,10 +191,10 @@ export const FormControls: FC = () => {
                 name="countries"
                 label="Countries"
                 placeholder="Select..."
-                multiple
-                items={countries}
+                items={countriesItems}
                 value={formState.countries}
                 onChange={setFormField('countries')}
+                multiple
                 required
                 clearable
                 search
