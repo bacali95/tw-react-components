@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import {
   ChangeEvent,
@@ -8,34 +8,39 @@ import {
   forwardRef,
   useCallback,
   useEffect,
+  useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react';
 
 import { useOutsideClick } from '../../../../../hooks';
-import { BasicInputProps, TextInput } from '../../primitive';
+import { BasicInputProps, CheckboxInput, TextInput } from '../../primitive';
 
 export type SelectInputType = 'select';
 
 export type SelectItem<T> = {
   id: string | number;
   label: string;
-  groupHeader?: false;
   value: T;
-};
-
-export type GroupHeader = Pick<SelectItem<any>, 'id'> & {
-  label: ReactNode;
-  groupHeader: true;
-};
+} & (
+  | {
+      group?: false;
+    }
+  | {
+      group: true;
+      items: SelectItem<T>[];
+    }
+);
 
 export type SelectInputProps<T = any> = {
-  items: (SelectItem<T> | GroupHeader)[];
+  items: SelectItem<T>[];
   renderItem?: (item: SelectItem<T>, selected?: boolean) => ReactNode;
   clearable?: boolean;
   search?: boolean;
-  predicate?: (a: T, b: T) => boolean;
+  searchPredicate?: (item: SelectItem<T>, searchValue: string) => boolean;
+  selectPredicate?: (a: T, b: T) => boolean;
 } & (
   | {
       multiple?: false;
@@ -58,65 +63,99 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     {
       className,
       items,
-      renderItem = (item: SelectItem<T>) => item.value as any,
+      renderItem = (item: SelectItem<T>) => item.label,
       value,
       multiple,
       clearable,
       search,
+      searchPredicate = (item, searchValue) =>
+        item.label.toLowerCase().includes(searchValue.toLowerCase()),
+      selectPredicate = (a, b) => a === b,
       onChange,
-      predicate,
       ...props
     }: SelectInputProps<T>,
     ref: ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
+    const prefixId = useId();
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [hoverIndex, setHoverIndex] = useState<number | undefined>(undefined);
+    const [hoveredId, setHoveredId] = useState<string | number | undefined>(undefined);
     const [searchValue, setSearchValue] = useState('');
-    const pureItems = useMemo(
-      () => items.filter((item) => !item.groupHeader) as SelectItem<T>[],
-      [items]
-    );
+    const [reverseDropdown, setReverseDropdown] = useState<boolean>();
+    const pureItems = useMemo(() => items.filter((item) => !item.group), [items]);
     const [selectedItems, setSelectedItems] = useState<SelectItem<T>[]>(
       value
         ? !multiple
-          ? pureItems.find((item) =>
-              predicate ? predicate(item.value, value) : item.value === value
-            )
-            ? [
-                pureItems.find((item) =>
-                  predicate ? predicate(item.value, value) : item.value === value
-                )!,
-              ]
+          ? pureItems.find((item) => selectPredicate(item.value, value))
+            ? [pureItems.find((item) => selectPredicate(item.value, value))!]
             : []
           : value
-              .map<SelectItem<T>>(
-                (v) =>
-                  pureItems.find((item) =>
-                    predicate ? predicate(item.value, v) : item.value === v
-                  )!
-              )
+              .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
               .filter(Boolean)
         : []
     );
 
+    const containerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    useOutsideClick(dropdownRef, () => setIsOpen(false));
+    useOutsideClick(containerRef, () => setIsOpen(false));
 
     useEffect(() => {
-      return () => {
-        setHoverIndex(undefined);
-      };
-    }, []);
+      if (!isOpen) {
+        setSearchValue('');
+        setHoveredId(undefined);
+      }
+    }, [isOpen]);
+
+    useEffect(() => {
+      setHoveredId(undefined);
+    }, [searchValue]);
+
+    useEffect(() => {
+      const element = document.getElementById(`${prefixId}-item-${hoveredId}`);
+      element?.scrollIntoView({ block: 'nearest' });
+    }, [hoveredId, prefixId]);
+
+    useLayoutEffect(() => {
+      if (dropdownRef.current && isOpen) {
+        const boundaries = dropdownRef.current.getBoundingClientRect();
+
+        setReverseDropdown((reverseDropdown) =>
+          reverseDropdown === undefined
+            ? boundaries.bottom > (window.innerHeight || document.documentElement.clientHeight)
+            : reverseDropdown
+        );
+      }
+
+      const onResize = () => setReverseDropdown(undefined);
+
+      window.addEventListener('resize', onResize);
+
+      return () => window.removeEventListener('resize', onResize);
+    }, [isOpen]);
 
     const filteredItems = useMemo(
       () =>
         !search || !searchValue
           ? items
-          : pureItems.filter((item) =>
-              item.label.toLowerCase().includes(searchValue.toLowerCase())
+          : items.flatMap<SelectItem<T>>((item) =>
+              item.group
+                ? item.items.some((subItem) =>
+                    subItem.label.toLowerCase().includes(searchValue.toLowerCase())
+                  )
+                  ? [
+                      {
+                        ...item,
+                        items: item.items.filter((subItem) =>
+                          subItem.label.toLowerCase().includes(searchValue.toLowerCase())
+                        ),
+                      },
+                    ]
+                  : []
+                : item.label.toLowerCase().includes(searchValue.toLowerCase())
+                ? [item]
+                : []
             ),
-      [items, pureItems, search, searchValue]
+      [items, search, searchValue]
     );
 
     const text = useMemo(
@@ -142,6 +181,11 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       (item: SelectItem<T>) => () => {
         setSelectedItems((selected) => {
           if (!multiple) {
+            if (clearable && selected[0]?.id === item.id) {
+              onChange?.(undefined);
+              return [];
+            }
+
             onChange?.(item.value);
             return [item];
           }
@@ -154,30 +198,32 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         });
         if (!multiple) setIsOpen(false);
       },
-      [multiple, onChange]
+      [clearable, multiple, onChange]
     );
 
     const handleOnClick = () => {
       setIsOpen((open) => !open);
-      dropdownRef.current?.focus();
+      containerRef.current?.focus();
     };
 
     const handleOnSearchValueChange = (event: ChangeEvent<HTMLInputElement>) =>
       setSearchValue(event.target.value);
 
+    const clearSearchValue = () => setSearchValue('');
+
     const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       switch (event.key) {
         case 'ArrowDown':
-          setHoverIndex(getNextIndex(filteredItems, 1));
+          setHoveredId(getNextIndex(filteredItems, 1));
           break;
         case 'ArrowUp':
-          setHoverIndex(getNextIndex(filteredItems, -1));
+          setHoveredId(getNextIndex(filteredItems, -1));
           break;
         case 'Home':
-          setHoverIndex(0);
+          setHoveredId(filteredItems[0].group ? filteredItems[0].items[0].id : filteredItems[0].id);
           break;
         case 'End':
-          setHoverIndex(filteredItems.length - 1);
+          setHoveredId(filteredItems.length - 1);
           break;
         case ' ':
         case 'Enter':
@@ -185,9 +231,20 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
           event.stopPropagation();
           if (!isOpen) {
             setIsOpen(true);
-          } else if (hoverIndex !== undefined) {
-            const item = filteredItems[hoverIndex];
-            !item.groupHeader && selectItem(item)();
+          } else if (hoveredId !== undefined) {
+            let item = filteredItems.find((item) =>
+              item.group
+                ? item.items.some((subItem) => subItem.id === hoveredId)
+                : item.id === hoveredId
+            );
+
+            if (item?.group) {
+              item = item.items.find((item) => item.id === hoveredId);
+            }
+
+            if (item && !item.group) {
+              selectItem(item)();
+            }
           }
           break;
         case 'Escape':
@@ -200,26 +257,51 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       onChange?.(undefined);
     };
 
+    const renderOption = (item: SelectItem<T>) => (
+      <div
+        id={`${prefixId}-item-${item.id}`}
+        key={`item-${item.id}`}
+        className={classNames(
+          'relative flex cursor-pointer items-center rounded p-2 pl-9 hover:bg-gray-300 hover:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700 dark:active:!bg-gray-900',
+          {
+            'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
+            'bg-gray-300 dark:!bg-gray-900': item.id === hoveredId,
+          }
+        )}
+        onClick={selectItem(item)}
+      >
+        {selectedMap[item.id] && <CheckboxInput className="absolute left-2" checked readOnly />}
+        <span>{renderItem(item, !!selectedMap[item.id])}</span>
+      </div>
+    );
+
     return (
       <div
         className={classNames(className, 'relative')}
         onKeyDown={handleOnKeyDown}
-        ref={dropdownRef}
+        ref={containerRef}
       >
         <TextInput
           className="[&>div>*]:cursor-pointer"
           {...props}
           value={text ?? ''}
           ExtraIcon={clearable && selectedItems.length ? XMarkIcon : ChevronDownIcon}
-          onExtraIconClick={clearable && selectedItems.length ? handleOnClear : undefined}
+          onExtraIconClick={clearable && selectedItems.length ? handleOnClear : handleOnClick}
           onClick={handleOnClick}
           ref={ref}
           readOnly
         />
         {isOpen && (
           <div
-            className="absolute z-10 mt-2 flex w-full flex-col gap-1 rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            className={classNames(
+              'absolute z-10 mt-2 flex max-h-80 w-full flex-col overflow-hidden rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white',
+              {
+                'mt-2': !reverseDropdown,
+                'bottom-full -mb-5': reverseDropdown,
+              }
+            )}
             tabIndex={0}
+            ref={dropdownRef}
           >
             {search && (
               <TextInput
@@ -227,28 +309,29 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                 value={searchValue}
                 placeholder="Search..."
                 onChange={handleOnSearchValueChange}
+                ExtraIcon={XMarkIcon}
+                onExtraIconClick={clearSearchValue}
               />
             )}
             {filteredItems.length === 0 && (
               <div className="p-2 text-center text-gray-500">No items.</div>
             )}
-            {filteredItems.map((item, index) => (
-              <div
-                key={item.id}
-                className={classNames('relative flex items-center', {
-                  'cursor-pointer p-2 hover:bg-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700':
-                    !item.groupHeader,
-                  'bg-gray-900/40 px-2 py-1.5 text-sm': item.groupHeader,
-                  'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
-                  'bg-gray-300 dark:!bg-gray-900': hoverIndex === index,
-                })}
-                onMouseEnter={() => setHoverIndex(undefined)}
-                onClick={!item.groupHeader ? selectItem(item) : undefined}
-              >
-                {item.groupHeader ? item.label : renderItem(item, !!selectedMap[item.id])}
-                {selectedMap[item.id] && <CheckIcon className="absolute right-0 mr-2 h-6 w-6" />}
-              </div>
-            ))}
+            <div className="flex flex-col gap-1 overflow-auto px-1">
+              {filteredItems.map((item) =>
+                item.group
+                  ? [
+                      <div
+                        id={`${prefixId}-group-${item.id}`}
+                        key={`group-${item.id}`}
+                        className="relative flex items-center bg-gray-300 px-2 py-1.5 text-sm dark:bg-gray-900"
+                      >
+                        {item.label}
+                      </div>,
+                      item.items.map((subItem) => renderOption(subItem)),
+                    ]
+                  : renderOption(item)
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -257,32 +340,22 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 ) as <T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element;
 
 function getNextIndex(
-  items: (SelectItem<any> | GroupHeader)[],
+  items: SelectItem<any>[],
   step: 1 | -1
-): (index: number | undefined) => number | undefined {
-  return (index) => {
-    if (items.every((item) => item.groupHeader)) return index;
+): (index: string | number | undefined) => string | number | undefined {
+  return (previousId) => {
+    const allPureItems = items.flatMap((item) => (item.group ? item.items : [item]));
+    const previousIndex =
+      previousId === undefined
+        ? undefined
+        : allPureItems.findIndex((item) => item.id === previousId);
 
-    const [newIndex, newItems] =
-      step === 1
-        ? [index === undefined ? 0 : index + step, items]
-        : [items.length - 1 - (index === undefined ? 0 : index + step), [...items].reverse()];
-    let nextPureItemIndex: number | undefined;
+    if (!allPureItems.length || previousIndex === -1) return previousId;
 
-    nextPureItemIndex = newItems.findIndex(
-      (item, _index) => _index >= newIndex && !item.groupHeader
-    );
-
-    if (nextPureItemIndex === -1) {
-      nextPureItemIndex = newItems.findIndex(
-        (item, _index) => _index < newIndex && !item.groupHeader
-      );
-    }
-
-    return nextPureItemIndex === -1
-      ? undefined
-      : step === 1
-      ? nextPureItemIndex
-      : items.length - 1 - nextPureItemIndex;
+    return allPureItems[
+      previousIndex !== undefined
+        ? (previousIndex + step + allPureItems.length) % allPureItems.length
+        : 0
+    ].id;
   };
 }
