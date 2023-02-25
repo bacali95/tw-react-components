@@ -161,7 +161,7 @@ export const DateTimeInput = forwardRef(
                   />
                 )}
                 <div
-                  className="cursor-pointer rounded border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-700"
+                  className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-700"
                   onClick={() => setIsOpen(false)}
                 >
                   OK

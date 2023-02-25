@@ -45,7 +45,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({ date, minDate, maxDate, se
             {...decreaseHours}
           />
         </div>
-        <div className="flex items-center rounded border border-gray-100 bg-gray-100 text-right dark:border-gray-700 dark:bg-gray-700">
+        <div className="flex items-center rounded-lg border border-gray-100 bg-gray-100 text-right dark:border-gray-700 dark:bg-gray-700">
           <span className="flex px-2" onWheel={onWheel('hours')}>
             {date.getHours().toString().padStart(2, '0')}
           </span>
