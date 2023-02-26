@@ -1,5 +1,6 @@
 export * from './form';
 export * from './Block';
+export * from './Button';
 export * from './Card';
 export * from './Flex';
 export * from './Layout';
