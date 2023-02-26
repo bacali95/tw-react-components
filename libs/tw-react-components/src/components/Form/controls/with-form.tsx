@@ -17,6 +17,8 @@ import {
   InputType,
   NumberInput,
   NumberInputProps,
+  PasswordInput,
+  PasswordInputProps,
   TextInput,
   TextInputProps,
   TextareaInput,
@@ -81,6 +83,7 @@ function withForm<
 
 export const FormInputs = {
   Text: withForm<'text', TextInputProps>('text', TextInput),
+  Password: withForm<'password', PasswordInputProps>('password', PasswordInput),
   Textarea: withForm<'textarea', TextareaInputProps>('textarea', TextareaInput),
   Number: withForm<'number', NumberInputProps>('number', NumberInput),
   Checkbox: withForm<'checkbox', CheckboxInputProps>('checkbox', CheckboxInput),

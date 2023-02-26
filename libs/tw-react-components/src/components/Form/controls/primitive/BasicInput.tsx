@@ -73,7 +73,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
   );
 
   return (
-    <div className={classNames(className, 'dark:text-white')}>
+    <div className={classNames(className, 'w-full dark:text-white')}>
       {type !== 'checkbox' && memoLabel}
       <div
         className={classNames('flex', {
@@ -119,10 +119,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         )}
         {type === 'checkbox' && memoLabel}
         {type !== 'checkbox' && (hasErrors || ExtraIcon) && (
-          <BasicInputExtension
-            hasErrors={hasErrors}
-            onClick={!hasErrors ? onExtraIconClick : undefined}
-          >
+          <BasicInputExtension hasErrors={hasErrors} onClick={onExtraIconClick}>
             {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-6 w-6" />}
             {ExtraIcon && <ExtraIcon className="h-6 w-6" />}
           </BasicInputExtension>

@@ -277,7 +277,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 
     return (
       <div
-        className={classNames(className, 'relative')}
+        className={classNames(className, 'relative w-full')}
         onKeyDown={handleOnKeyDown}
         ref={containerRef}
       >

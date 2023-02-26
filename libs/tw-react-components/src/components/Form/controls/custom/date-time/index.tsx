@@ -114,7 +114,7 @@ export const DateTimeInput = forwardRef(
     };
 
     return (
-      <div className={classNames(className, 'relative')} ref={ref}>
+      <div className={classNames(className, 'relative w-full')} ref={ref}>
         <BasicInput
           type="text"
           label={label}
