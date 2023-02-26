@@ -24,9 +24,10 @@ const alignClasses: Record<Position, string> = {
   end: 'items-end',
 };
 
-const justifyClasses: Record<Position, string> = {
+const justifyClasses: Record<Position | 'between', string> = {
   start: 'justify-start',
   center: 'justify-center',
+  between: 'justify-between',
   end: 'justify-end',
 };
 
@@ -35,7 +36,7 @@ type Props = BlockProps & {
   wrap?: boolean;
   direction?: Direction;
   align?: Position;
-  justify?: Position;
+  justify?: Position | 'between';
 };
 
 export const Flex: FC<PropsWithChildren<Props>> = ({
