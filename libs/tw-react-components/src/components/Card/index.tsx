@@ -7,7 +7,7 @@ export const Card: FC<PropsWithChildren<BlockProps>> = ({ children, className, .
   <Block
     className={classNames(
       className,
-      'rounded-lg bg-white p-4 shadow dark:bg-gray-800 dark:text-white'
+      'rounded-lg bg-white p-3 shadow dark:bg-gray-800 dark:text-white'
     )}
     {...blockProps}
   >
