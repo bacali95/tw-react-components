@@ -4,6 +4,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitErrorHandler } from 'react-hook-form/dist/types/form';
 
 import {
+  Button,
   Card,
   CheckboxInput,
   DateTimeInput,
@@ -62,22 +63,15 @@ export const FormControls: FC = () => {
     <Flex>
       <Flex className="w-1/2" direction="column" centered>
         <Card fullWidth>
-          With <code className="rounded bg-gray-100 p-1 dark:bg-gray-900">use-form-hook</code>{' '}
-          context
-        </Card>
-        <Card fullWidth>
+          <p className="mb-2">
+            With <code className="rounded bg-gray-100 p-1 dark:bg-gray-900">use-form-hook</code>{' '}
+            context
+          </p>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
               <Flex direction="column">
-                <FormInputs.Text
-                  className="w-full"
-                  name="text"
-                  label="Text"
-                  placeholder="Text"
-                  required
-                />
+                <FormInputs.Text name="text" label="Text" placeholder="Text" required />
                 <FormInputs.Textarea
-                  className="w-full"
                   name="textarea"
                   label="Full Text"
                   placeholder="Full Text"
@@ -85,7 +79,6 @@ export const FormControls: FC = () => {
                   required
                 />
                 <FormInputs.Number
-                  className="w-full"
                   name="number"
                   label="Number"
                   placeholder="0"
@@ -94,9 +87,8 @@ export const FormControls: FC = () => {
                   ExtraIcon={CurrencyDollarIcon}
                   required
                 />
-                <FormInputs.Checkbox className="w-full" name="checkbox" label="Checkbox" required />
+                <FormInputs.Checkbox name="checkbox" label="Checkbox" required />
                 <FormInputs.DateTime
-                  className="w-full"
                   name="date"
                   label="DateTime"
                   displayFormat="DD-MM-YYYY [at] HH:mm"
@@ -106,7 +98,6 @@ export const FormControls: FC = () => {
                   clearable
                 />
                 <FormInputs.Select
-                  className="w-full"
                   name="countries"
                   label="Countries"
                   placeholder="Select country..."
@@ -116,7 +107,9 @@ export const FormControls: FC = () => {
                   clearable
                   search
                 />
-                <button type="submit">Submit</button>
+                <Button className="self-end" type="submit" color="green">
+                  Submit
+                </Button>
               </Flex>
             </form>
           </FormProvider>
@@ -124,10 +117,10 @@ export const FormControls: FC = () => {
       </Flex>
       <Flex className="w-1/2" direction="column" centered>
         <Card fullWidth>
-          Without <code className="rounded bg-gray-100 p-1 dark:bg-gray-900 ">use-form-hook</code>{' '}
-          context
-        </Card>
-        <Card fullWidth>
+          <p className="mb-2">
+            Without <code className="rounded bg-gray-100 p-1 dark:bg-gray-900 ">use-form-hook</code>{' '}
+            context
+          </p>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -136,7 +129,6 @@ export const FormControls: FC = () => {
           >
             <Flex direction="column">
               <TextInput
-                className="w-full"
                 name="text"
                 label="Text"
                 value={formState.text ?? ''}
@@ -145,7 +137,6 @@ export const FormControls: FC = () => {
                 required
               />
               <TextareaInput
-                className="w-full"
                 name="textarea"
                 label="Full Text"
                 value={formState.textarea ?? ''}
@@ -155,7 +146,6 @@ export const FormControls: FC = () => {
                 required
               />
               <NumberInput
-                className="w-full"
                 name="number"
                 label="Number"
                 value={formState.number ?? ''}
@@ -167,7 +157,6 @@ export const FormControls: FC = () => {
                 required
               />
               <CheckboxInput
-                className="w-full"
                 name="checkbox"
                 label="Checkbox"
                 checked={formState.checkbox ?? false}
@@ -175,7 +164,6 @@ export const FormControls: FC = () => {
                 required
               />
               <DateTimeInput
-                className="w-full"
                 name="date"
                 label="DateTime"
                 displayFormat="DD-MM-YYYY [at] HH:mm"
@@ -187,7 +175,6 @@ export const FormControls: FC = () => {
                 clearable
               />
               <SelectInput
-                className="w-full"
                 name="countries"
                 label="Countries"
                 placeholder="Select..."
@@ -199,7 +186,9 @@ export const FormControls: FC = () => {
                 clearable
                 search
               />
-              <button type="submit">Submit</button>
+              <Button className="self-end" type="submit" color="green">
+                Submit
+              </Button>
             </Flex>
           </form>
         </Card>
