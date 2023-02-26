@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.8...v0.0.9) (2023-02-26)
+
+
+### Bug Fixes
+
+* **card:** update padding to p-3 of the card component ([64252ac](https://github.com/NaN-Projects/tw-react-components/commit/64252ac295b1ca4092ecd7a2d3901b2fc0dcf031))
+
 ### [0.0.8](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.6...v0.0.8) (2023-02-26)
 
 
