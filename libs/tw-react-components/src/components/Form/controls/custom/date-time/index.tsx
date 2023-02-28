@@ -1,4 +1,4 @@
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, ClockIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import {
@@ -53,6 +53,7 @@ export const DateTimeInput = forwardRef(
       hasErrors,
       onChange,
       onBlur,
+      readOnly,
       displayFormat = 'dddd, MMMM Do YYYY, HH:mm:ss',
       displayLocale = 'en',
     },
@@ -94,11 +95,15 @@ export const DateTimeInput = forwardRef(
     };
 
     const handleOnClick = () => {
+      if (readOnly) return;
+
       setIsOpen((open) => !open);
       calendarRef.current?.focus();
     };
 
     const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
+      if (readOnly) return;
+
       setIsOpen(false);
       onBlur?.(event);
     };
@@ -127,7 +132,9 @@ export const DateTimeInput = forwardRef(
           hasErrors={hasErrors}
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
-          ExtraIcon={clearable && displayDate ? XMarkIcon : undefined}
+          ExtraIcon={
+            clearable && displayDate ? XMarkIcon : type?.includes('date') ? CalendarIcon : ClockIcon
+          }
           onExtraIconClick={clearDate}
         />
 

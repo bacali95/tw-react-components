@@ -55,7 +55,14 @@ export type SelectInputProps<T = any> = {
 ) &
   Pick<
     BasicInputProps<'text'>,
-    'className' | 'name' | 'label' | 'placeholder' | 'required' | 'hasErrors'
+    | 'className'
+    | 'name'
+    | 'label'
+    | 'placeholder'
+    | 'required'
+    | 'hasErrors'
+    | 'disabled'
+    | 'readOnly'
   >;
 
 export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
@@ -72,6 +79,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         item.label.toLowerCase().includes(searchValue.toLowerCase()),
       selectPredicate = (a, b) => a === b,
       onChange,
+      readOnly,
       ...props
     }: SelectInputProps<T>,
     ref: ForwardedRef<HTMLInputElement>
@@ -202,6 +210,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     );
 
     const handleOnClick = () => {
+      if (readOnly) return;
+
       setIsOpen((open) => !open);
       containerRef.current?.focus();
     };
@@ -253,6 +263,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     };
 
     const handleOnClear = () => {
+      if (readOnly) return;
+
       setSelectedItems([]);
       onChange?.(undefined);
     };

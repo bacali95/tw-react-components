@@ -28,6 +28,7 @@ export type BasicInputProps<Type extends InputType> = {
 const classes = {
   base: {
     input: 'peer w-full rounded-md shadow-sm',
+    disabled: 'opacity-60',
   },
   withoutErrors: {
     input:
@@ -85,6 +86,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           <textarea
             id={id}
             className={classNames(classes.base.input, {
+              [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
               'rounded-r-none': hasErrors || ExtraIcon,
@@ -97,6 +99,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           <input
             id={id}
             className={classNames('h-5 w-5 rounded border-gray-300 text-blue-600', {
+              [classes.base.disabled]: props.disabled,
               'bg-red-100': hasErrors,
             })}
             type={type}
@@ -107,6 +110,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           <input
             id={id}
             className={classNames(classes.base.input, {
+              [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
               'rounded-r-none': hasErrors || ExtraIcon,
@@ -119,7 +123,11 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         )}
         {type === 'checkbox' && memoLabel}
         {type !== 'checkbox' && (hasErrors || ExtraIcon) && (
-          <BasicInputExtension hasErrors={hasErrors} onClick={onExtraIconClick}>
+          <BasicInputExtension
+            hasErrors={hasErrors}
+            disabled={props.disabled}
+            onClick={onExtraIconClick}
+          >
             {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-6 w-6" />}
             {ExtraIcon && <ExtraIcon className="h-6 w-6" />}
           </BasicInputExtension>
@@ -132,13 +140,15 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
 export const BasicInputExtension: FC<
   PropsWithChildren<{
     hasErrors?: boolean;
+    disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   }>
-> = ({ children, hasErrors, onClick }) => (
+> = ({ children, hasErrors, disabled, onClick }) => (
   <div
     className={classNames(
       'flex items-center rounded-r-md border border-l-0 bg-gray-50 px-2 peer-focus:border-l peer-focus:ring-1 dark:bg-gray-700',
       {
+        [classes.base.disabled]: disabled,
         [classes.withoutErrors.extension]: !hasErrors,
         [classes.withErrors.extension]: hasErrors,
         'cursor-pointer': onClick,
