@@ -104,6 +104,8 @@ export const FormControls: FC = () => {
                   items={countriesItems}
                   multiple
                   required
+                  allowAddition
+                  onNewItemAdded={alert}
                   clearable
                   search
                 />

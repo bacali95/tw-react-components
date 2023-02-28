@@ -38,6 +38,8 @@ export type SelectInputProps<T = any> = {
   items: SelectItem<T>[];
   renderItem?: (item: SelectItem<T>, selected?: boolean) => ReactNode;
   clearable?: boolean;
+  allowAddition?: boolean;
+  onNewItemAdded?: (value: string) => void;
   search?: boolean;
   searchPredicate?: (item: SelectItem<T>, searchValue: string) => boolean;
   selectPredicate?: (a: T, b: T) => boolean;
@@ -74,6 +76,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       value,
       multiple,
       clearable,
+      allowAddition,
+      onNewItemAdded,
       search,
       searchPredicate = (item, searchValue) =>
         item.label.toLowerCase().includes(searchValue.toLowerCase()),
@@ -269,12 +273,17 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       onChange?.(undefined);
     };
 
+    const handleOnAddItemClicked = () => {
+      onNewItemAdded?.(searchValue);
+      setSearchValue('');
+    };
+
     const renderOption = (item: SelectItem<T>) => (
       <div
         id={`${prefixId}-item-${item.id}`}
         key={`item-${item.id}`}
         className={classNames(
-          'relative flex cursor-pointer items-center rounded p-2 pl-9 hover:bg-gray-300 hover:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700 dark:active:!bg-gray-900',
+          'relative flex cursor-pointer items-center rounded p-2 hover:bg-gray-300 hover:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700 dark:active:!bg-gray-900',
           {
             'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
             'bg-gray-300 dark:!bg-gray-900': item.id === hoveredId,
@@ -282,8 +291,10 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         )}
         onClick={selectItem(item)}
       >
-        {selectedMap[item.id] && <CheckboxInput className="absolute left-2" checked readOnly />}
         <span>{renderItem(item, !!selectedMap[item.id])}</span>
+        {selectedMap[item.id] && (
+          <CheckboxInput className="absolute right-0 mr-2 w-fit" checked readOnly />
+        )}
       </div>
     );
 
@@ -325,9 +336,17 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                 onExtraIconClick={clearSearchValue}
               />
             )}
-            {filteredItems.length === 0 && (
-              <div className="p-2 text-center text-gray-500">No items.</div>
-            )}
+            {filteredItems.length === 0 &&
+              (allowAddition ? (
+                <button
+                  className="mx-1 rounded bg-gray-100 p-2 text-center hover:bg-gray-200 dark:bg-gray-900/30 dark:hover:bg-gray-700/30"
+                  onClick={handleOnAddItemClicked}
+                >
+                  Add '{searchValue}'
+                </button>
+              ) : (
+                <div className="p-2 text-center text-gray-500">No items.</div>
+              ))}
             <div className="flex flex-col gap-1 overflow-auto px-1">
               {filteredItems.map((item) =>
                 item.group
@@ -335,7 +354,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                       <div
                         id={`${prefixId}-group-${item.id}`}
                         key={`group-${item.id}`}
-                        className="relative flex items-center bg-gray-300 px-2 py-1.5 text-sm dark:bg-gray-900"
+                        className="relative flex items-center rounded bg-gray-300 px-2 py-1.5 text-sm dark:bg-gray-900"
                       >
                         {item.label}
                       </div>,
