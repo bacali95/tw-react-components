@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.9...v0.0.10) (2023-02-28)
+
+
+### Features
+
+* **form-dialog:** add extra action ([8c0582e](https://github.com/NaN-Projects/tw-react-components/commit/8c0582e131195249720b760267a65a59c6825afa))
+* **form-inputs:** add allow addition ([b1a83d6](https://github.com/NaN-Projects/tw-react-components/commit/b1a83d6cee619d24023e0594850929aab4bf5bae))
+* **form-inputs:** add disabled and readOnly ([3cb2677](https://github.com/NaN-Projects/tw-react-components/commit/3cb267723fbf98841c37c35a9abcd4f56482a632))
+* **form-inputs:** add email input ([8ebea0d](https://github.com/NaN-Projects/tw-react-components/commit/8ebea0d2eeaee52b5acdb685d37ce81963b3a3e1))
+
 ### [0.0.9](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.8...v0.0.9) (2023-02-26)
 
 
