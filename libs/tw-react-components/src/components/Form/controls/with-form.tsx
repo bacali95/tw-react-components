@@ -1,4 +1,4 @@
-import { ComponentProps, FC, ForwardedRef } from 'react';
+import { ComponentProps, FC } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 import { Validate } from 'react-hook-form/dist/types/validator';
 
@@ -14,6 +14,8 @@ import {
   BasicInputProps,
   CheckboxInput,
   CheckboxInputProps,
+  EmailInput,
+  EmailInputProps,
   InputType,
   NumberInput,
   NumberInputProps,
@@ -51,7 +53,7 @@ function withForm<
     : Type extends SelectInputType
     ? SelectInputProps
     : BasicInputProps<Type>
->(type: Type, Component: FC<Props>): FC<WithFormProps<Type, Props>> {
+>(Component: FC<Props>): FC<WithFormProps<Type, Props>> {
   return ({ name, pattern, validate, ...props }) => {
     const { control } = useFormContext();
 
@@ -82,13 +84,12 @@ function withForm<
 }
 
 export const FormInputs = {
-  Text: withForm<'text', TextInputProps>('text', TextInput),
-  Password: withForm<'password', PasswordInputProps>('password', PasswordInput),
-  Textarea: withForm<'textarea', TextareaInputProps>('textarea', TextareaInput),
-  Number: withForm<'number', NumberInputProps>('number', NumberInput),
-  Checkbox: withForm<'checkbox', CheckboxInputProps>('checkbox', CheckboxInput),
-  DateTime: withForm<'datetime-local', DateTimeInputProps>('datetime-local', DateTimeInput),
-  Select: withForm<'select', SelectInputProps>('select', SelectInput) as <T>(
-    props: WithFormProps<'select', SelectInputProps<T>> & { ref?: ForwardedRef<HTMLDivElement> }
-  ) => JSX.Element,
+  Text: withForm<'text', TextInputProps>(TextInput),
+  Email: withForm<'email', EmailInputProps>(EmailInput),
+  Password: withForm<'password', PasswordInputProps>(PasswordInput),
+  Textarea: withForm<'textarea', TextareaInputProps>(TextareaInput),
+  Number: withForm<'number', NumberInputProps>(NumberInput),
+  Checkbox: withForm<'checkbox', CheckboxInputProps>(CheckboxInput),
+  DateTime: withForm<'datetime-local', DateTimeInputProps>(DateTimeInput),
+  Select: withForm<'select', SelectInputProps>(SelectInput),
 };
