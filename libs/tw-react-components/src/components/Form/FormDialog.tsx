@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { FormProvider, SubmitErrorHandler, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { Button } from '../Button';
@@ -10,6 +11,7 @@ export type FormDialogProps<T extends Record<string, any>> = DialogProps & {
   onInvalid?: SubmitErrorHandler<T>;
   submitLabel?: string;
   cancelLabel?: string;
+  extraAction?: ReactNode;
 };
 
 export function FormDialog<T extends Record<string, any>>({
@@ -19,6 +21,7 @@ export function FormDialog<T extends Record<string, any>>({
   onInvalid,
   submitLabel,
   cancelLabel,
+  extraAction,
   ...props
 }: FormDialogProps<T>) {
   return (
@@ -27,13 +30,16 @@ export function FormDialog<T extends Record<string, any>>({
         <form onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
           <Flex direction="column" fullWidth>
             {children}
-            <Flex className="mt-4" justify="end" fullWidth>
-              <Button onClick={props.onClose} color="red">
-                {cancelLabel ?? 'Cancel'}
-              </Button>
-              <Button type="submit" color="green" disabled={form.formState.isSubmitting}>
-                {submitLabel ?? 'Submit'}
-              </Button>
+            <Flex className="mt-4" justify="between" fullWidth>
+              {extraAction}
+              <Flex justify="end" fullWidth>
+                <Button onClick={props.onClose} color="red">
+                  {cancelLabel ?? 'Cancel'}
+                </Button>
+                <Button type="submit" color="green" disabled={form.formState.isSubmitting}>
+                  {submitLabel ?? 'Submit'}
+                </Button>
+              </Flex>
             </Flex>
           </Flex>
         </form>

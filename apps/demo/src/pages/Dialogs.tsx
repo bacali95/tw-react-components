@@ -41,6 +41,7 @@ export const Dialogs: FC = () => {
           onSubmit={handleLogin}
           isOpen={openDialogs['form']}
           onClose={toggleDialog('form')}
+          extraAction={<Button>Action</Button>}
         >
           <Flex direction="column" fullWidth>
             <FormInputs.Text name="username" label="Username" required />
