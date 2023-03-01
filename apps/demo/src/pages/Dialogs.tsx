@@ -9,6 +9,7 @@ import {
   Flex,
   FormDialog,
   FormInputs,
+  PdfViewerDialog,
 } from 'tw-react-components';
 
 type Login = {
@@ -72,6 +73,15 @@ export const Dialogs: FC = () => {
             <FormInputs.Password name="password" label="Password" required />
           </Flex>
         </FormDialog>
+      </Card>
+      <Card fullWidth>
+        <Button onClick={toggleDialog('pdf')}>Pdf dialog</Button>
+        <PdfViewerDialog
+          title="Pdf Dialog"
+          url="https://www.orimi.com/pdf-test.pdf"
+          isOpen={openDialogs['pdf']}
+          onClose={toggleDialog('pdf')}
+        />
       </Card>
     </Flex>
   );
