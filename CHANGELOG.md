@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.10...v0.0.11) (2023-03-01)
+
+
+### Features
+
+* **dialogs:** create confirm dialog ([eafe1db](https://github.com/NaN-Projects/tw-react-components/commit/eafe1dbba5117643141d07b8314b9c232ca39ff9))
+
 ### [0.0.10](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.9...v0.0.10) (2023-02-28)
 
 
