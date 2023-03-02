@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "demo": "apps/demo",
+    "demo-e2e": "apps/demo-e2e",
+    "tw-react-components": "libs/tw-react-components"
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
+}
