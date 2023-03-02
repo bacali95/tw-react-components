@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import { ComponentProps, FC, PropsWithChildren } from 'react';
 
-export type BlockProps = {
+export type BlockProps = ComponentProps<'div'> & {
   className?: string;
   centered?: boolean;
   container?: boolean;
@@ -16,6 +16,7 @@ export const Block: FC<PropsWithChildren<BlockProps>> = ({
   container,
   fullWidth,
   fullHeight,
+  ...props
 }) => (
   <div
     className={classNames(
@@ -25,6 +26,7 @@ export const Block: FC<PropsWithChildren<BlockProps>> = ({
       fullWidth && 'w-full',
       fullHeight && 'h-full'
     )}
+    {...props}
   >
     {children}
   </div>

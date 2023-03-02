@@ -9,6 +9,7 @@ import {
   Flex,
   FormDialog,
   FormInputs,
+  ListSorterDialog,
   PdfViewerDialog,
 } from 'tw-react-components';
 
@@ -32,6 +33,11 @@ export const Dialogs: FC = () => {
   const handleLogin = (login: Login) => {
     alert(JSON.stringify(login, null, 2));
     toggleDialog('form')();
+  };
+
+  const handleSorter = (items: string[]) => {
+    alert(JSON.stringify(items, null, 2));
+    toggleDialog('sorter')();
   };
 
   return (
@@ -81,6 +87,18 @@ export const Dialogs: FC = () => {
           url="https://www.orimi.com/pdf-test.pdf"
           isOpen={openDialogs['pdf']}
           onClose={toggleDialog('pdf')}
+        />
+      </Card>
+      <Card fullWidth>
+        <Button onClick={toggleDialog('sorter')}>Sorter dialog</Button>
+        <ListSorterDialog
+          title="Sorter Dialog"
+          isOpen={openDialogs['sorter']}
+          items={['one', 'two', 'three']}
+          renderer={(item) => <>{item}</>}
+          idResolver={(item) => item}
+          onSubmit={handleSorter}
+          onClose={toggleDialog('sorter')}
         />
       </Card>
     </Flex>

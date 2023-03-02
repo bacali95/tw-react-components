@@ -2,8 +2,8 @@ import { ReactNode } from 'react';
 import { FormProvider, SubmitErrorHandler, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { Button } from '../Button';
-import { Dialog, DialogProps } from '../Dialog';
 import { Flex } from '../Flex';
+import { Dialog, DialogProps } from './Dialog';
 
 export type FormDialogProps<T extends Record<string, any>> = DialogProps & {
   form: UseFormReturn<T>;
