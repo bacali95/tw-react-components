@@ -103,6 +103,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               'bg-red-100': hasErrors,
             })}
             type={type}
+            checked={Boolean(props.value)}
             {...(props as ComponentProps<'input'>)}
             ref={ref as ForwardedRef<HTMLInputElement>}
           />
