@@ -135,7 +135,7 @@ export const DateTimeInput = forwardRef(
           ExtraIcon={
             clearable && displayDate ? XMarkIcon : type?.includes('date') ? CalendarIcon : ClockIcon
           }
-          onExtraIconClick={clearDate}
+          onExtraIconClick={clearable && displayDate ? clearDate : undefined}
         />
 
         {isOpen && (

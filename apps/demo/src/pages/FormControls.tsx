@@ -28,12 +28,11 @@ type State = {
   countries: string[];
 };
 
-const countriesItems: SelectItem<string>[] = Object.entries(countriesByContinent).map(
+const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByContinent).map(
   ([continent, countries]) => ({
     id: continent,
     label: continent,
     group: true,
-    value: continent,
     items: countries.map((country) => ({ id: country, value: country, label: country })),
   })
 );
@@ -109,9 +108,14 @@ export const FormControls: FC = () => {
                   clearable
                   search
                 />
-                <Button className="self-end" type="submit" color="green">
-                  Submit
-                </Button>
+                <Flex justify="end" fullWidth>
+                  <Button color="red" onClick={() => form.reset()}>
+                    Clear
+                  </Button>
+                  <Button type="submit" color="green">
+                    Submit
+                  </Button>
+                </Flex>
               </Flex>
             </form>
           </FormProvider>

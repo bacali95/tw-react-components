@@ -16,26 +16,27 @@ import {
 } from 'react';
 
 import { useOutsideClick } from '../../../../../hooks';
+import { Flex } from '../../../../Flex';
 import { BasicInputProps, CheckboxInput, TextInput } from '../../primitive';
 
 export type SelectInputType = 'select';
 
-export type SelectItem<T> = {
+export type SelectItem<T, Group extends boolean = false> = {
   id: string | number;
   label: string;
-  value: T;
-} & (
-  | {
+} & (Group extends false
+  ? {
       group?: false;
+      value: T;
     }
-  | {
+  : {
       group: true;
+      value?: never;
       items: SelectItem<T>[];
-    }
-);
+    });
 
 export type SelectInputProps<T = any> = {
-  items: SelectItem<T>[];
+  items: SelectItem<T, boolean>[];
   renderItem?: (item: SelectItem<T>, selected?: boolean) => ReactNode;
   clearable?: boolean;
   allowAddition?: boolean;
@@ -93,17 +94,22 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     const [hoveredId, setHoveredId] = useState<string | number | undefined>(undefined);
     const [searchValue, setSearchValue] = useState('');
     const [reverseDropdown, setReverseDropdown] = useState<boolean>();
-    const pureItems = useMemo(() => items.filter((item) => !item.group), [items]);
-    const [selectedItems, setSelectedItems] = useState<SelectItem<T>[]>(
-      value
-        ? !multiple
-          ? pureItems.find((item) => selectPredicate(item.value, value))
-            ? [pureItems.find((item) => selectPredicate(item.value, value))!]
-            : []
-          : value
-              .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
-              .filter(Boolean)
-        : []
+    const pureItems = useMemo(
+      () => items.flatMap((item: SelectItem<T, boolean>) => (item.group ? item.items : [item])),
+      [items]
+    );
+    const selectedItems = useMemo<SelectItem<T>[]>(
+      () =>
+        value
+          ? !multiple
+            ? pureItems.find((item) => selectPredicate(item.value, value))
+              ? [pureItems.find((item) => selectPredicate(item.value, value))!]
+              : []
+            : value
+                .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
+                .filter(Boolean)
+          : [],
+      [multiple, pureItems, selectPredicate, value]
     );
 
     const containerRef = useRef<HTMLDivElement>(null);
@@ -149,7 +155,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       () =>
         !search || !searchValue
           ? items
-          : items.flatMap<SelectItem<T>>((item) =>
+          : items.flatMap<SelectItem<T, boolean>>((item: SelectItem<T, boolean>) =>
               item.group
                 ? item.items.some((subItem) =>
                     subItem.label.toLowerCase().includes(searchValue.toLowerCase())
@@ -191,26 +197,22 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 
     const selectItem = useCallback(
       (item: SelectItem<T>) => () => {
-        setSelectedItems((selected) => {
-          if (!multiple) {
-            if (clearable && selected[0]?.id === item.id) {
-              onChange?.(undefined);
-              return [];
-            }
-
+        if (!multiple) {
+          if (clearable && selectedItems[0]?.id === item.id) {
+            onChange?.(undefined);
+          } else {
             onChange?.(item.value);
-            return [item];
           }
-          if (selected.some((i) => i.id === item.id)) {
-            onChange?.(selected.filter((i) => i.id !== item.id).map((i) => i.value));
-            return selected.filter((i) => i.id !== item.id);
+        } else {
+          if (selectedItems.some((i) => i.id === item.id)) {
+            onChange?.(selectedItems.filter((i) => i.id !== item.id).map((i) => i.value));
+          } else {
+            onChange?.([...selectedItems, item].map((i) => i.value));
           }
-          onChange?.([...selected, item].map((i) => i.value));
-          return [...selected, item];
-        });
+        }
         if (!multiple) setIsOpen(false);
       },
-      [clearable, multiple, onChange]
+      [clearable, multiple, onChange, selectedItems]
     );
 
     const handleOnClick = () => {
@@ -269,7 +271,6 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     const handleOnClear = () => {
       if (readOnly) return;
 
-      setSelectedItems([]);
       onChange?.(undefined);
     };
 
@@ -279,11 +280,14 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     };
 
     const renderOption = (item: SelectItem<T>) => (
-      <div
+      <Flex
         id={`${prefixId}-item-${item.id}`}
         key={`item-${item.id}`}
+        align="center"
+        justify="between"
+        fullWidth
         className={classNames(
-          'relative flex cursor-pointer items-center rounded p-2 hover:bg-gray-300 hover:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700 dark:active:!bg-gray-900',
+          'cursor-pointer rounded p-2 hover:bg-gray-300 hover:bg-gray-300 active:bg-gray-300 dark:hover:bg-gray-700 dark:hover:bg-gray-700 dark:active:!bg-gray-900',
           {
             'bg-gray-100 dark:bg-gray-700/40': selectedMap[item.id],
             'bg-gray-300 dark:!bg-gray-900': item.id === hoveredId,
@@ -292,10 +296,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         onClick={selectItem(item)}
       >
         <span>{renderItem(item, !!selectedMap[item.id])}</span>
-        {selectedMap[item.id] && (
-          <CheckboxInput className="absolute right-0 mr-2 w-fit" checked readOnly />
-        )}
-      </div>
+        {selectedMap[item.id] && <CheckboxInput className="-my-2 w-min" checked readOnly />}
+      </Flex>
     );
 
     return (
@@ -371,7 +373,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 ) as <T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element;
 
 function getNextIndex(
-  items: SelectItem<any>[],
+  items: SelectItem<any, boolean>[],
   step: 1 | -1
 ): (index: string | number | undefined) => string | number | undefined {
   return (previousId) => {

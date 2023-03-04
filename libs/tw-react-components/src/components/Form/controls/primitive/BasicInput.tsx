@@ -89,7 +89,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
-              'rounded-r-none': hasErrors || ExtraIcon,
+              'rounded-r-none border-r-0': hasErrors || ExtraIcon,
             })}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
@@ -113,7 +113,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
-              'rounded-r-none': hasErrors || ExtraIcon,
+              'rounded-r-none border-r-0': hasErrors || ExtraIcon,
             })}
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
@@ -146,7 +146,7 @@ export const BasicInputExtension: FC<
 > = ({ children, hasErrors, disabled, onClick }) => (
   <div
     className={classNames(
-      'flex items-center rounded-r-md border border-l-0 bg-gray-50 px-2 peer-focus:border-l peer-focus:ring-1 dark:bg-gray-700',
+      'flex items-center rounded-r-md border border-l-0 bg-gray-50 px-2 peer-focus:ring-1 dark:bg-gray-700',
       {
         [classes.base.disabled]: disabled,
         [classes.withoutErrors.extension]: !hasErrors,
