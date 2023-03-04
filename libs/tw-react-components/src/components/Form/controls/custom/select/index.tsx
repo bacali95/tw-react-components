@@ -100,7 +100,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     );
     const selectedItems = useMemo<SelectItem<T>[]>(
       () =>
-        value
+        value !== undefined
           ? !multiple
             ? pureItems.find((item) => selectPredicate(item.value, value))
               ? [pureItems.find((item) => selectPredicate(item.value, value))!]
@@ -339,7 +339,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               />
             )}
             {filteredItems.length === 0 &&
-              (allowAddition ? (
+              (allowAddition && searchValue ? (
                 <button
                   className="mx-1 rounded bg-gray-100 p-2 text-center hover:bg-gray-200 dark:bg-gray-900/30 dark:hover:bg-gray-700/30"
                   onClick={handleOnAddItemClicked}
