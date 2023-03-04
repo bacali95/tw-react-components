@@ -1,7 +1,7 @@
 import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { FC, Fragment, PropsWithChildren, ReactNode } from 'react';
 
 import { Button } from '../Button';
 import { Flex } from '../Flex';
@@ -11,6 +11,7 @@ export type DialogProps = PropsWithChildren<{
   isOpen: boolean;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
   onClose: () => void;
+  footer?: ReactNode;
 }>;
 
 export const Dialog: FC<DialogProps> = ({
@@ -19,14 +20,11 @@ export const Dialog: FC<DialogProps> = ({
   isOpen = false,
   size = 'lg',
   onClose,
+  footer,
 }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <HeadlessDialog
-        as="div"
-        className="fixed inset-0 z-10 z-[1000] overflow-y-auto"
-        onClose={onClose}
-      >
+      <HeadlessDialog as="div" className="fixed inset-0 z-[1000] overflow-hidden" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -39,8 +37,8 @@ export const Dialog: FC<DialogProps> = ({
           <div className="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+        <div className="fixed inset-0 overflow-hidden">
+          <div className="flex min-h-full items-center justify-center overflow-hidden p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -52,7 +50,7 @@ export const Dialog: FC<DialogProps> = ({
             >
               <HeadlessDialog.Panel
                 className={classNames(
-                  'w-full transform overflow-hidden rounded-lg bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-gray-800',
+                  'flex max-h-[90vh] w-full transform flex-col overflow-hidden rounded-lg bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-gray-800 dark:text-white',
                   {
                     'max-w-xs': size === 'xs',
                     'max-w-sm': size === 'sm',
@@ -82,7 +80,8 @@ export const Dialog: FC<DialogProps> = ({
                     onClick={onClose}
                   />
                 </Flex>
-                {children && <div className="mt-4 dark:text-white">{children}</div>}
+                {children && <div className="-mx-4 mt-4 overflow-y-auto py-1 px-4">{children}</div>}
+                {footer && <div className="mt-4">{footer}</div>}
               </HeadlessDialog.Panel>
             </Transition.Child>
           </div>

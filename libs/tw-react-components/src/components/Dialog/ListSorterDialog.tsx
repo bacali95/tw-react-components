@@ -7,7 +7,7 @@ import { Flex } from '../Flex';
 import { ListItem, ListSorter, ListSorterProps } from '../ListSorter';
 import { Dialog, DialogProps } from './Dialog';
 
-export type ListSorterDialogProps<T extends ListItem> = Omit<DialogProps, 'children'> &
+export type ListSorterDialogProps<T extends ListItem> = Omit<DialogProps, 'children' | 'footer'> &
   Omit<ListSorterProps<T>, 'onChange'> & {
     cancelLabel?: string;
     submitLabel?: string;
@@ -52,16 +52,10 @@ export function ListSorterDialog<T extends ListItem>({
   );
 
   return (
-    <Dialog {...props}>
-      <ListSorter
-        className="divide-y overflow-auto rounded-lg border dark:divide-gray-600 dark:border-gray-600 dark:text-white"
-        items={sortedItems}
-        idResolver={idResolver}
-        renderer={customRenderer}
-        onChange={setSortedItems}
-      />
-      <Flex direction="column" fullWidth>
-        <Flex className="mt-4" justify="end" fullWidth>
+    <Dialog
+      {...props}
+      footer={
+        <Flex justify="end" fullWidth>
           <Button color="red" onClick={props.onClose}>
             {cancelLabel ?? 'Cancel'}
           </Button>
@@ -69,7 +63,15 @@ export function ListSorterDialog<T extends ListItem>({
             {submitLabel ?? 'Submit'}
           </Button>
         </Flex>
-      </Flex>
+      }
+    >
+      <ListSorter
+        className="divide-y overflow-auto rounded-lg border dark:divide-gray-600 dark:border-gray-600 dark:text-white"
+        items={sortedItems}
+        idResolver={idResolver}
+        renderer={customRenderer}
+        onChange={setSortedItems}
+      />
     </Dialog>
   );
 }
