@@ -129,8 +129,8 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             disabled={props.disabled}
             onClick={onExtraIconClick}
           >
-            {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-6 w-6" />}
-            {ExtraIcon && <ExtraIcon className="h-6 w-6" />}
+            {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-5 w-5" />}
+            {ExtraIcon && <ExtraIcon className="h-5 w-5" />}
           </BasicInputExtension>
         )}
       </div>
