@@ -3,12 +3,14 @@ import {
   HomeIcon,
   RectangleGroupIcon,
   RectangleStackIcon,
+  TableCellsIcon,
 } from '@heroicons/react/24/outline';
 import {
   AdjustmentsHorizontalIcon as AdjustmentsHorizontalIconSolid,
   HomeIcon as HomeIconSolid,
   RectangleGroupIcon as RectangleGroupIconSolid,
   RectangleStackIcon as RectangleStackIconSolid,
+  TableCellsIcon as TableCellsIconSolid,
 } from '@heroicons/react/24/solid';
 import { FC, useMemo } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
@@ -19,6 +21,7 @@ import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
 import { FormControls } from './pages/FormControls';
 import { Home } from './pages/Home';
+import { Tables } from './pages/Tables';
 
 export const App: FC = () => {
   const sidebarProps: SidebarProps = useMemo(
@@ -48,6 +51,12 @@ export const App: FC = () => {
           Icon: RectangleGroupIcon,
           IconSelected: RectangleGroupIconSolid,
         },
+        {
+          key: 'tables',
+          title: 'Tables',
+          Icon: TableCellsIcon,
+          IconSelected: TableCellsIconSolid,
+        },
       ],
       smallLogo: 'SL',
       fullLogo: 'Full Logo',
@@ -69,6 +78,7 @@ export const App: FC = () => {
         <Route path="buttons" element={<Buttons />} />
         <Route path="form-controls" element={<FormControls />} />
         <Route path="dialogs" element={<Dialogs />} />
+        <Route path="tables" element={<Tables />} />
       </Route>
       <Route path="*" element={<Navigate to="" replace />} />
     </Routes>
