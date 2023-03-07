@@ -100,7 +100,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     );
     const selectedItems = useMemo<SelectItem<T>[]>(
       () =>
-        value !== undefined
+        value
           ? !multiple
             ? pureItems.find((item) => selectPredicate(item.value, value))
               ? [pureItems.find((item) => selectPredicate(item.value, value))!]
