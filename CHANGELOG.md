@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.20...v0.0.21) (2023-03-09)
+
+
+### Bug Fixes
+
+* **pagination:** fix resetting page ([d9d5bb8](https://github.com/NaN-Projects/tw-react-components/commit/d9d5bb8bc264df3fae9760a11d51c6c3090cd7c8))
+
 ### [0.0.20](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.19...v0.0.20) (2023-03-09)
 
 
