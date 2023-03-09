@@ -5,6 +5,7 @@ import {
   ForwardedRef,
   KeyboardEvent,
   ReactNode,
+  RefObject,
   forwardRef,
   useCallback,
   useEffect,
@@ -44,6 +45,7 @@ export type SelectInputProps<T = any> = {
   search?: boolean;
   searchPredicate?: (item: SelectItem<T>, searchValue: string) => boolean;
   selectPredicate?: (a: T, b: T) => boolean;
+  parentRef?: RefObject<HTMLDivElement>;
 } & (
   | {
       multiple?: false;
@@ -85,6 +87,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       selectPredicate = (a, b) => a === b,
       onChange,
       readOnly,
+      parentRef,
       ...props
     }: SelectInputProps<T>,
     ref: ForwardedRef<HTMLInputElement>
@@ -134,13 +137,13 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     }, [hoveredId, prefixId]);
 
     useLayoutEffect(() => {
+      const element = parentRef?.current ?? document.documentElement;
+
       if (dropdownRef.current && isOpen) {
         const boundaries = dropdownRef.current.getBoundingClientRect();
 
         setReverseDropdown((reverseDropdown) =>
-          reverseDropdown === undefined
-            ? boundaries.bottom > (window.innerHeight || document.documentElement.clientHeight)
-            : reverseDropdown
+          reverseDropdown === undefined ? boundaries.bottom > element.clientHeight : reverseDropdown
         );
       }
 
@@ -149,7 +152,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       window.addEventListener('resize', onResize);
 
       return () => window.removeEventListener('resize', onResize);
-    }, [isOpen]);
+    }, [isOpen, parentRef]);
 
     const filteredItems = useMemo(
       () =>
@@ -322,7 +325,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               'absolute z-10 mt-2 flex max-h-80 w-full flex-col overflow-hidden rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white',
               {
                 'mt-2': !reverseDropdown,
-                'bottom-full -mb-5': reverseDropdown,
+                'bottom-full mb-2': reverseDropdown,
               }
             )}
             tabIndex={0}
