@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.15...v0.0.16) (2023-03-09)
+
+
+### Features
+
+* **block:** add forwarding ref ([0bad445](https://github.com/NaN-Projects/tw-react-components/commit/0bad4455a5083912a242d2ae93c9084155e5a14d))
+* **button:** add rounded prop ([41ec147](https://github.com/NaN-Projects/tw-react-components/commit/41ec14741d9afc5d4b8a892d1fb8b23be219d9e3))
+* **data-table:** add pagination and sorting functionalities ([fb0d051](https://github.com/NaN-Projects/tw-react-components/commit/fb0d051c40c628bce942d92b8f33693df61ab495))
+* **flex:** add forwarding ref ([9f0dbcb](https://github.com/NaN-Projects/tw-react-components/commit/9f0dbcbe35f4122e5942edc8c50c3dc4ebf6666f))
+* **pagination:** introduce pagination component ([ee920d2](https://github.com/NaN-Projects/tw-react-components/commit/ee920d2c739a9449d183b4335e42345efdf2c900))
+* **select:** add parentRef prop ([432e87c](https://github.com/NaN-Projects/tw-react-components/commit/432e87c62ac9a87099ac67c45ef2edb584d3787e))
+* **table:** introduce table component ([683602f](https://github.com/NaN-Projects/tw-react-components/commit/683602f681224d329cfb4b889325219ec9948d53))
+
+
+### Bug Fixes
+
+* **select:** fix false value bug ([034ce37](https://github.com/NaN-Projects/tw-react-components/commit/034ce37d9a6f1e09c40b42c07fd1ca7ecfd19172))
+
 ### [0.0.15](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.14...v0.0.15) (2023-03-04)
 
 
