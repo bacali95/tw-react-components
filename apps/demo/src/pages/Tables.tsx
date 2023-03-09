@@ -1,3 +1,4 @@
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { FC, useMemo, useState } from 'react';
@@ -6,9 +7,9 @@ import {
   Card,
   DataTable,
   DataTableColumn,
+  DataTablePageSize,
   DataTableSorting,
   Flex,
-  Table,
   getDisplayDate,
 } from 'tw-react-components';
 
@@ -17,19 +18,26 @@ import { Person, people } from '../data/people';
 dayjs.extend(LocalizedFormat);
 
 export const Tables: FC = () => {
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState<DataTablePageSize>(10);
   const [sorting, setSorting] = useState<DataTableSorting<Person>>();
 
-  const rows = useMemo(
-    () =>
-      (sorting
+  const sortedPeople = useMemo(
+    () => [
+      ...(sorting
         ? people.sort((a, b) =>
             sorting.direction === 'asc'
               ? sorting.comparator(a[sorting.field], b[sorting.field])
               : sorting.comparator(b[sorting.field], a[sorting.field])
           )
-        : people
-      ).slice(0, 10),
+        : people),
+    ],
     [sorting]
+  );
+
+  const rows = useMemo(
+    () => sortedPeople.slice(page * pageSize, (page + 1) * pageSize),
+    [page, pageSize, sortedPeople]
   );
 
   const columns: DataTableColumn<Person>[] = [
@@ -47,41 +55,33 @@ export const Tables: FC = () => {
   ];
 
   return (
-    <Flex direction="column" fullWidth>
-      <Card fullWidth>Simple Table</Card>
-      <Table>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadCell>ID</Table.HeadCell>
-            <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Title</Table.HeadCell>
-            <Table.HeadCell>Company</Table.HeadCell>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          <Table.Row>
-            <Table.Cell align="center">1</Table.Cell>
-            <Table.Cell align="center">Nasreddine</Table.Cell>
-            <Table.Cell align="center">Software Engineer</Table.Cell>
-            <Table.Cell align="center">Zoover</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell align="center">2</Table.Cell>
-            <Table.Cell align="center">Nesrine</Table.Cell>
-            <Table.Cell align="center">Software Engineer</Table.Cell>
-            <Table.Cell align="center">AH</Table.Cell>
-          </Table.Row>
-        </Table.Body>
-        <Table.Footer>
-          <Table.Row>
-            <Table.Cell colSpan={4} align="center">
-              Footer
-            </Table.Cell>
-          </Table.Row>
-        </Table.Footer>
-      </Table>
+    <Flex className="overflow-hidden" direction="column" fullWidth>
       <Card fullWidth>Data Table</Card>
-      <DataTable columns={columns} rows={rows} onSortingChange={setSorting} />
+      <DataTable
+        rows={rows}
+        columns={columns}
+        sorting={{ sorting, onSortingChange: setSorting }}
+        pagination={{
+          pageSize,
+          currentPage: page,
+          setCurrentPage: setPage,
+          totalItems: people.length,
+          onPageSizeChange: setPageSize,
+        }}
+        actions={[
+          {
+            color: 'yellow',
+            icon: PencilIcon,
+            onClick: (item) => alert(`Edit clicked for ${item.firstName}!`),
+          },
+          {
+            color: 'red',
+            icon: TrashIcon,
+            onClick: (item) => alert(`Delete clicked for ${item.firstName}!`),
+          },
+        ]}
+        onRowClick={(item) => alert(`Row clicked for ${item.firstName}!`)}
+      />
     </Flex>
   );
 };

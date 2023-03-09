@@ -1,14 +1,19 @@
 import { ArrowsUpDownIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
-import { ComponentProps, ReactNode, useState } from 'react';
+import { ComponentProps, FC, MouseEvent, ReactNode, useRef } from 'react';
 
 import { generalComparator } from '../../helpers';
+import { Button, ButtonProps } from '../Button';
+import { Flex } from '../Flex';
+import { SelectInput } from '../Form';
+import { Pagination, PaginationProps } from '../Pagination';
+import { Spinner } from '../Spinner';
 import { Table } from '../Table';
 
 export type DataTableColumn<T> = {
   header: ReactNode;
   field: keyof T;
-  render?: (item: T, index: number) => ReactNode;
+  render?: (item: T, rowIndex: number) => ReactNode;
   className?: string;
   align?: ComponentProps<'td'>['align'];
   comparator?: (a: T[keyof T], b: T[keyof T]) => number;
@@ -21,60 +26,110 @@ export type DataTableSorting<T> = {
   comparator: (a: T[keyof T], b: T[keyof T]) => number;
 };
 
+const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
+
+export type DataTablePageSize = (typeof possiblePageSize)[number];
+
+export type DataTableAction<T> = {
+  icon: FC<ComponentProps<'svg'>>;
+  label?: string;
+  color?: ButtonProps['color'];
+  onClick: (item: T, rowIndex: number) => void;
+};
+
 export type DataTableProps<T> = {
-  columns: DataTableColumn<T>[];
   rows: T[];
-  onSortingChange?: (sorting: DataTableSorting<T>) => void;
+  columns: DataTableColumn<T>[];
+  sorting?: {
+    sorting: DataTableSorting<T> | undefined;
+    onSortingChange: (sorting: DataTableSorting<T>) => void;
+  };
+  pagination?: PaginationProps & {
+    pageSize?: DataTablePageSize;
+    onPageSizeChange?: (pageSize: DataTablePageSize) => void;
+  };
+  actions?: DataTableAction<T>[];
+  isLoading?: boolean;
+  onRowClick?: DataTableAction<T>['onClick'];
 };
 
 function defaultRender<T>(item: T, field: keyof T): ReactNode {
   return item[field] as ReactNode;
 }
 
-export function DataTable<T>({ columns, rows, onSortingChange }: DataTableProps<T>) {
-  const [sorting, setSorting] = useState<DataTableSorting<T>>();
+export function DataTable<T>({
+  columns,
+  rows,
+  sorting,
+  pagination,
+  actions = [],
+  isLoading,
+  onRowClick,
+}: DataTableProps<T>) {
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const handleSorting =
     (field: DataTableSorting<T>['field'], comparator: DataTableSorting<T>['comparator']) => () => {
-      if (!sorting) {
-        onSortingChange?.({ field, direction: 'asc', comparator });
-        setSorting({ field, direction: 'asc', comparator });
+      if (!sorting) return;
+
+      if (!sorting.sorting) {
+        sorting.onSortingChange({ field, direction: 'asc', comparator });
       } else {
         const newDirection =
-          sorting.field === field && sorting.direction === 'asc' ? 'desc' : 'asc';
-        onSortingChange?.({ field, direction: newDirection, comparator });
-        setSorting({ field, direction: newDirection, comparator });
+          sorting.sorting.field === field && sorting.sorting.direction === 'asc' ? 'desc' : 'asc';
+        sorting.onSortingChange({ field, direction: newDirection, comparator });
       }
     };
 
+  const handleActionClicked =
+    (action: DataTableAction<T>, item: T, rowIndex: number) => (event: MouseEvent) => {
+      event.stopPropagation();
+
+      action.onClick(item, rowIndex);
+    };
+
+  const handleRowClicked = (item: T, rowIndex: number) => (event: MouseEvent) => {
+    event.stopPropagation();
+
+    onRowClick?.(item, rowIndex);
+  };
   return (
-    <Table>
-      <Table.Head>
+    <Table className="relative">
+      {isLoading && <Spinner className="absolute top-0 z-10 bg-gray-700 opacity-50" />}
+      <Table.Head className="sticky top-0 z-10">
         <Table.Row>
           {columns.map((column, columnIndex) => (
             <Table.HeadCell
               key={columnIndex}
               className={classNames('group relative', {
-                'cursor-pointer': !column.noSorting,
+                'cursor-pointer': sorting && !column.noSorting,
               })}
               onClick={handleSorting(column.field, column.comparator ?? generalComparator)}
             >
               {column.header}
-              {!column.noSorting &&
-                (sorting?.field !== column.field ? (
+              {sorting &&
+                !column.noSorting &&
+                (sorting.sorting?.field !== column.field ? (
                   <ArrowsUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
-                ) : sorting.direction === 'asc' ? (
+                ) : sorting.sorting?.direction === 'asc' ? (
                   <ChevronDownIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
                 ) : (
                   <ChevronUpIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
                 ))}
             </Table.HeadCell>
           ))}
+          {actions.length > 0 && <Table.HeadCell>Actions</Table.HeadCell>}
         </Table.Row>
       </Table.Head>
       <Table.Body>
         {rows.map((item, rowIndex) => (
-          <Table.Row key={rowIndex}>
+          <Table.Row
+            key={rowIndex}
+            className={classNames({
+              'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900': onRowClick,
+            })}
+            onClick={handleRowClicked(item, rowIndex)}
+          >
             {columns.map((column, columnIndex) => (
               <Table.Cell
                 key={columnIndex}
@@ -84,9 +139,53 @@ export function DataTable<T>({ columns, rows, onSortingChange }: DataTableProps<
                 {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
               </Table.Cell>
             ))}
+            {actions.length > 0 && (
+              <Table.Cell>
+                <Flex align="center" justify="center">
+                  {actions.map((action, actionIndex) => (
+                    <Button
+                      key={actionIndex}
+                      rounded={!action.label}
+                      size="small"
+                      className={!action.label ? 'p-2' : undefined}
+                      prefixIcon={() => <action.icon className="h-4 w-4" />}
+                      color={action.color}
+                      onClick={handleActionClicked(action, item, rowIndex)}
+                      children={action.label}
+                    />
+                  ))}
+                </Flex>
+              </Table.Cell>
+            )}
           </Table.Row>
         ))}
       </Table.Body>
+      {pagination && (
+        <Table.Footer className="sticky bottom-0">
+          <Table.Row>
+            <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
+              <Flex justify="end" ref={footerRef}>
+                <Pagination {...pagination} />
+                {pagination.onPageSizeChange && (
+                  <SelectInput
+                    className="!w-32"
+                    value={pagination.pageSize ?? 10}
+                    items={possiblePageSize.map((pageSize) => ({
+                      id: pageSize,
+                      label: String(pageSize),
+                      value: pageSize,
+                    }))}
+                    onChange={(newPageSize) =>
+                      newPageSize && pagination.onPageSizeChange?.(newPageSize)
+                    }
+                    parentRef={footerRef}
+                  />
+                )}
+              </Flex>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Footer>
+      )}
     </Table>
   );
 }
