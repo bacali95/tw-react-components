@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.21...v0.0.22) (2023-03-09)
+
+
+### Bug Fixes
+
+* **data-table:** add shadow ([048811b](https://github.com/NaN-Projects/tw-react-components/commit/048811be29c09930ca91ee2ac36030af9c53a202))
+
 ### [0.0.21](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.20...v0.0.21) (2023-03-09)
 
 
