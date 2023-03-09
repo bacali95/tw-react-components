@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.20](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.19...v0.0.20) (2023-03-09)
+
+
+### Bug Fixes
+
+* **data-table:** fix column props type ([c180b6a](https://github.com/NaN-Projects/tw-react-components/commit/c180b6a389fe18d20e5ce2f987fe0237244a8282))
+
 ### [0.0.19](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.18...v0.0.19) (2023-03-09)
 
 
