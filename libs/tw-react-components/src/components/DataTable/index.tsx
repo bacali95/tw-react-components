@@ -11,13 +11,13 @@ import { Pagination, PaginationProps } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
 
-export type DataTableColumn<T> = {
+export type DataTableColumn<T, Field extends keyof T = keyof T> = {
   header: ReactNode;
-  field: keyof T;
+  field: Field;
   render?: (item: T, rowIndex: number) => ReactNode;
   className?: string;
   align?: ComponentProps<'td'>['align'];
-  comparator?: (a: T[keyof T], b: T[keyof T]) => number;
+  comparator?: (a: T[Field], b: T[Field]) => number;
   noSorting?: boolean;
 };
 
