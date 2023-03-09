@@ -41,7 +41,7 @@ export const Dialogs: FC = () => {
   };
 
   return (
-    <Flex direction="column">
+    <>
       <Card fullWidth>
         <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
         <Dialog
@@ -101,6 +101,6 @@ export const Dialogs: FC = () => {
           onClose={toggleDialog('sorter')}
         />
       </Card>
-    </Flex>
+    </>
   );
 };

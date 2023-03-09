@@ -9,7 +9,6 @@ import {
   DataTableColumn,
   DataTablePageSize,
   DataTableSorting,
-  Flex,
   getDisplayDate,
 } from 'tw-react-components';
 
@@ -55,7 +54,7 @@ export const Tables: FC = () => {
   ];
 
   return (
-    <Flex className="overflow-hidden" direction="column" fullWidth>
+    <>
       <Card fullWidth>Data Table</Card>
       <DataTable
         rows={rows}
@@ -82,6 +81,6 @@ export const Tables: FC = () => {
         ]}
         onRowClick={(item) => alert(`Row clicked for ${item.firstName}!`)}
       />
-    </Flex>
+    </>
   );
 };

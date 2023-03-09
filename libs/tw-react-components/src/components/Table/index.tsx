@@ -4,7 +4,7 @@ import { ComponentProps, FC } from 'react';
 import { Flex } from '../Flex';
 
 const $Table: FC<ComponentProps<'table'>> = ({ children, className, ...props }) => (
-  <Flex className="overflow-auto rounded-lg" fullWidth>
+  <Flex className="overflow-auto rounded-lg shadow" fullWidth>
     <table
       className={classNames(
         'min-w-full divide-y divide-gray-200 dark:divide-gray-800 dark:text-white',

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Button, Card, Flex } from 'tw-react-components';
 
 export const Buttons: FC = () => (
-  <Card fullWidth>
+  <Card className="overflow-auto" fullWidth>
     <Flex className="gap-2" direction="column">
       <p className="text-lg">Simple buttons</p>
       <Flex className="!gap-2">

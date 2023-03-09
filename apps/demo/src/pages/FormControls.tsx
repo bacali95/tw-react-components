@@ -59,8 +59,8 @@ export const FormControls: FC = () => {
       }));
 
   return (
-    <Flex>
-      <Flex className="w-1/2" direction="column" centered>
+    <Flex className="overflow-auto" direction="column" fullWidth>
+      <Flex direction="column" fullWidth>
         <Card fullWidth>
           <p className="mb-2">
             With <code className="rounded bg-gray-100 p-1 dark:bg-gray-900">use-form-hook</code>{' '}
@@ -121,7 +121,7 @@ export const FormControls: FC = () => {
           </FormProvider>
         </Card>
       </Flex>
-      <Flex className="w-1/2" direction="column" centered>
+      <Flex direction="column" fullWidth>
         <Card fullWidth>
           <p className="mb-2">
             Without <code className="rounded bg-gray-100 p-1 dark:bg-gray-900 ">use-form-hook</code>{' '}

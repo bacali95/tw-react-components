@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { ComponentProps, FC, MouseEvent, ReactNode, useRef } from 'react';
 
 import { generalComparator } from '../../helpers';
-import { Block } from '../Block';
 import { Button, ButtonProps } from '../Button';
 import { Flex } from '../Flex';
 import { SelectInput } from '../Form';
@@ -96,104 +95,119 @@ export function DataTable<T>({
     onRowClick?.(item, rowIndex);
   };
   return (
-    <Block className="relative" fullWidth>
-      {isLoading && <Spinner className="absolute top-0 z-20 rounded-lg bg-gray-700 opacity-50" />}
-      <Table>
-        <Table.Head className="sticky top-0 z-10">
-          <Table.Row>
-            {columns.map((column, columnIndex) => (
-              <Table.HeadCell
-                key={columnIndex}
-                className={classNames('group relative', {
-                  'cursor-pointer': sorting && !column.noSorting,
-                })}
-                onClick={handleSorting(column.field, column.comparator ?? generalComparator)}
-              >
-                {column.header}
-                {sorting &&
-                  !column.noSorting &&
-                  (sorting.sorting?.field !== column.field ? (
-                    <ArrowsUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
-                  ) : sorting.sorting?.direction === 'asc' ? (
-                    <ChevronDownIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
-                  ) : (
-                    <ChevronUpIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
-                  ))}
-              </Table.HeadCell>
-            ))}
-            {actions.length > 0 && <Table.HeadCell>Actions</Table.HeadCell>}
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>
-          {rows.map((item, rowIndex) => (
-            <Table.Row
-              key={rowIndex}
-              className={classNames({
-                'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900': onRowClick,
+    <Table>
+      <Table.Head className="sticky top-0 z-10">
+        <Table.Row>
+          {columns.map((column, columnIndex) => (
+            <Table.HeadCell
+              key={columnIndex}
+              className={classNames('group relative', {
+                'cursor-pointer': !isLoading && sorting && !column.noSorting,
               })}
-              onClick={handleRowClicked(item, rowIndex)}
+              align="center"
+              onClick={
+                !isLoading
+                  ? handleSorting(column.field, column.comparator ?? generalComparator)
+                  : undefined
+              }
             >
-              {columns.map((column, columnIndex) => (
-                <Table.Cell
-                  key={columnIndex}
-                  className={column.className}
-                  align={column.align ?? 'center'}
-                >
-                  {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
-                </Table.Cell>
-              ))}
-              {actions.length > 0 && (
-                <Table.Cell>
-                  <Flex align="center" justify="center">
-                    {actions
-                      .filter((action) =>
-                        typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
-                      )
-                      .map((action, actionIndex) => (
-                        <Button
-                          key={actionIndex}
-                          rounded={!action.label}
-                          size="small"
-                          className={!action.label ? '!p-2' : undefined}
-                          prefixIcon={() => <action.icon className="h-4 w-4" />}
-                          color={action.color}
-                          onClick={handleActionClicked(action, item, rowIndex)}
-                          children={action.label}
-                        />
-                      ))}
-                  </Flex>
-                </Table.Cell>
-              )}
-            </Table.Row>
+              {column.header}
+              {sorting &&
+                !column.noSorting &&
+                (sorting.sorting?.field !== column.field ? (
+                  <ArrowsUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
+                ) : sorting.sorting?.direction === 'asc' ? (
+                  <ChevronDownIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
+                ) : (
+                  <ChevronUpIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
+                ))}
+            </Table.HeadCell>
           ))}
-        </Table.Body>
-        {pagination && (
-          <Table.Footer className="sticky bottom-0">
-            <Table.Row>
-              <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
-                <Flex justify="end" ref={footerRef}>
-                  <Pagination {...pagination} />
-                  {pagination.onPageSizeChange && (
-                    <SelectInput
-                      className="!w-32"
-                      value={pagination.pageSize ?? 10}
-                      items={possiblePageSize.map((pageSize) => ({
-                        id: pageSize,
-                        label: String(pageSize),
-                        value: pageSize,
-                      }))}
-                      onChange={(newPageSize) =>
-                        newPageSize && pagination.onPageSizeChange?.(newPageSize)
-                      }
-                      parentRef={footerRef}
-                    />
-                  )}
+          {actions.length > 0 && <Table.HeadCell align="center">Actions</Table.HeadCell>}
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        {(isLoading || !rows.length) && (
+          <Table.Row>
+            <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
+              {isLoading ? (
+                <Spinner className="rounded-lg bg-gray-700 opacity-50" />
+              ) : (
+                <Flex className="text-gray-500" justify="center">
+                  No data
+                </Flex>
+              )}
+            </Table.Cell>
+          </Table.Row>
+        )}
+        {rows.map((item, rowIndex) => (
+          <Table.Row
+            key={rowIndex}
+            className={classNames({
+              'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900': onRowClick,
+            })}
+            onClick={handleRowClicked(item, rowIndex)}
+          >
+            {columns.map((column, columnIndex) => (
+              <Table.Cell
+                key={columnIndex}
+                className={column.className}
+                align={column.align ?? 'center'}
+              >
+                {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
+              </Table.Cell>
+            ))}
+            {actions.length > 0 && (
+              <Table.Cell>
+                <Flex align="center" justify="center">
+                  {actions
+                    .filter((action) =>
+                      typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
+                    )
+                    .map((action, actionIndex) => (
+                      <Button
+                        key={actionIndex}
+                        rounded={!action.label}
+                        size="small"
+                        className={!action.label ? '!p-2' : undefined}
+                        prefixIcon={() => <action.icon className="h-4 w-4" />}
+                        color={action.color}
+                        onClick={handleActionClicked(action, item, rowIndex)}
+                        children={action.label}
+                      />
+                    ))}
                 </Flex>
               </Table.Cell>
-            </Table.Row>
-          </Table.Footer>
-        )}
-      </Table>
-    </Block>
+            )}
+          </Table.Row>
+        ))}
+      </Table.Body>
+      {pagination && !isLoading && (
+        <Table.Footer className="sticky bottom-0">
+          <Table.Row>
+            <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
+              <Flex justify="end" ref={footerRef}>
+                <Pagination {...pagination} />
+                {pagination.onPageSizeChange && (
+                  <SelectInput
+                    className="!w-32"
+                    value={pagination.pageSize ?? 10}
+                    items={possiblePageSize.map((pageSize) => ({
+                      id: pageSize,
+                      label: String(pageSize),
+                      value: pageSize,
+                    }))}
+                    onChange={(newPageSize) =>
+                      newPageSize && pagination.onPageSizeChange?.(newPageSize)
+                    }
+                    parentRef={footerRef}
+                  />
+                )}
+              </Flex>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Footer>
+      )}
+    </Table>
   );
 }

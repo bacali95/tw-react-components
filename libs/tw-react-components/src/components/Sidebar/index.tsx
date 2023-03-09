@@ -52,7 +52,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
     );
 
   return (
-    <nav className="p-3 pr-0 text-black dark:text-white">
+    <nav className="p-1 text-black dark:text-white">
       <div
         className={classNames('h-full flex-col transition-all duration-200 ease-in-out', {
           'w-72': sidebar,

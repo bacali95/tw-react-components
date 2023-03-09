@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { Flex } from '../Flex';
 import { Navbar } from '../Navbar';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { ThemeSwitcher } from '../ThemeSwitcher';
@@ -15,14 +16,16 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   navbarChildren,
 }) => {
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex h-screen gap-1 bg-gray-100 p-2 dark:bg-gray-900">
       <Sidebar {...sidebarProps} />
-      <div className="flex w-full flex-col overflow-hidden">
+      <div className="flex w-full flex-col gap-1 overflow-hidden">
         <Navbar>
           {navbarChildren}
           <ThemeSwitcher />
         </Navbar>
-        <div className="flex h-full flex-col overflow-hidden p-3">{children}</div>
+        <Flex className="overflow-hidden p-1" direction="column" fullWidth fullHeight>
+          {children}
+        </Flex>
       </div>
     </div>
   );
