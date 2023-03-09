@@ -24,7 +24,7 @@ export type DataTableColumn<T> = {
 export type DataTableSorting<T> = {
   field: keyof T;
   direction: 'asc' | 'desc';
-  comparator?: (a: T[keyof T], b: T[keyof T]) => number;
+  comparator: (a: T[keyof T], b: T[keyof T]) => number;
 };
 
 const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
@@ -35,7 +35,7 @@ export type DataTableAction<T> = {
   icon: FC<ComponentProps<'svg'>>;
   label?: string;
   color?: ButtonProps['color'];
-  hide?: boolean;
+  hide?: boolean | ((item: T) => boolean);
   onClick: (item: T, rowIndex: number) => void;
 };
 
@@ -146,7 +146,9 @@ export function DataTable<T>({
                 <Table.Cell>
                   <Flex align="center" justify="center">
                     {actions
-                      .filter((action) => !action.hide)
+                      .filter((action) =>
+                        typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
+                      )
                       .map((action, actionIndex) => (
                         <Button
                           key={actionIndex}
