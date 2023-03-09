@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.17...v0.0.18) (2023-03-09)
+
+
+### Features
+
+* **data-table:** add hide option to action ([8637dbe](https://github.com/NaN-Projects/tw-react-components/commit/8637dbeae5e42c377eadbdc2b49ddbaaf97ba2c0))
+
 ### [0.0.17](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.16...v0.0.17) (2023-03-09)
 
 
