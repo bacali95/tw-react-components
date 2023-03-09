@@ -40,7 +40,7 @@ export const Pagination: FC<PaginationProps> = ({
 
   return (
     <Flex justify="end">
-      <Flex className="gap-0 divide-x rounded-md border border-gray-300 bg-white dark:divide-gray-600 dark:border-gray-600 dark:bg-gray-800">
+      <Flex className="!gap-0 divide-x rounded-md border border-gray-300 bg-white dark:divide-gray-600 dark:border-gray-600 dark:bg-gray-800">
         <PaginationItem title="First page" onClick={() => setCurrentPage(0)}>
           <ChevronDoubleLeftIcon className="h-5 w-5" />
         </PaginationItem>
