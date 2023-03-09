@@ -62,18 +62,20 @@ const sizeClassNames: Record<
   },
 };
 
-type Props = ComponentProps<'button'> & {
-  prefixIcon?: FC<ComponentProps<'svg'>>;
-  suffixIcon?: FC<ComponentProps<'svg'>>;
+export type ButtonProps = ComponentProps<'button'> & {
   size?: Size;
   color?: Color;
+  rounded?: boolean;
+  prefixIcon?: FC<ComponentProps<'svg'>>;
+  suffixIcon?: FC<ComponentProps<'svg'>>;
 };
 
-export const Button: FC<Props> = ({
+export const Button: FC<ButtonProps> = ({
   children,
   className,
   size = 'medium',
   color = 'default',
+  rounded,
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
   ...props
@@ -81,7 +83,8 @@ export const Button: FC<Props> = ({
   <button
     className={classNames(
       className,
-      'relative flex cursor-pointer items-center rounded-md',
+      'relative flex cursor-pointer items-center',
+      rounded ? 'rounded-full' : 'rounded-md',
       colorClassNames[color].base,
       sizeClassNames[size].base,
       {
