@@ -35,7 +35,7 @@ export const Pagination: FC<PaginationProps> = ({
   const pagination = usePagination(currentPage + 1, totalPages);
 
   useEffect(() => {
-    setCurrentPage((page) => Math.min(page, totalPages - 1));
+    setCurrentPage((page) => Math.min(page, Math.max(0, totalPages - 1)));
   }, [setCurrentPage, totalPages]);
 
   return (
