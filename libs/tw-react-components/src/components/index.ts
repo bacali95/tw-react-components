@@ -7,6 +7,7 @@ export * from './Flex';
 export * from './Form';
 export * from './Layout';
 export * from './ListSorter';
+export * from './Menu';
 export * from './Navbar';
 export * from './Sidebar';
 export * from './Spinner';

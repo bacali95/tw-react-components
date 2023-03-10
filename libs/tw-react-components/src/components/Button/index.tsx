@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, PropsWithoutRef, forwardRef } from 'react';
 
 type Size = 'small' | 'medium' | 'big';
 
@@ -62,7 +62,7 @@ const sizeClassNames: Record<
   },
 };
 
-export type ButtonProps = ComponentProps<'button'> & {
+export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   size?: Size;
   color?: Color;
   rounded?: boolean;
@@ -70,47 +70,53 @@ export type ButtonProps = ComponentProps<'button'> & {
   suffixIcon?: FC<ComponentProps<'svg'>>;
 };
 
-export const Button: FC<ButtonProps> = ({
-  children,
-  className,
-  size = 'medium',
-  color = 'default',
-  rounded,
-  prefixIcon: PrefixIcon,
-  suffixIcon: SuffixIcon,
-  ...props
-}) => (
-  <button
-    className={classNames(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
       className,
-      'relative flex cursor-pointer items-center',
-      rounded ? 'rounded-full' : 'rounded-md',
-      colorClassNames[color].base,
-      sizeClassNames[size].base,
-      {
-        'cursor-unset opacity-50': props.disabled,
-        [sizeClassNames[size].withChildren]: children,
-        [colorClassNames[color].hover]: !props.disabled,
-        [colorClassNames[color].active]: !props.disabled,
-      }
-    )}
-    type="button"
-    {...props}
-  >
-    {PrefixIcon && (
-      <PrefixIcon
-        className={
-          children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+      size = 'medium',
+      color = 'default',
+      rounded,
+      prefixIcon: PrefixIcon,
+      suffixIcon: SuffixIcon,
+      ...props
+    },
+    ref
+  ) => (
+    <button
+      className={classNames(
+        className,
+        'relative flex cursor-pointer items-center',
+        rounded ? 'rounded-full' : 'rounded-md',
+        colorClassNames[color].base,
+        sizeClassNames[size].base,
+        {
+          'cursor-unset opacity-50': props.disabled,
+          [sizeClassNames[size].withChildren]: children,
+          [colorClassNames[color].hover]: !props.disabled,
+          [colorClassNames[color].active]: !props.disabled,
         }
-      />
-    )}
-    {children}
-    {SuffixIcon && (
-      <SuffixIcon
-        className={
-          children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
-        }
-      />
-    )}
-  </button>
+      )}
+      type="button"
+      {...props}
+      ref={ref}
+    >
+      {PrefixIcon && (
+        <PrefixIcon
+          className={
+            children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+          }
+        />
+      )}
+      {children}
+      {SuffixIcon && (
+        <SuffixIcon
+          className={
+            children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+          }
+        />
+      )}
+    </button>
+  )
 );

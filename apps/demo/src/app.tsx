@@ -1,5 +1,6 @@
 import {
   AdjustmentsHorizontalIcon,
+  Bars3Icon,
   HomeIcon,
   RectangleGroupIcon,
   RectangleStackIcon,
@@ -7,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import {
   AdjustmentsHorizontalIcon as AdjustmentsHorizontalIconSolid,
+  Bars3Icon as Bars3IconSolid,
   HomeIcon as HomeIconSolid,
   RectangleGroupIcon as RectangleGroupIconSolid,
   RectangleStackIcon as RectangleStackIconSolid,
@@ -21,6 +23,7 @@ import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
 import { FormControls } from './pages/FormControls';
 import { Home } from './pages/Home';
+import { Menus } from './pages/Menus';
 import { Tables } from './pages/Tables';
 
 export const App: FC = () => {
@@ -38,6 +41,12 @@ export const App: FC = () => {
           title: 'Buttons',
           Icon: RectangleStackIcon,
           IconSelected: RectangleStackIconSolid,
+        },
+        {
+          key: 'menus',
+          title: 'Menus',
+          Icon: Bars3Icon,
+          IconSelected: Bars3IconSolid,
         },
         {
           key: 'form-controls',
@@ -76,6 +85,7 @@ export const App: FC = () => {
       >
         <Route path="" element={<Home />} />
         <Route path="buttons" element={<Buttons />} />
+        <Route path="menus" element={<Menus />} />
         <Route path="form-controls" element={<FormControls />} />
         <Route path="dialogs" element={<Dialogs />} />
         <Route path="tables" element={<Tables />} />
