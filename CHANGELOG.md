@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.23](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.22...v0.0.23) (2023-03-10)
+
+
+### Features
+
+* **menu:** introduce simple version of menu component ([4221189](https://github.com/NaN-Projects/tw-react-components/commit/422118944404b8984be89dacc857433ea3e84e30))
+
 ### [0.0.22](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.21...v0.0.22) (2023-03-09)
 
 
