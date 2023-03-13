@@ -1,11 +1,24 @@
 import { FC } from 'react';
 
-import { Button, Card, Menu } from 'tw-react-components';
+import { Block, Button, Card, Flex, Menu, MenuItem } from 'tw-react-components';
 
-export const Menus: FC = () => (
-  <Card className="overflow-auto" fullHeight fullWidth>
-    <Menu
-      items={[
+export const Menus: FC = () => {
+  const items: MenuItem[] = [
+    {
+      label: 'One',
+      onClick: () => alert('One!'),
+    },
+    {
+      label: 'Two',
+      onClick: () => alert('Two!'),
+    },
+    {
+      type: 'separator',
+    },
+    {
+      type: 'nested',
+      children: 'Nested',
+      items: [
         {
           label: 'One',
           onClick: () => alert('One!'),
@@ -14,26 +27,22 @@ export const Menus: FC = () => (
           label: 'Two',
           onClick: () => alert('Two!'),
         },
-        {
-          type: 'separator',
-        },
-        {
-          type: 'nested',
-          children: 'Nested',
-          items: [
-            {
-              label: 'One',
-              onClick: () => alert('One!'),
-            },
-            {
-              label: 'Two',
-              onClick: () => alert('Two!'),
-            },
-          ],
-        },
-      ]}
-    >
-      <Button>Open Menu</Button>
-    </Menu>
-  </Card>
-);
+      ],
+    },
+  ];
+
+  return (
+    <Block fullHeight fullWidth>
+      <Card fullWidth>
+        <Flex justify="between">
+          <Menu items={items}>
+            <Button>Open Menu</Button>
+          </Menu>
+          <Menu items={items} position="bottom-right">
+            <Button>Open Menu 2</Button>
+          </Menu>
+        </Flex>
+      </Card>
+    </Block>
+  );
+};

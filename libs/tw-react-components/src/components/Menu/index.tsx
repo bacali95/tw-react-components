@@ -6,6 +6,8 @@ import { FC, Fragment, MouseEvent, PropsWithChildren, ReactNode, forwardRef } fr
 import { Block } from '../Block';
 import { Flex } from '../Flex';
 
+export type MenuPosition = 'bottom-left' | 'bottom-right' | 'right' | 'left';
+
 type SimpleMenuItem = {
   type?: 'simple';
   label: ReactNode;
@@ -15,7 +17,7 @@ type SimpleMenuItem = {
 type NestedMenuItem = PropsWithChildren<{
   root?: boolean;
   type: 'nested';
-  position?: 'bottom' | 'right';
+  position?: MenuPosition;
   items: MenuItem[];
 }>;
 
@@ -23,12 +25,19 @@ type SeparatorMenuItem = {
   type: 'separator';
 };
 
+const positionClasses: Record<MenuPosition, string> = {
+  'bottom-left': 'top-full left-0 mt-1',
+  'bottom-right': 'top-full right-0 mt-1',
+  right: 'top-0 left-full ml-1',
+  left: 'top-0 right-full mr-1',
+};
+
 export type MenuItem = SimpleMenuItem | NestedMenuItem | SeparatorMenuItem;
 
 export type MenuProps = Omit<NestedMenuItem, 'type'>;
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(
-  ({ root = true, children, items, position = 'bottom' }, ref) => {
+  ({ root = true, children, items, position = 'bottom-left' }, ref) => {
     return (
       <HeadlessMenu as="div" className={classNames('relative', { 'w-fit': root })} ref={ref}>
         <HeadlessMenu.Button as={Fragment}>{children}</HeadlessMenu.Button>
@@ -44,11 +53,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
           <HeadlessMenu.Items
             as={Flex}
             className={classNames(
-              'absolute z-20 min-w-[100%] !gap-0.5 rounded-md bg-gray-100 p-1 shadow-lg dark:bg-gray-700',
-              {
-                'top-full left-0 mt-1': position === 'bottom',
-                'top-0 left-full ml-1': position === 'right',
-              }
+              'absolute z-20 min-w-[100%] !gap-0.5 rounded-md bg-white p-1 shadow-lg dark:bg-gray-700',
+              positionClasses[position]
             )}
             direction="column"
           >
@@ -83,7 +89,7 @@ const MenuItem: FC<MenuItemProps> = ({ item }) => {
       return (
         <HeadlessMenu.Item>
           <Block
-            className="cursor-pointer rounded py-1 px-2 hover:bg-gray-200 dark:hover:bg-gray-800"
+            className="min-w-[11rem] cursor-pointer rounded py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={handleNestedClick}
             fullWidth
           >
@@ -100,7 +106,7 @@ const MenuItem: FC<MenuItemProps> = ({ item }) => {
       return (
         <HeadlessMenu.Item>
           <Block
-            className="cursor-pointer rounded py-1 px-2 hover:bg-gray-200 dark:hover:bg-gray-800"
+            className="min-w-[11rem] cursor-pointer rounded py-1 px-2 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={handleItemClick}
             fullWidth
           >
