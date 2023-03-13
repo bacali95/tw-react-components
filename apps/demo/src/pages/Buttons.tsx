@@ -13,6 +13,32 @@ export const Buttons: FC = () => (
         <Button color="yellow">Yellow</Button>
         <Button color="red">Red</Button>
       </Flex>
+      <p className="text-lg">Simple buttons with border</p>
+      <Flex className="!gap-2">
+        <Button border>Primary</Button>
+        <Button border color="green">
+          Green
+        </Button>
+        <Button border color="yellow">
+          Yellow
+        </Button>
+        <Button border color="red">
+          Red
+        </Button>
+      </Flex>
+      <p className="text-lg">Transparent buttons</p>
+      <Flex className="!gap-2">
+        <Button transparent>Primary</Button>
+        <Button transparent color="green">
+          Green
+        </Button>
+        <Button transparent color="yellow">
+          Yellow
+        </Button>
+        <Button transparent color="red">
+          Red
+        </Button>
+      </Flex>
       <p className="text-lg">Disabled buttons</p>
       <Flex className="!gap-2">
         <Button disabled>Primary</Button>

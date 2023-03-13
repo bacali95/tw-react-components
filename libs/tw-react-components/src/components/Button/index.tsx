@@ -5,26 +5,33 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 
 export type ButtonColor = 'default' | 'green' | 'yellow' | 'red';
 
-const colorClassNames: Record<ButtonColor, { base: string; hover: string; active: string }> = {
+const colorClassNames: Record<
+  ButtonColor,
+  { base: string; hover: string; active: string; border: string }
+> = {
   default: {
     base: 'bg-gray-100 dark:bg-gray-900/50',
     hover: 'hover:bg-gray-200 dark:hover:bg-gray-700',
     active: 'active:bg-gray-300 dark:active:bg-gray-900',
+    border: 'border-gray-300 dark:border-gray-600',
   },
   green: {
     base: 'text-white bg-green-500 dark:bg-green-600',
-    hover: 'hover:bg-green-600 dark:hover:bg-green-700',
-    active: 'active:bg-green-700 dark:active:bg-green-800',
+    hover: 'hover:text-white hover:bg-green-600 dark:hover:bg-green-700',
+    active: 'active:text-white active:bg-green-700 dark:active:bg-green-800',
+    border: 'border-green-700 dark:border-green-800',
   },
   yellow: {
     base: 'text-white bg-yellow-500 dark:bg-yellow-600',
-    hover: 'hover:bg-yellow-600 dark:hover:bg-yellow-700',
-    active: 'active:bg-yellow-700 dark:active:bg-yellow-800',
+    hover: 'hover:text-white hover:bg-yellow-600 dark:hover:bg-yellow-700',
+    active: 'active:text-white active:bg-yellow-700 dark:active:bg-yellow-800',
+    border: 'border-yellow-700 dark:border-yellow-800',
   },
   red: {
     base: 'text-white bg-red-500 dark:bg-red-600',
-    hover: 'hover:bg-red-600 dark:hover:bg-red-700',
-    active: 'active:bg-red-700 dark:active:bg-red-800',
+    hover: 'hover:text-white hover:bg-red-600 dark:hover:bg-red-700',
+    active: 'active:text-white active:bg-red-700 dark:active:bg-red-800',
+    border: 'border-red-700 dark:border-red-800',
   },
 };
 
@@ -65,7 +72,9 @@ const sizeClassNames: Record<
 export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   size?: ButtonSize;
   color?: ButtonColor;
+  border?: boolean;
   rounded?: boolean;
+  transparent?: boolean;
   prefixIcon?: FC<ComponentProps<'svg'>>;
   suffixIcon?: FC<ComponentProps<'svg'>>;
 };
@@ -77,7 +86,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       size = 'medium',
       color = 'default',
+      border,
       rounded,
+      transparent,
       prefixIcon: PrefixIcon,
       suffixIcon: SuffixIcon,
       ...props
@@ -89,11 +100,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className,
         'relative flex cursor-pointer items-center',
         rounded ? 'rounded-full' : 'rounded-md',
-        colorClassNames[color].base,
         sizeClassNames[size].base,
         {
           'cursor-unset opacity-50': props.disabled,
+          [colorClassNames[color].base]: !transparent,
           [sizeClassNames[size].withChildren]: children,
+          [`border ${colorClassNames[color].border}`]: border,
           [colorClassNames[color].hover]: !props.disabled,
           [colorClassNames[color].active]: !props.disabled,
         }
