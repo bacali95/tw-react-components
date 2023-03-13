@@ -1,16 +1,7 @@
 import { CalendarIcon, ClockIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import {
-  FC,
-  FocusEvent,
-  KeyboardEvent,
-  forwardRef,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
@@ -35,7 +26,7 @@ export type DateTimeInputProps = {
   'value' | 'type' | 'min' | 'max' | 'pattern' | 'onClick' | 'onChange'
 >;
 
-export const DateTimeInput = forwardRef(
+export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
   (
     {
       className,
@@ -53,6 +44,7 @@ export const DateTimeInput = forwardRef(
       hasErrors,
       onChange,
       onBlur,
+      size,
       readOnly,
       displayFormat = 'dddd, MMMM Do YYYY, HH:mm:ss',
       displayLocale = 'en',
@@ -132,6 +124,7 @@ export const DateTimeInput = forwardRef(
           hasErrors={hasErrors}
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
+          size={size}
           ExtraIcon={
             clearable && displayDate ? XMarkIcon : type?.includes('date') ? CalendarIcon : ClockIcon
           }
@@ -180,4 +173,4 @@ export const DateTimeInput = forwardRef(
       </div>
     );
   }
-) as FC<DateTimeInputProps>;
+);

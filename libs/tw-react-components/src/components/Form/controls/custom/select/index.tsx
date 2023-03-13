@@ -63,6 +63,7 @@ export type SelectInputProps<T = any> = {
     | 'className'
     | 'name'
     | 'label'
+    | 'size'
     | 'placeholder'
     | 'required'
     | 'hasErrors'
@@ -373,7 +374,9 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       </div>
     );
   }
-) as <T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element;
+) as (<T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element) & {
+  readonly $$typeof: symbol;
+};
 
 function getNextIndex(
   items: SelectItem<any, boolean>[],

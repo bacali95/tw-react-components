@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react';
+import { ComponentProps, FC, ForwardRefExoticComponent } from 'react';
 import { Controller, ControllerRenderProps, useFormContext } from 'react-hook-form';
 import { Validate } from 'react-hook-form/dist/types/validator';
 
@@ -53,7 +53,7 @@ function withForm<
     : Type extends SelectInputType
     ? SelectInputProps
     : BasicInputProps<Type>
->(Component: FC<Props>): FC<WithFormProps<Type, Props>> {
+>(Component: ForwardRefExoticComponent<Props>): FC<WithFormProps<Type, Props>> {
   return ({ name, pattern, validate, ...props }) => {
     const { control } = useFormContext();
 
@@ -72,7 +72,7 @@ function withForm<
         }}
         render={({ field, fieldState }) => (
           <Component
-            {...(props as unknown as Props)}
+            {...(props as Props)}
             {...field}
             value={field.value ?? ''}
             hasErrors={fieldState.error}

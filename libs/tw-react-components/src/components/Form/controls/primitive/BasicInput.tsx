@@ -16,14 +16,21 @@ import { Label } from '../Label';
 
 export type InputType = ComponentProps<'input'>['type'] | 'textarea';
 
+export type InputSize = 'small' | 'medium' | 'large';
+
 export type BasicInputProps<Type extends InputType> = {
+  inputClassName?: string;
   type?: Type;
   label?: string;
   description?: ReactNode;
+  size?: InputSize;
   hasErrors?: boolean;
   ExtraIcon?: FC<ComponentProps<'svg'>>;
   onExtraIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
-} & Omit<Type extends 'textarea' ? ComponentProps<'textarea'> : ComponentProps<'input'>, 'id'>;
+} & Omit<
+  Type extends 'textarea' ? ComponentProps<'textarea'> : ComponentProps<'input'>,
+  'id' | 'ref' | 'size'
+>;
 
 const classes = {
   base: {
@@ -44,12 +51,47 @@ const classes = {
   },
 };
 
+const sizeClasses: Record<
+  InputSize,
+  { label: string; input: string; checkbox: { input: string; wrapper: string }; extension: string }
+> = {
+  small: {
+    label: 'text-sm',
+    input: 'text-sm py-1 px-2',
+    checkbox: {
+      input: 'w-4 h-4',
+      wrapper: 'h-6 gap-1',
+    },
+    extension: 'h-4 w-4 mx-1.5',
+  },
+  medium: {
+    label: 'text-base',
+    input: 'text-base py-2 px-3',
+    checkbox: {
+      input: 'w-5 h-5',
+      wrapper: 'h-8 gap-2',
+    },
+    extension: 'w-5 h-5 mx-2',
+  },
+  large: {
+    label: 'text-lg',
+    input: 'text-lg py-3 px-4',
+    checkbox: {
+      input: 'w-6 h-6',
+      wrapper: 'h-10 gap-2',
+    },
+    extension: 'h-6 w-6 mx-3',
+  },
+};
+
 export const BasicInput = forwardRef(function BasicInput<Type extends InputType>(
   {
     className,
+    inputClassName,
     type = 'text' as Type,
     label,
     description,
+    size = 'medium',
     hasErrors,
     ExtraIcon,
     onExtraIconClick,
@@ -62,6 +104,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
     () =>
       label && (
         <Label
+          className={sizeClasses[size].label}
           htmlFor={id}
           description={description}
           required={props.required}
@@ -70,7 +113,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           {label}
         </Label>
       ),
-    [description, hasErrors, id, label, props.required]
+    [description, hasErrors, id, label, props.required, size]
   );
 
   return (
@@ -79,13 +122,13 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
       <div
         className={classNames('flex', {
           'mt-1': label && type !== 'checkbox',
-          'h-8 items-center gap-2': type === 'checkbox',
+          [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
       >
         {type === 'textarea' ? (
           <textarea
             id={id}
-            className={classNames(classes.base.input, {
+            className={classNames(inputClassName, classes.base.input, sizeClasses[size].input, {
               [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
@@ -98,10 +141,15 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         ) : type === 'checkbox' ? (
           <input
             id={id}
-            className={classNames('h-5 w-5 rounded border-gray-300 text-blue-600', {
-              [classes.base.disabled]: props.disabled,
-              'bg-red-100': hasErrors,
-            })}
+            className={classNames(
+              inputClassName,
+              'rounded border-gray-300 text-blue-600',
+              sizeClasses[size].checkbox.input,
+              {
+                [classes.base.disabled]: props.disabled,
+                'bg-red-100': hasErrors,
+              }
+            )}
             type={type}
             checked={Boolean(props.value)}
             {...(props as ComponentProps<'input'>)}
@@ -110,7 +158,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         ) : (
           <input
             id={id}
-            className={classNames(classes.base.input, {
+            className={classNames(inputClassName, classes.base.input, sizeClasses[size].input, {
               [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
@@ -129,8 +177,10 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             disabled={props.disabled}
             onClick={onExtraIconClick}
           >
-            {hasErrors && !ExtraIcon && <ExclamationTriangleIcon className="h-5 w-5" />}
-            {ExtraIcon && <ExtraIcon className="h-5 w-5" />}
+            {hasErrors && !ExtraIcon && (
+              <ExclamationTriangleIcon className={sizeClasses[size].extension} />
+            )}
+            {ExtraIcon && <ExtraIcon className={sizeClasses[size].extension} />}
           </BasicInputExtension>
         )}
       </div>
@@ -147,7 +197,7 @@ export const BasicInputExtension: FC<
 > = ({ children, hasErrors, disabled, onClick }) => (
   <div
     className={classNames(
-      'flex items-center rounded-r-md border border-l-0 bg-gray-50 px-2 peer-focus:ring-1 dark:bg-gray-700',
+      'flex items-center rounded-r-md border border-l-0 peer-focus:ring-1 dark:bg-gray-700',
       {
         [classes.base.disabled]: disabled,
         [classes.withoutErrors.extension]: !hasErrors,

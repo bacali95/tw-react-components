@@ -5,6 +5,7 @@ import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Tooltip } from '../../Tooltip';
 
 type Props = {
+  className?: string;
   description?: ReactNode;
   required?: boolean;
   hasErrors?: boolean;
@@ -13,6 +14,7 @@ type Props = {
 
 export const Label: FC<PropsWithChildren<Props>> = ({
   children,
+  className,
   description,
   required,
   hasErrors,
@@ -20,7 +22,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
 }) => {
   return !children ? null : (
     <label
-      className={classNames('flex items-center gap-1 font-medium', {
+      className={classNames(className, 'flex items-center gap-1 font-medium', {
         'text-gray-700 dark:text-gray-100': !hasErrors,
         'text-red-600 dark:text-red-500': hasErrors,
       })}

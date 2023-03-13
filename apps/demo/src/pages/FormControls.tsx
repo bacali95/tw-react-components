@@ -10,6 +10,7 @@ import {
   DateTimeInput,
   Flex,
   FormInputs,
+  InputSize,
   NumberInput,
   SelectInput,
   SelectItem,
@@ -39,6 +40,7 @@ const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByCon
 
 export const FormControls: FC = () => {
   const form = useForm<State>({ defaultValues: {} });
+  const [inputSize, setInputSize] = useState<InputSize | undefined>('medium');
   const [formState, setFormState] = useState<State>({ countries: [] });
 
   const onSubmit: SubmitHandler<State> = (data) => alert(JSON.stringify(data, null, 2));
@@ -60,6 +62,18 @@ export const FormControls: FC = () => {
 
   return (
     <Flex className="overflow-auto" direction="column" fullWidth>
+      <Card fullWidth>
+        <SelectInput
+          label="Size"
+          value={inputSize}
+          items={[
+            { id: 'small', label: 'Small', value: 'small' },
+            { id: 'medium', label: 'medium', value: 'medium' },
+            { id: 'large', label: 'large', value: 'large' },
+          ]}
+          onChange={setInputSize}
+        />
+      </Card>
       <Flex direction="column" fullWidth>
         <Card fullWidth>
           <p className="mb-2">
@@ -69,12 +83,19 @@ export const FormControls: FC = () => {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
               <Flex direction="column">
-                <FormInputs.Text name="text" label="Text" placeholder="Text" required />
+                <FormInputs.Text
+                  name="text"
+                  label="Text"
+                  placeholder="Text"
+                  size={inputSize}
+                  required
+                />
                 <FormInputs.Textarea
                   name="textarea"
                   label="Full Text"
                   placeholder="Full Text"
                   rows={5}
+                  size={inputSize}
                   required
                 />
                 <FormInputs.Number
@@ -84,15 +105,17 @@ export const FormControls: FC = () => {
                   min={0}
                   validate={(value) => value < 11}
                   ExtraIcon={CurrencyDollarIcon}
+                  size={inputSize}
                   required
                 />
-                <FormInputs.Checkbox name="checkbox" label="Checkbox" required />
+                <FormInputs.Checkbox name="checkbox" label="Checkbox" size={inputSize} required />
                 <FormInputs.DateTime
                   name="date"
                   label="DateTime"
                   displayFormat="DD-MM-YYYY [at] HH:mm"
                   minDate={new Date(2010, 1, 5, 13, 44)}
                   maxDate={new Date(2030, 4, 5, 13, 44)}
+                  size={inputSize}
                   required
                   clearable
                 />
@@ -102,6 +125,7 @@ export const FormControls: FC = () => {
                   placeholder="Select country..."
                   items={countriesItems}
                   multiple
+                  size={inputSize}
                   required
                   allowAddition
                   onNewItemAdded={alert}
@@ -109,10 +133,10 @@ export const FormControls: FC = () => {
                   search
                 />
                 <Flex justify="end" fullWidth>
-                  <Button color="red" onClick={() => form.reset()}>
+                  <Button color="red" onClick={() => form.reset()} size={inputSize}>
                     Clear
                   </Button>
-                  <Button type="submit" color="green">
+                  <Button type="submit" color="green" size={inputSize}>
                     Submit
                   </Button>
                 </Flex>
@@ -140,6 +164,7 @@ export const FormControls: FC = () => {
                 value={formState.text ?? ''}
                 onChange={setFormField('text', 'value')}
                 placeholder="Text"
+                size={inputSize}
                 required
               />
               <TextareaInput
@@ -149,6 +174,7 @@ export const FormControls: FC = () => {
                 onChange={setFormField('textarea', 'value')}
                 placeholder="Full Text"
                 rows={5}
+                size={inputSize}
                 required
               />
               <NumberInput
@@ -160,6 +186,7 @@ export const FormControls: FC = () => {
                 min={0}
                 hasErrors={(formState.number ?? 0) > 10}
                 ExtraIcon={CurrencyDollarIcon}
+                size={inputSize}
                 required
               />
               <CheckboxInput
@@ -167,6 +194,7 @@ export const FormControls: FC = () => {
                 label="Checkbox"
                 checked={formState.checkbox ?? false}
                 onChange={setFormField('checkbox', 'checked')}
+                size={inputSize}
                 required
               />
               <DateTimeInput
@@ -177,6 +205,7 @@ export const FormControls: FC = () => {
                 onChange={setFormField('date')}
                 minDate={new Date(2010, 1, 5, 13, 44)}
                 maxDate={new Date(2030, 4, 5, 13, 44)}
+                size={inputSize}
                 required
                 clearable
               />
@@ -188,11 +217,12 @@ export const FormControls: FC = () => {
                 value={formState.countries}
                 onChange={setFormField('countries')}
                 multiple
+                size={inputSize}
                 required
                 clearable
                 search
               />
-              <Button className="self-end" type="submit" color="green">
+              <Button className="self-end" type="submit" color="green" size={inputSize}>
                 Submit
               </Button>
             </Flex>
