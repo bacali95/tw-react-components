@@ -44,7 +44,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
           <HeadlessMenu.Items
             as={Flex}
             className={classNames(
-              'absolute z-30 min-w-[100%] !gap-0.5 rounded-md bg-gray-100 p-1 shadow-lg dark:bg-gray-700',
+              'absolute z-20 min-w-[100%] !gap-0.5 rounded-md bg-gray-100 p-1 shadow-lg dark:bg-gray-700',
               {
                 'top-full left-0 mt-1': position === 'bottom',
                 'top-0 left-full ml-1': position === 'right',

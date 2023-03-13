@@ -61,6 +61,7 @@ export type SelectInputProps<T = any> = {
   Pick<
     BasicInputProps<'text'>,
     | 'className'
+    | 'inputClassName'
     | 'name'
     | 'label'
     | 'size'
@@ -323,7 +324,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         {isOpen && (
           <div
             className={classNames(
-              'absolute z-10 mt-2 flex max-h-80 w-full flex-col overflow-hidden rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white',
+              'absolute z-20 mt-2 flex max-h-80 w-full flex-col overflow-hidden rounded-md border bg-white py-1 shadow dark:border-gray-700 dark:bg-gray-800 dark:text-white',
               {
                 'mt-2': !reverseDropdown,
                 'bottom-full mb-2': reverseDropdown,

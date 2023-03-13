@@ -30,6 +30,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
   (
     {
       className,
+      inputClassName,
       name,
       label,
       description,
@@ -117,6 +118,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
           label={label}
           description={description}
           placeholder={placeholder ?? label ?? 'Select date'}
+          inputClassName={inputClassName}
           readOnly
           required={required}
           disabled={disabled}
@@ -133,7 +135,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
 
         {isOpen && (
           <div
-            className="absolute z-10 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             tabIndex={0}
             onBlur={handleOnBlur}
             ref={calendarRef}
