@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.24...v0.0.25) (2023-03-13)
+
+
+### Bug Fixes
+
+* **form-inputs:** add missing inputClassName prop and fix z-index ([b0a5986](https://github.com/NaN-Projects/tw-react-components/commit/b0a5986339c98b6dbd2c84164397aa2a0642b3ef))
+
 ### [0.0.24](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.23...v0.0.24) (2023-03-13)
 
 
