@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.26...v0.0.27) (2023-03-13)
+
+
+### Features
+
+* **button:** add border and transparent props ([5fa84f9](https://github.com/NaN-Projects/tw-react-components/commit/5fa84f99a5c26a5d533f289c43cff8b97495f202))
+* **menu:** add extra positions ([2bed93c](https://github.com/NaN-Projects/tw-react-components/commit/2bed93c2a81b7f5918e95b20b5e81c493b980c1f))
+
 ### [0.0.26](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.25...v0.0.26) (2023-03-13)
 
 
