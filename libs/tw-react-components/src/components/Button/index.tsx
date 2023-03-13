@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { ComponentProps, FC, PropsWithoutRef, forwardRef } from 'react';
 
-type Size = 'small' | 'medium' | 'big';
+export type ButtonSize = 'small' | 'medium' | 'large';
 
-type Color = 'default' | 'green' | 'yellow' | 'red';
+export type ButtonColor = 'default' | 'green' | 'yellow' | 'red';
 
-const colorClassNames: Record<Color, { base: string; hover: string; active: string }> = {
+const colorClassNames: Record<ButtonColor, { base: string; hover: string; active: string }> = {
   default: {
     base: 'bg-gray-100 dark:bg-gray-900/50',
     hover: 'hover:bg-gray-200 dark:hover:bg-gray-700',
@@ -29,7 +29,7 @@ const colorClassNames: Record<Color, { base: string; hover: string; active: stri
 };
 
 const sizeClassNames: Record<
-  Size,
+  ButtonSize,
   {
     base: string;
     withChildren: string;
@@ -52,7 +52,7 @@ const sizeClassNames: Record<
       withChildren: 'h-4 w-4',
     },
   },
-  big: {
+  large: {
     base: 'gap-2.5 p-3 text-xl',
     withChildren: 'px-4',
     icon: {
@@ -63,8 +63,8 @@ const sizeClassNames: Record<
 };
 
 export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
-  size?: Size;
-  color?: Color;
+  size?: ButtonSize;
+  color?: ButtonColor;
   rounded?: boolean;
   prefixIcon?: FC<ComponentProps<'svg'>>;
   suffixIcon?: FC<ComponentProps<'svg'>>;

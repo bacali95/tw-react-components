@@ -30,19 +30,19 @@ export const Buttons: FC = () => (
       <Flex className="!gap-2" align="end">
         <Button size="small">Small</Button>
         <Button size="medium">Medium</Button>
-        <Button size="big">Big</Button>
+        <Button size="large">Big</Button>
         <Button size="small" color="green" prefixIcon={ArrowLeftIcon}>
           Small
         </Button>
         <Button size="medium" color="green" prefixIcon={ArrowLeftIcon}>
           Medium
         </Button>
-        <Button size="big" color="green" prefixIcon={ArrowLeftIcon}>
+        <Button size="large" color="green" prefixIcon={ArrowLeftIcon}>
           Big
         </Button>
         <Button size="small" color="yellow" prefixIcon={XMarkIcon} />
         <Button size="medium" color="yellow" prefixIcon={XMarkIcon} />
-        <Button size="big" color="yellow" prefixIcon={XMarkIcon} />
+        <Button size="large" color="yellow" prefixIcon={XMarkIcon} />
       </Flex>
       <p className="text-lg">Buttons with prefix icons</p>
       <Flex className="!gap-2">
