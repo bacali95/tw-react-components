@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.25...v0.0.26) (2023-03-13)
+
+
+### Bug Fixes
+
+* **form-inputs:** add extensionClassName prop ([4d60f2f](https://github.com/NaN-Projects/tw-react-components/commit/4d60f2f67bd28edf6b02f19ab615ae62f2e55eca))
+
 ### [0.0.25](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.24...v0.0.25) (2023-03-13)
 
 
