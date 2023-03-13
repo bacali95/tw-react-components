@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.23...v0.0.24) (2023-03-13)
+
+
+### Features
+
+* **form-inputs:** add size prop ([0dc283a](https://github.com/NaN-Projects/tw-react-components/commit/0dc283ad371981b8b70fe141e28dbdeccf82ce5b))
+
+
+### Bug Fixes
+
+* **button:** change size from big to large ([05c8cb9](https://github.com/NaN-Projects/tw-react-components/commit/05c8cb91398a8bde43233c347429d9e5374a9d67))
+
 ### [0.0.23](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.22...v0.0.23) (2023-03-10)
 
 
