@@ -112,6 +112,7 @@ export const FormControls: FC = () => {
                 <FormInputs.DateTime
                   name="date"
                   label="DateTime"
+                  placeholder="Select date..."
                   displayFormat="DD-MM-YYYY [at] HH:mm"
                   minDate={new Date(2010, 1, 5, 13, 44)}
                   maxDate={new Date(2030, 4, 5, 13, 44)}
@@ -200,6 +201,7 @@ export const FormControls: FC = () => {
               <DateTimeInput
                 name="date"
                 label="DateTime"
+                placeholder="Select date..."
                 displayFormat="DD-MM-YYYY [at] HH:mm"
                 value={formState.date}
                 onChange={setFormField('date')}

@@ -21,34 +21,37 @@ export type DateTimeInputProps = {
   displayFormat?: string;
   displayLocale?: string;
   onChange?: (date: Date | undefined) => void;
-} & Omit<
+} & Pick<
   BasicInputProps<'text'>,
-  'value' | 'type' | 'min' | 'max' | 'pattern' | 'onClick' | 'onChange'
+  | 'className'
+  | 'inputClassName'
+  | 'extensionClassName'
+  | 'label'
+  | 'name'
+  | 'description'
+  | 'placeholder'
+  | 'required'
+  | 'disabled'
+  | 'onBlur'
+  | 'size'
+  | 'readOnly'
 >;
 
 export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
   (
     {
       className,
-      inputClassName,
-      name,
-      label,
-      description,
       value,
-      placeholder,
-      required,
       clearable,
       type = 'datetime-local',
       minDate,
       maxDate,
-      disabled,
       hasErrors,
       onChange,
       onBlur,
-      size,
-      readOnly,
       displayFormat = 'dddd, MMMM Do YYYY, HH:mm:ss',
       displayLocale = 'en',
+      ...props
     },
     ref
   ) => {
@@ -88,14 +91,14 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     };
 
     const handleOnClick = () => {
-      if (readOnly) return;
+      if (props.readOnly) return;
 
       setIsOpen((open) => !open);
       calendarRef.current?.focus();
     };
 
     const handleOnBlur = (event: FocusEvent<HTMLInputElement>) => {
-      if (readOnly) return;
+      if (props.readOnly) return;
 
       setIsOpen(false);
       onBlur?.(event);
@@ -114,19 +117,13 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     return (
       <div className={classNames(className, 'relative w-full')} ref={ref}>
         <BasicInput
+          {...props}
           type="text"
-          label={label}
-          description={description}
-          placeholder={placeholder ?? label ?? 'Select date'}
-          inputClassName={inputClassName}
           readOnly
-          required={required}
-          disabled={disabled}
           value={displayDate ?? ''}
           hasErrors={hasErrors}
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
-          size={size}
           ExtraIcon={
             clearable && displayDate ? XMarkIcon : type?.includes('date') ? CalendarIcon : ClockIcon
           }

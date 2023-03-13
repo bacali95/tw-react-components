@@ -62,6 +62,7 @@ export type SelectInputProps<T = any> = {
     BasicInputProps<'text'>,
     | 'className'
     | 'inputClassName'
+    | 'extensionClassName'
     | 'name'
     | 'label'
     | 'size'

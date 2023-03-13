@@ -20,6 +20,7 @@ export type InputSize = 'small' | 'medium' | 'large';
 
 export type BasicInputProps<Type extends InputType> = {
   inputClassName?: string;
+  extensionClassName?: string;
   type?: Type;
   label?: string;
   description?: ReactNode;
@@ -88,6 +89,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
   {
     className,
     inputClassName,
+    extensionClassName,
     type = 'text' as Type,
     label,
     description,
@@ -173,6 +175,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         {type === 'checkbox' && memoLabel}
         {type !== 'checkbox' && (hasErrors || ExtraIcon) && (
           <BasicInputExtension
+            className={extensionClassName}
             hasErrors={hasErrors}
             disabled={props.disabled}
             onClick={onExtraIconClick}
@@ -190,13 +193,15 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
 
 export const BasicInputExtension: FC<
   PropsWithChildren<{
+    className?: string;
     hasErrors?: boolean;
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   }>
-> = ({ children, hasErrors, disabled, onClick }) => (
+> = ({ children, className, hasErrors, disabled, onClick }) => (
   <div
     className={classNames(
+      className,
       'flex items-center rounded-r-md border border-l-0 peer-focus:ring-1 dark:bg-gray-700',
       {
         [classes.base.disabled]: disabled,
