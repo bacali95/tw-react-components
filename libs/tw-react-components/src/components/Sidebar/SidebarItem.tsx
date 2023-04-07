@@ -1,4 +1,3 @@
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
@@ -18,7 +17,6 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
   label,
   Icon,
   IconSelected,
-  items,
   active,
   completelyVisible,
   onClick,
@@ -57,13 +55,6 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
           {title}
           <div className="ml-auto flex items-center space-x-2">{label}</div>
         </div>
-        {completelyVisible &&
-          items &&
-          (active ? (
-            <ChevronDownIcon className="ml-auto h-5 w-5" />
-          ) : (
-            <ChevronRightIcon className="ml-auto h-5 w-5" />
-          ))}
       </div>
     </ItemWrapper>
   );

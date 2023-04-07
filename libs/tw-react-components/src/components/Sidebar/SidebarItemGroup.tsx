@@ -1,4 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import * as Accordion from '@radix-ui/react-accordion';
+import { forwardRef } from 'react';
 
 import { SidebarItem } from '.';
 import { SidebarItemComp, SidebarItemProps } from './SidebarItem';
@@ -8,35 +10,16 @@ export type SidebarItemGroupProps = Omit<SidebarItemProps, 'items'> & {
   items: SidebarItem[];
 };
 
-export const SidebarItemGroup: FC<SidebarItemGroupProps> = ({
-  items,
-  currentTab,
-  completelyVisible,
-  onClick,
-  ...item
-}) => {
-  const [open, setOpen] = useState(
-    () => item.active || items.some((item) => item.pathname === currentTab)
-  );
-
-  const handleOnClick = (pathname: string) => () => {
-    setOpen((open) => !open);
-    onClick(pathname)();
-  };
-
-  useEffect(() => {
-    setOpen(item.active || items.some((item) => item.pathname === currentTab));
-  }, [currentTab, item.active, items]);
-
-  return (
-    <>
-      <SidebarItemComp
-        {...item}
-        items={items}
-        completelyVisible={completelyVisible}
-        onClick={handleOnClick}
-      />
-      {open && (
+export const SidebarItemGroup = forwardRef<HTMLDivElement, SidebarItemGroupProps>(
+  ({ items, currentTab, completelyVisible, onClick, ...item }, ref) => (
+    <Accordion.Item className="flex flex-col gap-1" value={item.pathname} ref={ref}>
+      <Accordion.Header>
+        <Accordion.Trigger className="relative w-full data-[state=open]:[--rotate-chevron:90deg]">
+          <SidebarItemComp {...item} completelyVisible={completelyVisible} onClick={onClick} />
+          <ChevronRightIcon className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200" />
+        </Accordion.Trigger>
+      </Accordion.Header>
+      <Accordion.Content className="overflow-hidden data-[state=open]:animate-[slideDown_200ms_ease-out] data-[state=closed]:animate-[slideUp_200ms_ease-out]">
         <div className="flex flex-col gap-1 rounded-md bg-gray-50 p-1 dark:bg-gray-700">
           {items.map((subItem) => (
             <SidebarItemComp
@@ -48,7 +31,7 @@ export const SidebarItemGroup: FC<SidebarItemGroupProps> = ({
             />
           ))}
         </div>
-      )}
-    </>
-  );
-};
+      </Accordion.Content>
+    </Accordion.Item>
+  )
+);

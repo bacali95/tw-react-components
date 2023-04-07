@@ -1,3 +1,4 @@
+import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
 import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -56,7 +57,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
               {completelyVisible ? fullLogo : smallLogo}
             </Link>
           </div>
-          <div className="space-y-1">
+          <Accordion.Root className="space-y-1" type="multiple">
             {items.map((item) =>
               !item.items ? (
                 <SidebarItemComp
@@ -78,7 +79,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                 />
               )
             )}
-          </div>
+          </Accordion.Root>
         </div>
       </div>
     </nav>
