@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.31](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.30...v0.0.31) (2023-04-07)
+
+
+### Bug Fixes
+
+* **sidebar:** fix logo width ([d434bb5](https://github.com/NaN-Projects/tw-react-components/commit/d434bb579da46beaa20166d1b7ff364a7ae5eb7b))
+
 ### [0.0.30](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.29...v0.0.30) (2023-04-07)
 
 
