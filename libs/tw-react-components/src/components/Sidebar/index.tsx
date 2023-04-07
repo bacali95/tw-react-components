@@ -1,6 +1,5 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import classNames from 'classnames';
-import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
+import { ComponentProps, FC, ReactNode, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLayoutContext } from '../../contexts';
@@ -27,16 +26,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   const [currentTab, setCurrentTab] = useState(
     window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
   );
-  const { sidebar } = useLayoutContext();
-  const [completelyVisible, setCompletelyVisible] = useState(sidebar);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (sidebar) timeout = setTimeout(() => setCompletelyVisible(true), 200);
-    else timeout = setTimeout(() => setCompletelyVisible(false), 50);
-
-    return () => timeout && clearTimeout(timeout);
-  }, [sidebar]);
+  const { sidebarOpen } = useLayoutContext();
 
   const onLinkClick = (tab: string) => () => {
     setCurrentTab(tab);
@@ -46,15 +36,13 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   return (
     <nav className="p-1 text-black dark:text-white">
       <div
-        className={classNames('h-full flex-col transition-all duration-200 ease-in-out', {
-          'w-56': sidebar,
-          'w-16': !sidebar,
-        })}
+        className="h-full flex-col overflow-hidden transition-all duration-200 ease-in-out data-[open=true]:w-56 data-[open=false]:w-14"
+        data-open={sidebarOpen}
       >
         <div className="h-full rounded-lg bg-white p-2 shadow dark:bg-gray-800">
-          <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
+          <div className="mb-2 min-w-max cursor-pointer p-2 py-3 text-center text-2xl">
             <Link to="/" target="_blank">
-              {completelyVisible ? fullLogo : smallLogo}
+              {sidebarOpen ? fullLogo : smallLogo}
             </Link>
           </div>
           <Accordion.Root className="space-y-1" type="multiple">
@@ -63,7 +51,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                 <SidebarItemComp
                   key={item.pathname}
                   active={currentTab === item.pathname}
-                  completelyVisible={completelyVisible}
+                  sidebarOpen={sidebarOpen}
                   onClick={onLinkClick}
                   {...item}
                 />
@@ -72,7 +60,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                   key={item.pathname}
                   active={currentTab === item.pathname}
                   currentTab={currentTab}
-                  completelyVisible={completelyVisible}
+                  sidebarOpen={sidebarOpen}
                   onClick={onLinkClick}
                   {...item}
                   items={item.items}

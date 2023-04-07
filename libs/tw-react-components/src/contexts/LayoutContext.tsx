@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, createContext, useContext, useEffect, useState }
 
 export type LayoutContext = {
   theme: ThemeState;
-  sidebar: boolean;
+  sidebarOpen: boolean;
   toggleTheme: () => void;
   toggleSidebar: () => void;
 };
@@ -11,7 +11,9 @@ export const LayoutContext = createContext<LayoutContext | undefined>(undefined)
 
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(getValueFromLocalStorage<ThemeState>(THEME_KEY, 'light'));
-  const [sidebar, setSidebar] = useState(getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true));
+  const [sidebarOpen, setSidebarOpen] = useState(
+    getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true)
+  );
 
   useEffect(() => {
     if (theme) {
@@ -34,14 +36,14 @@ export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const toggleSidebar = () =>
-    setSidebar((sidebar) => {
+    setSidebarOpen((sidebar) => {
       window.localStorage.setItem(SIDEBAR_KEY, String(!sidebar));
 
       return !sidebar;
     });
 
   return (
-    <LayoutContext.Provider value={{ theme, toggleTheme, sidebar, toggleSidebar }}>
+    <LayoutContext.Provider value={{ theme, toggleTheme, sidebarOpen, toggleSidebar }}>
       {children}
     </LayoutContext.Provider>
   );
