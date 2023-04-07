@@ -15,5 +15,10 @@
   },
   "bugs": {
     "url": "https://github.com/NaN-Projects/tw-react-components/issues"
+  },
+  "exports": {
+    "./tailwindcss-plugin.cjs": {
+      "default": "./tailwindcss-plugin.cjs"
+    }
   }
 }

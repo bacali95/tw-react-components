@@ -40,7 +40,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
         data-open={sidebarOpen}
       >
         <div className="h-full rounded-lg bg-white p-2 shadow dark:bg-gray-800">
-          <div className="mb-2 min-w-max cursor-pointer p-2 py-3 text-center text-2xl">
+          <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
             <Link to="/" target="_blank">
               {sidebarOpen ? fullLogo : smallLogo}
             </Link>
