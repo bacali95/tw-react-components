@@ -1,6 +1,8 @@
 import {
   AdjustmentsHorizontalIcon,
   Bars3Icon,
+  DocumentIcon,
+  FolderIcon,
   HomeIcon,
   RectangleGroupIcon,
   RectangleStackIcon,
@@ -9,6 +11,8 @@ import {
 import {
   AdjustmentsHorizontalIcon as AdjustmentsHorizontalIconSolid,
   Bars3Icon as Bars3IconSolid,
+  DocumentIcon as DocumentIconSolid,
+  FolderIcon as FolderIconSolid,
   HomeIcon as HomeIconSolid,
   RectangleGroupIcon as RectangleGroupIconSolid,
   RectangleStackIcon as RectangleStackIconSolid,
@@ -31,40 +35,56 @@ export const App: FC = () => {
     () => ({
       items: [
         {
-          key: '',
+          pathname: '',
           title: 'Home',
           Icon: HomeIcon,
           IconSelected: HomeIconSolid,
         },
         {
-          key: 'buttons',
-          title: 'Buttons',
-          Icon: RectangleStackIcon,
-          IconSelected: RectangleStackIconSolid,
+          pathname: 'buttons',
+          title: 'Atoms',
+          Icon: DocumentIcon,
+          IconSelected: DocumentIconSolid,
+          items: [
+            {
+              pathname: 'buttons',
+              title: 'Buttons',
+              Icon: RectangleStackIcon,
+              IconSelected: RectangleStackIconSolid,
+            },
+            {
+              pathname: 'form-controls',
+              title: 'Form Controls',
+              Icon: AdjustmentsHorizontalIcon,
+              IconSelected: AdjustmentsHorizontalIconSolid,
+            },
+          ],
         },
         {
-          key: 'menus',
-          title: 'Menus',
-          Icon: Bars3Icon,
-          IconSelected: Bars3IconSolid,
-        },
-        {
-          key: 'form-controls',
-          title: 'Form Controls',
-          Icon: AdjustmentsHorizontalIcon,
-          IconSelected: AdjustmentsHorizontalIconSolid,
-        },
-        {
-          key: 'dialogs',
-          title: 'Dialogs',
-          Icon: RectangleGroupIcon,
-          IconSelected: RectangleGroupIconSolid,
-        },
-        {
-          key: 'tables',
-          title: 'Tables',
-          Icon: TableCellsIcon,
-          IconSelected: TableCellsIconSolid,
+          pathname: 'menus',
+          title: 'Molecules',
+          Icon: FolderIcon,
+          IconSelected: FolderIconSolid,
+          items: [
+            {
+              pathname: 'menus',
+              title: 'Menus',
+              Icon: Bars3Icon,
+              IconSelected: Bars3IconSolid,
+            },
+            {
+              pathname: 'dialogs',
+              title: 'Dialogs',
+              Icon: RectangleGroupIcon,
+              IconSelected: RectangleGroupIconSolid,
+            },
+            {
+              pathname: 'tables',
+              title: 'Tables',
+              Icon: TableCellsIcon,
+              IconSelected: TableCellsIconSolid,
+            },
+          ],
         },
       ],
       smallLogo: 'SL',

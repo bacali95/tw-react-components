@@ -3,14 +3,16 @@ import { ComponentProps, FC, ReactNode, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLayoutContext } from '../../contexts';
-import { Tooltip } from '../Tooltip';
+import { SidebarItemComp } from './SidebarItem';
+import { SidebarItemGroup } from './SidebarItemGroup';
 
 export type SidebarItem = {
-  key: string;
+  pathname: string;
   title: string;
+  label?: ReactNode;
   Icon: FC<ComponentProps<'svg'>>;
   IconSelected: FC<ComponentProps<'svg'>>;
-  label?: ReactNode;
+  items?: SidebarItem[];
 };
 
 export type SidebarProps = {
@@ -40,22 +42,11 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
     navigate(`/${tab}`);
   };
 
-  const ItemWrapper = ({ title, children }: { title: string; children: ReactNode }) =>
-    sidebar ? (
-      <div>
-        <Tooltip className="!z-50" content={title} placement="right">
-          {children}
-        </Tooltip>
-      </div>
-    ) : (
-      <>{children}</>
-    );
-
   return (
     <nav className="p-1 text-black dark:text-white">
       <div
         className={classNames('h-full flex-col transition-all duration-200 ease-in-out', {
-          'w-72': sidebar,
+          'w-56': sidebar,
           'w-16': !sidebar,
         })}
       >
@@ -66,37 +57,27 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
             </Link>
           </div>
           <div className="space-y-1">
-            {items.map(({ key, Icon, IconSelected, label, title }) => (
-              <ItemWrapper key={key} title={title}>
-                <div
-                  className={classNames(
-                    'flex w-full cursor-pointer items-center rounded-md p-2 font-medium',
-                    {
-                      'bg-gray-100 dark:bg-gray-900 dark:text-white': currentTab === key,
-                      'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700':
-                        currentTab !== key,
-                      'justify-center': !sidebar,
-                    }
-                  )}
-                  onClick={onLinkClick(key)}
-                >
-                  {currentTab === key ? (
-                    <IconSelected className="h-6 w-6" />
-                  ) : (
-                    <Icon className="h-6 w-6" />
-                  )}
-                  <div
-                    className={classNames({
-                      'ml-2': completelyVisible,
-                      'invisible h-0 w-0': !completelyVisible,
-                    })}
-                  >
-                    {title}
-                    <div className="ml-auto flex items-center space-x-2">{label}</div>
-                  </div>
-                </div>
-              </ItemWrapper>
-            ))}
+            {items.map((item) =>
+              !item.items ? (
+                <SidebarItemComp
+                  key={item.pathname}
+                  active={currentTab === item.pathname}
+                  completelyVisible={completelyVisible}
+                  onClick={onLinkClick}
+                  {...item}
+                />
+              ) : (
+                <SidebarItemGroup
+                  key={item.pathname}
+                  active={currentTab === item.pathname}
+                  currentTab={currentTab}
+                  completelyVisible={completelyVisible}
+                  onClick={onLinkClick}
+                  {...item}
+                  items={item.items}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
