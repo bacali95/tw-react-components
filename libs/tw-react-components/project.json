@@ -12,6 +12,13 @@
         "outputPath": "dist/libs/tw-react-components",
         "main": "libs/tw-react-components/src/index.ts",
         "tsConfig": "libs/tw-react-components/tsconfig.lib.json",
+        "assets": [
+          {
+            "glob": "tailwindcss-plugin.js",
+            "input": "libs/tw-react-components",
+            "output": "."
+          }
+        ],
         "format": ["cjs", "esm"],
         "compiler": "tsc"
       }
