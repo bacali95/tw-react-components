@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.28](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.27...v0.0.28) (2023-04-07)
+
+
+### Features
+
+* **sidebar:** add items groups to sidebar ([51439fa](https://github.com/NaN-Projects/tw-react-components/commit/51439fa642320da5232aa15359a5c5990e1fc830))
+
 ### [0.0.27](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.26...v0.0.27) (2023-03-13)
 
 
