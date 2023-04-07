@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.30](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.29...v0.0.30) (2023-04-07)
+
+
+### Features
+
+* **tooltip:** introduce tooltip component ([e63cbcd](https://github.com/NaN-Projects/tw-react-components/commit/e63cbcdc1b24a34f48b099fe86e5225880519286))
+
+
+### Bug Fixes
+
+* **sidebar:** fix sidebar styling ([ef570b1](https://github.com/NaN-Projects/tw-react-components/commit/ef570b1ef9e393edc72be0a52dc1080562dee76d))
+
 ### [0.0.29](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.28...v0.0.29) (2023-04-07)
 
 
