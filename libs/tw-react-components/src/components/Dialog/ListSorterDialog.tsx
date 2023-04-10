@@ -59,10 +59,10 @@ export function ListSorterDialog<T extends ListSorterItem>({
       {...props}
       footer={
         <Flex justify="end" fullWidth>
-          <Button color="red" onClick={props.onClose}>
+          <Button variant="red" onClick={props.onClose}>
             {cancelLabel ?? 'Cancel'}
           </Button>
-          <Button color="green" onClick={preFinish}>
+          <Button variant="green" onClick={preFinish}>
             {submitLabel ?? 'Submit'}
           </Button>
         </Flex>

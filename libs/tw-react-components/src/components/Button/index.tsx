@@ -3,13 +3,18 @@ import { ComponentProps, FC, PropsWithoutRef, forwardRef } from 'react';
 
 import { Size } from '../types';
 
-export type ButtonColor = 'default' | 'green' | 'yellow' | 'red';
+export type ButtonVariant = 'default' | 'inverse' | 'green' | 'yellow' | 'red';
 
-const colorClassNames: Record<ButtonColor, { base: string; hover: string; active: string }> = {
+const variantClassNames: Record<ButtonVariant, { base: string; hover: string; active: string }> = {
   default: {
-    base: 'bg-slate-100 dark:bg-slate-900/50',
+    base: 'dark:text-white bg-slate-100 dark:bg-slate-900/50',
     hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
     active: 'active:bg-slate-300 dark:active:bg-slate-900',
+  },
+  inverse: {
+    base: 'dark:text-white bg-white dark:bg-slate-800',
+    hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
+    active: 'active:bg-slate-300 dark:active:bg-slate-800/50',
   },
   green: {
     base: 'text-white bg-green-500 dark:bg-green-600',
@@ -64,7 +69,7 @@ const sizeClassNames: Record<
 
 export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   size?: Size;
-  color?: ButtonColor;
+  variant?: ButtonVariant;
   rounded?: boolean;
   transparent?: boolean;
   prefixIcon?: FC<ComponentProps<'svg'>>;
@@ -77,7 +82,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       className,
       size = 'medium',
-      color = 'default',
+      variant = 'default',
       rounded,
       transparent,
       prefixIcon: PrefixIcon,
@@ -94,10 +99,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         sizeClassNames[size].base,
         {
           'cursor-unset opacity-50': props.disabled,
-          [colorClassNames[color].base]: !transparent,
+          [variantClassNames[variant].base]: !transparent,
           [sizeClassNames[size].withChildren]: children,
-          [colorClassNames[color].hover]: !props.disabled,
-          [colorClassNames[color].active]: !props.disabled,
+          [variantClassNames[variant].hover]: !props.disabled,
+          [variantClassNames[variant].active]: !props.disabled,
         }
       )}
       type="button"

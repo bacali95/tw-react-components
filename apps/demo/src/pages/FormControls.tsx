@@ -134,10 +134,10 @@ export const FormControls: FC = () => {
                   search
                 />
                 <Flex justify="end" fullWidth>
-                  <Button color="red" onClick={() => form.reset()} size={inputSize}>
+                  <Button variant="red" onClick={() => form.reset()} size={inputSize}>
                     Clear
                   </Button>
-                  <Button type="submit" color="green" size={inputSize}>
+                  <Button type="submit" variant="green" size={inputSize}>
                     Submit
                   </Button>
                 </Flex>
@@ -225,7 +225,7 @@ export const FormControls: FC = () => {
                 clearable
                 search
               />
-              <Button className="self-end" type="submit" color="green" size={inputSize}>
+              <Button className="self-end" type="submit" variant="green" size={inputSize}>
                 Submit
               </Button>
             </Flex>

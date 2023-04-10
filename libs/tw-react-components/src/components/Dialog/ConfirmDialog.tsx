@@ -21,10 +21,10 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({
     {...props}
     footer={
       <Flex justify="end" fullWidth>
-        <Button color="red" onClick={props.onClose}>
+        <Button variant="red" onClick={props.onClose}>
           {noLabel ?? 'No'}
         </Button>
-        <Button color="green" onClick={onConfirm}>
+        <Button variant="green" onClick={onConfirm}>
           {yesLabel ?? 'Yes'}
         </Button>
       </Flex>

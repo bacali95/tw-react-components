@@ -33,7 +33,7 @@ export type DataTablePageSize = (typeof possiblePageSize)[number];
 export type DataTableAction<T> = {
   icon: FC<ComponentProps<'svg'>>;
   label?: string;
-  color?: ButtonProps['color'];
+  color?: ButtonProps['variant'];
   hide?: boolean | ((item: T) => boolean);
   onClick: (item: T, rowIndex: number) => void;
 };
@@ -171,7 +171,7 @@ export function DataTable<T>({
                         size="small"
                         className={!action.label ? '!p-2' : undefined}
                         prefixIcon={() => <action.icon className="h-4 w-4" />}
-                        color={action.color}
+                        variant={action.color}
                         onClick={handleActionClicked(action, item, rowIndex)}
                         children={action.label}
                       />

@@ -33,13 +33,13 @@ export function FormDialog<T extends Record<string, any>>({
         <Flex justify="between" fullWidth>
           {extraAction}
           <Flex justify="end" fullWidth>
-            <Button onClick={props.onClose} color="red">
+            <Button onClick={props.onClose} variant="red">
               {cancelLabel ?? 'Cancel'}
             </Button>
             <Button
               type="submit"
               form={`form-${id}`}
-              color="green"
+              variant="green"
               disabled={form.formState.isSubmitting}
             >
               {submitLabel ?? 'Submit'}
