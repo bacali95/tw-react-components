@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.36](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.35...v0.0.36) (2023-04-10)
+
+
+### Bug Fixes
+
+* **navbar:** fix styling ([e8f04a4](https://github.com/NaN-Projects/tw-react-components/commit/e8f04a4249cea6fe634a62a3e42f2be04a9e0767))
+* **sidebar:** fix styling ([39f219a](https://github.com/NaN-Projects/tw-react-components/commit/39f219ade8ffc01e9a9b2206b42b6f82128005e9))
+
 ### [0.0.35](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.34...v0.0.35) (2023-04-10)
 
 
