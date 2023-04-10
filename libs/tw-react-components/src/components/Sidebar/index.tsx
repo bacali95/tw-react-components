@@ -45,14 +45,15 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
               {sidebarOpen ? fullLogo : smallLogo}
             </Link>
           </div>
-          <Accordion.Root className="space-y-1 overflow-hidden" type="single" collapsible>
+          <Accordion.Root className="overflow-hidden" type="single" collapsible>
             {items.map((item) => (
               <Accordion.Item
                 key={item.pathname}
                 className={classNames('flex flex-col rounded-md', {
                   'bg-slate-100 dark:bg-slate-900':
-                    currentTab === item.pathname ||
-                    item.items?.some((subItem) => currentTab === subItem.pathname),
+                    item.items &&
+                    (currentTab === item.pathname ||
+                      item.items.some((subItem) => currentTab === subItem.pathname)),
                 })}
                 value={item.pathname}
               >
