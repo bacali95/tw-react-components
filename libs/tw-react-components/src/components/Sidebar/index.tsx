@@ -45,7 +45,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
               {sidebarOpen ? fullLogo : smallLogo}
             </Link>
           </div>
-          <Accordion.Root className="overflow-hidden" type="single" collapsible>
+          <Accordion.Root className="overflow-hidden" type="single">
             {items.map((item) => (
               <Accordion.Item
                 key={item.pathname}
