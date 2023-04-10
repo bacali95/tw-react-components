@@ -1,5 +1,5 @@
 import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
-import { ArrowsUpDownIcon } from '@heroicons/react/24/outline';
+import { ArrowUpDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../Button';
@@ -37,15 +37,15 @@ export function ListSorterDialog<T extends ListItem>({
   const customRenderer = (item: T, index: number, listeners?: SyntheticListenerMap) => (
     <Flex
       align="center"
-      className="gap-4 p-4 focus:outline-none dark:bg-gray-800 hover:dark:bg-gray-800/50"
+      className="gap-4 p-4 focus:outline-none dark:bg-slate-800 hover:dark:bg-slate-800/50"
     >
       <Flex
         align="center"
         justify="center"
-        className="cursor-move rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-900"
+        className="cursor-move rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-900"
         {...listeners}
       >
-        <ArrowsUpDownIcon className="h-5 w-5" />
+        <ArrowUpDownIcon className="h-5 w-5" />
       </Flex>
       {renderer(item, index, listeners)}
     </Flex>
@@ -66,7 +66,7 @@ export function ListSorterDialog<T extends ListItem>({
       }
     >
       <ListSorter
-        className="divide-y overflow-auto rounded-lg border dark:divide-gray-600 dark:border-gray-600 dark:text-white"
+        className="divide-y overflow-auto rounded-lg border dark:divide-slate-600 dark:border-slate-600 dark:text-white"
         items={sortedItems}
         idResolver={idResolver}
         renderer={customRenderer}

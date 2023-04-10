@@ -11,12 +11,25 @@ import {
   FormInputs,
   ListSorterDialog,
   PdfViewerDialog,
+  SelectItem,
 } from 'tw-react-components';
+
+import { countriesByContinent } from '../data';
 
 type Login = {
   email: string;
   password: string;
+  country: string;
 };
+
+const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByContinent).map(
+  ([continent, countries]) => ({
+    id: continent,
+    label: continent,
+    group: true,
+    items: countries.map((country) => ({ id: country, value: country, label: country })),
+  })
+);
 
 export const Dialogs: FC = () => {
   const [openDialogs, setOpenDialogs] = useState<Record<string, boolean>>({});
@@ -44,11 +57,7 @@ export const Dialogs: FC = () => {
     <>
       <Card fullWidth>
         <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
-        <Dialog
-          isOpen={openDialogs['simple']}
-          title="Simple Dialog"
-          onClose={toggleDialog('simple')}
-        >
+        <Dialog open={openDialogs['simple']} title="Simple Dialog" onClose={toggleDialog('simple')}>
           Your payment has been successfully submitted. We’ve sent you an email with all of the
           details of your order.
         </Dialog>
@@ -56,7 +65,7 @@ export const Dialogs: FC = () => {
       <Card fullWidth>
         <Button onClick={toggleDialog('confirm')}>Confirm dialog</Button>
         <ConfirmDialog
-          isOpen={openDialogs['confirm']}
+          open={openDialogs['confirm']}
           title="Confirm Dialog"
           onClose={handleConfirmDialog('No')}
           onConfirm={handleConfirmDialog('Yes')}
@@ -70,13 +79,22 @@ export const Dialogs: FC = () => {
           title="Form Dialog"
           form={form}
           onSubmit={handleLogin}
-          isOpen={openDialogs['form']}
+          open={openDialogs['form']}
           onClose={toggleDialog('form')}
           extraAction={<Button>Action</Button>}
         >
           <Flex direction="column" fullWidth>
             <FormInputs.Text name="username" label="Username" required />
             <FormInputs.Password name="password" label="Password" required />
+            <FormInputs.Select
+              name="country"
+              label="Country"
+              placeholder="Select country..."
+              items={countriesItems}
+              required
+              clearable
+              search
+            />
           </Flex>
         </FormDialog>
       </Card>
@@ -85,7 +103,7 @@ export const Dialogs: FC = () => {
         <PdfViewerDialog
           title="Pdf Dialog"
           url="https://www.orimi.com/pdf-test.pdf"
-          isOpen={openDialogs['pdf']}
+          open={openDialogs['pdf']}
           onClose={toggleDialog('pdf')}
         />
       </Card>
@@ -93,7 +111,7 @@ export const Dialogs: FC = () => {
         <Button onClick={toggleDialog('sorter')}>Sorter dialog</Button>
         <ListSorterDialog
           title="Sorter Dialog"
-          isOpen={openDialogs['sorter']}
+          open={openDialogs['sorter']}
           items={['one', 'two', 'three']}
           renderer={(item) => <>{item}</>}
           idResolver={(item) => item}

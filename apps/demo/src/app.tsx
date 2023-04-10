@@ -1,23 +1,13 @@
 import {
-  AdjustmentsHorizontalIcon,
-  Bars3Icon,
-  DocumentIcon,
+  AtomIcon,
   FolderIcon,
   HomeIcon,
-  RectangleGroupIcon,
-  RectangleStackIcon,
-  TableCellsIcon,
-} from '@heroicons/react/24/outline';
-import {
-  AdjustmentsHorizontalIcon as AdjustmentsHorizontalIconSolid,
-  Bars3Icon as Bars3IconSolid,
-  DocumentIcon as DocumentIconSolid,
-  FolderIcon as FolderIconSolid,
-  HomeIcon as HomeIconSolid,
-  RectangleGroupIcon as RectangleGroupIconSolid,
-  RectangleStackIcon as RectangleStackIconSolid,
-  TableCellsIcon as TableCellsIconSolid,
-} from '@heroicons/react/24/solid';
+  LayersIcon,
+  MenuIcon,
+  RectangleHorizontalIcon,
+  TableIcon,
+  TextCursorIcon,
+} from 'lucide-react';
 import { FC, useMemo } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
@@ -38,25 +28,21 @@ export const App: FC = () => {
           pathname: '',
           title: 'Home',
           Icon: HomeIcon,
-          IconSelected: HomeIconSolid,
         },
         {
           pathname: 'buttons',
           title: 'Atoms',
-          Icon: DocumentIcon,
-          IconSelected: DocumentIconSolid,
+          Icon: AtomIcon,
           items: [
             {
               pathname: 'buttons',
               title: 'Buttons',
-              Icon: RectangleStackIcon,
-              IconSelected: RectangleStackIconSolid,
+              Icon: RectangleHorizontalIcon,
             },
             {
               pathname: 'form-controls',
               title: 'Form Controls',
-              Icon: AdjustmentsHorizontalIcon,
-              IconSelected: AdjustmentsHorizontalIconSolid,
+              Icon: TextCursorIcon,
             },
           ],
         },
@@ -64,25 +50,21 @@ export const App: FC = () => {
           pathname: 'menus',
           title: 'Molecules',
           Icon: FolderIcon,
-          IconSelected: FolderIconSolid,
           items: [
             {
               pathname: 'menus',
               title: 'Menus',
-              Icon: Bars3Icon,
-              IconSelected: Bars3IconSolid,
+              Icon: MenuIcon,
             },
             {
               pathname: 'dialogs',
               title: 'Dialogs',
-              Icon: RectangleGroupIcon,
-              IconSelected: RectangleGroupIconSolid,
+              Icon: LayersIcon,
             },
             {
               pathname: 'tables',
               title: 'Tables',
-              Icon: TableCellsIcon,
-              IconSelected: TableCellsIconSolid,
+              Icon: TableIcon,
             },
           ],
         },

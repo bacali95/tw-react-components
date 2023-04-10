@@ -1,6 +1,6 @@
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import { PencilIcon, TrashIcon } from 'lucide-react';
 import { FC, useMemo, useState } from 'react';
 
 import {

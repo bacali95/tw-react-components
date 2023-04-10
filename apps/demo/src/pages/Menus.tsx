@@ -1,48 +1,102 @@
+import {
+  CloudIcon,
+  CreditCardIcon,
+  GithubIcon,
+  LifeBuoyIcon,
+  LogOutIcon,
+  MailIcon,
+  MessageSquareIcon,
+  PlusCircleIcon,
+  PlusIcon,
+  UserIcon,
+  UserPlusIcon,
+  UsersIcon,
+} from 'lucide-react';
 import { FC } from 'react';
 
-import { Block, Button, Card, Flex, Menu, MenuItem } from 'tw-react-components';
+import { Block, Button, Card, DropdownMenu, Flex } from 'tw-react-components';
 
 export const Menus: FC = () => {
-  const items: MenuItem[] = [
-    {
-      label: 'One',
-      onClick: () => alert('One!'),
-    },
-    {
-      label: 'Two',
-      onClick: () => alert('Two!'),
-    },
-    {
-      type: 'separator',
-    },
-    {
-      type: 'nested',
-      children: 'Nested',
-      items: [
-        {
-          label: 'One',
-          onClick: () => alert('One!'),
-        },
-        {
-          label: 'Two',
-          onClick: () => alert('Two!'),
-        },
-      ],
-    },
-  ];
-
   return (
     <Block fullHeight fullWidth>
-      <Card fullWidth>
-        <Flex justify="between">
-          <Menu items={items}>
-            <Button>Open Menu</Button>
-          </Menu>
-          <Menu items={items} position="bottom-right">
-            <Button>Open Menu 2</Button>
-          </Menu>
-        </Flex>
-      </Card>
+      <Flex direction="column">
+        <Card fullWidth>
+          <DropdownMenu>
+            <DropdownMenu.Trigger asChild>
+              <Button>Dropdown Menu</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content className="w-56">
+              <DropdownMenu.Label>Menu</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Group>
+                <DropdownMenu.Item>
+                  <DropdownMenu.Icon icon={UserIcon} />
+                  Profile
+                  <DropdownMenu.Shortcut>Ctrl+P</DropdownMenu.Shortcut>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item>
+                  <DropdownMenu.Icon icon={CreditCardIcon} />
+                  Billing
+                </DropdownMenu.Item>
+              </DropdownMenu.Group>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Group>
+                <DropdownMenu.Item>
+                  <DropdownMenu.Icon icon={UsersIcon} />
+                  <span>Team</span>
+                </DropdownMenu.Item>
+                <DropdownMenu.Sub>
+                  <DropdownMenu.SubTrigger>
+                    <DropdownMenu.Icon icon={UserPlusIcon} />
+                    <span>Invite users</span>
+                  </DropdownMenu.SubTrigger>
+                  <DropdownMenu.Portal>
+                    <DropdownMenu.SubContent>
+                      <DropdownMenu.Item>
+                        <DropdownMenu.Icon icon={MailIcon} />
+                        <span>Email</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item>
+                        <DropdownMenu.Icon icon={MessageSquareIcon} />
+                        <span>Message</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Separator />
+                      <DropdownMenu.Item>
+                        <DropdownMenu.Icon icon={PlusCircleIcon} />
+                        <span>More...</span>
+                      </DropdownMenu.Item>
+                    </DropdownMenu.SubContent>
+                  </DropdownMenu.Portal>
+                </DropdownMenu.Sub>
+                <DropdownMenu.Item>
+                  <DropdownMenu.Icon icon={PlusIcon} />
+                  <span>New Team</span>
+                  <DropdownMenu.Shortcut>⌘+T</DropdownMenu.Shortcut>
+                </DropdownMenu.Item>
+              </DropdownMenu.Group>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item>
+                <DropdownMenu.Icon icon={GithubIcon} />
+                <span>GitHub</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item>
+                <DropdownMenu.Icon icon={LifeBuoyIcon} />
+                <span>Support</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item disabled>
+                <DropdownMenu.Icon icon={CloudIcon} />
+                <span>API</span>
+              </DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Item>
+                <DropdownMenu.Icon icon={LogOutIcon} />
+                <span>Log out</span>
+                <DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu>
+        </Card>
+      </Flex>
     </Block>
   );
 };

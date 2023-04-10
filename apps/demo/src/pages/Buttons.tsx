@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ArrowRightIcon, XIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { Button, Card, Flex } from 'tw-react-components';
@@ -66,9 +66,9 @@ export const Buttons: FC = () => (
         <Button size="large" color="green" prefixIcon={ArrowLeftIcon}>
           Big
         </Button>
-        <Button size="small" color="yellow" prefixIcon={XMarkIcon} />
-        <Button size="medium" color="yellow" prefixIcon={XMarkIcon} />
-        <Button size="large" color="yellow" prefixIcon={XMarkIcon} />
+        <Button size="small" color="yellow" prefixIcon={XIcon} />
+        <Button size="medium" color="yellow" prefixIcon={XIcon} />
+        <Button size="large" color="yellow" prefixIcon={XIcon} />
       </Flex>
       <p className="text-lg">Buttons with prefix icons</p>
       <Flex className="!gap-2">
@@ -98,10 +98,10 @@ export const Buttons: FC = () => (
       </Flex>
       <p className="text-lg">Icon buttons</p>
       <Flex className="!gap-2">
-        <Button prefixIcon={XMarkIcon} />
-        <Button prefixIcon={XMarkIcon} color="green" />
-        <Button prefixIcon={XMarkIcon} color="yellow" />
-        <Button prefixIcon={XMarkIcon} color="red" />
+        <Button prefixIcon={XIcon} />
+        <Button prefixIcon={XIcon} color="green" />
+        <Button prefixIcon={XIcon} color="yellow" />
+        <Button prefixIcon={XIcon} color="red" />
       </Flex>
     </Flex>
   </Card>

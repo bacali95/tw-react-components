@@ -1,4 +1,4 @@
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { forwardRef, useState } from 'react';
 
 import { BasicInput, BasicInputProps } from './BasicInput';
@@ -14,7 +14,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
     <BasicInput
       type={type}
       {...props}
-      ExtraIcon={type === 'password' ? EyeIcon : EyeSlashIcon}
+      ExtraIcon={type === 'password' ? EyeIcon : EyeOffIcon}
       onExtraIconClick={toggleType}
       ref={ref}
     />

@@ -1,6 +1,6 @@
-import { CalendarIcon, ClockIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
+import { CalendarIcon, ClockIcon, XIcon } from 'lucide-react';
 import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getDisplayDate } from '../../../../../helpers';
@@ -125,14 +125,14 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
           ExtraIcon={
-            clearable && displayDate ? XMarkIcon : type?.includes('date') ? CalendarIcon : ClockIcon
+            clearable && displayDate ? XIcon : type?.includes('date') ? CalendarIcon : ClockIcon
           }
           onExtraIconClick={clearable && displayDate ? clearDate : undefined}
         />
 
         {isOpen && (
           <div
-            className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+            className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
             tabIndex={0}
             onBlur={handleOnBlur}
             ref={calendarRef}
@@ -160,7 +160,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
                   />
                 )}
                 <div
-                  className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-gray-100 dark:text-blue-500 dark:hover:bg-gray-700"
+                  className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-slate-100 dark:text-blue-500 dark:hover:bg-slate-700"
                   onClick={() => setIsOpen(false)}
                 >
                   OK

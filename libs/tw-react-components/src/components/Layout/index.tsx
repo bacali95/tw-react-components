@@ -16,7 +16,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   navbarChildren,
 }) => {
   return (
-    <div className="flex h-screen gap-1 bg-gray-100 p-2 dark:bg-gray-900">
+    <div className="flex h-screen gap-1 bg-slate-100 p-2 dark:bg-slate-900">
       <Sidebar {...sidebarProps} />
       <div className="flex w-full flex-col gap-1 overflow-hidden">
         <Navbar>

@@ -1,6 +1,6 @@
 import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { XIcon } from 'lucide-react';
 import { FC, Fragment, PropsWithChildren, ReactNode } from 'react';
 
 import { Button } from '../Button';
@@ -8,7 +8,7 @@ import { Flex } from '../Flex';
 
 export type DialogProps = PropsWithChildren<{
   title?: string;
-  isOpen: boolean;
+  open: boolean;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
   onClose: () => void;
   footer?: ReactNode;
@@ -17,14 +17,14 @@ export type DialogProps = PropsWithChildren<{
 export const Dialog: FC<DialogProps> = ({
   children,
   title,
-  isOpen = false,
+  open = false,
   size = 'lg',
   onClose,
   footer,
 }) => {
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <HeadlessDialog as="div" className="fixed inset-0 z-[1000] overflow-hidden" onClose={onClose}>
+    <Transition appear show={open} as={Fragment}>
+      <HeadlessDialog as="div" className="fixed inset-0 z-[1000]" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -37,8 +37,8 @@ export const Dialog: FC<DialogProps> = ({
           <div className="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="flex min-h-full items-center justify-center overflow-hidden p-4 text-center">
+        <div className="fixed inset-0">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -50,7 +50,7 @@ export const Dialog: FC<DialogProps> = ({
             >
               <HeadlessDialog.Panel
                 className={classNames(
-                  'flex max-h-[90vh] w-full transform flex-col overflow-hidden rounded-lg bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-gray-800 dark:text-white',
+                  'flex max-h-[90vh] w-full transform flex-col rounded-lg bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-slate-800 dark:text-white',
                   {
                     'max-w-xs': size === 'xs',
                     'max-w-sm': size === 'sm',
@@ -67,18 +67,13 @@ export const Dialog: FC<DialogProps> = ({
                   }
                 )}
               >
-                <Flex className="text-gray-900 dark:text-gray-100" align="center" fullWidth>
+                <Flex className="text-slate-900 dark:text-slate-100" align="center" fullWidth>
                   {title && (
                     <HeadlessDialog.Title className="text-lg font-medium leading-6">
                       {title}
                     </HeadlessDialog.Title>
                   )}
-                  <Button
-                    className="ml-auto"
-                    prefixIcon={XMarkIcon}
-                    size="small"
-                    onClick={onClose}
-                  />
+                  <Button className="ml-auto" prefixIcon={XIcon} size="small" onClick={onClose} />
                 </Flex>
                 {children && <div className="-mx-4 mt-4 overflow-y-auto py-1 px-4">{children}</div>}
                 {footer && <div className="mt-4">{footer}</div>}

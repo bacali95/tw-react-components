@@ -1,5 +1,5 @@
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { AlertTriangleIcon } from 'lucide-react';
 import {
   ComponentProps,
   FC,
@@ -40,13 +40,13 @@ const classes = {
   },
   withoutErrors: {
     input:
-      'border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:!border-blue-600 dark:placeholder-gray-500 dark:placeholder-gray-400',
+      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:!border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
     extension:
-      'border-gray-300 text-gray-600 peer-focus:border-blue-600 peer-focus:ring-blue-600 dark:border-gray-600 dark:text-white',
+      'border-slate-300 text-slate-600 peer-focus:border-blue-600 peer-focus:ring-blue-600 dark:border-slate-600 dark:text-white',
   },
   withErrors: {
     input:
-      '!border-red-600 dark:bg-gray-700 placeholder-red-900 !ring-red-600 dark:!border-red-500 dark:!placeholder-red-500 dark:!ring-red-600',
+      '!border-red-600 dark:bg-slate-700 placeholder-red-900 !ring-red-600 dark:!border-red-500 dark:!placeholder-red-500 dark:!ring-red-600',
     extension:
       'border-red-600 text-red-600 peer-focus:border-red-600 peer-focus:ring-red-600 dark:border-red-500 dark:text-red-500',
   },
@@ -145,7 +145,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             id={id}
             className={classNames(
               inputClassName,
-              'rounded border-gray-300 text-blue-600',
+              'rounded border-slate-300 text-blue-600',
               sizeClasses[size].checkbox.input,
               {
                 [classes.base.disabled]: props.disabled,
@@ -181,7 +181,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             onClick={onExtraIconClick}
           >
             {hasErrors && !ExtraIcon && (
-              <ExclamationTriangleIcon className={sizeClasses[size].extension} />
+              <AlertTriangleIcon className={sizeClasses[size].extension} />
             )}
             {ExtraIcon && <ExtraIcon className={sizeClasses[size].extension} />}
           </BasicInputExtension>
@@ -202,7 +202,7 @@ export const BasicInputExtension: FC<
   <div
     className={classNames(
       className,
-      'flex items-center rounded-r-md border border-l-0 peer-focus:ring-1 dark:bg-gray-700',
+      'flex items-center rounded-r-md border border-l-0 peer-focus:ring-1 dark:bg-slate-700',
       {
         [classes.base.disabled]: disabled,
         [classes.withoutErrors.extension]: !hasErrors,

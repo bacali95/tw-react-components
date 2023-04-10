@@ -1,5 +1,5 @@
-import { ArrowsUpDownIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { ArrowUpDownIcon, SortAscIcon, SortDescIcon } from 'lucide-react';
 import { ComponentProps, FC, MouseEvent, ReactNode, useRef } from 'react';
 
 import { generalComparator } from '../../helpers';
@@ -115,11 +115,11 @@ export function DataTable<T>({
               {sorting &&
                 !column.noSorting &&
                 (sorting.sorting?.field !== column.field ? (
-                  <ArrowsUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
+                  <ArrowUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
                 ) : sorting.sorting?.direction === 'asc' ? (
-                  <ChevronDownIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
+                  <SortAscIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
                 ) : (
-                  <ChevronUpIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
+                  <SortDescIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
                 ))}
             </Table.HeadCell>
           ))}
@@ -131,9 +131,9 @@ export function DataTable<T>({
           <Table.Row>
             <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
               {isLoading ? (
-                <Spinner className="rounded-lg bg-gray-700 opacity-50" />
+                <Spinner className="rounded-lg bg-slate-700 opacity-50" />
               ) : (
-                <Flex className="text-gray-500" justify="center">
+                <Flex className="text-slate-500" justify="center">
                   No data
                 </Flex>
               )}
@@ -144,7 +144,7 @@ export function DataTable<T>({
           <Table.Row
             key={rowIndex}
             className={classNames({
-              'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900': onRowClick,
+              'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900': onRowClick,
             })}
             onClick={handleRowClicked(item, rowIndex)}
           >

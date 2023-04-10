@@ -1,10 +1,10 @@
+import classNames from 'classnames';
 import {
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from '@heroicons/react/24/outline';
-import classNames from 'classnames';
+  ChevronsLeftIcon,
+  ChevronsRightIcon,
+} from 'lucide-react';
 import {
   ComponentProps,
   Dispatch,
@@ -40,9 +40,9 @@ export const Pagination: FC<PaginationProps> = ({
 
   return (
     <Flex justify="end">
-      <Flex className="!gap-0 divide-x rounded-md border border-gray-300 bg-white dark:divide-gray-600 dark:border-gray-600 dark:bg-gray-800">
+      <Flex className="!gap-0 divide-x rounded-md border border-slate-300 bg-white dark:divide-slate-600 dark:border-slate-600 dark:bg-slate-800">
         <PaginationItem title="First page" onClick={() => setCurrentPage(0)}>
-          <ChevronDoubleLeftIcon className="h-5 w-5" />
+          <ChevronsLeftIcon className="h-5 w-5" />
         </PaginationItem>
         <PaginationItem
           title="Previous page"
@@ -78,7 +78,7 @@ export const Pagination: FC<PaginationProps> = ({
             )
           }
         >
-          <ChevronDoubleRightIcon className="h-5 w-5" />
+          <ChevronsRightIcon className="h-5 w-5" />
         </PaginationItem>
       </Flex>
     </Flex>
@@ -92,8 +92,8 @@ const PaginationItem: FC<PropsWithoutRef<ComponentProps<'div'> & { active?: bool
 }) => (
   <Flex
     className={classNames('h-10 w-10 first:rounded-l-md last:rounded-r-md', {
-      'bg-gray-100 dark:bg-gray-700': active,
-      'cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700': props.onClick,
+      'bg-slate-100 dark:bg-slate-700': active,
+      'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700': props.onClick,
     })}
     align="center"
     justify="center"

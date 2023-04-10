@@ -1,4 +1,4 @@
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
+import { DollarSignIcon } from 'lucide-react';
 import { ChangeEvent, FC, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { SubmitErrorHandler } from 'react-hook-form/dist/types/form';
@@ -77,7 +77,7 @@ export const FormControls: FC = () => {
       <Flex direction="column" fullWidth>
         <Card fullWidth>
           <p className="mb-2">
-            With <code className="rounded bg-gray-100 p-1 dark:bg-gray-900">use-form-hook</code>{' '}
+            With <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
             context
           </p>
           <FormProvider {...form}>
@@ -104,7 +104,7 @@ export const FormControls: FC = () => {
                   placeholder="0"
                   min={0}
                   validate={(value) => value < 11}
-                  ExtraIcon={CurrencyDollarIcon}
+                  ExtraIcon={DollarSignIcon}
                   size={inputSize}
                   required
                 />
@@ -149,7 +149,8 @@ export const FormControls: FC = () => {
       <Flex direction="column" fullWidth>
         <Card fullWidth>
           <p className="mb-2">
-            Without <code className="rounded bg-gray-100 p-1 dark:bg-gray-900 ">use-form-hook</code>{' '}
+            Without{' '}
+            <code className="rounded bg-slate-100 p-1 dark:bg-slate-900 ">use-form-hook</code>{' '}
             context
           </p>
           <form
@@ -186,7 +187,7 @@ export const FormControls: FC = () => {
                 placeholder="0"
                 min={0}
                 hasErrors={(formState.number ?? 0) > 10}
-                ExtraIcon={CurrencyDollarIcon}
+                ExtraIcon={DollarSignIcon}
                 size={inputSize}
                 required
               />

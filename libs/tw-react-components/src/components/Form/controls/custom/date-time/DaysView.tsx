@@ -109,7 +109,7 @@ export const DaysView: FC<DaysViewProps> = ({
         {days.map((day, index) => (
           <span
             key={index}
-            className="flex h-8 w-8 items-center justify-center text-xs uppercase text-gray-500 dark:text-gray-400"
+            className="flex h-8 w-8 items-center justify-center text-xs uppercase text-slate-500 dark:text-slate-400"
           >
             {day.shortName}
           </span>
@@ -202,7 +202,7 @@ const Day: FC<DayProps> = ({
         'bg-blue-500 text-white': isSelected,
         'cursor-pointer': isSelectable,
         'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
-        'text-gray-400 dark:text-gray-500': !isSelectable || !primary,
+        'text-slate-400 dark:text-slate-500': !isSelectable || !primary,
       })}
       onClick={isSelectable ? setDayNumber(day, month, year) : undefined}
     >

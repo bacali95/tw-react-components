@@ -7,7 +7,7 @@ export const Spinner: FC<Props> = ({ className, fullScreen }) => (
   <div
     className={classNames(
       className,
-      'flex w-full items-center justify-center bg-white dark:bg-gray-800',
+      'flex w-full items-center justify-center bg-white dark:bg-slate-800',
       {
         'h-screen': fullScreen,
         'h-full': !fullScreen,

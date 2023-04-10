@@ -1,6 +1,6 @@
 import { Switch } from '@headlessui/react';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { MoonIcon, SunIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { useLayoutContext } from '../../contexts';
@@ -20,7 +20,7 @@ export const ThemeSwitcher: FC<Props> = ({ className }) => {
         'flex h-8 w-14 items-center rounded-full border p-1 dark:border-blue-700',
         {
           'bg-blue-700': darkMode,
-          'bg-gray-100': !darkMode,
+          'bg-slate-100': !darkMode,
         }
       )}
     >
@@ -31,9 +31,9 @@ export const ThemeSwitcher: FC<Props> = ({ className }) => {
         })}
       >
         {darkMode ? (
-          <MoonIcon className="h-6 w-6 rounded-full bg-gray-800 p-1 text-white" />
+          <MoonIcon className="h-6 w-6 rounded-full bg-slate-800 p-1 text-white" />
         ) : (
-          <SunIcon className="h-6 w-6 rounded-full bg-gray-200 p-1 text-black" />
+          <SunIcon className="h-6 w-6 rounded-full bg-slate-200 p-1 text-black" />
         )}
       </div>
     </Switch>

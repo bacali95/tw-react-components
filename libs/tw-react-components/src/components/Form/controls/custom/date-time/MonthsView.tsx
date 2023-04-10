@@ -94,7 +94,7 @@ const Month: FC<MonthProps> = ({
           'bg-blue-500 text-white': isSelected,
           'cursor-pointer': isSelectable,
           'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
-          'text-gray-400 dark:text-gray-500': !isSelectable,
+          'text-slate-400 dark:text-slate-500': !isSelectable,
         }
       )}
       onClick={isSelectable ? selectMonth(month) : undefined}

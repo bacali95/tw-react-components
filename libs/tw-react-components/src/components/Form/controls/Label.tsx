@@ -1,5 +1,5 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import { HelpCircle } from 'lucide-react';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Tooltip } from '../../Tooltip';
@@ -23,7 +23,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
   return !children ? null : (
     <label
       className={classNames(className, 'flex items-center gap-1 font-medium', {
-        'text-gray-700 dark:text-gray-100': !hasErrors,
+        'text-slate-700 dark:text-slate-100': !hasErrors,
         'text-red-600 dark:text-red-500': hasErrors,
       })}
       htmlFor={htmlFor}
@@ -33,7 +33,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
       </span>
       {description && (
         <Tooltip content={<div className="max-w-xs">{description}</div>} placement="right">
-          <QuestionMarkCircleIcon className="h-5 w-5" />
+          <HelpCircle className="h-5 w-5" />
         </Tooltip>
       )}
     </label>

@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 import { useMonths } from '../../../../../hooks';
@@ -96,29 +96,29 @@ export const DateSelector: FC<DateSelectorProps> = ({
     <div className="select-none">
       <div className="flex justify-between px-3 pt-2">
         <div
-          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-slate-700"
           onClick={editCalendarViewPage('subtract')}
         >
-          <ChevronLeftIcon className="h-5 w-5 text-gray-400" />
+          <ChevronLeftIcon className="h-5 w-5 text-slate-400" />
         </div>
         <div
-          className="flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition duration-100 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition duration-100 ease-in-out hover:bg-slate-100 dark:hover:bg-slate-700"
           onClick={nextCalendarView}
         >
           {calendarView === 'days' && <span className="capitalize">{months[month].name}</span>}
           {calendarView !== 'years' ? (
-            <span className="text-gray-500 dark:text-gray-300">{year}</span>
+            <span className="text-slate-500 dark:text-slate-300">{year}</span>
           ) : (
-            <span className="text-gray-500 dark:text-gray-300">
+            <span className="text-slate-500 dark:text-slate-300">
               {yearsRange[0]} - {yearsRange[11]}
             </span>
           )}
         </div>
         <div
-          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-slate-700"
           onClick={editCalendarViewPage('add')}
         >
-          <ChevronRightIcon className="h-5 w-5 text-gray-400" />
+          <ChevronRightIcon className="h-5 w-5 text-slate-400" />
         </div>
       </div>
       {calendarView === 'days' ? (

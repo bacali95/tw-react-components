@@ -10,10 +10,10 @@ const colorClassNames: Record<
   { base: string; hover: string; active: string; border: string }
 > = {
   default: {
-    base: 'bg-gray-100 dark:bg-gray-900/50',
-    hover: 'hover:bg-gray-200 dark:hover:bg-gray-700',
-    active: 'active:bg-gray-300 dark:active:bg-gray-900',
-    border: 'border-gray-300 dark:border-gray-600',
+    base: 'bg-slate-100 dark:bg-slate-900/50',
+    hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
+    active: 'active:bg-slate-300 dark:active:bg-slate-900',
+    border: 'border-slate-300 dark:border-slate-600',
   },
   green: {
     base: 'text-white bg-green-500 dark:bg-green-600',
