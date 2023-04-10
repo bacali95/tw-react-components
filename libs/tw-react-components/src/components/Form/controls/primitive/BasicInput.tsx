@@ -58,7 +58,7 @@ const sizeClasses: Record<
 > = {
   small: {
     label: 'text-sm',
-    input: 'text-sm py-1 px-2',
+    input: 'text-sm py-1 px-2 h-7',
     checkbox: {
       input: 'w-4 h-4',
       wrapper: 'h-6 gap-1',
@@ -67,7 +67,7 @@ const sizeClasses: Record<
   },
   medium: {
     label: 'text-base',
-    input: 'text-base py-2 px-3',
+    input: 'text-base py-2 px-3 h-10',
     checkbox: {
       input: 'w-5 h-5',
       wrapper: 'h-8 gap-2',
@@ -76,7 +76,7 @@ const sizeClasses: Record<
   },
   large: {
     label: 'text-lg',
-    input: 'text-lg py-3 px-4',
+    input: 'text-lg py-3 px-4 h-14',
     checkbox: {
       input: 'w-6 h-6',
       wrapper: 'h-10 gap-2',
