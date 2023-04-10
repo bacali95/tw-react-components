@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentProps, FC, PropsWithoutRef, forwardRef } from 'react';
 
-export type ButtonSize = 'small' | 'medium' | 'large';
+import { Size } from '../types';
 
 export type ButtonColor = 'default' | 'green' | 'yellow' | 'red';
 
@@ -29,7 +29,7 @@ const colorClassNames: Record<ButtonColor, { base: string; hover: string; active
 };
 
 const sizeClassNames: Record<
-  ButtonSize,
+  Size,
   {
     base: string;
     withChildren: string;
@@ -63,7 +63,7 @@ const sizeClassNames: Record<
 };
 
 export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
-  size?: ButtonSize;
+  size?: Size;
   color?: ButtonColor;
   rounded?: boolean;
   transparent?: boolean;

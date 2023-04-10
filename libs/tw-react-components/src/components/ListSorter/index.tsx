@@ -18,9 +18,9 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { ReactElement, ReactNode, useMemo } from 'react';
 
-export type ListItem = number | string | boolean | Record<'rank', number>;
+export type ListSorterItem = number | string | boolean | Record<'rank', number>;
 
-export type ListSorterProps<T extends ListItem> = {
+export type ListSorterProps<T extends ListSorterItem> = {
   className?: string;
   items: T[];
   idResolver: (item: T, index: number) => string;
@@ -28,7 +28,7 @@ export type ListSorterProps<T extends ListItem> = {
   onChange: (items: T[]) => void;
 };
 
-export function ListSorter<T extends ListItem>({
+export function ListSorter<T extends ListSorterItem>({
   className,
   items,
   idResolver,
@@ -82,13 +82,13 @@ export function ListSorter<T extends ListItem>({
   );
 }
 
-type SortableItemProps<T extends ListItem> = {
+type SortableItemProps<T extends ListSorterItem> = {
   item: { id: string; value: T };
   index: number;
   renderer: (item: T, index: number, listeners?: SyntheticListenerMap) => ReactNode;
 };
 
-function SortableItem<T extends ListItem>({
+function SortableItem<T extends ListSorterItem>({
   item,
   index,
   renderer,

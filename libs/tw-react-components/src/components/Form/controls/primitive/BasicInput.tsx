@@ -12,11 +12,10 @@ import {
   useMemo,
 } from 'react';
 
+import { Size } from '../../../types';
 import { Label } from '../Label';
 
 export type InputType = ComponentProps<'input'>['type'] | 'textarea';
-
-export type InputSize = 'small' | 'medium' | 'large';
 
 export type BasicInputProps<Type extends InputType> = {
   inputClassName?: string;
@@ -24,7 +23,7 @@ export type BasicInputProps<Type extends InputType> = {
   type?: Type;
   label?: string;
   description?: ReactNode;
-  size?: InputSize;
+  size?: Size;
   hasErrors?: boolean;
   ExtraIcon?: FC<ComponentProps<'svg'>>;
   onExtraIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
@@ -53,7 +52,7 @@ const classes = {
 };
 
 const sizeClasses: Record<
-  InputSize,
+  Size,
   { label: string; input: string; checkbox: { input: string; wrapper: string }; extension: string }
 > = {
   small: {

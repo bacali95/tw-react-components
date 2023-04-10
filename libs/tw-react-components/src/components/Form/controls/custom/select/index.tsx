@@ -13,6 +13,7 @@ import {
 
 import { usePopper } from '../../../../../hooks';
 import { Flex } from '../../../../Flex';
+import { List } from '../../../../List';
 import { BasicInputProps, TextInput } from '../../primitive';
 
 export type SelectInputType = 'select';
@@ -204,20 +205,18 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     };
 
     const RenderOption = (item: SelectItem<T>) => (
-      <Listbox.Option
-        value={item}
-        className={({ active, selected }) =>
-          classNames('cursor-pointer rounded p-2', {
-            'bg-slate-100 dark:bg-slate-700/40': active,
-            'bg-slate-300 dark:bg-slate-900': selected,
-          })
-        }
-      >
-        {({ selected }) => (
-          <Flex align="center" justify="between">
+      <Listbox.Option className="w-full" value={item}>
+        {({ active, selected }) => (
+          <List.Item
+            className={classNames('cursor-pointer', {
+              'bg-slate-100 dark:bg-slate-700/40': active,
+              'bg-slate-300 dark:bg-slate-900': selected,
+            })}
+            size={props.size}
+          >
             <span>{renderItem(item, !!selectedMap[item.id])}</span>
-            {selected && <CheckIcon className="h-5 w-5" />}
-          </Flex>
+            {selected && <CheckIcon className="ml-auto h-5 w-5" />}
+          </List.Item>
         )}
       </Listbox.Option>
     );
@@ -251,8 +250,9 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                   className="px-1 pb-1"
                   value={searchValue}
                   placeholder="Search..."
+                  size={props.size}
                   onChange={handleOnSearchValueChange}
-                  ExtraIcon={XIcon}
+                  ExtraIcon={searchValue.length ? XIcon : undefined}
                   onExtraIconClick={clearSearchValue}
                 />
               )}
@@ -270,15 +270,17 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               <div className="flex flex-col gap-1 overflow-auto px-1">
                 {filteredItems.map((item) =>
                   item.group ? (
-                    [
-                      <div
-                        key={item.id}
-                        className="relative flex items-center rounded bg-gray-300 px-2 py-1.5 text-sm dark:bg-gray-900"
+                    <Flex key={item.id} className="gap-1" noGap direction="column" fullWidth>
+                      <List.Label
+                        className="sticky top-0 z-[51] w-full rounded-md px-2 py-1 dark:bg-slate-700"
+                        size={props.size}
                       >
                         {item.label}
-                      </div>,
-                      item.items.map((subItem) => <RenderOption key={subItem.id} {...subItem} />),
-                    ]
+                      </List.Label>
+                      {item.items.map((subItem) => (
+                        <RenderOption key={subItem.id} {...subItem} />
+                      ))}
+                    </Flex>
                   ) : (
                     <RenderOption key={item.id} {...item} />
                   )

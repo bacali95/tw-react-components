@@ -10,10 +10,10 @@ import {
   DateTimeInput,
   Flex,
   FormInputs,
-  InputSize,
   NumberInput,
   SelectInput,
   SelectItem,
+  Size,
   TextInput,
   TextareaInput,
 } from 'tw-react-components';
@@ -40,7 +40,7 @@ const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByCon
 
 export const FormControls: FC = () => {
   const form = useForm<State>({ defaultValues: {} });
-  const [inputSize, setInputSize] = useState<InputSize | undefined>('medium');
+  const [inputSize, setInputSize] = useState<Size | undefined>('medium');
   const [formState, setFormState] = useState<State>({ countries: [] });
 
   const onSubmit: SubmitHandler<State> = (data) => alert(JSON.stringify(data, null, 2));

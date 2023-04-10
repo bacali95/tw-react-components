@@ -31,15 +31,16 @@ const justifyClasses: Record<Position | 'between', string> = {
   end: 'justify-end',
 };
 
-type Props = BlockProps & {
+export type FlexProps = BlockProps & {
   reverse?: boolean;
   wrap?: boolean;
   direction?: Direction;
   align?: Position;
   justify?: Position | 'between';
+  noGap?: boolean;
 };
 
-export const Flex = forwardRef<HTMLDivElement, Props>(
+export const Flex = forwardRef<HTMLDivElement, FlexProps>(
   (
     {
       children,
@@ -49,6 +50,7 @@ export const Flex = forwardRef<HTMLDivElement, Props>(
       direction = 'row',
       align = 'start',
       justify = 'start',
+      noGap,
       ...blockProps
     },
     ref
@@ -56,8 +58,9 @@ export const Flex = forwardRef<HTMLDivElement, Props>(
     <Block
       className={classNames(
         className,
-        'flex gap-3',
+        'flex',
         wrap && 'flex-wrap',
+        !noGap && 'gap-3',
         directionClasses[direction][reverse ? 'reverse' : 'normal'],
         alignClasses[align],
         justifyClasses[justify]

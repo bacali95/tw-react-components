@@ -4,17 +4,20 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { ListItem, ListSorter, ListSorterProps } from '../ListSorter';
+import { ListSorter, ListSorterItem, ListSorterProps } from '../ListSorter';
 import { Dialog, DialogProps } from './Dialog';
 
-export type ListSorterDialogProps<T extends ListItem> = Omit<DialogProps, 'children' | 'footer'> &
+export type ListSorterDialogProps<T extends ListSorterItem> = Omit<
+  DialogProps,
+  'children' | 'footer'
+> &
   Omit<ListSorterProps<T>, 'onChange'> & {
     cancelLabel?: string;
     submitLabel?: string;
     onSubmit: (items: T[]) => void;
   };
 
-export function ListSorterDialog<T extends ListItem>({
+export function ListSorterDialog<T extends ListSorterItem>({
   className,
   items,
   idResolver,

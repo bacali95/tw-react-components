@@ -25,7 +25,7 @@ export const Menus: FC = () => {
             <DropdownMenu.Trigger asChild>
               <Button>Dropdown Menu</Button>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content className="w-56">
+            <DropdownMenu.Content className="w-56" align="start">
               <DropdownMenu.Label>Menu</DropdownMenu.Label>
               <DropdownMenu.Separator />
               <DropdownMenu.Group>
@@ -50,23 +50,21 @@ export const Menus: FC = () => {
                     <DropdownMenu.Icon icon={UserPlusIcon} />
                     <span>Invite users</span>
                   </DropdownMenu.SubTrigger>
-                  <DropdownMenu.Portal>
-                    <DropdownMenu.SubContent>
-                      <DropdownMenu.Item>
-                        <DropdownMenu.Icon icon={MailIcon} />
-                        <span>Email</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Item>
-                        <DropdownMenu.Icon icon={MessageSquareIcon} />
-                        <span>Message</span>
-                      </DropdownMenu.Item>
-                      <DropdownMenu.Separator />
-                      <DropdownMenu.Item>
-                        <DropdownMenu.Icon icon={PlusCircleIcon} />
-                        <span>More...</span>
-                      </DropdownMenu.Item>
-                    </DropdownMenu.SubContent>
-                  </DropdownMenu.Portal>
+                  <DropdownMenu.SubContent>
+                    <DropdownMenu.Item>
+                      <DropdownMenu.Icon icon={MailIcon} />
+                      <span>Email</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item>
+                      <DropdownMenu.Icon icon={MessageSquareIcon} />
+                      <span>Message</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Separator />
+                    <DropdownMenu.Item>
+                      <DropdownMenu.Icon icon={PlusCircleIcon} />
+                      <span>More...</span>
+                    </DropdownMenu.Item>
+                  </DropdownMenu.SubContent>
                 </DropdownMenu.Sub>
                 <DropdownMenu.Item>
                   <DropdownMenu.Icon icon={PlusIcon} />
@@ -93,6 +91,16 @@ export const Menus: FC = () => {
                 <span>Log out</span>
                 <DropdownMenu.Shortcut>⇧⌘Q</DropdownMenu.Shortcut>
               </DropdownMenu.Item>
+              <DropdownMenu.Separator />
+              <DropdownMenu.Group>
+                <DropdownMenu.CheckboxItem checked>French</DropdownMenu.CheckboxItem>
+                <DropdownMenu.CheckboxItem>English</DropdownMenu.CheckboxItem>
+              </DropdownMenu.Group>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup value="en">
+                <DropdownMenu.RadioItem value="fr">French</DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="en">English</DropdownMenu.RadioItem>
+              </DropdownMenu.RadioGroup>
             </DropdownMenu.Content>
           </DropdownMenu>
         </Card>
