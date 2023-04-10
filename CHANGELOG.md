@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.39](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.38...v0.0.39) (2023-04-10)
+
+
+### Features
+
+* **button:** add inverse color ([58cfcf3](https://github.com/NaN-Projects/tw-react-components/commit/58cfcf37cbcb2fc439c15df7588f8ee9f6d4e819))
+
 ### [0.0.38](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.37...v0.0.38) (2023-04-10)
 
 
