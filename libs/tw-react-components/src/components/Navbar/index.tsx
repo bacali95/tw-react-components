@@ -11,7 +11,7 @@ export const Navbar: FC<PropsWithChildren> = ({ children }) => {
     <div className="p-1">
       <div className="flex w-full select-none items-center justify-between rounded-lg bg-white p-2 text-black shadow dark:bg-slate-800 dark:text-white">
         <Button prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
-        <div className="flex items-center gap-2 py-1">{children}</div>
+        <div className="flex items-center gap-2">{children}</div>
       </div>
     </div>
   );
