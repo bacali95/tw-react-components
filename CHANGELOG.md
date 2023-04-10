@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.41](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.40...v0.0.41) (2023-04-10)
+
+
+### Bug Fixes
+
+* **select:** add separator to select items ([ba9c5fd](https://github.com/NaN-Projects/tw-react-components/commit/ba9c5fd3be9d7dbc7947d571ca5f6b9936560139))
+
 ### [0.0.40](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.39...v0.0.40) (2023-04-10)
 
 
