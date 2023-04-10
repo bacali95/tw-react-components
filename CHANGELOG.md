@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.37](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.36...v0.0.37) (2023-04-10)
+
+
+### Bug Fixes
+
+* **sidebar:** remove collapsible ([ae29e5d](https://github.com/NaN-Projects/tw-react-components/commit/ae29e5d0512419896d037825491756b9739c62d1))
+
 ### [0.0.36](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.35...v0.0.36) (2023-04-10)
 
 
