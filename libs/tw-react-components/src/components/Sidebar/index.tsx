@@ -1,4 +1,5 @@
 import * as Accordion from '@radix-ui/react-accordion';
+import classNames from 'classnames';
 import { ChevronRightIcon } from 'lucide-react';
 import { ComponentProps, FC, ReactNode, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,7 +36,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   return (
     <nav className="p-1 text-black dark:text-white">
       <div
-        className="h-full flex-col transition-all duration-200 ease-in-out data-[open=true]:w-56 data-[open=false]:w-16"
+        className="h-full flex-col transition-all duration-200 ease-in-out data-[open=false]:w-16 data-[open=true]:w-56"
         data-open={sidebarOpen}
       >
         <div className="h-full rounded-lg bg-white p-2 shadow dark:bg-slate-800">
@@ -48,11 +49,15 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
             {items.map((item) => (
               <Accordion.Item
                 key={item.pathname}
-                className="flex flex-col gap-1"
+                className={classNames('flex flex-col rounded-md', {
+                  'bg-slate-100 dark:bg-slate-900':
+                    currentTab === item.pathname ||
+                    item.items?.some((subItem) => currentTab === subItem.pathname),
+                })}
                 value={item.pathname}
               >
                 <Accordion.Header>
-                  <Accordion.Trigger className="relative w-full data-[state=open]:[--rotate-chevron:90deg]">
+                  <Accordion.Trigger className="relative w-full p-1 data-[state=open]:[--rotate-chevron:90deg]">
                     <SidebarItemComp
                       {...item}
                       active={currentTab === item.pathname}
@@ -67,7 +72,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                 </Accordion.Header>
                 {item.items && (
                   <Accordion.Content className="overflow-hidden data-[state=open]:animate-[slideDown_200ms_ease-out] data-[state=closed]:animate-[slideUp_200ms_ease-out]">
-                    <div className="flex flex-col gap-1 rounded-md bg-slate-100 p-1 dark:bg-slate-700">
+                    <div className="flex flex-col gap-1 p-1">
                       {item.items.map((subItem) => (
                         <SidebarItemComp
                           key={subItem.pathname}

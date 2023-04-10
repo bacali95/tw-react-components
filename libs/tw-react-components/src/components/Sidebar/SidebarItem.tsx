@@ -38,9 +38,8 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
           {
             'gap-2': sidebarOpen,
             'gap-3': !sidebarOpen,
-            'pl-3': !sidebarOpen && !isChild,
+            'pl-2.5': !sidebarOpen,
             'dark:text-white': active,
-            'bg-slate-100 dark:bg-slate-900': active && !isChild,
             'bg-slate-200 dark:bg-slate-800': active && isChild,
             'text-slate-500 dark:text-slate-400': !active,
             'hover:bg-slate-100 dark:hover:bg-slate-700': !active && !isChild,
