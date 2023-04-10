@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.34](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.33...v0.0.34) (2023-04-10)
+
+
+### Bug Fixes
+
+* **form-controls|button:** fix height for inputs and buttons ([edddd59](https://github.com/NaN-Projects/tw-react-components/commit/edddd59b80a028c2109c4c0c29b0f638561938de))
+
 ### [0.0.33](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.32...v0.0.33) (2023-04-10)
 
 
