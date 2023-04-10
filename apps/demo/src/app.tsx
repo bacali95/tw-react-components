@@ -11,7 +11,7 @@ import {
 import { FC, useMemo } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-import { Layout, SidebarProps } from 'tw-react-components';
+import { Layout, SidebarProps, ThemeSwitcher } from 'tw-react-components';
 
 import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
@@ -80,7 +80,7 @@ export const App: FC = () => {
       <Route
         path=""
         element={
-          <Layout sidebarProps={sidebarProps}>
+          <Layout sidebarProps={sidebarProps} navbarChildren={<ThemeSwitcher />}>
             <Outlet />
           </Layout>
         }

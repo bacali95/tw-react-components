@@ -205,7 +205,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     };
 
     const RenderOption = (item: SelectItem<T>) => (
-      <Listbox.Option className="w-full" value={item}>
+      <Listbox.Option className="w-full px-1" value={item}>
         {({ active, selected }) => (
           <List.Item
             className={classNames('cursor-pointer', {
@@ -267,19 +267,24 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                 ) : (
                   <div className="p-2 text-center text-slate-500">No items.</div>
                 ))}
-              <div className="flex flex-col gap-1 overflow-auto px-1">
-                {filteredItems.map((item) =>
+              <div className="flex flex-col gap-1 overflow-auto">
+                {filteredItems.map((item, index) =>
                   item.group ? (
                     <Flex key={item.id} className="gap-1" noGap direction="column" fullWidth>
-                      <List.Label
-                        className="sticky top-0 z-[51] w-full rounded-md px-2 py-1 dark:bg-slate-700"
-                        size={props.size}
-                      >
-                        {item.label}
-                      </List.Label>
+                      <div className="sticky top-0 z-[51] w-full px-1">
+                        <List.Label
+                          className="w-full rounded-md bg-slate-200 px-2 py-1 dark:bg-slate-700"
+                          size={props.size}
+                        >
+                          {item.label}
+                        </List.Label>
+                      </div>
                       {item.items.map((subItem) => (
                         <RenderOption key={subItem.id} {...subItem} />
                       ))}
+                      {index < filteredItems.length - 1 && (
+                        <div className="mb-1 h-px w-full bg-slate-200 dark:bg-slate-700" />
+                      )}
                     </Flex>
                   ) : (
                     <RenderOption key={item.id} {...item} />
