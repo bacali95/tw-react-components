@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.33](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.32...v0.0.33) (2023-04-10)
+
+
+### Features
+
+* **dropdown-menu:** replace menu with dropdown menu and use Lucide for icons ([8495164](https://github.com/NaN-Projects/tw-react-components/commit/84951644095495447aba8b179d57da99b3583a7d))
+
 ### [0.0.32](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.31...v0.0.32) (2023-04-07)
 
 ### [0.0.31](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.30...v0.0.31) (2023-04-07)

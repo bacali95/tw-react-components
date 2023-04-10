@@ -1,7 +1,7 @@
 {
   "name": "@nan-projects/tw-react-components",
   "description": "A set of React components build with TailwindCSS to make a nice dashboard.",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "license": "MIT",
   "homepage": "https://nan-projects.github.io/tw-react-components",
   "author": {
