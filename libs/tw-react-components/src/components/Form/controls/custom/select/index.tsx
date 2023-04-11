@@ -125,9 +125,11 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
             ? pureItems.find((item) => selectPredicate(item.value, value))
               ? [pureItems.find((item) => selectPredicate(item.value, value))!]
               : []
-            : value
+            : Array.isArray(value)
+            ? value
                 .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
                 .filter(Boolean)
+            : []
           : [],
       [multiple, pureItems, selectPredicate, value]
     );
