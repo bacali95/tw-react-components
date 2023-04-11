@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.43](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.42...v0.0.43) (2023-04-11)
+
+
+### Bug Fixes
+
+* **button:** fix sizes ([9bd87c6](https://github.com/NaN-Projects/tw-react-components/commit/9bd87c6750adbaf8e11f2632b378239c1471057b))
+* **data-table:** fix action icons ([65c9f5f](https://github.com/NaN-Projects/tw-react-components/commit/65c9f5faa415ff61dcfd55beba5a794333267b35))
+
 ### [0.0.42](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.41...v0.0.42) (2023-04-11)
 
 
