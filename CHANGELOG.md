@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.42](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.41...v0.0.42) (2023-04-11)
+
+
+### Bug Fixes
+
+* **select:** fix value not being an array for multiple ([eed0a57](https://github.com/NaN-Projects/tw-react-components/commit/eed0a57437cf17c615df180f86aae3495b673f9b))
+
 ### [0.0.41](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.40...v0.0.41) (2023-04-10)
 
 
