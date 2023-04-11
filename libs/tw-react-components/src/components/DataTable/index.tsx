@@ -169,8 +169,7 @@ export function DataTable<T>({
                         key={actionIndex}
                         rounded={!action.label}
                         size="small"
-                        className={!action.label ? '!p-2' : undefined}
-                        prefixIcon={() => <action.icon className="h-4 w-4" />}
+                        prefixIcon={({ className }) => <action.icon className={className} />}
                         variant={action.color}
                         onClick={handleActionClicked(action, item, rowIndex)}
                         children={action.label}
