@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.44](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.43...v0.0.44) (2023-04-11)
+
+
+### Bug Fixes
+
+* **card:** revert padding ([49f1ef9](https://github.com/NaN-Projects/tw-react-components/commit/49f1ef960075773b716e32d5e4a1d80e33de962c))
+
 ### [0.0.43](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.42...v0.0.43) (2023-04-11)
 
 
