@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon, XIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, Trash2Icon, XIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { Button, Card, Flex } from 'tw-react-components';
@@ -57,6 +57,30 @@ export const Buttons: FC = () => (
           <Button size="small" variant="yellow" prefixIcon={XIcon} />
           <Button size="medium" variant="yellow" prefixIcon={XIcon} />
           <Button size="large" variant="yellow" prefixIcon={XIcon} />
+        </Flex>
+        <p className="text-lg">Rounded Buttons</p>
+        <Flex className="!gap-2" align="end">
+          <Button size="small" rounded>
+            Small
+          </Button>
+          <Button size="medium" rounded>
+            Medium
+          </Button>
+          <Button size="large" rounded>
+            Big
+          </Button>
+          <Button size="small" rounded variant="green" prefixIcon={ArrowLeftIcon}>
+            Small
+          </Button>
+          <Button size="medium" rounded variant="green" prefixIcon={ArrowLeftIcon}>
+            Medium
+          </Button>
+          <Button size="large" rounded variant="green" prefixIcon={ArrowLeftIcon}>
+            Big
+          </Button>
+          <Button size="small" rounded variant="yellow" prefixIcon={Trash2Icon} />
+          <Button size="medium" rounded variant="yellow" prefixIcon={Trash2Icon} />
+          <Button size="large" rounded variant="yellow" prefixIcon={Trash2Icon} />
         </Flex>
         <p className="text-lg">Buttons with prefix icons</p>
         <Flex className="!gap-2">
