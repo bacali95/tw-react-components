@@ -229,6 +229,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
           by="id"
           value={!multiple ? selectedItems[0] : selectedItems}
           multiple={multiple}
+          disabled={props.disabled}
           onChange={handleOnChange}
         >
           <Listbox.Button className="w-full" ref={trigger}>
