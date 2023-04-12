@@ -130,7 +130,7 @@ export function DataTable<T>({
       </Table.Head>
       <Table.Body className="relative">
         {isLoading && <Spinner className="absolute z-10 rounded-lg bg-slate-700 opacity-50" />}
-        {!rows.length && (
+        {!isLoading && !rows.length && (
           <Table.Row>
             <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
               <Flex className="text-slate-500" justify="center">
