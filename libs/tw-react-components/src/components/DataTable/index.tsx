@@ -51,6 +51,7 @@ export type DataTableProps<T> = {
   };
   actions?: DataTableAction<T>[];
   isLoading?: boolean;
+  noDataMessage?: ReactNode;
   onRowClick?: DataTableAction<T>['onClick'];
 };
 
@@ -65,6 +66,7 @@ export function DataTable<T>({
   pagination,
   actions = [],
   isLoading,
+  noDataMessage,
   onRowClick,
 }: DataTableProps<T>) {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -126,17 +128,14 @@ export function DataTable<T>({
           {actions.length > 0 && <Table.HeadCell align="center">Actions</Table.HeadCell>}
         </Table.Row>
       </Table.Head>
-      <Table.Body>
-        {(isLoading || !rows.length) && (
+      <Table.Body className="relative">
+        {isLoading && <Spinner className="absolute z-10 rounded-lg bg-slate-700 opacity-50" />}
+        {!rows.length && (
           <Table.Row>
             <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
-              {isLoading ? (
-                <Spinner className="rounded-lg bg-slate-700 opacity-50" />
-              ) : (
-                <Flex className="text-slate-500" justify="center">
-                  No data
-                </Flex>
-              )}
+              <Flex className="text-slate-500" justify="center">
+                {noDataMessage ?? 'No data'}
+              </Flex>
             </Table.Cell>
           </Table.Row>
         )}
@@ -181,12 +180,12 @@ export function DataTable<T>({
           </Table.Row>
         ))}
       </Table.Body>
-      {pagination && !isLoading && (
+      {pagination && (
         <Table.Footer className="sticky bottom-0">
           <Table.Row>
             <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
               <Flex justify="end" ref={footerRef}>
-                <Pagination {...pagination} />
+                <Pagination disabled={isLoading} {...pagination} />
                 {pagination.onPageSizeChange && (
                   <SelectInput
                     className="!w-32"
@@ -199,6 +198,7 @@ export function DataTable<T>({
                     onChange={(newPageSize) =>
                       newPageSize && pagination.onPageSizeChange?.(newPageSize)
                     }
+                    disabled={isLoading}
                     parentRef={footerRef}
                   />
                 )}
