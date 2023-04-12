@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.45](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.44...v0.0.45) (2023-04-12)
+
+
+### Bug Fixes
+
+* **data-table:** fix loading and add empty message prop ([1f9b42d](https://github.com/NaN-Projects/tw-react-components/commit/1f9b42d88d365fba881aec1fa9321a9ac93953c1))
+* **pagination:** fix disabled state ([58bf6c8](https://github.com/NaN-Projects/tw-react-components/commit/58bf6c89b23bf84f43e560bb2c528541f1454c7b))
+* **select:** fix disabled state ([7e00c09](https://github.com/NaN-Projects/tw-react-components/commit/7e00c097655475fc8fe34af71fd732c08e3f1aa4))
+
 ### [0.0.44](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.43...v0.0.44) (2023-04-11)
 
 
