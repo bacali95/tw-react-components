@@ -19,6 +19,7 @@ import { usePagination } from '../../hooks';
 import { Flex } from '../Flex';
 
 export type PaginationProps = {
+  disabled?: boolean;
   pageSize?: number;
   totalItems: number;
   currentPage: number;
@@ -26,6 +27,7 @@ export type PaginationProps = {
 };
 
 export const Pagination: FC<PaginationProps> = ({
+  disabled,
   pageSize = 10,
   currentPage,
   totalItems,
@@ -41,12 +43,17 @@ export const Pagination: FC<PaginationProps> = ({
   return (
     <Flex justify="end">
       <Flex className="!gap-0 divide-x rounded-md border border-slate-300 bg-white dark:divide-slate-600 dark:border-slate-600 dark:bg-slate-800">
-        <PaginationItem title="First page" onClick={() => setCurrentPage(0)}>
+        <PaginationItem
+          title="First page"
+          onClick={() => setCurrentPage(0)}
+          disabled={!currentPage || disabled}
+        >
           <ChevronsLeftIcon className="h-5 w-5" />
         </PaginationItem>
         <PaginationItem
           title="Previous page"
           onClick={() => currentPage && setCurrentPage(currentPage - 1)}
+          disabled={!currentPage || disabled}
         >
           <ChevronLeftIcon className="h-5 w-5" />
         </PaginationItem>
@@ -56,6 +63,7 @@ export const Pagination: FC<PaginationProps> = ({
             active={page !== '...' && page - 1 === currentPage}
             title={page !== '...' ? `Page ${page}` : undefined}
             onClick={page !== '...' ? () => setCurrentPage(page - 1) : undefined}
+            disabled={page === '...' || disabled}
           >
             {page}
           </PaginationItem>
@@ -63,6 +71,7 @@ export const Pagination: FC<PaginationProps> = ({
         <PaginationItem
           title="Next page"
           onClick={() => currentPage + 1 < totalPages && setCurrentPage(currentPage + 1)}
+          disabled={currentPage + 1 === totalPages || disabled}
         >
           <ChevronRightIcon className="h-5 w-5" />
         </PaginationItem>
@@ -77,6 +86,7 @@ export const Pagination: FC<PaginationProps> = ({
               )
             )
           }
+          disabled={currentPage + 1 === totalPages || disabled}
         >
           <ChevronsRightIcon className="h-5 w-5" />
         </PaginationItem>
@@ -85,15 +95,14 @@ export const Pagination: FC<PaginationProps> = ({
   );
 };
 
-const PaginationItem: FC<PropsWithoutRef<ComponentProps<'div'> & { active?: boolean }>> = ({
-  children,
-  active,
-  ...props
-}) => (
+const PaginationItem: FC<
+  PropsWithoutRef<ComponentProps<'div'> & { active?: boolean; disabled?: boolean }>
+> = ({ children, active, disabled, ...props }) => (
   <Flex
     className={classNames('h-10 w-10 first:rounded-l-md last:rounded-r-md', {
+      'opacity-50': disabled,
       'bg-slate-100 dark:bg-slate-700': active,
-      'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700': props.onClick,
+      'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700': !disabled && props.onClick,
     })}
     align="center"
     justify="center"
