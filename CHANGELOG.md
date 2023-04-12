@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.46](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.45...v0.0.46) (2023-04-12)
+
+
+### Bug Fixes
+
+* **data-table:** hide empty message when loading ([55d51aa](https://github.com/NaN-Projects/tw-react-components/commit/55d51aa295c804273905590c5a1bb7405bf61a45))
+
 ### [0.0.45](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.44...v0.0.45) (2023-04-12)
 
 
