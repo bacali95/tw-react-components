@@ -96,6 +96,7 @@ export function DataTable<T>({
 
     onRowClick?.(item, rowIndex);
   };
+
   return (
     <Table>
       <Table.Head className="sticky top-0 z-10">
@@ -129,7 +130,18 @@ export function DataTable<T>({
         </Table.Row>
       </Table.Head>
       <Table.Body className="relative">
-        {isLoading && <Spinner className="absolute z-10 rounded-lg bg-slate-700 opacity-50" />}
+        {isLoading && (
+          <Table.Row>
+            <Table.Cell
+              className={classNames('z-10 h-full w-full !p-0', {
+                absolute: rows.length,
+              })}
+              colSpan={columns.length + Math.min(1, actions.length)}
+            >
+              <Spinner className="bg-slate-700 py-4 opacity-50" />
+            </Table.Cell>
+          </Table.Row>
+        )}
         {!isLoading && !rows.length && (
           <Table.Row>
             <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
