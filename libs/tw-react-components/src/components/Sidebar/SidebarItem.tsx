@@ -19,6 +19,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
   active,
   isChild,
   sidebarOpen,
+  items,
   onClick,
 }) => {
   const ItemWrapper = ({ title, children }: { title: string; children: ReactNode }) =>
@@ -40,8 +41,8 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
             'gap-3': !sidebarOpen,
             'pl-2.5': !sidebarOpen,
             'dark:text-white': active,
-            'bg-slate-100 dark:bg-slate-900': active && !isChild,
-            'bg-slate-200 dark:bg-slate-800': active && isChild,
+            'bg-slate-100 dark:bg-slate-900': active && !isChild && !items,
+            'bg-slate-200 dark:bg-slate-800': active && (isChild || items),
             'text-slate-500 dark:text-slate-400': !active,
             'hover:bg-slate-100 dark:hover:bg-slate-700': !active && !isChild,
             'hover:bg-slate-200 dark:hover:bg-slate-800': !active && isChild,

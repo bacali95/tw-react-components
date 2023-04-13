@@ -84,7 +84,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                 </Accordion.Header>
                 {item.items && (
                   <Accordion.Content className="overflow-hidden data-[state=open]:animate-[slideDown_200ms_ease-out] data-[state=closed]:animate-[slideUp_200ms_ease-out]">
-                    <div className="flex flex-col gap-1 p-1">
+                    <div className="flex flex-col gap-1 p-1 pt-0">
                       {item.items.map((subItem) => (
                         <SidebarItemComp
                           key={subItem.pathname}
