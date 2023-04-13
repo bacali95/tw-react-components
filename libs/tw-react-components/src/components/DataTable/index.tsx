@@ -108,7 +108,7 @@ export function DataTable<T>({
               })}
               align="center"
               onClick={
-                !isLoading
+                !isLoading && sorting && !column.noSorting
                   ? handleSorting(column.field, column.comparator ?? generalComparator)
                   : undefined
               }
