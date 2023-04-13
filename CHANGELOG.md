@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.50](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.49...v0.0.50) (2023-04-13)
+
+
+### Bug Fixes
+
+* **sidebar:** fix mobile styling ([8cea2c3](https://github.com/NaN-Projects/tw-react-components/commit/8cea2c3ea537367c8fb9ff9b947e6dce76193a00))
+
 ### [0.0.49](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.48...v0.0.49) (2023-04-13)
 
 
