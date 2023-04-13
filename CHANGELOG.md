@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.47](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.46...v0.0.47) (2023-04-13)
+
+
+### Bug Fixes
+
+* **pagination:** export pagination component ([7cde936](https://github.com/NaN-Projects/tw-react-components/commit/7cde936b35cc7bbd62440ab83e842f8f757b53ed))
+
 ### [0.0.46](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.45...v0.0.46) (2023-04-12)
 
 
