@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.48](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.47...v0.0.48) (2023-04-13)
+
+
+### Bug Fixes
+
+* **data-table:** fix sorting ([4dc7ef4](https://github.com/NaN-Projects/tw-react-components/commit/4dc7ef4bbb253813e1bde2ee77c932e27e1e46da))
+* **form-group:** fix label text color ([51ceb00](https://github.com/NaN-Projects/tw-react-components/commit/51ceb001fc6d05e6d2e0715be5a4b53d36d67114))
+
 ### [0.0.47](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.46...v0.0.47) (2023-04-13)
 
 
