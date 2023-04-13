@@ -1,10 +1,11 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
 import { ChevronRightIcon } from 'lucide-react';
-import { ComponentProps, FC, ReactNode, useState } from 'react';
+import { ComponentProps, FC, ReactNode, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLayoutContext } from '../../contexts';
+import { useOutsideClick } from '../../hooks';
 import { SidebarItemComp } from './SidebarItem';
 
 export type SidebarItem = {
@@ -26,7 +27,13 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   const [currentTab, setCurrentTab] = useState(
     window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
   );
-  const { sidebarOpen } = useLayoutContext();
+  const { sidebarOpen, toggleSidebar } = useLayoutContext();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(
+    ref,
+    () => sidebarOpen && window.document.documentElement.offsetWidth < 768 && toggleSidebar()
+  );
 
   const onLinkClick = (tab: string) => () => {
     setCurrentTab(tab);
@@ -34,12 +41,16 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
   };
 
   return (
-    <nav className="p-1 text-black dark:text-white">
+    <nav
+      className="fixed top-0 left-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full dark:text-white md:relative md:p-1 md:data-[open=false]:translate-x-0"
+      data-open={sidebarOpen}
+      ref={ref}
+    >
       <div
-        className="h-full flex-col transition-all duration-200 ease-in-out data-[open=false]:w-16 data-[open=true]:w-56"
+        className="h-full w-56 flex-col transition-all duration-200 ease-in-out md:data-[open=false]:w-16 md:data-[open=true]:w-56"
         data-open={sidebarOpen}
       >
-        <div className="h-full rounded-lg bg-white p-2 shadow dark:bg-slate-800">
+        <div className="h-full bg-white p-2 shadow dark:bg-slate-800 md:rounded-lg">
           <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
             <Link to="/" target="_blank">
               {sidebarOpen ? fullLogo : smallLogo}
