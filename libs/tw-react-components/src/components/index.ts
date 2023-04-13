@@ -10,6 +10,7 @@ export * from './Layout';
 export * from './List';
 export * from './ListSorter';
 export * from './Navbar';
+export * from './Pagination';
 export * from './Sidebar';
 export * from './Spinner';
 export * from './Table';
