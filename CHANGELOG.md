@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.53](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.52...v0.0.53) (2023-04-14)
+
+
+### Bug Fixes
+
+* **form-controls:** fix clearable functionality ([f5bd653](https://github.com/NaN-Projects/tw-react-components/commit/f5bd65319b9548d4a9b2a85e3344b22412fd0b81))
+* upgrade libraries ([184644f](https://github.com/NaN-Projects/tw-react-components/commit/184644f2d197aab5640f25ba5802465ab3641b54))
+
 ### [0.0.52](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.51...v0.0.52) (2023-04-14)
 
 
