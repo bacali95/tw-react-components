@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.52](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.51...v0.0.52) (2023-04-14)
+
+
+### Bug Fixes
+
+* **dialog:** lower z-index ([f23ffbd](https://github.com/NaN-Projects/tw-react-components/commit/f23ffbdfe11d98cd1d3be5a316a963c0249856f6))
+* **tooltip:** increase z-index ([78b5582](https://github.com/NaN-Projects/tw-react-components/commit/78b558231010d3c2a774a7d9648052ba3ed8a2d5))
+
 ### [0.0.51](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.50...v0.0.51) (2023-04-13)
 
 
