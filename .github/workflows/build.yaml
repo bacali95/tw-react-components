@@ -14,10 +14,10 @@ jobs:
       - name: Check out the code 🗄
         uses: actions/checkout@v3
 
-      - name: Setup NodeJs 16 💿
+      - name: Setup NodeJs 18 💿
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: 18
           registry-url: 'https://npm.pkg.github.com'
           scope: '@nan-projects'
 

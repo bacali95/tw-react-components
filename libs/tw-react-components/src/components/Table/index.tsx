@@ -52,7 +52,7 @@ const TableRow: FC<ComponentProps<'tr'>> = ({ children, ...props }) => (
 );
 
 const TableCell: FC<ComponentProps<'td'>> = ({ children, className, ...props }) => (
-  <td className={classNames('py-3 px-4', className)} {...props}>
+  <td className={classNames('px-4 py-3', className)} {...props}>
     {children}
   </td>
 );

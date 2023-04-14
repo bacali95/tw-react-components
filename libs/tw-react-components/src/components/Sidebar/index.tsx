@@ -42,7 +42,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
 
   return (
     <nav
-      className="fixed top-0 left-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full dark:text-white md:relative md:p-1 md:data-[open=false]:translate-x-0"
+      className="fixed left-0 top-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full dark:text-white md:relative md:p-1 md:data-[open=false]:translate-x-0"
       data-open={sidebarOpen}
       ref={ref}
     >
@@ -78,12 +78,12 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
                     />
 
                     {sidebarOpen && item.items && (
-                      <ChevronRightIcon className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200" />
+                      <ChevronRightIcon className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200" />
                     )}
                   </Accordion.Trigger>
                 </Accordion.Header>
                 {item.items && (
-                  <Accordion.Content className="overflow-hidden data-[state=open]:animate-[slideDown_200ms_ease-out] data-[state=closed]:animate-[slideUp_200ms_ease-out]">
+                  <Accordion.Content className="overflow-hidden data-[state=closed]:animate-[slideUp_200ms_ease-out] data-[state=open]:animate-[slideDown_200ms_ease-out]">
                     <div className="flex flex-col gap-1 p-1 pt-0">
                       {item.items.map((subItem) => (
                         <SidebarItemComp

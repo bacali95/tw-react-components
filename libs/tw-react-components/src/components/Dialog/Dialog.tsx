@@ -75,7 +75,7 @@ export const Dialog: FC<DialogProps> = ({
                   )}
                   <Button className="ml-auto" prefixIcon={XIcon} size="small" onClick={onClose} />
                 </Flex>
-                {children && <div className="-mx-4 mt-4 overflow-y-auto py-1 px-4">{children}</div>}
+                {children && <div className="-mx-4 mt-4 overflow-y-auto px-4 py-1">{children}</div>}
                 {footer && <div className="mt-4">{footer}</div>}
               </HeadlessDialog.Panel>
             </Transition.Child>
