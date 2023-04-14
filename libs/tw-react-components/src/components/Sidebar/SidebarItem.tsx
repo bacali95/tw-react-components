@@ -24,7 +24,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
 }) => {
   const ItemWrapper = ({ title, children }: { title: string; children: ReactNode }) =>
     !sidebarOpen ? (
-      <Tooltip content={title} placement="right">
+      <Tooltip content={title} placement="right" asChild>
         {children}
       </Tooltip>
     ) : (
