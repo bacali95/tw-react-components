@@ -12,6 +12,7 @@ import {
   ListSorterDialog,
   PdfViewerDialog,
   SelectItem,
+  Tooltip,
 } from 'tw-react-components';
 
 import { countriesByContinent } from '../data';
@@ -59,7 +60,7 @@ export const Dialogs: FC = () => {
         <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
         <Dialog open={openDialogs['simple']} title="Simple Dialog" onClose={toggleDialog('simple')}>
           Your payment has been successfully submitted. We’ve sent you an email with all of the
-          details of your order.
+          details of your <Tooltip content="Simple Tooltip">order.</Tooltip>
         </Dialog>
       </Card>
       <Card fullWidth>
