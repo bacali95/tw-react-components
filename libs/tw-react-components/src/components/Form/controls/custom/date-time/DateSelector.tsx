@@ -10,7 +10,7 @@ export type View = 'days' | 'months' | 'years';
 
 type DateSelectorProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   minDate?: Date;
   maxDate?: Date;
   locale?: string;

@@ -6,7 +6,7 @@ import { useDays } from '../../../../../hooks';
 
 type DaysViewProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   month: number;
   year: number;
   minDate?: Date;
@@ -159,7 +159,7 @@ export const DaysView: FC<DaysViewProps> = ({
 };
 
 type DayProps = {
-  value?: string | Date;
+  value?: string | Date | null;
   day: number;
   month: number;
   year: number;

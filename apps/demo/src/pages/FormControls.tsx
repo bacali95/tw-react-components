@@ -51,7 +51,7 @@ export const FormControls: FC = () => {
 
   const setFormField =
     <T extends HTMLElement>(field: keyof typeof formState, attr?: keyof ChangeEvent<T>['target']) =>
-    (event: ChangeEvent<T> | Date | string | string[] | undefined) =>
+    (event: ChangeEvent<T> | Date | null | string | string[] | undefined) =>
       setFormState((state) => ({
         ...state,
         [field]:
@@ -65,6 +65,7 @@ export const FormControls: FC = () => {
       <Card fullWidth>
         <SelectInput
           label="Size"
+          placeholder="Size"
           value={inputSize}
           items={[
             { id: 'small', label: 'Small', value: 'small' },
@@ -89,6 +90,7 @@ export const FormControls: FC = () => {
                   placeholder="Text"
                   size={inputSize}
                   required
+                  clearable
                 />
                 <FormInputs.Textarea
                   name="textarea"
@@ -97,6 +99,7 @@ export const FormControls: FC = () => {
                   rows={5}
                   size={inputSize}
                   required
+                  clearable
                 />
                 <FormInputs.Number
                   name="number"
@@ -104,9 +107,10 @@ export const FormControls: FC = () => {
                   placeholder="0"
                   min={0}
                   validate={(value) => value < 11}
-                  ExtraIcon={DollarSignIcon}
+                  suffixIcon={DollarSignIcon}
                   size={inputSize}
                   required
+                  clearable
                 />
                 <FormInputs.Checkbox name="checkbox" label="Checkbox" size={inputSize} required />
                 <FormInputs.DateTime
@@ -187,7 +191,7 @@ export const FormControls: FC = () => {
                 placeholder="0"
                 min={0}
                 hasErrors={(formState.number ?? 0) > 10}
-                ExtraIcon={DollarSignIcon}
+                suffixIcon={DollarSignIcon}
                 size={inputSize}
                 required
               />

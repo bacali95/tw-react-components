@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import { CalendarIcon, ClockIcon, XIcon } from 'lucide-react';
+import { CalendarIcon, ClockIcon } from 'lucide-react';
 import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getDisplayDate } from '../../../../../helpers';
@@ -12,7 +12,7 @@ import { TimeSelector } from './TimeSelector';
 export type DateTimeInputType = 'date' | 'time' | 'datetime-local';
 
 export type DateTimeInputProps = {
-  value?: string | Date;
+  value?: string | Date | null;
   type?: DateTimeInputType;
   hasErrors?: boolean;
   clearable?: boolean;
@@ -20,7 +20,7 @@ export type DateTimeInputProps = {
   maxDate?: Date;
   displayFormat?: string;
   displayLocale?: string;
-  onChange?: (date: Date | undefined) => void;
+  onChange?: (date?: Date | null) => void;
 } & Pick<
   BasicInputProps<'text'>,
   | 'className'
@@ -87,7 +87,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     };
 
     const clearDate = () => {
-      onChange?.(undefined);
+      onChange?.(null);
     };
 
     const handleOnClick = () => {
@@ -124,10 +124,9 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
           hasErrors={hasErrors}
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
-          ExtraIcon={
-            clearable && displayDate ? XIcon : type?.includes('date') ? CalendarIcon : ClockIcon
-          }
-          onExtraIconClick={clearable && displayDate ? clearDate : undefined}
+          clearable={!!displayDate}
+          onClear={clearDate}
+          suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
         />
 
         {isOpen && (

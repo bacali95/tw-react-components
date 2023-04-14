@@ -5,7 +5,7 @@ import { compareDates } from '../../../../../helpers';
 
 type YearsViewProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   years: number[];
   minDate?: Date;
   maxDate?: Date;
@@ -37,7 +37,7 @@ export const YearsView: FC<YearsViewProps> = ({
 
 type YearProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   year: number;
   minDate?: Date;
   maxDate?: Date;

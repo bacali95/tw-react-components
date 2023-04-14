@@ -1,6 +1,6 @@
 import { Listbox, Portal } from '@headlessui/react';
 import classNames from 'classnames';
-import { CheckIcon, ChevronDownIcon, XIcon } from 'lucide-react';
+import { CheckIcon, ChevronDownIcon } from 'lucide-react';
 import {
   ChangeEvent,
   ForwardedRef,
@@ -45,13 +45,13 @@ export type SelectInputProps<T = any> = {
 } & (
   | {
       multiple?: false;
-      value?: T;
-      onChange?: (item: T | undefined) => void;
+      value?: T | null;
+      onChange?: (item?: T) => void;
     }
   | {
       multiple: true;
       value: T[];
-      onChange?: (item: T[] | undefined) => void;
+      onChange?: (item?: T[]) => void;
     }
 ) &
   Pick<
@@ -227,7 +227,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       <div className={classNames(className, 'w-full')}>
         <Listbox
           by="id"
-          value={!multiple ? selectedItems[0] : selectedItems}
+          value={!multiple ? selectedItems[0] ?? '' : selectedItems}
           multiple={multiple}
           disabled={props.disabled}
           onChange={handleOnChange}
@@ -237,8 +237,9 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               className="[&>div>*]:cursor-pointer"
               {...props}
               value={text ?? ''}
-              ExtraIcon={clearable && selectedItems.length ? XIcon : ChevronDownIcon}
-              onExtraIconClick={clearable && selectedItems.length ? handleOnClear : undefined}
+              clearable={clearable && !!selectedItems.length}
+              onClear={handleOnClear}
+              suffixIcon={ChevronDownIcon}
               ref={ref}
               readOnly
             />
@@ -255,8 +256,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                   placeholder="Search..."
                   size={props.size}
                   onChange={handleOnSearchValueChange}
-                  ExtraIcon={searchValue.length ? XIcon : undefined}
-                  onExtraIconClick={clearSearchValue}
+                  clearable={!!searchValue.length}
+                  onClear={clearSearchValue}
                 />
               )}
               {filteredItems.length === 0 &&

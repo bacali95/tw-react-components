@@ -2,10 +2,23 @@
 @tailwind base;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-  @apply h-1 w-1 bg-gray-100 dark:bg-gray-900;
+html {
+  ::-webkit-scrollbar {
+    @apply h-1 w-1 bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 hover:bg-gray-400;
+  }
+
+  &.dark {
+    ::-webkit-scrollbar {
+      @apply bg-gray-900;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply border-gray-900 bg-gray-700 hover:bg-gray-600;
+    }
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 hover:bg-gray-400 dark:border-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600;
-}

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { AlertTriangleIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import {
+  ChangeEvent,
   ComponentProps,
   FC,
   ForwardedRef,
@@ -25,8 +26,10 @@ export type BasicInputProps<Type extends InputType> = {
   description?: ReactNode;
   size?: Size;
   hasErrors?: boolean;
-  ExtraIcon?: FC<ComponentProps<'svg'>>;
-  onExtraIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  clearable?: boolean;
+  suffixIcon?: FC<ComponentProps<'svg'>>;
+  onClear?: () => void;
+  onSuffixIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
 } & Omit<
   Type extends 'textarea' ? ComponentProps<'textarea'> : ComponentProps<'input'>,
   'id' | 'ref' | 'size'
@@ -53,7 +56,13 @@ const classes = {
 
 const sizeClasses: Record<
   Size,
-  { label: string; input: string; checkbox: { input: string; wrapper: string }; extension: string }
+  {
+    label: string;
+    input: string;
+    checkbox: { input: string; wrapper: string };
+    suffix: { wrapper: string; icon: string };
+    clearButton: { base: string; withSuffixIcon: string };
+  }
 > = {
   small: {
     label: 'text-sm',
@@ -62,7 +71,14 @@ const sizeClasses: Record<
       input: 'w-4 h-4',
       wrapper: 'h-6 gap-1',
     },
-    extension: 'h-4 w-4 mx-1.5',
+    suffix: {
+      wrapper: 'h-7',
+      icon: 'h-4 w-4 mx-1.5',
+    },
+    clearButton: {
+      base: 'h-5 w-5',
+      withSuffixIcon: '!right-8',
+    },
   },
   medium: {
     label: 'text-base',
@@ -71,7 +87,14 @@ const sizeClasses: Record<
       input: 'w-5 h-5',
       wrapper: 'h-8 gap-2',
     },
-    extension: 'w-5 h-5 mx-2',
+    suffix: {
+      wrapper: 'h-10',
+      icon: 'w-5 h-5 mx-2',
+    },
+    clearButton: {
+      base: 'h-6 w-6',
+      withSuffixIcon: '!right-12',
+    },
   },
   large: {
     label: 'text-lg',
@@ -80,7 +103,14 @@ const sizeClasses: Record<
       input: 'w-6 h-6',
       wrapper: 'h-10 gap-2',
     },
-    extension: 'h-6 w-6 mx-3',
+    suffix: {
+      wrapper: 'h-14',
+      icon: 'h-6 w-6',
+    },
+    clearButton: {
+      base: 'h-7 w-7',
+      withSuffixIcon: '!right-16',
+    },
   },
 };
 
@@ -94,8 +124,10 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
     description,
     size = 'medium',
     hasErrors,
-    ExtraIcon,
-    onExtraIconClick,
+    clearable,
+    suffixIcon: SuffixIcon,
+    onClear,
+    onSuffixIconClick,
     ...props
   }: BasicInputProps<Type>,
   ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
@@ -117,11 +149,18 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
     [description, hasErrors, id, label, props.required, size]
   );
 
+  const handleClear = (event: MouseEvent) => {
+    event.stopPropagation();
+
+    onClear?.();
+    !onClear && props.onChange?.({ target: { value: '', checked: false } } as ChangeEvent<any>);
+  };
+
   return (
     <div className={classNames(className, 'w-full dark:text-white')}>
       {type !== 'checkbox' && memoLabel}
       <div
-        className={classNames('flex', {
+        className={classNames('group relative flex', {
           'mt-1': label && type !== 'checkbox',
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
@@ -129,12 +168,18 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         {type === 'textarea' ? (
           <textarea
             id={id}
-            className={classNames(inputClassName, classes.base.input, sizeClasses[size].input, {
-              [classes.base.disabled]: props.disabled,
-              [classes.withoutErrors.input]: !hasErrors,
-              [classes.withErrors.input]: hasErrors,
-              'rounded-r-none border-r-0': hasErrors || ExtraIcon,
-            })}
+            className={classNames(
+              inputClassName,
+              '!h-auto',
+              classes.base.input,
+              sizeClasses[size].input,
+              {
+                [classes.base.disabled]: props.disabled,
+                [classes.withoutErrors.input]: !hasErrors,
+                [classes.withErrors.input]: hasErrors,
+                'rounded-r-none border-r-0': SuffixIcon,
+              }
+            )}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
             ref={ref as ForwardedRef<HTMLTextAreaElement>}
@@ -163,7 +208,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               [classes.base.disabled]: props.disabled,
               [classes.withoutErrors.input]: !hasErrors,
               [classes.withErrors.input]: hasErrors,
-              'rounded-r-none border-r-0': hasErrors || ExtraIcon,
+              'rounded-r-none border-r-0': SuffixIcon,
             })}
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
@@ -172,17 +217,27 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           />
         )}
         {type === 'checkbox' && memoLabel}
-        {type !== 'checkbox' && (hasErrors || ExtraIcon) && (
+        {clearable && (onClear || !!props.value) && (
+          <XIcon
+            className={classNames(
+              'absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-0.5 opacity-0 duration-200 hover:bg-slate-200 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-800',
+              sizeClasses[size].clearButton.base,
+              {
+                [sizeClasses[size].clearButton.withSuffixIcon]: SuffixIcon,
+              }
+            )}
+            onClick={handleClear}
+          />
+        )}
+        {type !== 'checkbox' && SuffixIcon && (
           <BasicInputExtension
             className={extensionClassName}
             hasErrors={hasErrors}
+            size={size}
             disabled={props.disabled}
-            onClick={onExtraIconClick}
+            onClick={onSuffixIconClick}
           >
-            {hasErrors && !ExtraIcon && (
-              <AlertTriangleIcon className={sizeClasses[size].extension} />
-            )}
-            {ExtraIcon && <ExtraIcon className={sizeClasses[size].extension} />}
+            <SuffixIcon className={sizeClasses[size].suffix.icon} />
           </BasicInputExtension>
         )}
       </div>
@@ -193,15 +248,17 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
 export const BasicInputExtension: FC<
   PropsWithChildren<{
     className?: string;
+    size: Size;
     hasErrors?: boolean;
     disabled?: boolean;
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   }>
-> = ({ children, className, hasErrors, disabled, onClick }) => (
+> = ({ children, className, size, hasErrors, disabled, onClick }) => (
   <div
     className={classNames(
       className,
-      'flex items-center rounded-r-md border border-l-0 peer-focus:ring-1 dark:bg-slate-700',
+      'flex aspect-square items-center justify-center rounded-r-md border peer-focus:ring-1 dark:bg-slate-700',
+      sizeClasses[size].suffix.wrapper,
       {
         [classes.base.disabled]: disabled,
         [classes.withoutErrors.extension]: !hasErrors,

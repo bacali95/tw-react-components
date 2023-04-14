@@ -14,8 +14,8 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
     <BasicInput
       type={type}
       {...props}
-      ExtraIcon={type === 'password' ? EyeIcon : EyeOffIcon}
-      onExtraIconClick={toggleType}
+      suffixIcon={type === 'password' ? EyeIcon : EyeOffIcon}
+      onSuffixIconClick={toggleType}
       ref={ref}
     />
   );

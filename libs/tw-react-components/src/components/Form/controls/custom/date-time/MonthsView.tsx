@@ -6,7 +6,7 @@ import { useMonths } from '../../../../../hooks';
 
 type MonthsViewProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   year: number;
   minDate?: Date;
   maxDate?: Date;
@@ -46,7 +46,7 @@ export const MonthsView: FC<MonthsViewProps> = ({
 
 type MonthProps = {
   date: Date;
-  value?: string | Date;
+  value?: string | Date | null;
   shortName: string;
   month: number;
   year: number;

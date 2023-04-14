@@ -6,5 +6,5 @@ import { BasicInput, BasicInputProps } from './BasicInput';
 export type EmailInputProps = Omit<BasicInputProps<'email'>, 'type'>;
 
 export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>((props, ref) => (
-  <BasicInput type="email" {...props} ExtraIcon={AtSignIcon} ref={ref} />
+  <BasicInput type="email" {...props} suffixIcon={AtSignIcon} ref={ref} />
 ));
