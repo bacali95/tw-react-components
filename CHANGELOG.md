@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.54](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.53...v0.0.54) (2023-04-14)
+
+
+### Bug Fixes
+
+* **form-controls:** fix text overflow style ([3fe6eb9](https://github.com/NaN-Projects/tw-react-components/commit/3fe6eb97407ef52a11f3f28f3ddfbacacba53bf5))
+
 ### [0.0.53](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.52...v0.0.53) (2023-04-14)
 
 
