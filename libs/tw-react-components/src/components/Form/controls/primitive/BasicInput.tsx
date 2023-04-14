@@ -37,7 +37,7 @@ export type BasicInputProps<Type extends InputType> = {
 
 const classes = {
   base: {
-    input: 'peer w-full rounded-md shadow-sm',
+    input: 'peer w-full rounded-md shadow-sm overflow-hidden text-ellipsis',
     disabled: 'opacity-60',
   },
   withoutErrors: {
@@ -164,6 +164,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           'mt-1': label && type !== 'checkbox',
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
+        title={type !== 'textarea' && typeof props.value === 'string' ? props.value : undefined}
       >
         {type === 'textarea' ? (
           <textarea
