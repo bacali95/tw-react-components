@@ -20,7 +20,8 @@
           }
         ],
         "format": ["cjs", "esm"],
-        "compiler": "tsc"
+        "compiler": "tsc",
+        "generateExportsField": true
       }
     },
     "lint": {

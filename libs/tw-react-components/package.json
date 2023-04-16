@@ -17,11 +17,7 @@
     "url": "https://github.com/NaN-Projects/tw-react-components/issues"
   },
   "exports": {
-    ".": {
-      "module": "./index.js",
-      "main": "./index.cjs",
-      "types": "./src/index.d.ts"
-    },
+    ".": {},
     "./tailwindcss-plugin.cjs": {
       "default": "./tailwindcss-plugin.cjs"
     }
