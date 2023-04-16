@@ -21,7 +21,8 @@
         ],
         "format": ["cjs", "esm"],
         "compiler": "tsc",
-        "generateExportsField": true
+        "generateExportsField": true,
+        "rollupConfig": "libs/tw-react-components/rollup.config.js"
       }
     },
     "lint": {
