@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.58](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.57...v0.0.58) (2023-07-26)
+
+
+### Features
+
+* update dependencies ([b478668](https://github.com/NaN-Projects/tw-react-components/commit/b478668659682bb5a8c3de1c3c1844fef954bd3b))
+
 ### [0.0.57](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.56...v0.0.57) (2023-04-16)
 
 
