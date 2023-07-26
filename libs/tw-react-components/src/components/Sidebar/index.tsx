@@ -1,7 +1,7 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
-import { ChevronRightIcon } from 'lucide-react';
-import { ComponentProps, FC, ReactNode, useRef, useState } from 'react';
+import { ChevronRightIcon, LucideIcon } from 'lucide-react';
+import { FC, ReactNode, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useLayoutContext } from '../../contexts';
@@ -12,7 +12,7 @@ export type SidebarItem = {
   pathname: string;
   title: string;
   label?: ReactNode;
-  Icon: FC<ComponentProps<'svg'>>;
+  Icon: LucideIcon;
   items?: SidebarItem[];
 };
 

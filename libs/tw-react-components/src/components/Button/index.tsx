@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { ComponentProps, FC, PropsWithoutRef, forwardRef } from 'react';
+import { LucideIcon } from 'lucide-react';
+import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
 
 import { Size } from '../types';
 
@@ -72,8 +73,8 @@ export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   variant?: ButtonVariant;
   rounded?: boolean;
   transparent?: boolean;
-  prefixIcon?: FC<ComponentProps<'svg'>>;
-  suffixIcon?: FC<ComponentProps<'svg'>>;
+  prefixIcon?: LucideIcon;
+  suffixIcon?: LucideIcon;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

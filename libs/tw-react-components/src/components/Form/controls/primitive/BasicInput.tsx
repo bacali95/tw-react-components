@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { XIcon } from 'lucide-react';
+import { LucideIcon, XIcon } from 'lucide-react';
 import {
   ChangeEvent,
   ComponentProps,
@@ -27,7 +27,7 @@ export type BasicInputProps<Type extends InputType> = {
   size?: Size;
   hasErrors?: boolean;
   clearable?: boolean;
-  suffixIcon?: FC<ComponentProps<'svg'>>;
+  suffixIcon?: LucideIcon;
   onClear?: () => void;
   onSuffixIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
 } & Omit<

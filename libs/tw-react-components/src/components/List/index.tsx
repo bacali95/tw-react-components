@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { ComponentProps, ComponentPropsWithoutRef, FC, forwardRef } from 'react';
+import { LucideIcon } from 'lucide-react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { Block } from '../Block';
 import { Flex } from '../Flex';
@@ -67,7 +68,7 @@ const ListLabel = forwardRef<
 const ListIndicator = forwardRef<
   HTMLDivElement,
   ComponentPropsWithoutRef<'div'> & {
-    icon: (props: ComponentProps<'svg'>) => JSX.Element;
+    icon: LucideIcon;
     iconClassName: string;
   }
 >(({ className, icon: Icon, iconClassName, ...props }, ref) => (
@@ -82,9 +83,9 @@ const ListIndicator = forwardRef<
   </Flex>
 ));
 
-const ListIcon = forwardRef<SVGSVGElement, { icon: FC<ComponentProps<'svg'>> }>(
-  ({ icon: Icon }, ref) => <Icon className="mr-2 h-4 w-4" ref={ref} />
-);
+const ListIcon = forwardRef<SVGSVGElement, { icon: LucideIcon }>(({ icon: Icon }, ref) => (
+  <Icon className="mr-2 h-4 w-4" ref={ref} />
+));
 
 const ListSeparator = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
   ({ className, ...props }, ref) => (

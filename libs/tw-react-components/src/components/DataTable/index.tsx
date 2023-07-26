@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { ArrowUpDownIcon, SortAscIcon, SortDescIcon } from 'lucide-react';
-import { ComponentProps, FC, MouseEvent, ReactNode, useRef } from 'react';
+import { ArrowUpDownIcon, LucideIcon, SortAscIcon, SortDescIcon } from 'lucide-react';
+import { ComponentProps, MouseEvent, ReactNode, useRef } from 'react';
 
 import { generalComparator } from '../../helpers';
 import { Button, ButtonProps } from '../Button';
@@ -31,7 +31,7 @@ const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
 export type DataTablePageSize = (typeof possiblePageSize)[number];
 
 export type DataTableAction<T> = {
-  icon: FC<ComponentProps<'svg'>>;
+  icon: LucideIcon;
   label?: string;
   color?: ButtonProps['variant'];
   hide?: boolean | ((item: T) => boolean);
@@ -180,7 +180,7 @@ export function DataTable<T>({
                         key={actionIndex}
                         rounded={!action.label}
                         size="small"
-                        prefixIcon={({ className }) => <action.icon className={className} />}
+                        prefixIcon={action.icon}
                         variant={action.color}
                         onClick={handleActionClicked(action, item, rowIndex)}
                         children={action.label}
