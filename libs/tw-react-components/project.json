@@ -21,6 +21,7 @@
         ],
         "format": ["cjs", "esm"],
         "compiler": "tsc",
+        "external": "all",
         "generateExportsField": true,
         "rollupConfig": "libs/tw-react-components/rollup.config.js",
         "babelUpwardRootMode": true
