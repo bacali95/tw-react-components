@@ -24,7 +24,13 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({
         <Button variant="red" onClick={props.onClose}>
           {noLabel ?? 'No'}
         </Button>
-        <Button variant="green" onClick={onConfirm}>
+        <Button
+          variant="green"
+          onClick={() => {
+            onConfirm();
+            props.onClose();
+          }}
+        >
           {yesLabel ?? 'Yes'}
         </Button>
       </Flex>
