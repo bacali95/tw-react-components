@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.62](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.61...v0.0.62) (2023-10-01)
+
+
+### Features
+
+* allow sidebar items to be hidden ([d76042a](https://github.com/NaN-Projects/tw-react-components/commit/d76042a5c76e49114a5604b71693d9b163eee200))
+
 ### [0.0.61](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.60...v0.0.61) (2023-07-27)
 
 
