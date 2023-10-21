@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.63](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.62...v0.0.63) (2023-10-21)
+
+
+### Bug Fixes
+
+* disable select when readonly ([8e05fc5](https://github.com/NaN-Projects/tw-react-components/commit/8e05fc572128cb8caf959875d69f3e57e5854312))
+
 ### [0.0.62](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.61...v0.0.62) (2023-10-01)
 
 
