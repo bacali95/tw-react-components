@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.64](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.63...v0.0.64) (2023-10-22)
+
+
+### Features
+
+* create Badge component ([3810c61](https://github.com/NaN-Projects/tw-react-components/commit/3810c618ef26b41c22fa030122b3606a1ce56765))
+* Support nested paths for DataTable ([9572f19](https://github.com/NaN-Projects/tw-react-components/commit/9572f19204863ddf2c272cba2cbf7d7831fd7266))
+
 ### [0.0.63](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.62...v0.0.63) (2023-10-21)
 
 
