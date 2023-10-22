@@ -1,5 +1,6 @@
 import {
   AtomIcon,
+  BadgeIcon,
   FolderIcon,
   HomeIcon,
   LayersIcon,
@@ -13,6 +14,7 @@ import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 import { Layout, SidebarProps, ThemeSwitcher } from 'tw-react-components';
 
+import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
 import { FormControls } from './pages/FormControls';
@@ -34,6 +36,11 @@ export const App: FC = () => {
           title: 'Atoms',
           Icon: AtomIcon,
           items: [
+            {
+              pathname: 'badges',
+              title: 'Badges',
+              Icon: BadgeIcon,
+            },
             {
               pathname: 'buttons',
               title: 'Buttons',
@@ -86,6 +93,7 @@ export const App: FC = () => {
         }
       >
         <Route path="" element={<Home />} />
+        <Route path="badges" element={<Badges />} />
         <Route path="buttons" element={<Buttons />} />
         <Route path="menus" element={<Menus />} />
         <Route path="form-controls" element={<FormControls />} />
