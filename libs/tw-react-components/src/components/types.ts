@@ -13,25 +13,31 @@ type NextDepth = {
   '10': '9';
 };
 
-export type Leaves<T, Depth extends keyof NextDepth = '10'> = Depth extends keyof NextDepth
-  ? T extends object
+export type Paths<T, Depth extends keyof NextDepth = '10'> = Depth extends keyof NextDepth
+  ? T extends ReadonlyArray<infer R>
+    ? `[${Paths<R, NextDepth[Depth]>}]`
+    : T extends object
     ? {
-        [K in keyof T]: `${Exclude<K, symbol>}${Leaves<T[K], NextDepth[Depth]> extends never
-          ? ''
-          : `.${Leaves<T[K], NextDepth[Depth]>}`}`;
+        [K in keyof T]: `${Exclude<K, symbol>}${'' | `.${Paths<T[K], NextDepth[Depth]>}`}`;
       }[keyof T]
     : never
   : never;
 
-export type ResolveLeave<T, Leave extends Leaves<T>> = Leave extends ''
+export type ResolvePath<T, Path extends Paths<T>> = Path extends ''
   ? T
-  : Leave extends `${infer Field}.${infer Rest}`
-  ? Field extends keyof T
-    ? Rest extends Leaves<T[Field]>
-      ? ResolveLeave<T[Field], Rest>
+  : Path extends `[${infer NestedPath}]`
+  ? T extends ReadonlyArray<infer R>
+    ? NestedPath extends Paths<R>
+      ? ResolvePath<R, NestedPath>
       : never
     : never
-  : Leave extends `${infer Field}`
+  : Path extends `${infer Field}.${infer Rest}`
+  ? Field extends keyof T
+    ? Rest extends Paths<T[Field]>
+      ? ResolvePath<T[Field], Rest>
+      : never
+    : never
+  : Path extends `${infer Field}`
   ? Field extends keyof T
     ? T[Field]
     : never

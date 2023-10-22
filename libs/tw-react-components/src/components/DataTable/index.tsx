@@ -9,26 +9,26 @@ import { SelectInput } from '../Form';
 import { Pagination, PaginationProps } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
-import { Leaves, ResolveLeave } from '../types';
+import { Paths, ResolvePath } from '../types';
 
-export type DataTableColumn<T, Field extends Leaves<T> = Leaves<T>> = {
+export type DataTableColumn<T, Field extends Paths<T> = Paths<T>> = {
   header: ReactNode;
   field: Field;
   render?: (item: T, rowIndex: number) => ReactNode;
   className?: string;
   align?: ComponentProps<'td'>['align'];
-  comparator?: (a: ResolveLeave<T, Field>, b: ResolveLeave<T, Field>) => number;
+  comparator?: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
   noSorting?: boolean;
 };
 
 export type DataTableColumns<T> = Partial<{
-  [Field in Leaves<T>]: DataTableColumn<T, Field>;
+  [Field in Paths<T>]: DataTableColumn<T, Field>;
 }>;
 
-export type DataTableSorting<T, Field extends Leaves<T> = Leaves<T>> = {
+export type DataTableSorting<T, Field extends Paths<T> = Paths<T>> = {
   field: Field;
   direction: 'asc' | 'desc';
-  comparator: (a: ResolveLeave<T, Field>, b: ResolveLeave<T, Field>) => number;
+  comparator: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
 };
 
 const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
@@ -60,7 +60,7 @@ export type DataTableProps<T> = {
   onRowClick?: DataTableAction<T>['onClick'];
 };
 
-function defaultRender<T>(item: T, field: Leaves<T>): ReactNode {
+function defaultRender<T>(item: T, field: Paths<T>): ReactNode {
   return resolveTargetObject(item, field.split('.')) as ReactNode;
 }
 
@@ -82,15 +82,23 @@ export function DataTable<T>({
   );
 
   const handleSorting =
-    (field: DataTableSorting<T>['field'], comparator: DataTableSorting<T>['comparator']) => () => {
+    (field: DataTableSorting<T>['field'], comparator?: DataTableSorting<T>['comparator']) => () => {
       if (!sorting) return;
 
       if (!sorting.sorting) {
-        sorting.onSortingChange({ field, direction: 'asc', comparator });
+        sorting.onSortingChange({
+          field,
+          direction: 'asc',
+          comparator: comparator ?? generalComparator,
+        });
       } else {
         const newDirection =
           sorting.sorting.field === field && sorting.sorting.direction === 'asc' ? 'desc' : 'asc';
-        sorting.onSortingChange({ field, direction: newDirection, comparator });
+        sorting.onSortingChange({
+          field,
+          direction: newDirection,
+          comparator: comparator ?? generalComparator,
+        });
       }
     };
 
@@ -120,7 +128,7 @@ export function DataTable<T>({
               align="center"
               onClick={
                 !isLoading && sorting && !column.noSorting
-                  ? handleSorting(column.field, column.comparator ?? generalComparator)
+                  ? handleSorting(column.field, column.comparator)
                   : undefined
               }
             >
