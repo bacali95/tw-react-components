@@ -6,7 +6,7 @@ import { FC, useMemo, useState } from 'react';
 import {
   Card,
   DataTable,
-  DataTableColumn,
+  DataTableColumns,
   DataTablePageSize,
   DataTableSorting,
   getDisplayDate,
@@ -39,19 +39,19 @@ export const Tables: FC = () => {
     [page, pageSize, sortedPeople]
   );
 
-  const columns: DataTableColumn<Person>[] = [
-    { header: 'ID', field: 'id' },
-    { header: 'First Name', field: 'firstName' },
-    { header: 'Last Name', field: 'lastLame' },
-    { header: 'Email', field: 'email' },
-    { header: 'Gender', field: 'gender' },
-    {
+  const columns: DataTableColumns<Person> = {
+    id: { header: 'ID', field: 'id' },
+    firstName: { header: 'First Name', field: 'firstName' },
+    lastLame: { header: 'Last Name', field: 'lastLame' },
+    email: { header: 'Email', field: 'email' },
+    gender: { header: 'Gender', field: 'gender' },
+    birthDate: {
       header: 'Birth Date',
       field: 'birthDate',
       render: (item) => getDisplayDate(new Date(item.birthDate), 'LL'),
     },
-    { header: 'IP Address', field: 'ipAddress' },
-  ];
+    ipAddress: { header: 'IP Address', field: 'ipAddress' },
+  };
 
   return (
     <>

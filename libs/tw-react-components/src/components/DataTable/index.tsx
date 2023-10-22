@@ -1,29 +1,34 @@
 import classNames from 'classnames';
 import { ArrowUpDownIcon, LucideIcon, SortAscIcon, SortDescIcon } from 'lucide-react';
-import { ComponentProps, MouseEvent, ReactNode, useRef } from 'react';
+import { ComponentProps, MouseEvent, ReactNode, useMemo, useRef } from 'react';
 
-import { generalComparator } from '../../helpers';
+import { generalComparator, resolveTargetObject } from '../../helpers';
 import { Button, ButtonProps } from '../Button';
 import { Flex } from '../Flex';
 import { SelectInput } from '../Form';
 import { Pagination, PaginationProps } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
+import { Leaves, ResolveLeave } from '../types';
 
-export type DataTableColumn<T, Field extends keyof T = keyof T> = {
+export type DataTableColumn<T, Field extends Leaves<T> = Leaves<T>> = {
   header: ReactNode;
   field: Field;
   render?: (item: T, rowIndex: number) => ReactNode;
   className?: string;
   align?: ComponentProps<'td'>['align'];
-  comparator?: (a: T[Field], b: T[Field]) => number;
+  comparator?: (a: ResolveLeave<T, Field>, b: ResolveLeave<T, Field>) => number;
   noSorting?: boolean;
 };
 
-export type DataTableSorting<T> = {
-  field: keyof T;
+export type DataTableColumns<T> = Partial<{
+  [Field in Leaves<T>]: DataTableColumn<T, Field>;
+}>;
+
+export type DataTableSorting<T, Field extends Leaves<T> = Leaves<T>> = {
+  field: Field;
   direction: 'asc' | 'desc';
-  comparator: (a: T[keyof T], b: T[keyof T]) => number;
+  comparator: (a: ResolveLeave<T, Field>, b: ResolveLeave<T, Field>) => number;
 };
 
 const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
@@ -40,7 +45,7 @@ export type DataTableAction<T> = {
 
 export type DataTableProps<T> = {
   rows: T[];
-  columns: DataTableColumn<T>[];
+  columns: DataTableColumn<T>[] | DataTableColumns<T>;
   sorting?: {
     sorting: DataTableSorting<T> | undefined;
     onSortingChange: (sorting: DataTableSorting<T>) => void;
@@ -55,8 +60,8 @@ export type DataTableProps<T> = {
   onRowClick?: DataTableAction<T>['onClick'];
 };
 
-function defaultRender<T>(item: T, field: keyof T): ReactNode {
-  return item[field] as ReactNode;
+function defaultRender<T>(item: T, field: Leaves<T>): ReactNode {
+  return resolveTargetObject(item, field.split('.')) as ReactNode;
 }
 
 export function DataTable<T>({
@@ -70,6 +75,11 @@ export function DataTable<T>({
   onRowClick,
 }: DataTableProps<T>) {
   const footerRef = useRef<HTMLDivElement>(null);
+
+  const _columns: DataTableColumn<T>[] = useMemo(
+    () => (Array.isArray(columns) ? columns : Object.values(columns)),
+    [columns]
+  );
 
   const handleSorting =
     (field: DataTableSorting<T>['field'], comparator: DataTableSorting<T>['comparator']) => () => {
@@ -101,7 +111,7 @@ export function DataTable<T>({
     <Table>
       <Table.Head className="sticky top-0 z-10">
         <Table.Row>
-          {columns.map((column, columnIndex) => (
+          {_columns.map((column, columnIndex) => (
             <Table.HeadCell
               key={columnIndex}
               className={classNames('group relative', {
@@ -136,7 +146,7 @@ export function DataTable<T>({
               className={classNames('z-10 h-full w-full !p-0', {
                 absolute: rows.length,
               })}
-              colSpan={columns.length + Math.min(1, actions.length)}
+              colSpan={_columns.length + Math.min(1, actions.length)}
             >
               <Spinner className="bg-slate-700 py-4 opacity-50" />
             </Table.Cell>
@@ -144,7 +154,7 @@ export function DataTable<T>({
         )}
         {!isLoading && !rows.length && (
           <Table.Row>
-            <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
+            <Table.Cell colSpan={_columns.length + Math.min(1, actions.length)}>
               <Flex className="text-slate-500" justify="center">
                 {noDataMessage ?? 'No data'}
               </Flex>
@@ -159,7 +169,7 @@ export function DataTable<T>({
             })}
             onClick={handleRowClicked(item, rowIndex)}
           >
-            {columns.map((column, columnIndex) => (
+            {_columns.map((column, columnIndex) => (
               <Table.Cell
                 key={columnIndex}
                 className={column.className}
@@ -195,7 +205,7 @@ export function DataTable<T>({
       {pagination && (
         <Table.Footer className="sticky bottom-0">
           <Table.Row>
-            <Table.Cell colSpan={columns.length + Math.min(1, actions.length)}>
+            <Table.Cell colSpan={_columns.length + Math.min(1, actions.length)}>
               <Flex justify="end" ref={footerRef}>
                 <Pagination disabled={isLoading} {...pagination} />
                 {pagination.onPageSizeChange && (

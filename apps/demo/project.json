@@ -44,6 +44,7 @@
       "executor": "@nx/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
+        "host": "0.0.0.0",
         "buildTarget": "demo:build",
         "hmr": true
       },
