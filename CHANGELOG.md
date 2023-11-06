@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.67](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.66...v0.0.67) (2023-11-06)
+
+
+### Features
+
+* add Switch component ([726cdcf](https://github.com/NaN-Projects/tw-react-components/commit/726cdcfa0f2b315756e8086bbfffd5a4a494a02b))
+
 ### [0.0.66](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.65...v0.0.66) (2023-10-22)
 
 
