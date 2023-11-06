@@ -24,11 +24,12 @@
         "external": "all",
         "generateExportsField": true,
         "rollupConfig": "libs/tw-react-components/rollup.config.js",
-        "babelUpwardRootMode": true
+        "babelUpwardRootMode": true,
+        "updateBuildableProjectDepsInPackageJson": true
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/tw-react-components/**/*.ts"]

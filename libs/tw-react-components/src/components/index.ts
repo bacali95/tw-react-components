@@ -14,6 +14,7 @@ export * from './Navbar';
 export * from './Pagination';
 export * from './Sidebar';
 export * from './Spinner';
+export * from './Switch';
 export * from './Table';
 export * from './ThemeSwitcher';
 export * from './Tooltip';

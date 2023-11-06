@@ -37,14 +37,14 @@ export const App: FC = () => {
           Icon: AtomIcon,
           items: [
             {
-              pathname: 'badges',
-              title: 'Badges',
-              Icon: BadgeIcon,
-            },
-            {
               pathname: 'buttons',
               title: 'Buttons',
               Icon: RectangleHorizontalIcon,
+            },
+            {
+              pathname: 'badges',
+              title: 'Badges',
+              Icon: BadgeIcon,
             },
             {
               pathname: 'form-controls',
