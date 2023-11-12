@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.69](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.68...v0.0.69) (2023-11-12)
+
+
+### Features
+
+* Create new dialog using radix-ui ([305c922](https://github.com/NaN-Projects/tw-react-components/commit/305c922160eed7b1c5ef9925566dedb535f939a3))
+
 ### [0.0.68](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.67...v0.0.68) (2023-11-06)
 
 
