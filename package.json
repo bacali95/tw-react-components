@@ -19,6 +19,7 @@
     "@headlessui/react": "^1.7.15",
     "@popperjs/core": "^2.11.8",
     "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tooltip": "^1.0.7",
@@ -94,5 +95,9 @@
     "commitAll": true,
     "packageFiles": "libs/tw-react-components/package.json",
     "bumpFiles": "libs/tw-react-components/package.json"
+  },
+  "volta": {
+    "node": "18.18.0",
+    "yarn": "1.22.19"
   }
 }
