@@ -13,6 +13,7 @@ export * from './List';
 export * from './ListSorter';
 export * from './Navbar';
 export * from './Pagination';
+export * from './Popover';
 export * from './Sidebar';
 export * from './Spinner';
 export * from './Switch';

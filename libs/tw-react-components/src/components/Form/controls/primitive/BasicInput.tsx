@@ -37,7 +37,7 @@ export type BasicInputProps<Type extends InputType> = {
 
 const classes = {
   base: {
-    input: 'peer w-full rounded-md shadow-sm overflow-hidden text-ellipsis',
+    input: 'peer w-full border focus:ring-1 rounded-md shadow-sm overflow-hidden text-ellipsis',
     disabled: 'opacity-60',
   },
   withoutErrors: {

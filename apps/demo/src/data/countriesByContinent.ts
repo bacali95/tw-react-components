@@ -1,3 +1,5 @@
+import { SelectItem } from 'tw-react-components';
+
 export const countriesByContinent = {
   Asia: [
     'Afghanistan',
@@ -258,3 +260,12 @@ export const countriesByContinent = {
     'Venezuela',
   ],
 };
+
+export const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByContinent).map(
+  ([continent, countries]) => ({
+    id: continent,
+    label: continent,
+    group: true,
+    items: countries.map((country) => ({ id: country, value: country, label: country })),
+  })
+);

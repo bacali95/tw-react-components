@@ -24,7 +24,7 @@ export const Dialog: FC<DialogProps> = ({
 }) => {
   return (
     <Transition appear show={open} as={Fragment}>
-      <HeadlessDialog as="div" className="fixed inset-0 z-[100]" onClose={onClose}>
+      <HeadlessDialog as="div" className="fixed inset-0 z-[50]" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

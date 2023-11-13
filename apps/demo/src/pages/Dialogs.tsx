@@ -11,26 +11,16 @@ import {
   FormInputs,
   ListSorterDialog,
   PdfViewerDialog,
-  SelectItem,
   Tooltip,
 } from 'tw-react-components';
 
-import { countriesByContinent } from '../data';
+import { countriesItems } from '../data';
 
 type Login = {
   email: string;
   password: string;
   country: string;
 };
-
-const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByContinent).map(
-  ([continent, countries]) => ({
-    id: continent,
-    label: continent,
-    group: true,
-    items: countries.map((country) => ({ id: country, value: country, label: country })),
-  })
-);
 
 export const Dialogs: FC = () => {
   const [openDialogs, setOpenDialogs] = useState<Record<string, boolean>>({});
