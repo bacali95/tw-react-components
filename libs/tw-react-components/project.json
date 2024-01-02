@@ -30,17 +30,13 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/tw-react-components/**/*.ts"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/tw-react-components/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/tw-react-components/jest.config.ts"
       }
     }
   },
