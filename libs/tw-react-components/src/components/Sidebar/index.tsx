@@ -43,7 +43,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
 
   return (
     <nav
-      className="fixed left-0 top-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full dark:text-white md:relative md:p-1 md:data-[open=false]:translate-x-0"
+      className="fixed left-0 top-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full md:relative md:p-1 md:data-[open=false]:translate-x-0 dark:text-white"
       data-open={sidebarOpen}
       ref={ref}
     >
@@ -51,7 +51,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
         className="h-full w-56 flex-col transition-all duration-200 ease-in-out md:data-[open=false]:w-16 md:data-[open=true]:w-56"
         data-open={sidebarOpen}
       >
-        <div className="h-full bg-white p-2 shadow dark:bg-slate-800 md:rounded-lg">
+        <div className="h-full bg-white p-2 shadow md:rounded-lg dark:bg-slate-800">
           <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
             <Link to="/" target="_blank">
               {sidebarOpen ? fullLogo : smallLogo}
