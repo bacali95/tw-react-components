@@ -24,6 +24,9 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+@back-n-soft/tw-react-components
+MIT
+
 @dnd-kit/accessibility
 MIT
 MIT License
@@ -175,9 +178,6 @@ SOFTWARE.
 
 
 @headlessui/react
-MIT
-
-@nan-projects/tw-react-components
 MIT
 
 @remix-run/router
