@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.73](https://github.com/back-n-soft/tw-react-components/compare/v0.0.72...v0.0.73) (2024-01-02)
+
+
+### Bug Fixes
+
+* fix library scope ([be3cd5b](https://github.com/back-n-soft/tw-react-components/commit/be3cd5be97adad524b37e07a5e2b423309d94549))
+
 ### [0.0.72](https://github.com/back-n-soft/tw-react-components/compare/v0.0.71...v0.0.72) (2024-01-02)
 
 ### [0.0.71](https://github.com/back-n-soft/tw-react-components/compare/v0.0.70...v0.0.71) (2024-01-02)
