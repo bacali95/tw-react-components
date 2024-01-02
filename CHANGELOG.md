@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.71](https://github.com/back-n-soft/tw-react-components/compare/v0.0.70...v0.0.71) (2024-01-02)
+
+
+### Bug Fixes
+
+* fix form input types ([2169d63](https://github.com/back-n-soft/tw-react-components/commit/2169d631a0dee91b5bdeefe504c5b859d0296539))
+
 ### [0.0.70](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.69...v0.0.70) (2023-11-13)
 
 ### [0.0.69](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.68...v0.0.69) (2023-11-12)
