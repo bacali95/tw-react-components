@@ -1,9 +1,9 @@
 {
-  "name": "@nan-projects/tw-react-components",
+  "name": "@back-n-soft/tw-react-components",
   "description": "A set of React components build with TailwindCSS to make a nice dashboard.",
   "version": "0.0.72",
   "license": "MIT",
-  "homepage": "https://nan-projects.github.io/tw-react-components",
+  "homepage": "https://back-n-soft.github.io/tw-react-components",
   "author": {
     "name": "Nasreddine Bac Ali",
     "email": "nasreddine.bacali95@gmail.com",
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NaN-Projects/tw-react-components.git"
+    "url": "git+https://github.com/back-n-soft/tw-react-components.git"
   },
   "bugs": {
-    "url": "https://github.com/NaN-Projects/tw-react-components/issues"
+    "url": "https://github.com/back-n-soft/tw-react-components/issues"
   },
   "exports": {
     ".": {},
