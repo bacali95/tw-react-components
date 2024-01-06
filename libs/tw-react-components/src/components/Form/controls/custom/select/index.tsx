@@ -159,7 +159,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     );
 
     const handleOnSelect = (id: string | number) => {
-      setOpen(false);
+      !multiple && setOpen(false);
       if (!multiple) {
         if (clearable && selectedItems[0]?.id === id) {
           onChange?.(undefined);
@@ -198,6 +198,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 
     const RenderOption = (option: SelectItem<T>) => (
       <List.Item
+        key={option.id}
         className={classNames(
           'w-full cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/40',
           {

@@ -58,7 +58,18 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     const [isOpen, setIsOpen] = useState<boolean>();
     const [calendarView, setCalendarView] = useState<View>('days');
 
-    const date = useMemo(() => (value ? new Date(value) : new Date()), [value]);
+    const date = useMemo(
+      () =>
+        value
+          ? new Date(value)
+          : new Date(
+              Math.min(
+                Math.max(new Date(minDate ?? Date.now()).getTime(), Date.now()),
+                new Date(maxDate ?? Date.now()).getTime()
+              )
+            ),
+      [maxDate, minDate, value]
+    );
     const displayDate = useMemo(
       () => value && getDisplayDate(date, displayFormat, displayLocale),
       [date, value, displayFormat, displayLocale]
