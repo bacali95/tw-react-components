@@ -8,8 +8,5 @@ module.exports = {
     join(__dirname, '{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
-  plugins: [
-    require('@tailwindcss/forms'),
-    require("tailwindcss-animate"),
-  ],
+  plugins: [require('@tailwindcss/forms'), require('tailwindcss-animate')],
 };
