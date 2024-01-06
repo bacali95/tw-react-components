@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.76](https://github.com/back-n-soft/tw-react-components/compare/v0.0.75...v0.0.76) (2024-01-06)
+
+
+### Bug Fixes
+
+* use tailwindcss-animate package ([b8613ba](https://github.com/back-n-soft/tw-react-components/commit/b8613bac6fde7943a09b72ee932c2b6c6f8240af))
+
 ### [0.0.75](https://github.com/back-n-soft/tw-react-components/compare/v0.0.74...v0.0.75) (2024-01-06)
 
 
