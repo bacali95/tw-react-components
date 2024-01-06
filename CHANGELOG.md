@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.75](https://github.com/back-n-soft/tw-react-components/compare/v0.0.74...v0.0.75) (2024-01-06)
+
+
+### Features
+
+* refactor dialog component ([391e1ad](https://github.com/back-n-soft/tw-react-components/commit/391e1ad11781064ac0c18d6ad1112faf7152772c))
+
 ### [0.0.74](https://github.com/back-n-soft/tw-react-components/compare/v0.0.73...v0.0.74) (2024-01-06)
 
 
