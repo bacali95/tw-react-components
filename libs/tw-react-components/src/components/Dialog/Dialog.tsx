@@ -1,87 +1,112 @@
-import { Dialog as HeadlessDialog, Transition } from '@headlessui/react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 import { XIcon } from 'lucide-react';
-import { FC, Fragment, PropsWithChildren, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
 
 import { Button } from '../Button';
-import { Flex } from '../Flex';
 
-export type DialogProps = PropsWithChildren<{
-  title?: string;
-  open: boolean;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full';
-  onClose: () => void;
-  footer?: ReactNode;
-}>;
+const $Dialog = DialogPrimitive.Root;
 
-export const Dialog: FC<DialogProps> = ({
-  children,
-  title,
-  open = false,
-  size = 'lg',
-  onClose,
-  footer,
-}) => {
-  return (
-    <Transition appear show={open} as={Fragment}>
-      <HeadlessDialog as="div" className="fixed inset-0 z-[50]" onClose={onClose}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true" />
-        </Transition.Child>
+const DialogTrigger = DialogPrimitive.Trigger;
 
-        <div className="fixed inset-0">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <HeadlessDialog.Panel
-                className={classNames(
-                  'flex max-h-[90vh] w-full transform flex-col rounded-lg bg-white p-4 text-left align-middle shadow-xl transition-all dark:bg-slate-800 dark:text-white',
-                  {
-                    'max-w-xs': size === 'xs',
-                    'max-w-sm': size === 'sm',
-                    'max-w-md': size === 'md',
-                    'max-w-lg': size === 'lg',
-                    'max-w-xl': size === 'xl',
-                    'max-w-2xl': size === '2xl',
-                    'max-w-3xl': size === '3xl',
-                    'max-w-4xl': size === '4xl',
-                    'max-w-5xl': size === '5xl',
-                    'max-w-6xl': size === '6xl',
-                    'max-w-7xl': size === '7xl',
-                    'max-w-full': size === 'full',
-                  }
-                )}
-              >
-                <Flex className="text-slate-900 dark:text-slate-100" align="center" fullWidth>
-                  {title && (
-                    <HeadlessDialog.Title className="text-lg font-medium leading-6">
-                      {title}
-                    </HeadlessDialog.Title>
-                  )}
-                  <Button className="ml-auto" prefixIcon={XIcon} size="small" onClick={onClose} />
-                </Flex>
-                {children && <div className="-mx-4 mt-4 overflow-y-auto px-4 py-1">{children}</div>}
-                {footer && <div className="mt-4">{footer}</div>}
-              </HeadlessDialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </HeadlessDialog>
-    </Transition>
-  );
-};
+const DialogPortal = DialogPrimitive.Portal;
+
+const DialogClose = DialogPrimitive.Close;
+
+const DialogOverlay = forwardRef<
+  ElementRef<typeof DialogPrimitive.Overlay>,
+  ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={classNames(
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 backdrop-blur-sm',
+      className
+    )}
+    {...props}
+  />
+));
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
+
+const DialogContent = forwardRef<
+  ElementRef<typeof DialogPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={classNames(
+        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 bg-white p-4 shadow-lg duration-200 sm:rounded-lg dark:bg-slate-800 dark:text-white',
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close
+        className="!absolute right-4 top-4 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:pointer-events-none"
+        asChild
+      >
+        <Button prefixIcon={XIcon} size="small">
+          <span className="sr-only">Close</span>
+        </Button>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
+DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={classNames('flex flex-col space-y-1.5 text-center sm:text-left', className)}
+    {...props}
+  />
+);
+DialogHeader.displayName = 'DialogHeader';
+
+const DialogFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+  <div
+    className={classNames(
+      'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
+      className
+    )}
+    {...props}
+  />
+);
+DialogFooter.displayName = 'DialogFooter';
+
+const DialogTitle = forwardRef<
+  ElementRef<typeof DialogPrimitive.Title>,
+  ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Title
+    ref={ref}
+    className={classNames('text-lg font-semibold leading-none tracking-tight', className)}
+    {...props}
+  />
+));
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
+
+const DialogDescription = forwardRef<
+  ElementRef<typeof DialogPrimitive.Description>,
+  ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={classNames('text-sm text-slate-600 dark:text-slate-400', className)}
+    {...props}
+  />
+));
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+export const Dialog = Object.assign($Dialog, {
+  Portal: DialogPortal,
+  Overlay: DialogOverlay,
+  Close: DialogClose,
+  Trigger: DialogTrigger,
+  Content: DialogContent,
+  Header: DialogHeader,
+  Footer: DialogFooter,
+  Title: DialogTitle,
+  Description: DialogDescription,
+});

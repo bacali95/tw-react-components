@@ -31,7 +31,6 @@ export const Dialogs: FC = () => {
 
   const handleConfirmDialog = (action: string) => () => {
     alert(`${action} clicked!`);
-    toggleDialog('confirm')();
   };
 
   const handleLogin = (login: Login) => {
@@ -47,10 +46,23 @@ export const Dialogs: FC = () => {
   return (
     <>
       <Card fullWidth>
-        <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
-        <Dialog open={openDialogs['simple']} title="Simple Dialog" onClose={toggleDialog('simple')}>
-          Your payment has been successfully submitted. We’ve sent you an email with all of the
-          details of your <Tooltip content="Simple Tooltip">order.</Tooltip>
+        <Dialog
+          open={openDialogs['simple']}
+          onOpenChange={(value) => !value && toggleDialog('simple')()}
+        >
+          <Dialog.Trigger asChild>
+            <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
+          </Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Header>Simple Dialog</Dialog.Header>
+            <p>
+              Your payment has been successfully submitted. We’ve sent you an email with all of the
+              details of your{' '}
+              <Tooltip className="w-fit" content="Simple Tooltip">
+                order.
+              </Tooltip>
+            </p>
+          </Dialog.Content>
         </Dialog>
       </Card>
       <Card fullWidth>
@@ -58,7 +70,7 @@ export const Dialogs: FC = () => {
         <ConfirmDialog
           open={openDialogs['confirm']}
           title="Confirm Dialog"
-          onClose={handleConfirmDialog('No')}
+          onClose={toggleDialog('confirm')}
           onConfirm={handleConfirmDialog('Yes')}
         >
           Are you sure you want to delete this item?
@@ -104,7 +116,7 @@ export const Dialogs: FC = () => {
           title="Sorter Dialog"
           open={openDialogs['sorter']}
           items={['one', 'two', 'three']}
-          renderer={(item) => <>{item}</>}
+          renderer={(item) => item}
           idResolver={(item) => item}
           onSubmit={handleSorter}
           onClose={toggleDialog('sorter')}

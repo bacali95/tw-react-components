@@ -1,58 +1,71 @@
-import { ReactNode, useId } from 'react';
-import { FormProvider, SubmitErrorHandler, SubmitHandler, UseFormReturn } from 'react-hook-form';
+import { PropsWithChildren, ReactNode, useId } from 'react';
+import {
+  FieldValues,
+  FormProvider,
+  SubmitErrorHandler,
+  SubmitHandler,
+  UseFormReturn,
+} from 'react-hook-form';
 
 import { Button } from '../Button';
-import { Flex } from '../Flex';
-import { Dialog, DialogProps } from './Dialog';
+import { Dialog } from './Dialog';
 
-export type FormDialogProps<T extends Record<string, any>> = Omit<DialogProps, 'footer'> & {
+type Props<T extends FieldValues> = {
+  className?: string;
+  open: boolean;
+  title: ReactNode;
   form: UseFormReturn<T>;
-  onSubmit: SubmitHandler<T>;
-  onInvalid?: SubmitErrorHandler<T>;
   submitLabel?: string;
   cancelLabel?: string;
   extraAction?: ReactNode;
+  onSubmit: SubmitHandler<T>;
+  onInvalid?: SubmitErrorHandler<T>;
+  onClose: () => void;
 };
 
-export function FormDialog<T extends Record<string, any>>({
-  children,
+export const FormDialog = <T extends FieldValues>({
+  className,
+  open,
+  title,
   form,
+  children,
+  submitLabel = 'Submit',
+  cancelLabel = 'Cancel',
+  extraAction,
   onSubmit,
   onInvalid,
-  submitLabel,
-  cancelLabel,
-  extraAction,
-  ...props
-}: FormDialogProps<T>) {
+  onClose,
+}: PropsWithChildren<Props<T>>) => {
   const id = useId();
 
   return (
-    <Dialog
-      {...props}
-      footer={
-        <Flex justify="between" fullWidth>
+    <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
+      <Dialog.Content className={className}>
+        <Dialog.Header>
+          <Dialog.Title>{title}</Dialog.Title>
+        </Dialog.Header>
+        <FormProvider {...form}>
+          <form id={`form-${id}`} onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
+            {children}
+          </form>
+        </FormProvider>
+        <Dialog.Footer className="w-full sm:justify-between">
           {extraAction}
-          <Flex justify="end" fullWidth>
-            <Button onClick={props.onClose} variant="red">
-              {cancelLabel ?? 'Cancel'}
-            </Button>
+          <Dialog.Footer>
+            <Dialog.Close asChild>
+              <Button variant="red">{cancelLabel}</Button>
+            </Dialog.Close>
             <Button
+              variant="green"
               type="submit"
               form={`form-${id}`}
-              variant="green"
               disabled={form.formState.isSubmitting}
             >
-              {submitLabel ?? 'Submit'}
+              {submitLabel}
             </Button>
-          </Flex>
-        </Flex>
-      }
-    >
-      <FormProvider {...form}>
-        <form id={`form-${id}`} onSubmit={form.handleSubmit(onSubmit, onInvalid)} {...props}>
-          {children}
-        </form>
-      </FormProvider>
+          </Dialog.Footer>
+        </Dialog.Footer>
+      </Dialog.Content>
     </Dialog>
   );
-}
+};

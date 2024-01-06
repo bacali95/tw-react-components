@@ -1,41 +1,42 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { Button } from '../Button';
-import { Flex } from '../Flex';
-import { Dialog, DialogProps } from './Dialog';
+import { Dialog } from './Dialog';
 
-export type ConfirmDialogProps = Omit<DialogProps, 'footer'> & {
+type Props = {
+  open: boolean;
+  title: ReactNode;
   yesLabel?: string;
   noLabel?: string;
   onConfirm: () => void;
+  onClose: () => void;
 };
 
-export const ConfirmDialog: FC<ConfirmDialogProps> = ({
+export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
+  open,
+  title,
   children,
   yesLabel,
   noLabel,
   onConfirm,
-  ...props
+  onClose,
 }) => (
-  <Dialog
-    {...props}
-    footer={
-      <Flex justify="end" fullWidth>
-        <Button variant="red" onClick={props.onClose}>
-          {noLabel ?? 'No'}
-        </Button>
-        <Button
-          variant="green"
-          onClick={() => {
-            onConfirm();
-            props.onClose();
-          }}
-        >
-          {yesLabel ?? 'Yes'}
-        </Button>
-      </Flex>
-    }
-  >
-    {children}
+  <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
+    <Dialog.Content>
+      <Dialog.Header>
+        <Dialog.Title>{title}</Dialog.Title>
+      </Dialog.Header>
+      {children}
+      <Dialog.Footer>
+        <Dialog.Close asChild>
+          <Button variant="red">{noLabel ?? 'No'}</Button>
+        </Dialog.Close>
+        <Dialog.Close asChild>
+          <Button variant="green" onClick={onConfirm}>
+            {yesLabel ?? 'Yes'}
+          </Button>
+        </Dialog.Close>
+      </Dialog.Footer>
+    </Dialog.Content>
   </Dialog>
 );

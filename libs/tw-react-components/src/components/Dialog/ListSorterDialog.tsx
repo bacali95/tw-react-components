@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { ListSorter, ListSorterItem, ListSorterProps } from '../ListSorter';
-import { Dialog, DialogProps } from './Dialog';
+import { Dialog } from './Dialog';
 
-export type ListSorterDialogProps<T extends ListSorterItem> = Omit<
-  DialogProps,
-  'children' | 'footer'
-> &
-  Omit<ListSorterProps<T>, 'onChange'> & {
+export type ListSorterDialogProps<T extends ListSorterItem> = {
+  className?: string;
+  open: boolean;
+  title: string;
+  onClose: () => void;
+} & Omit<ListSorterProps<T>, 'onChange'> & {
     cancelLabel?: string;
     submitLabel?: string;
     onSubmit: (items: T[]) => void;
@@ -19,13 +20,15 @@ export type ListSorterDialogProps<T extends ListSorterItem> = Omit<
 
 export function ListSorterDialog<T extends ListSorterItem>({
   className,
+  open,
+  title,
   items,
   idResolver,
   renderer,
   cancelLabel,
   submitLabel,
   onSubmit,
-  ...props
+  onClose,
 }: ListSorterDialogProps<T>) {
   const [sortedItems, setSortedItems] = useState<T[]>(structuredClone(items));
 
@@ -55,26 +58,25 @@ export function ListSorterDialog<T extends ListSorterItem>({
   );
 
   return (
-    <Dialog
-      {...props}
-      footer={
-        <Flex justify="end" fullWidth>
-          <Button variant="red" onClick={props.onClose}>
-            {cancelLabel ?? 'Cancel'}
-          </Button>
+    <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
+      <Dialog.Content className={className}>
+        <Dialog.Header>{title}</Dialog.Header>
+        <ListSorter
+          className="divide-y overflow-auto rounded-lg border dark:divide-slate-600 dark:border-slate-600 dark:text-white"
+          items={sortedItems}
+          idResolver={idResolver}
+          renderer={customRenderer}
+          onChange={setSortedItems}
+        />
+        <Dialog.Footer>
+          <Dialog.Close asChild>
+            <Button variant="red">{cancelLabel ?? 'Cancel'}</Button>
+          </Dialog.Close>
           <Button variant="green" onClick={preFinish}>
             {submitLabel ?? 'Submit'}
           </Button>
-        </Flex>
-      }
-    >
-      <ListSorter
-        className="divide-y overflow-auto rounded-lg border dark:divide-slate-600 dark:border-slate-600 dark:text-white"
-        items={sortedItems}
-        idResolver={idResolver}
-        renderer={customRenderer}
-        onChange={setSortedItems}
-      />
+        </Dialog.Footer>
+      </Dialog.Content>
     </Dialog>
   );
 }

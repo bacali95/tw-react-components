@@ -20,7 +20,6 @@ import { Dialogs } from './pages/Dialogs';
 import { FormControls } from './pages/FormControls';
 import { Home } from './pages/Home';
 import { Menus } from './pages/Menus';
-import { NewDialogs } from './pages/NewDialogs';
 import { Tables } from './pages/Tables';
 
 export const App: FC = () => {
@@ -70,11 +69,6 @@ export const App: FC = () => {
               Icon: LayersIcon,
             },
             {
-              pathname: 'new-dialogs',
-              title: 'New Dialogs',
-              Icon: LayersIcon,
-            },
-            {
               pathname: 'tables',
               title: 'Tables',
               Icon: TableIcon,
@@ -104,7 +98,6 @@ export const App: FC = () => {
         <Route path="menus" element={<Menus />} />
         <Route path="form-controls" element={<FormControls />} />
         <Route path="dialogs" element={<Dialogs />} />
-        <Route path="new-dialogs" element={<NewDialogs />} />
         <Route path="tables" element={<Tables />} />
       </Route>
       <Route path="*" element={<Navigate to="" replace />} />

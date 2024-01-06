@@ -4,7 +4,6 @@ export * from './Button';
 export * from './Card';
 export * from './DataTable';
 export * from './Dialog';
-export * from './NewDialog';
 export * from './DropdownMenu';
 export * from './Flex';
 export * from './Form';
