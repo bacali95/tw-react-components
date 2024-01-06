@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.74](https://github.com/back-n-soft/tw-react-components/compare/v0.0.73...v0.0.74) (2024-01-06)
+
+
+### Bug Fixes
+
+* fix select and date behavior ([e422e57](https://github.com/back-n-soft/tw-react-components/commit/e422e5743d944b15d3108fb70024ee389ae09105))
+
 ### [0.0.73](https://github.com/back-n-soft/tw-react-components/compare/v0.0.72...v0.0.73) (2024-01-02)
 
 
