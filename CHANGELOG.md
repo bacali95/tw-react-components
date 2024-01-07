@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.78](https://github.com/back-n-soft/tw-react-components/compare/v0.0.77...v0.0.78) (2024-01-07)
+
+
+### Features
+
+* add tabs component ([1699bdf](https://github.com/back-n-soft/tw-react-components/commit/1699bdf2f82f9cffce7abc4de0cf7bcbec2618c6))
+
 ### [0.0.77](https://github.com/back-n-soft/tw-react-components/compare/v0.0.76...v0.0.77) (2024-01-06)
 
 ### [0.0.76](https://github.com/back-n-soft/tw-react-components/compare/v0.0.75...v0.0.76) (2024-01-06)
