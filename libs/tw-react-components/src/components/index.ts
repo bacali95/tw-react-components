@@ -17,6 +17,7 @@ export * from './Sidebar';
 export * from './Spinner';
 export * from './Switch';
 export * from './Table';
+export * from './Tabs';
 export * from './ThemeSwitcher';
 export * from './Tooltip';
 

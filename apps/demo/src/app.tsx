@@ -1,6 +1,7 @@
 import {
   AtomIcon,
   BadgeIcon,
+  Columns2Icon,
   FolderIcon,
   HomeIcon,
   LayersIcon,
@@ -21,6 +22,7 @@ import { FormControls } from './pages/FormControls';
 import { Home } from './pages/Home';
 import { Menus } from './pages/Menus';
 import { Tables } from './pages/Tables';
+import { Tabs } from './pages/Tabs';
 
 export const App: FC = () => {
   const sidebarProps: SidebarProps = useMemo(
@@ -73,6 +75,11 @@ export const App: FC = () => {
               title: 'Tables',
               Icon: TableIcon,
             },
+            {
+              pathname: 'tabs',
+              title: 'Tabs',
+              Icon: Columns2Icon,
+            },
           ],
         },
       ],
@@ -99,6 +106,7 @@ export const App: FC = () => {
         <Route path="form-controls" element={<FormControls />} />
         <Route path="dialogs" element={<Dialogs />} />
         <Route path="tables" element={<Tables />} />
+        <Route path="tabs" element={<Tabs />} />
       </Route>
       <Route path="*" element={<Navigate to="" replace />} />
     </Routes>
