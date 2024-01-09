@@ -51,7 +51,7 @@ export const FormDialog = <T extends FieldValues>({
         </FormProvider>
         <Dialog.Footer className="w-full sm:justify-between">
           {extraAction}
-          <Dialog.Footer>
+          <Dialog.Footer className="ml-auto">
             <Dialog.Close asChild>
               <Button variant="red">{cancelLabel}</Button>
             </Dialog.Close>
