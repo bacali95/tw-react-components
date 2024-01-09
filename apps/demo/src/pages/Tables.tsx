@@ -9,6 +9,7 @@ import {
   DataTableColumns,
   DataTablePageSize,
   DataTableSorting,
+  Flex,
   getDisplayDate,
 } from 'tw-react-components';
 
@@ -67,6 +68,15 @@ export const Tables: FC = () => {
           totalItems: people.length,
           onPageSizeChange: setPageSize,
         }}
+        rowExtraContent={{
+          idGetter: (item) => item.id,
+          component: ({ item }) => (
+            <Flex className="px-4 py-2 dark:bg-slate-900">
+              Extra information for '{item.firstName} {item.lastLame}'
+            </Flex>
+          ),
+        }}
+        rowClassName={(item) => (item.gender === 'Female' ? 'bg-pink-500/20' : 'bg-blue-500/20')}
         actions={[
           {
             color: 'yellow',

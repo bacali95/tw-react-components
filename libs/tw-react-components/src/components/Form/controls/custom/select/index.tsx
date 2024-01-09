@@ -216,7 +216,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     const containerRef = useRef<HTMLDivElement>(null);
 
     return (
-      <Block ref={containerRef} fullWidth>
+      <Block className="contents" ref={containerRef}>
         <Popover open={open} onOpenChange={setOpen}>
           <Popover.Trigger className={classNames(className, 'w-full')}>
             <TextInput

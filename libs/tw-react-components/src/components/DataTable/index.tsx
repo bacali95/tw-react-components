@@ -1,6 +1,15 @@
 import classNames from 'classnames';
-import { ArrowUpDownIcon, LucideIcon, SortAscIcon, SortDescIcon } from 'lucide-react';
-import { ComponentProps, MouseEvent, ReactNode, useMemo, useRef } from 'react';
+import {
+  ArrowUpDownIcon,
+  ChevronsDownUpIcon,
+  ChevronsUpDownIcon,
+  LucideIcon,
+  MinusIcon,
+  PlusIcon,
+  SortAscIcon,
+  SortDescIcon,
+} from 'lucide-react';
+import { ComponentProps, FC, MouseEvent, ReactNode, useMemo, useRef, useState } from 'react';
 
 import { generalComparator, resolveTargetObject } from '../../helpers';
 import { Button, ButtonProps } from '../Button';
@@ -31,7 +40,12 @@ export type DataTableSorting<T, Field extends Paths<T> = Paths<T>> = {
   comparator: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
 };
 
-const possiblePageSize = [5, 10, 50, 100, 500, 1000] as const;
+export type DataTableRowExtraContent<T> = {
+  idGetter: (item: T) => number;
+  component: FC<{ item: T; rowIndex: number }>;
+};
+
+const possiblePageSize = [5, 10, 25, 50, 100, 500, 1000] as const;
 
 export type DataTablePageSize = (typeof possiblePageSize)[number];
 
@@ -56,8 +70,10 @@ export type DataTableProps<T> = {
   };
   actions?: DataTableAction<T>[];
   isLoading?: boolean;
+  rowExtraContent?: DataTableRowExtraContent<T>;
   noDataMessage?: ReactNode;
   onRowClick?: DataTableAction<T>['onClick'];
+  rowClassName?: (item: T, rowIndex: number) => string | undefined;
 };
 
 function defaultRender<T>(item: T, field: Paths<T>): ReactNode {
@@ -71,14 +87,28 @@ export function DataTable<T>({
   pagination,
   actions = [],
   isLoading,
+  rowExtraContent,
   noDataMessage,
   onRowClick,
+  rowClassName,
 }: DataTableProps<T>) {
   const footerRef = useRef<HTMLDivElement>(null);
+
+  const [expandedRows, setExpandedRows] = useState<Record<number, boolean>>({});
+  const allRowsExpanded = useMemo(
+    () =>
+      rowExtraContent ? rows.every((row) => expandedRows[rowExtraContent.idGetter(row)]) : false,
+    [expandedRows, rowExtraContent, rows]
+  );
 
   const _columns: DataTableColumn<T>[] = useMemo(
     () => (Array.isArray(columns) ? columns : Object.values(columns)),
     [columns]
+  );
+
+  const columnsLength = useMemo(
+    () => (rowExtraContent ? 1 : 0) + _columns.length + Math.min(1, actions.length),
+    [_columns.length, actions.length, rowExtraContent]
   );
 
   const handleSorting =
@@ -112,13 +142,49 @@ export function DataTable<T>({
   const handleRowClicked = (item: T, rowIndex: number) => (event: MouseEvent) => {
     event.stopPropagation();
 
-    onRowClick?.(item, rowIndex);
+    if (onRowClick) {
+      return onRowClick?.(item, rowIndex);
+    }
+
+    if (rowExtraContent) {
+      handleExpandRow(rowExtraContent.idGetter(item))(event);
+    }
+  };
+
+  const handleExpandAll = (event: MouseEvent) => {
+    event.stopPropagation();
+
+    if (!rowExtraContent) return;
+
+    setExpandedRows((prev) => ({
+      ...prev,
+      ...rows.reduce(
+        (acc, row) => ({ ...acc, [rowExtraContent.idGetter(row)]: !allRowsExpanded }),
+        {}
+      ),
+    }));
+  };
+
+  const handleExpandRow = (id: number) => (event: MouseEvent) => {
+    event.stopPropagation();
+
+    setExpandedRows((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
     <Table>
       <Table.Head className="sticky top-0 z-10">
         <Table.Row>
+          {rowExtraContent && (
+            <Table.HeadCell align="center">
+              <ExpandButton
+                folded={!allRowsExpanded}
+                foldComponent={ChevronsDownUpIcon}
+                unfoldComponent={ChevronsUpDownIcon}
+                onClick={handleExpandAll}
+              />
+            </Table.HeadCell>
+          )}
           {_columns.map((column, columnIndex) => (
             <Table.HeadCell
               key={columnIndex}
@@ -154,7 +220,7 @@ export function DataTable<T>({
               className={classNames('z-10 h-full w-full !p-0', {
                 absolute: rows.length,
               })}
-              colSpan={_columns.length + Math.min(1, actions.length)}
+              colSpan={columnsLength}
             >
               <Spinner className="bg-slate-700 py-4 opacity-50" />
             </Table.Cell>
@@ -162,21 +228,35 @@ export function DataTable<T>({
         )}
         {!isLoading && !rows.length && (
           <Table.Row>
-            <Table.Cell colSpan={_columns.length + Math.min(1, actions.length)}>
+            <Table.Cell colSpan={columnsLength}>
               <Flex className="text-slate-500" justify="center">
                 {noDataMessage ?? 'No data'}
               </Flex>
             </Table.Cell>
           </Table.Row>
         )}
-        {rows.map((item, rowIndex) => (
+        {rows.map((item, rowIndex) => [
           <Table.Row
             key={rowIndex}
-            className={classNames({
-              'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900': onRowClick,
-            })}
+            className={classNames(
+              {
+                'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900':
+                  onRowClick || rowExtraContent,
+              },
+              rowClassName?.(item, rowIndex)
+            )}
             onClick={handleRowClicked(item, rowIndex)}
           >
+            {rowExtraContent && (
+              <Table.Cell className="w-min" align="center">
+                <ExpandButton
+                  folded={!expandedRows[rowExtraContent.idGetter(item)]}
+                  foldComponent={MinusIcon}
+                  unfoldComponent={PlusIcon}
+                  onClick={handleExpandRow(rowExtraContent.idGetter(item))}
+                />
+              </Table.Cell>
+            )}
             {_columns.map((column, columnIndex) => (
               <Table.Cell
                 key={columnIndex}
@@ -207,13 +287,20 @@ export function DataTable<T>({
                 </Flex>
               </Table.Cell>
             )}
-          </Table.Row>
-        ))}
+          </Table.Row>,
+          rowExtraContent && expandedRows[rowExtraContent.idGetter(item)] && (
+            <Table.Row key={`${rowIndex}-expanded`}>
+              <Table.Cell className="!p-0" colSpan={columnsLength}>
+                <rowExtraContent.component item={item} rowIndex={rowIndex} />
+              </Table.Cell>
+            </Table.Row>
+          ),
+        ])}
       </Table.Body>
       {pagination && (
         <Table.Footer className="sticky bottom-0">
           <Table.Row>
-            <Table.Cell colSpan={_columns.length + Math.min(1, actions.length)}>
+            <Table.Cell colSpan={columnsLength}>
               <Flex justify="end" ref={footerRef}>
                 <Pagination disabled={isLoading} {...pagination} />
                 {pagination.onPageSizeChange && (
@@ -240,3 +327,26 @@ export function DataTable<T>({
     </Table>
   );
 }
+
+type ExpandButtonProps = {
+  folded: boolean;
+  foldComponent: LucideIcon;
+  unfoldComponent: LucideIcon;
+  onClick: (event: MouseEvent) => void;
+};
+
+const ExpandButton: FC<ExpandButtonProps> = ({
+  folded,
+  foldComponent,
+  unfoldComponent,
+  onClick,
+}) => {
+  const Icon = folded ? unfoldComponent : foldComponent;
+
+  return (
+    <Icon
+      className="h-6 w-6 cursor-pointer rounded p-1 hover:bg-gray-300 hover:dark:bg-gray-600"
+      onClick={onClick}
+    />
+  );
+};
