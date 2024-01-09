@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.79](https://github.com/back-n-soft/tw-react-components/compare/v0.0.78...v0.0.79) (2024-01-09)
+
+
+### Bug Fixes
+
+* fix form dialog buttons position ([8e9de1a](https://github.com/back-n-soft/tw-react-components/commit/8e9de1ac72a326f37d44ea1391fb9905b3010673))
+
 ### [0.0.78](https://github.com/back-n-soft/tw-react-components/compare/v0.0.77...v0.0.78) (2024-01-07)
 
 
