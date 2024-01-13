@@ -42,6 +42,7 @@ export type DataTableSorting<T, Field extends Paths<T> = Paths<T>> = {
 
 export type DataTableRowExtraContent<T> = {
   idGetter: (item: T) => number;
+  singleExpansion?: boolean;
   component: FC<{ item: T; rowIndex: number }>;
 };
 
@@ -168,7 +169,9 @@ export function DataTable<T>({
   const handleExpandRow = (id: number) => (event: MouseEvent) => {
     event.stopPropagation();
 
-    setExpandedRows((prev) => ({ ...prev, [id]: !prev[id] }));
+    setExpandedRows((prev) =>
+      rowExtraContent?.singleExpansion ? { [id]: !prev[id] } : { ...prev, [id]: !prev[id] }
+    );
   };
 
   return (
@@ -177,12 +180,14 @@ export function DataTable<T>({
         <Table.Row>
           {rowExtraContent && (
             <Table.HeadCell align="center">
-              <ExpandButton
-                folded={!allRowsExpanded}
-                foldComponent={ChevronsDownUpIcon}
-                unfoldComponent={ChevronsUpDownIcon}
-                onClick={handleExpandAll}
-              />
+              {!rowExtraContent.singleExpansion && (
+                <ExpandButton
+                  folded={!allRowsExpanded}
+                  foldComponent={ChevronsDownUpIcon}
+                  unfoldComponent={ChevronsUpDownIcon}
+                  onClick={handleExpandAll}
+                />
+              )}
             </Table.HeadCell>
           )}
           {_columns.map((column, columnIndex) => (
