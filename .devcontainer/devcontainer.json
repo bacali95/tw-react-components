@@ -1,0 +1,23 @@
+{
+    "image": "ghcr.io/bacali95/personal-devcontainer:main",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "18"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.fontFamily": "MesloLGS NF",
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            },
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "nrwl.angular-console",
+                "dbaeumer.vscode-eslint",
+                "GitHub.github-vscode-theme",
+                "bradlc.vscode-tailwindcss"
+            ]
+        }
+    }
+}
