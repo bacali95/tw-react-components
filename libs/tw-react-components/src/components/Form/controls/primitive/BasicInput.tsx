@@ -171,9 +171,8 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             id={id}
             className={classNames(
               inputClassName,
-              '!h-auto',
               classes.base.input,
-              sizeClasses[size].input,
+              sizeClasses[size].input.replace(/ h-\d/g, ''),
               {
                 [classes.base.disabled]: props.disabled,
                 [classes.withoutErrors.input]: !hasErrors,

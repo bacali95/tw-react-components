@@ -96,7 +96,6 @@ export const FormControls: FC = () => {
                   name="textarea"
                   label="Full Text"
                   placeholder="Full Text"
-                  rows={5}
                   size={inputSize}
                   required
                   clearable
@@ -179,7 +178,6 @@ export const FormControls: FC = () => {
                 value={formState.textarea ?? ''}
                 onChange={setFormField('textarea', 'value')}
                 placeholder="Full Text"
-                rows={5}
                 size={inputSize}
                 required
               />

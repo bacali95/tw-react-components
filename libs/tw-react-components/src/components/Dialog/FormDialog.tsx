@@ -38,6 +38,14 @@ export const FormDialog = <T extends FieldValues>({
 }: PropsWithChildren<Props<T>>) => {
   const id = useId();
 
+  const handleSubmit: SubmitHandler<T> = async (data, event) => {
+    try {
+      await onSubmit(data, event);
+    } catch {
+      // do nothering
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
       <Dialog.Content className={className}>
@@ -45,7 +53,7 @@ export const FormDialog = <T extends FieldValues>({
           <Dialog.Title>{title}</Dialog.Title>
         </Dialog.Header>
         <FormProvider {...form}>
-          <form id={`form-${id}`} onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
+          <form id={`form-${id}`} onSubmit={form.handleSubmit(handleSubmit, onInvalid)}>
             {children}
           </form>
         </FormProvider>
