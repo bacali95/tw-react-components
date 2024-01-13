@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.81](https://github.com/back-n-soft/tw-react-components/compare/v0.0.80...v0.0.81) (2024-01-13)
+
+
+### Bug Fixes
+
+* fix input and form dialog ([6ffc386](https://github.com/back-n-soft/tw-react-components/commit/6ffc38601142a954435af90ec3d608bdc6aa8f03))
+
 ### [0.0.80](https://github.com/back-n-soft/tw-react-components/compare/v0.0.79...v0.0.80) (2024-01-09)
 
 

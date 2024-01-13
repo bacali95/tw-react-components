@@ -1,7 +1,7 @@
 {
   "name": "@back-n-soft/tw-react-components",
   "description": "A set of React components build with TailwindCSS to make a nice dashboard.",
-  "version": "0.0.80",
+  "version": "0.0.81",
   "license": "MIT",
   "homepage": "https://back-n-soft.github.io/tw-react-components",
   "author": {
