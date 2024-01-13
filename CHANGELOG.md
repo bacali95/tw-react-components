@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.85](https://github.com/back-n-soft/tw-react-components/compare/v0.0.84...v0.0.85) (2024-01-13)
+
+
+### Bug Fixes
+
+* forward ref fo card component ([1a5258a](https://github.com/back-n-soft/tw-react-components/commit/1a5258a8051850e084432d5ac384a1e41ccb7601))
+
 ### [0.0.84](https://github.com/back-n-soft/tw-react-components/compare/v0.0.83...v0.0.84) (2024-01-13)
 
 
