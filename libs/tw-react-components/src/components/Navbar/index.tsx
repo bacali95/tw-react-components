@@ -11,7 +11,7 @@ export const Navbar: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className="p-1">
-      <Card className="select-none !p-2" fullWidth>
+      <Card className="select-none !py-2" fullWidth>
         <Flex align="center" justify="between">
           <Button prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
           <div className="flex items-center gap-2">{children}</div>
