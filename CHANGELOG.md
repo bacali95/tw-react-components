@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.83](https://github.com/back-n-soft/tw-react-components/compare/v0.0.82...v0.0.83) (2024-01-13)
+
+
+### Features
+
+* forward refs to form inputs ([6c16c5a](https://github.com/back-n-soft/tw-react-components/commit/6c16c5a2ff26e6afd4e1215762f57fddb5cf6382))
+
 ### [0.0.82](https://github.com/back-n-soft/tw-react-components/compare/v0.0.81...v0.0.82) (2024-01-13)
 
 ### [0.0.81](https://github.com/back-n-soft/tw-react-components/compare/v0.0.80...v0.0.81) (2024-01-13)
