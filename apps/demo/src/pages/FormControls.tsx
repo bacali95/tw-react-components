@@ -1,7 +1,6 @@
 import { DollarSignIcon } from 'lucide-react';
 import { ChangeEvent, FC, useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { SubmitErrorHandler } from 'react-hook-form/dist/types/form';
+import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 
 import {
   Button,
