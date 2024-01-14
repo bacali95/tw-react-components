@@ -77,6 +77,7 @@ function withForm<
               {...(props as Props)}
               {...field}
               value={field.value ?? ''}
+              disabled={field.disabled ?? (props as ComponentProps<'input'>).disabled}
               hasErrors={fieldState.error}
               ref={mergeRefs([ref, field.ref])}
             />
