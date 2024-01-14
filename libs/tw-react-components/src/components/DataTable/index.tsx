@@ -21,13 +21,14 @@ import { Table } from '../Table';
 import { Paths, ResolvePath } from '../types';
 
 export type DataTableColumn<T, Field extends Paths<T> = Paths<T>> = {
+  className?: string;
   header: ReactNode;
   field: Field;
-  render?: (item: T, rowIndex: number) => ReactNode;
-  className?: string;
-  align?: ComponentProps<'td'>['align'];
-  comparator?: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
   noSorting?: boolean;
+  hide?: boolean;
+  align?: ComponentProps<'td'>['align'];
+  render?: (item: T, rowIndex: number) => ReactNode;
+  comparator?: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
 };
 
 export type DataTableColumns<T> = Partial<{
@@ -103,7 +104,10 @@ export function DataTable<T>({
   );
 
   const _columns: DataTableColumn<T>[] = useMemo(
-    () => (Array.isArray(columns) ? columns : Object.values(columns)),
+    () =>
+      (Array.isArray(columns) ? columns : Object.values(columns)).filter(
+        (column) => !(column as DataTableColumn<T>).hide
+      ) as DataTableColumn<T>[],
     [columns]
   );
 
