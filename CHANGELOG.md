@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.88](https://github.com/back-n-soft/tw-react-components/compare/v0.0.87...v0.0.88) (2024-01-14)
+
+
+### Features
+
+* add hide prop to data table column ([fdfea04](https://github.com/back-n-soft/tw-react-components/commit/fdfea043fb484ad6c1f66e3784caa30d6384371b))
+
 ### [0.0.87](https://github.com/back-n-soft/tw-react-components/compare/v0.0.86...v0.0.87) (2024-01-14)
 
 
