@@ -54,6 +54,7 @@ export type DataTablePageSize = (typeof possiblePageSize)[number];
 export type DataTableAction<T> = {
   icon: LucideIcon;
   label?: string;
+  hasNotification?: (item: T, rowIndex: number) => boolean;
   color?: ButtonProps['variant'];
   hide?: boolean | ((item: T) => boolean);
   onClick: (item: T, rowIndex: number) => void;
@@ -283,15 +284,23 @@ export function DataTable<T>({
                       typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
                     )
                     .map((action, actionIndex) => (
-                      <Button
-                        key={actionIndex}
-                        rounded={!action.label}
-                        size="small"
-                        prefixIcon={action.icon}
-                        variant={action.color}
-                        onClick={handleActionClicked(action, item, rowIndex)}
-                        children={action.label}
-                      />
+                      <div key={actionIndex} className="relative">
+                        <Button
+                          size="small"
+                          prefixIcon={action.icon}
+                          variant={action.color}
+                          onClick={handleActionClicked(action, item, rowIndex)}
+                          children={action.label}
+                        />
+                        {action.hasNotification?.(item, rowIndex) && (
+                          <div className="absolute -right-1 -top-1">
+                            <div className="relative flex items-center">
+                              <div className="h-2 w-2 rounded-full bg-red-500" />
+                              <div className="absolute -left-0.5 -top-0.5 h-3 w-3 animate-ping rounded-full bg-red-500" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     ))}
                 </Flex>
               </Table.Cell>

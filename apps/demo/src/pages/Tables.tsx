@@ -81,6 +81,7 @@ export const Tables: FC = () => {
           {
             color: 'yellow',
             icon: PencilIcon,
+            hasNotification: (user) => user.gender === 'Male',
             onClick: (item) => alert(`Edit clicked for ${item.firstName}!`),
           },
           {
