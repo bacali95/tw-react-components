@@ -15,14 +15,24 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   navbarChildren,
 }) => {
   return (
-    <div className="flex h-screen gap-1 bg-slate-100 p-2 dark:bg-slate-900">
+    <Flex className="h-screen bg-slate-100 p-3 dark:bg-slate-900">
       <Sidebar {...sidebarProps} />
-      <div className="flex w-full flex-col gap-1 overflow-hidden">
+      <Flex
+        className="overflow-clip [overflow-clip-margin:1rem]"
+        direction="column"
+        fullHeight
+        fullWidth
+      >
         <Navbar>{navbarChildren}</Navbar>
-        <Flex className="overflow-hidden p-1" direction="column" fullWidth fullHeight>
+        <Flex
+          className="overflow-clip [overflow-clip-margin:1rem]"
+          direction="column"
+          fullWidth
+          fullHeight
+        >
           {children}
         </Flex>
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   );
 };

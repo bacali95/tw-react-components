@@ -43,7 +43,7 @@ export const Sidebar: FC<SidebarProps> = ({ items, smallLogo, fullLogo }) => {
 
   return (
     <nav
-      className="fixed left-0 top-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full md:relative md:p-1 md:data-[open=false]:translate-x-0 dark:text-white"
+      className="fixed left-0 top-0 z-50 h-full text-black duration-200 data-[open=false]:-translate-x-full md:relative md:data-[open=false]:translate-x-0 dark:text-white"
       data-open={sidebarOpen}
       ref={ref}
     >
