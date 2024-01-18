@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.94](https://github.com/back-n-soft/tw-react-components/compare/v0.0.93...v0.0.94) (2024-01-18)
+
+
+### Bug Fixes
+
+* fix sidebar styling ([624a9b0](https://github.com/back-n-soft/tw-react-components/commit/624a9b0486b4698c9ba3809f2ed12821c484f0c6))
+
 ### [0.0.93](https://github.com/back-n-soft/tw-react-components/compare/v0.0.92...v0.0.93) (2024-01-18)
 
 
