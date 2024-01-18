@@ -34,49 +34,49 @@ export const App: FC = () => {
           Icon: HomeIcon,
         },
         {
-          pathname: 'buttons',
+          pathname: 'atoms',
           title: 'Atoms',
           Icon: AtomIcon,
           items: [
             {
-              pathname: 'buttons',
+              pathname: 'atoms/buttons',
               title: 'Buttons',
               Icon: RectangleHorizontalIcon,
             },
             {
-              pathname: 'badges',
+              pathname: 'atoms/badges',
               title: 'Badges',
               Icon: BadgeIcon,
             },
             {
-              pathname: 'form-controls',
+              pathname: 'atoms/form-controls',
               title: 'Form Controls',
               Icon: TextCursorIcon,
             },
           ],
         },
         {
-          pathname: 'menus',
+          pathname: 'molecules',
           title: 'Molecules',
           Icon: FolderIcon,
           items: [
             {
-              pathname: 'menus',
+              pathname: 'molecules/menus',
               title: 'Menus',
               Icon: MenuIcon,
             },
             {
-              pathname: 'dialogs',
+              pathname: 'molecules/dialogs',
               title: 'Dialogs',
               Icon: LayersIcon,
             },
             {
-              pathname: 'tables',
+              pathname: 'molecules/tables',
               title: 'Tables',
               Icon: TableIcon,
             },
             {
-              pathname: 'tabs',
+              pathname: 'molecules/tabs',
               title: 'Tabs',
               Icon: Columns2Icon,
             },
@@ -100,13 +100,21 @@ export const App: FC = () => {
         }
       >
         <Route path="" element={<Home />} />
-        <Route path="badges" element={<Badges />} />
-        <Route path="buttons" element={<Buttons />} />
-        <Route path="menus" element={<Menus />} />
-        <Route path="form-controls" element={<FormControls />} />
-        <Route path="dialogs" element={<Dialogs />} />
-        <Route path="tables" element={<Tables />} />
-        <Route path="tabs" element={<Tabs />} />
+        <Route path="atoms" element={<Outlet />}>
+          <Route path="" element={<Navigate to="buttons" replace />} />
+          <Route path="buttons" element={<Buttons />} />
+          <Route path="badges" element={<Badges />} />
+          <Route path="form-controls" element={<FormControls />} />
+          <Route path="*" element={<Navigate to="" replace />} />
+        </Route>
+        <Route path="molecules" element={<Outlet />}>
+          <Route path="" element={<Navigate to="menus" replace />} />
+          <Route path="menus" element={<Menus />} />
+          <Route path="dialogs" element={<Dialogs />} />
+          <Route path="tables" element={<Tables />} />
+          <Route path="tabs" element={<Tabs />} />
+          <Route path="*" element={<Navigate to="" replace />} />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to="" replace />} />
     </Routes>

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 import { type SidebarItem } from '.';
 import { Tooltip } from '../Tooltip';
@@ -7,8 +8,8 @@ import { Tooltip } from '../Tooltip';
 export type SidebarItemProps = SidebarItem & {
   active?: boolean;
   isChild?: boolean;
+  basePath?: string;
   sidebarOpen: boolean;
-  onClick: (pathname: string) => () => void;
 };
 
 export const SidebarItemComp: FC<SidebarItemProps> = ({
@@ -18,9 +19,9 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
   Icon,
   active,
   isChild,
+  basePath,
   sidebarOpen,
   items,
-  onClick,
 }) => {
   const ItemWrapper = ({ title, children }: { title: string; children: ReactNode }) =>
     !sidebarOpen ? (
@@ -33,7 +34,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
 
   return (
     <ItemWrapper title={title}>
-      <div
+      <Link
         className={classNames(
           'flex h-10 w-full cursor-pointer items-center overflow-hidden rounded-md p-2 font-medium',
           {
@@ -48,14 +49,14 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
             'hover:bg-slate-200 dark:hover:bg-slate-800': !active && isChild,
           }
         )}
-        onClick={onClick(pathname)}
+        to={[basePath, pathname].filter(Boolean).join('/')}
       >
         <Icon className="h-5 w-5 min-w-min" />
         <div className="min-w-max">
           {title}
           <div className="ml-auto flex items-center space-x-2">{label}</div>
         </div>
-      </div>
+      </Link>
     </ItemWrapper>
   );
 };

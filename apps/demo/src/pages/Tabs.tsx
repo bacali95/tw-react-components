@@ -22,7 +22,7 @@ export const Tabs: FC = () => {
             ))}
           </TabsC.List>
           {tabs.map((tab) => (
-            <TabsC.Content value={tab.key}>
+            <TabsC.Content key={tab.key} value={tab.key}>
               <Block className="rounded-md border p-2 dark:border-slate-600" fullWidth>
                 {tab.label}
               </Block>
