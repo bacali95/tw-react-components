@@ -1,5 +1,7 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode, useRef } from 'react';
 
+import { useLayoutContext } from '../../contexts';
+import { useOutsideClick } from '../../hooks';
 import { Flex } from '../Flex';
 import { Navbar } from '../Navbar';
 import { Sidebar, SidebarProps } from '../Sidebar';
@@ -14,9 +16,17 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   sidebarProps,
   navbarChildren,
 }) => {
+  const { sidebarOpen, toggleSidebar } = useLayoutContext();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(
+    sidebarRef,
+    () => sidebarOpen && window.document.documentElement.offsetWidth < 768 && toggleSidebar()
+  );
+
   return (
     <Flex className="h-screen bg-slate-100 p-3 dark:bg-slate-900">
-      <Sidebar {...sidebarProps} />
+      <Sidebar {...sidebarProps} open={sidebarOpen} ref={sidebarRef} />
       <Flex
         className="overflow-clip [overflow-clip-margin:1rem]"
         direction="column"
