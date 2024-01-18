@@ -71,13 +71,14 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                         {...item}
                         active={
                           isLinkStartsWithPathname(currentPath, item.pathname) &&
-                          items.every(
-                            (subItem) =>
-                              !isLinkStartsWithPathname(
-                                currentPath,
-                                `${item.pathname}/${subItem.pathname}`
-                              )
-                          )
+                          (!item.items ||
+                            item.items.every(
+                              (subItem) =>
+                                !isLinkStartsWithPathname(
+                                  currentPath,
+                                  `${item.pathname}/${subItem.pathname}`
+                                )
+                            ))
                         }
                         basePath={basePath}
                         sidebarOpen={open}
