@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.96](https://github.com/back-n-soft/tw-react-components/compare/v0.0.95...v0.0.96) (2024-01-18)
+
+
+### Bug Fixes
+
+* fix sidebar item active state ([d3adef3](https://github.com/back-n-soft/tw-react-components/commit/d3adef34362d0c4791db9d65b9ae0018d3676a8c))
+
 ### [0.0.95](https://github.com/back-n-soft/tw-react-components/compare/v0.0.94...v0.0.95) (2024-01-18)
 
 
