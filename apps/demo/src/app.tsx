@@ -39,17 +39,17 @@ export const App: FC = () => {
           Icon: AtomIcon,
           items: [
             {
-              pathname: 'atoms/buttons',
+              pathname: 'buttons',
               title: 'Buttons',
               Icon: RectangleHorizontalIcon,
             },
             {
-              pathname: 'atoms/badges',
+              pathname: 'badges',
               title: 'Badges',
               Icon: BadgeIcon,
             },
             {
-              pathname: 'atoms/form-controls',
+              pathname: 'form-controls',
               title: 'Form Controls',
               Icon: TextCursorIcon,
             },
@@ -61,22 +61,22 @@ export const App: FC = () => {
           Icon: FolderIcon,
           items: [
             {
-              pathname: 'molecules/menus',
+              pathname: 'menus',
               title: 'Menus',
               Icon: MenuIcon,
             },
             {
-              pathname: 'molecules/dialogs',
+              pathname: 'dialogs',
               title: 'Dialogs',
               Icon: LayersIcon,
             },
             {
-              pathname: 'molecules/tables',
+              pathname: 'tables',
               title: 'Tables',
               Icon: TableIcon,
             },
             {
-              pathname: 'molecules/tabs',
+              pathname: 'tabs',
               title: 'Tabs',
               Icon: Columns2Icon,
             },
