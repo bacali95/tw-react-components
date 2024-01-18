@@ -44,7 +44,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
     return (
       <nav
         className={classNames(
-          'fixed left-0 top-0 z-50 h-full w-56 flex-col bg-white p-2 text-black shadow transition-all duration-200 ease-in-out md:relative md:rounded-lg dark:bg-slate-800 dark:text-white',
+          'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 text-black shadow transition-all duration-200 ease-in-out md:relative md:rounded-lg dark:bg-slate-800 dark:text-white',
           'data-[open=false]:-translate-x-full md:data-[open=false]:w-16 md:data-[open=true]:w-56 md:data-[open=false]:translate-x-0 ',
           className
         )}
