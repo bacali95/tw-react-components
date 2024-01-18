@@ -8,7 +8,7 @@ import { Tooltip } from '../Tooltip';
 export type SidebarItemProps = SidebarItem & {
   active?: boolean;
   isChild?: boolean;
-  basePath?: string;
+  basePath: string;
   sidebarOpen: boolean;
 };
 
@@ -49,7 +49,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
             'hover:bg-slate-200 dark:hover:bg-slate-800': !active && isChild,
           }
         )}
-        to={[basePath, pathname].filter(Boolean).join('/')}
+        to={[basePath, pathname].join('/').replace(/\/{2,}/g, '/')}
       >
         <Icon className="h-5 w-5 min-w-min" />
         <div className="min-w-max">
