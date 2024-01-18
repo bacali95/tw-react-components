@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.91](https://github.com/back-n-soft/tw-react-components/compare/v0.0.90...v0.0.91) (2024-01-18)
+
+
+### Features
+
+* extend sidebar props ([9f49963](https://github.com/back-n-soft/tw-react-components/commit/9f499637e5b9e14f33e6ceb0ae9e250f1d8b1662))
+
 ### [0.0.90](https://github.com/back-n-soft/tw-react-components/compare/v0.0.89...v0.0.90) (2024-01-17)
 
 
