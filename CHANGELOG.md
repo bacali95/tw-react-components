@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.97](https://github.com/back-n-soft/tw-react-components/compare/v0.0.96...v0.0.97) (2024-01-19)
+
+
+### Bug Fixes
+
+* fix select input disabled behavior ([2daed69](https://github.com/back-n-soft/tw-react-components/commit/2daed69ceb924be2e8b780efd7b516a1d80c669a))
+
 ### [0.0.96](https://github.com/back-n-soft/tw-react-components/compare/v0.0.95...v0.0.96) (2024-01-18)
 
 
