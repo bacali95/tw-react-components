@@ -48,7 +48,7 @@ export const FormDialog = <T extends FieldValues>({
 
   return (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-      <Dialog.Content className={className}>
+      <Dialog.Content className={className} onPointerDownOutside={event => event.preventDefault()}>
         <Dialog.Header>
           <Dialog.Title>{title}</Dialog.Title>
         </Dialog.Header>

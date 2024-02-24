@@ -59,7 +59,10 @@ export function ListSorterDialog<T extends ListSorterItem>({
 
   return (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-      <Dialog.Content className={className}>
+      <Dialog.Content
+        className={className}
+        onPointerDownOutside={(event) => event.preventDefault()}
+      >
         <Dialog.Header>{title}</Dialog.Header>
         <ListSorter
           className="divide-y overflow-auto rounded-lg border dark:divide-slate-600 dark:border-slate-600 dark:text-white"
