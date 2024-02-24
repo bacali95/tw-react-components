@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.100](https://github.com/back-n-soft/tw-react-components/compare/v0.0.99...v0.0.100) (2024-02-24)
+
+
+### Bug Fixes
+
+* fix dialog content layout ([a3e0e1b](https://github.com/back-n-soft/tw-react-components/commit/a3e0e1bb1ac22d25b57ea0bf54c147ed4750f962))
+
 ### [0.0.99](https://github.com/back-n-soft/tw-react-components/compare/v0.0.98...v0.0.99) (2024-02-24)
 
 ### [0.0.98](https://github.com/back-n-soft/tw-react-components/compare/v0.0.97...v0.0.98) (2024-02-24)
