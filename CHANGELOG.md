@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.98](https://github.com/back-n-soft/tw-react-components/compare/v0.0.97...v0.0.98) (2024-02-24)
+
+
+### Features
+
+* disable outside click for some dialogs ([ba75db9](https://github.com/back-n-soft/tw-react-components/commit/ba75db91926538226b4193a92a61cae7102c8498))
+
 ### [0.0.97](https://github.com/back-n-soft/tw-react-components/compare/v0.0.96...v0.0.97) (2024-01-19)
 
 
