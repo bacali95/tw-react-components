@@ -363,7 +363,7 @@ const ExpandButton: FC<ExpandButtonProps> = ({
 
   return (
     <Icon
-      className="h-6 w-6 cursor-pointer rounded p-1 hover:bg-gray-300 hover:dark:bg-gray-600"
+      className="h-6 w-6 cursor-pointer rounded p-1 hover:bg-slate-300 hover:dark:bg-slate-600"
       onClick={onClick}
     />
   );

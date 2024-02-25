@@ -4,7 +4,6 @@ import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-
 
 import {
   Button,
-  Card,
   CheckboxInput,
   DateTimeInput,
   Flex,
@@ -60,178 +59,172 @@ export const FormControls: FC = () => {
       }));
 
   return (
-    <Flex className="overflow-auto" direction="column" fullWidth>
-      <Card fullWidth>
-        <SelectInput
-          label="Size"
-          placeholder="Size"
-          value={inputSize}
-          items={[
-            { id: 'small', label: 'Small', value: 'small' },
-            { id: 'medium', label: 'medium', value: 'medium' },
-            { id: 'large', label: 'large', value: 'large' },
-          ]}
-          onChange={setInputSize}
-        />
-      </Card>
+    <Flex className="gap-6 overflow-auto" direction="column" fullWidth noGap>
+      <SelectInput
+        label="Size"
+        placeholder="Size"
+        value={inputSize}
+        items={[
+          { id: 'small', label: 'Small', value: 'small' },
+          { id: 'medium', label: 'medium', value: 'medium' },
+          { id: 'large', label: 'large', value: 'large' },
+        ]}
+        onChange={setInputSize}
+      />
       <Flex direction="column" fullWidth>
-        <Card fullWidth>
-          <p className="mb-2">
-            With <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
-            context
-          </p>
-          <FormProvider {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
-              <Flex direction="column">
-                <FormInputs.Text
-                  name="text"
-                  label="Text"
-                  placeholder="Text"
-                  size={inputSize}
-                  required
-                  clearable
-                />
-                <FormInputs.Textarea
-                  name="textarea"
-                  label="Full Text"
-                  placeholder="Full Text"
-                  size={inputSize}
-                  required
-                  clearable
-                />
-                <FormInputs.Number
-                  name="number"
-                  label="Number"
-                  placeholder="0"
-                  min={0}
-                  validate={(value) => value < 11}
-                  suffixIcon={DollarSignIcon}
-                  size={inputSize}
-                  required
-                  clearable
-                />
-                <FormInputs.Checkbox name="checkbox" label="Checkbox" size={inputSize} required />
-                <FormInputs.DateTime
-                  name="date"
-                  label="DateTime"
-                  placeholder="Select date..."
-                  displayFormat="DD-MM-YYYY [at] HH:mm"
-                  minDate={new Date(2010, 1, 5, 13, 44)}
-                  maxDate={new Date(2030, 4, 5, 13, 44)}
-                  size={inputSize}
-                  required
-                  clearable
-                />
-                <FormInputs.Select
-                  name="countries"
-                  label="Countries"
-                  placeholder="Select country..."
-                  items={countriesItems}
-                  multiple
-                  size={inputSize}
-                  required
-                  allowAddition
-                  onNewItemAdded={alert}
-                  clearable
-                  search
-                />
-                <Flex justify="end" fullWidth>
-                  <Button variant="red" onClick={() => form.reset()} size={inputSize}>
-                    Clear
-                  </Button>
-                  <Button type="submit" variant="green" size={inputSize}>
-                    Submit
-                  </Button>
-                </Flex>
-              </Flex>
-            </form>
-          </FormProvider>
-        </Card>
-      </Flex>
-      <Flex direction="column" fullWidth>
-        <Card fullWidth>
-          <p className="mb-2">
-            Without{' '}
-            <code className="rounded bg-slate-100 p-1 dark:bg-slate-900 ">use-form-hook</code>{' '}
-            context
-          </p>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              onSubmit(formState);
-            }}
-          >
+        <p className="mb-2">
+          With <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
+          context
+        </p>
+        <FormProvider {...form}>
+          <form className="w-full" onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
             <Flex direction="column">
-              <TextInput
+              <FormInputs.Text
                 name="text"
                 label="Text"
-                value={formState.text ?? ''}
-                onChange={setFormField('text', 'value')}
                 placeholder="Text"
                 size={inputSize}
                 required
+                clearable
               />
-              <TextareaInput
+              <FormInputs.Textarea
                 name="textarea"
                 label="Full Text"
-                value={formState.textarea ?? ''}
-                onChange={setFormField('textarea', 'value')}
                 placeholder="Full Text"
                 size={inputSize}
                 required
+                clearable
               />
-              <NumberInput
+              <FormInputs.Number
                 name="number"
                 label="Number"
-                value={formState.number ?? ''}
-                onChange={setFormField('number', 'value')}
                 placeholder="0"
                 min={0}
-                hasErrors={(formState.number ?? 0) > 10}
+                validate={(value) => value < 11}
                 suffixIcon={DollarSignIcon}
                 size={inputSize}
                 required
+                clearable
               />
-              <CheckboxInput
-                name="checkbox"
-                label="Checkbox"
-                checked={formState.checkbox ?? false}
-                onChange={setFormField('checkbox', 'checked')}
-                size={inputSize}
-                required
-              />
-              <DateTimeInput
+              <FormInputs.Checkbox name="checkbox" label="Checkbox" size={inputSize} required />
+              <FormInputs.DateTime
                 name="date"
                 label="DateTime"
                 placeholder="Select date..."
                 displayFormat="DD-MM-YYYY [at] HH:mm"
-                value={formState.date}
-                onChange={setFormField('date')}
                 minDate={new Date(2010, 1, 5, 13, 44)}
                 maxDate={new Date(2030, 4, 5, 13, 44)}
                 size={inputSize}
                 required
                 clearable
               />
-              <SelectInput
+              <FormInputs.Select
                 name="countries"
                 label="Countries"
-                placeholder="Select..."
+                placeholder="Select country..."
                 items={countriesItems}
-                value={formState.countries}
-                onChange={setFormField('countries')}
                 multiple
                 size={inputSize}
                 required
+                allowAddition
+                onNewItemAdded={alert}
                 clearable
                 search
               />
-              <Button className="self-end" type="submit" variant="green" size={inputSize}>
-                Submit
-              </Button>
+              <Flex justify="end" fullWidth>
+                <Button variant="red" onClick={() => form.reset()} size={inputSize}>
+                  Clear
+                </Button>
+                <Button type="submit" variant="green" size={inputSize}>
+                  Submit
+                </Button>
+              </Flex>
             </Flex>
           </form>
-        </Card>
+        </FormProvider>
+      </Flex>
+      <Flex direction="column" fullWidth>
+        <p className="mb-2">
+          Without <code className="rounded bg-slate-100 p-1 dark:bg-slate-900 ">use-form-hook</code>{' '}
+          context
+        </p>
+        <form
+          className="w-full"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit(formState);
+          }}
+        >
+          <Flex direction="column">
+            <TextInput
+              name="text"
+              label="Text"
+              value={formState.text ?? ''}
+              onChange={setFormField('text', 'value')}
+              placeholder="Text"
+              size={inputSize}
+              required
+            />
+            <TextareaInput
+              name="textarea"
+              label="Full Text"
+              value={formState.textarea ?? ''}
+              onChange={setFormField('textarea', 'value')}
+              placeholder="Full Text"
+              size={inputSize}
+              required
+            />
+            <NumberInput
+              name="number"
+              label="Number"
+              value={formState.number ?? ''}
+              onChange={setFormField('number', 'value')}
+              placeholder="0"
+              min={0}
+              hasErrors={(formState.number ?? 0) > 10}
+              suffixIcon={DollarSignIcon}
+              size={inputSize}
+              required
+            />
+            <CheckboxInput
+              name="checkbox"
+              label="Checkbox"
+              checked={formState.checkbox ?? false}
+              onChange={setFormField('checkbox', 'checked')}
+              size={inputSize}
+              required
+            />
+            <DateTimeInput
+              name="date"
+              label="DateTime"
+              placeholder="Select date..."
+              displayFormat="DD-MM-YYYY [at] HH:mm"
+              value={formState.date}
+              onChange={setFormField('date')}
+              minDate={new Date(2010, 1, 5, 13, 44)}
+              maxDate={new Date(2030, 4, 5, 13, 44)}
+              size={inputSize}
+              required
+              clearable
+            />
+            <SelectInput
+              name="countries"
+              label="Countries"
+              placeholder="Select..."
+              items={countriesItems}
+              value={formState.countries}
+              onChange={setFormField('countries')}
+              multiple
+              size={inputSize}
+              required
+              clearable
+              search
+            />
+            <Button className="self-end" type="submit" variant="green" size={inputSize}>
+              Submit
+            </Button>
+          </Flex>
+        </form>
       </Flex>
     </Flex>
   );

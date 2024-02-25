@@ -19,20 +19,20 @@ const variantClassNames: Record<
   { base: string; outline?: string; hover: string; active: string }
 > = {
   default: {
-    base: 'bg-slate-100 dark:bg-slate-900/50',
-    outline: 'border-slate-100 dark:border-slate-900/50',
-    hover:
-      'hover:bg-slate-200 hover:border-slate-200 dark:hover:bg-slate-700 dark:hover:border-slate-700',
-    active:
-      'active:bg-slate-300 active:border-slate-300 dark:active:bg-slate-900 dark:active:border-slate-900',
-  },
-  inverse: {
-    base: 'bg-white dark:bg-slate-800',
+    base: 'bg-slate-100 dark:bg-slate-800',
     outline: 'border-slate-100 dark:border-slate-800',
     hover:
       'hover:bg-slate-200 hover:border-slate-200 dark:hover:bg-slate-700 dark:hover:border-slate-700',
     active:
       'active:bg-slate-300 active:border-slate-300 dark:active:bg-slate-800/50 dark:active:border-slate-800/50',
+  },
+  inverse: {
+    base: 'bg-white dark:bg-slate-900',
+    outline: 'border-slate-100 dark:border-slate-900',
+    hover:
+      'hover:bg-slate-200 hover:border-slate-200 dark:hover:bg-slate-700 dark:hover:border-slate-700',
+    active:
+      'active:bg-slate-300 active:border-slate-300 dark:active:bg-slate-900/50 dark:active:border-slate-900/50',
   },
   red: {
     base: 'text-white bg-red-500 dark:bg-red-600',

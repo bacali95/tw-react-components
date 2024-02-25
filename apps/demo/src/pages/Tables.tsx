@@ -56,7 +56,7 @@ export const Tables: FC = () => {
 
   return (
     <>
-      <Card fullWidth>Data Table</Card>
+      Data Table
       <DataTable
         rows={rows}
         columns={columns}

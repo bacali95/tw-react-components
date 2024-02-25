@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Block, Card, Tabs as TabsC } from 'tw-react-components';
+import { Block, Tabs as TabsC } from 'tw-react-components';
 
 export const Tabs: FC = () => {
   const tabs = [
@@ -11,25 +11,23 @@ export const Tabs: FC = () => {
 
   return (
     <>
-      <Card fullWidth>Tabs</Card>
-      <Card fullWidth>
-        <TabsC defaultValue={tabs[0].key} className="mx-auto w-[400px]">
-          <TabsC.List>
-            {tabs.map((tab) => (
-              <TabsC.Trigger key={tab.key} value={tab.key}>
-                {tab.label}
-              </TabsC.Trigger>
-            ))}
-          </TabsC.List>
+      Tabs
+      <TabsC defaultValue={tabs[0].key} className="mx-auto w-[400px]">
+        <TabsC.List>
           {tabs.map((tab) => (
-            <TabsC.Content key={tab.key} value={tab.key}>
-              <Block className="rounded-md border p-2 dark:border-slate-600" fullWidth>
-                {tab.label}
-              </Block>
-            </TabsC.Content>
+            <TabsC.Trigger key={tab.key} value={tab.key}>
+              {tab.label}
+            </TabsC.Trigger>
           ))}
-        </TabsC>
-      </Card>
+        </TabsC.List>
+        {tabs.map((tab) => (
+          <TabsC.Content key={tab.key} value={tab.key}>
+            <Block className="rounded-md border p-2 dark:border-slate-600" fullWidth>
+              {tab.label}
+            </Block>
+          </TabsC.Content>
+        ))}
+      </TabsC>
     </>
   );
 };

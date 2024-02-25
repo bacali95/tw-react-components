@@ -10,7 +10,7 @@ export const Navbar: FC<PropsWithChildren> = ({ children }) => {
   const { toggleSidebar } = useLayoutContext();
 
   return (
-    <Card className="select-none !py-2" fullWidth>
+    <Card className="border-b border-slate-100 dark:border-slate-700/80" fullWidth>
       <Flex align="center" justify="between">
         <Button prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
         <div className="flex items-center gap-2">{children}</div>

@@ -8,14 +8,14 @@ export type ButtonVariant = 'default' | 'inverse' | 'green' | 'yellow' | 'red';
 
 const variantClassNames: Record<ButtonVariant, { base: string; hover: string; active: string }> = {
   default: {
-    base: 'dark:text-white bg-slate-100 dark:bg-slate-900/50',
-    hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
-    active: 'active:bg-slate-300 dark:active:bg-slate-900',
-  },
-  inverse: {
-    base: 'dark:text-white bg-white dark:bg-slate-800',
+    base: 'dark:text-white bg-slate-100 dark:bg-slate-800',
     hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
     active: 'active:bg-slate-300 dark:active:bg-slate-800/50',
+  },
+  inverse: {
+    base: 'dark:text-white bg-white dark:bg-slate-900',
+    hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
+    active: 'active:bg-slate-300 dark:active:bg-slate-900/50',
   },
   green: {
     base: 'text-white bg-green-500 dark:bg-green-600',

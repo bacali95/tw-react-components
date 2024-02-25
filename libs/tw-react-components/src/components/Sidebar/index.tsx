@@ -39,8 +39,8 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
     return (
       <nav
         className={classNames(
-          'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 text-black shadow transition-all duration-200 ease-in-out md:relative md:rounded-lg dark:bg-slate-800 dark:text-white',
-          'data-[open=false]:-translate-x-full md:data-[open=false]:w-16 md:data-[open=true]:w-56 md:data-[open=false]:translate-x-0 ',
+          'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col p-2 transition-all duration-200 ease-in-out md:relative',
+          'border-r border-slate-100 data-[open=false]:-translate-x-full md:data-[open=false]:w-16 md:data-[open=true]:w-56 md:data-[open=false]:translate-x-0 dark:border-slate-700/80',
           className
         )}
         data-open={open}
@@ -60,7 +60,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                 <Accordion.Item
                   key={item.pathname}
                   className={classNames('flex flex-col rounded-md', {
-                    'bg-slate-100 dark:bg-slate-900':
+                    'bg-slate-100 dark:bg-slate-800':
                       item.items && isLinkStartsWithPathname(currentPath, item.pathname),
                   })}
                   value={item.pathname}

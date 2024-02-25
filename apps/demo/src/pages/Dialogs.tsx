@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 import {
   Button,
-  Card,
   ConfirmDialog,
   Dialog,
   Flex,
@@ -45,83 +44,73 @@ export const Dialogs: FC = () => {
 
   return (
     <>
-      <Card fullWidth>
-        <Dialog
-          open={openDialogs['simple']}
-          onOpenChange={(value) => !value && toggleDialog('simple')()}
-        >
-          <Dialog.Trigger asChild>
-            <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
-          </Dialog.Trigger>
-          <Dialog.Content>
-            <Dialog.Header>Simple Dialog</Dialog.Header>
-            <p>
-              Your payment has been successfully submitted. We’ve sent you an email with all of the
-              details of your{' '}
-              <Tooltip className="w-fit" content="Simple Tooltip">
-                order.
-              </Tooltip>
-            </p>
-          </Dialog.Content>
-        </Dialog>
-      </Card>
-      <Card fullWidth>
-        <Button onClick={toggleDialog('confirm')}>Confirm dialog</Button>
-        <ConfirmDialog
-          open={openDialogs['confirm']}
-          title="Confirm Dialog"
-          onClose={toggleDialog('confirm')}
-          onConfirm={handleConfirmDialog('Yes')}
-        >
-          Are you sure you want to delete this item?
-        </ConfirmDialog>
-      </Card>
-      <Card fullWidth>
-        <Button onClick={toggleDialog('form')}>Form dialog</Button>
-        <FormDialog
-          title="Form Dialog"
-          form={form}
-          onSubmit={handleLogin}
-          open={openDialogs['form']}
-          onClose={toggleDialog('form')}
-          extraAction={<Button>Action</Button>}
-        >
-          <Flex direction="column" fullWidth>
-            <FormInputs.Text name="username" label="Username" required />
-            <FormInputs.Password name="password" label="Password" required />
-            <FormInputs.Select
-              name="country"
-              label="Country"
-              placeholder="Select country..."
-              items={countriesItems}
-              required
-              clearable
-              search
-            />
-          </Flex>
-        </FormDialog>
-      </Card>
-      <Card fullWidth>
-        <Button onClick={toggleDialog('pdf')}>Pdf dialog</Button>
-        <PdfViewerDialog
-          title="Pdf Dialog"
-          url="https://www.orimi.com/pdf-test.pdf"
-          open={openDialogs['pdf']}
-          onClose={toggleDialog('pdf')}
-        />
-      </Card>
-      <Card fullWidth>
-        <Button onClick={toggleDialog('sorter')}>Sorter dialog</Button>
-        <ListSorterDialog
-          title="Sorter Dialog"
-          open={openDialogs['sorter']}
-          items={['one', 'two', 'three']}
-          renderer={(item) => item}
-          idResolver={(item) => item}
-          onSubmit={handleSorter}
-          onClose={toggleDialog('sorter')}
-        />
-      </Card>
+      <Dialog
+        open={openDialogs['simple']}
+        onOpenChange={(value) => !value && toggleDialog('simple')()}
+      >
+        <Dialog.Trigger asChild>
+          <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Header>Simple Dialog</Dialog.Header>
+          <p>
+            Your payment has been successfully submitted. We’ve sent you an email with all of the
+            details of your{' '}
+            <Tooltip className="w-fit" content="Simple Tooltip">
+              order.
+            </Tooltip>
+          </p>
+        </Dialog.Content>
+      </Dialog>
+      <Button onClick={toggleDialog('confirm')}>Confirm dialog</Button>
+      <ConfirmDialog
+        open={openDialogs['confirm']}
+        title="Confirm Dialog"
+        onClose={toggleDialog('confirm')}
+        onConfirm={handleConfirmDialog('Yes')}
+      >
+        Are you sure you want to delete this item?
+      </ConfirmDialog>
+      <Button onClick={toggleDialog('form')}>Form dialog</Button>
+      <FormDialog
+        title="Form Dialog"
+        form={form}
+        onSubmit={handleLogin}
+        open={openDialogs['form']}
+        onClose={toggleDialog('form')}
+        extraAction={<Button>Action</Button>}
+      >
+        <Flex direction="column" fullWidth>
+          <FormInputs.Text name="username" label="Username" required />
+          <FormInputs.Password name="password" label="Password" required />
+          <FormInputs.Select
+            name="country"
+            label="Country"
+            placeholder="Select country..."
+            items={countriesItems}
+            required
+            clearable
+            search
+          />
+        </Flex>
+      </FormDialog>
+      <Button onClick={toggleDialog('pdf')}>Pdf dialog</Button>
+      <PdfViewerDialog
+        title="Pdf Dialog"
+        url="https://www.orimi.com/pdf-test.pdf"
+        open={openDialogs['pdf']}
+        onClose={toggleDialog('pdf')}
+      />
+      <Button onClick={toggleDialog('sorter')}>Sorter dialog</Button>
+      <ListSorterDialog
+        title="Sorter Dialog"
+        open={openDialogs['sorter']}
+        items={['one', 'two', 'three']}
+        renderer={(item) => item}
+        idResolver={(item) => item}
+        onSubmit={handleSorter}
+        onClose={toggleDialog('sorter')}
+      />
     </>
   );
 };
