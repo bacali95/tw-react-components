@@ -7,7 +7,7 @@ const $Table: FC<ComponentProps<'table'>> = ({ children, className, ...props }) 
   <Flex className="overflow-auto rounded-lg" fullWidth>
     <table
       className={classNames(
-        'min-w-full divide-y divide-slate-200 dark:divide-slate-800 dark:text-white',
+        'min-w-full divide-y divide-slate-200 dark:divide-slate-700 dark:text-white',
         className
       )}
       {...props}
@@ -20,7 +20,7 @@ const $Table: FC<ComponentProps<'table'>> = ({ children, className, ...props }) 
 const TableHead: FC<ComponentProps<'thead'>> = ({ children, className, ...props }) => (
   <thead
     className={classNames(
-      'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300',
+      'bg-slate-100 text-slate-800 dark:bg-slate-700/80 dark:text-slate-300',
       className
     )}
     {...props}
@@ -38,7 +38,7 @@ const TableHeadCell: FC<ComponentProps<'th'>> = ({ children, className, ...props
 const TableBody: FC<ComponentProps<'tbody'>> = ({ children, className, ...props }) => (
   <tbody
     className={classNames(
-      'divide-y divide-slate-200 bg-white dark:divide-slate-800 dark:bg-slate-800',
+      'divide-y divide-slate-200 bg-white dark:divide-slate-700 dark:bg-slate-800',
       className
     )}
     {...props}
@@ -60,7 +60,7 @@ const TableCell: FC<ComponentProps<'td'>> = ({ children, className, ...props }) 
 const TableFooter: FC<ComponentProps<'tfoot'>> = ({ children, className, ...props }) => (
   <tfoot
     className={classNames(
-      'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300',
+      'bg-slate-100 text-slate-800 dark:bg-slate-700/80 dark:text-slate-300',
       className
     )}
     {...props}
