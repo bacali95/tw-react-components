@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.102](https://github.com/back-n-soft/tw-react-components/compare/v0.0.101...v0.0.102) (2024-02-25)
+
+
+### Bug Fixes
+
+* fix table coloring ([f5999f1](https://github.com/back-n-soft/tw-react-components/commit/f5999f1501af4e74c452607762b6b8ba2016cf87))
+
 ### [0.0.101](https://github.com/back-n-soft/tw-react-components/compare/v0.0.100...v0.0.101) (2024-02-25)
 
 
