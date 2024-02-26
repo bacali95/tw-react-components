@@ -42,7 +42,7 @@ export const Pagination: FC<PaginationProps> = ({
 
   return (
     <Flex justify="end">
-      <Flex className="!gap-0 divide-x rounded-md border border-slate-300 bg-white dark:divide-slate-600 dark:border-slate-600 dark:bg-slate-800">
+      <Flex className="h-10 gap-0 divide-x rounded-md border border-slate-300 bg-white dark:divide-slate-600 dark:border-slate-600 dark:bg-slate-800">
         <PaginationItem
           title="First page"
           onClick={() => setCurrentPage(0)}
@@ -99,13 +99,14 @@ const PaginationItem: FC<
   PropsWithoutRef<ComponentProps<'div'> & { active?: boolean; disabled?: boolean }>
 > = ({ children, active, disabled, ...props }) => (
   <Flex
-    className={cn('h-10 w-10 first:rounded-l-md last:rounded-r-md', {
+    className={cn('w-10 first:rounded-l-md last:rounded-r-md', {
       'opacity-50': disabled,
       'bg-slate-100 dark:bg-slate-700': active,
       'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700': !disabled && props.onClick,
     })}
     align="center"
     justify="center"
+    fullHeight
     {...props}
   >
     {children}

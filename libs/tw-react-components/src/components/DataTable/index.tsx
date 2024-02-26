@@ -227,12 +227,12 @@ export function DataTable<T>({
         {isLoading && (
           <Table.Row>
             <Table.Cell
-              className={cn('z-10 h-full w-full !p-0', {
+              className={cn('z-10 h-full w-full p-0', {
                 absolute: rows.length,
               })}
               colSpan={columnsLength}
             >
-              <Spinner className="bg-slate-700 py-4 opacity-50" />
+              <Spinner className="bg-white/50 py-4 dark:bg-slate-700/50" />
             </Table.Cell>
           </Table.Row>
         )}
@@ -250,7 +250,7 @@ export function DataTable<T>({
             key={rowIndex}
             className={cn(
               {
-                'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900':
+                'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/40':
                   onRowClick || rowExtraContent,
               },
               rowClassName?.(item, rowIndex)
@@ -308,7 +308,7 @@ export function DataTable<T>({
           </Table.Row>,
           rowExtraContent && expandedRows[rowExtraContent.idGetter(item)] && (
             <Table.Row key={`${rowIndex}-expanded`}>
-              <Table.Cell className="!p-0" colSpan={columnsLength}>
+              <Table.Cell className="p-0" colSpan={columnsLength}>
                 <rowExtraContent.component item={item} rowIndex={rowIndex} />
               </Table.Cell>
             </Table.Row>
