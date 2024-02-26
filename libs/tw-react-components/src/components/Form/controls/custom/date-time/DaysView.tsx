@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { FC, useCallback, useMemo } from 'react';
 
 import { compareDates } from '../../../../../helpers';
+import { cn } from '../../../../../helpers';
 import { useDays } from '../../../../../hooks';
 
 type DaysViewProps = {
@@ -197,7 +197,7 @@ const Day: FC<DayProps> = ({
 
   return (
     <div
-      className={classNames('mx-auto flex h-8 w-8 items-center justify-center rounded-lg text-sm', {
+      className={cn('mx-auto flex h-8 w-8 items-center justify-center rounded-lg text-sm', {
         'border-2 border-blue-500': isEqualToday,
         'bg-blue-500 text-white': isSelected,
         'cursor-pointer': isSelectable,

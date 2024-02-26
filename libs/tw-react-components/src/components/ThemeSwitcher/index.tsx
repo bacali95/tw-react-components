@@ -1,9 +1,9 @@
 import { Switch } from '@headlessui/react';
-import classNames from 'classnames';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { useLayoutContext } from '../../contexts';
+import { cn } from '../../helpers';
 
 type Props = { className?: string };
 
@@ -15,17 +15,17 @@ export const ThemeSwitcher: FC<Props> = ({ className }) => {
     <Switch
       checked={darkMode}
       onChange={toggleTheme}
-      className={classNames(
-        className,
+      className={cn(
         'flex h-8 w-14 items-center rounded-full border p-1 dark:border-blue-700',
         {
           'bg-blue-700': darkMode,
           'bg-slate-100': !darkMode,
-        }
+        },
+        className
       )}
     >
       <div
-        className={classNames('flex transform transition duration-200 ease-in-out', {
+        className={cn('flex transform transition duration-200 ease-in-out', {
           'translate-x-6': darkMode,
           'translate-x-0': !darkMode,
         })}

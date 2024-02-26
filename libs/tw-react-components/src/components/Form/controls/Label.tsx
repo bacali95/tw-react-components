@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { HelpCircle } from 'lucide-react';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { cn } from '../../../helpers';
 import { Tooltip } from '../../Tooltip';
 
 type Props = {
@@ -22,10 +22,14 @@ export const Label: FC<PropsWithChildren<Props>> = ({
 }) => {
   return !children ? null : (
     <label
-      className={classNames(className, 'flex items-center gap-1 font-medium', {
-        'text-slate-700 dark:text-slate-100': !hasErrors,
-        'text-red-600 dark:text-red-500': hasErrors,
-      })}
+      className={cn(
+        'flex items-center gap-1 font-medium',
+        {
+          'text-slate-700 dark:text-slate-100': !hasErrors,
+          'text-red-600 dark:text-red-500': hasErrors,
+        },
+        className
+      )}
       htmlFor={htmlFor}
     >
       <span>

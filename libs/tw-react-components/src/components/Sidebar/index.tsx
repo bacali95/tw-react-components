@@ -1,9 +1,11 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import classNames from 'classnames';
-import { ChevronRightIcon, LucideIcon } from 'lucide-react';
+import { ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon, LucideIcon } from 'lucide-react';
 import { ReactNode, forwardRef, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { useLayoutContext } from '../../contexts';
+import { cn } from '../../helpers';
+import { Button } from '../Button';
 import { SidebarItemComp } from './SidebarItem';
 
 export type SidebarItem = {
@@ -25,8 +27,10 @@ export type SidebarProps = {
 };
 
 export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
-  ({ open = true, className, items, basePath = '/', smallLogo, fullLogo }, ref) => {
+  ({ className, items, basePath = '/', smallLogo, fullLogo }, ref) => {
     const location = useLocation();
+    const { sidebarOpen, toggleSidebar } = useLayoutContext();
+
     const currentPath = useMemo(
       () => location.pathname.replace(basePath, '').replace(/^\/*/, ''),
       [basePath, location.pathname]
@@ -36,20 +40,22 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
       [currentPath, items]
     );
 
+    const OpenCloseIcon = sidebarOpen ? ChevronsLeftIcon : ChevronsRightIcon;
+
     return (
       <nav
-        className={classNames(
-          'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col p-2 transition-all duration-200 ease-in-out md:relative',
-          'border-r border-slate-100 data-[open=false]:-translate-x-full md:data-[open=false]:w-16 md:data-[open=true]:w-56 md:data-[open=false]:translate-x-0 dark:border-slate-700/80',
+        className={cn(
+          'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 transition-all duration-200 ease-in-out md:relative dark:bg-slate-900',
+          'border-r border-slate-100 data-[open=false]:-translate-x-full md:data-[open=false]:w-16 md:data-[open=true]:w-56 md:data-[open=false]:translate-x-0 md:data-[open=false]:hover:w-56 dark:border-slate-700/80',
           className
         )}
-        data-open={open}
+        data-open={sidebarOpen}
         ref={ref}
       >
         {smallLogo && fullLogo && (
           <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
             <Link to="/" target="_blank">
-              {open ? fullLogo : smallLogo}
+              {sidebarOpen ? fullLogo : smallLogo}
             </Link>
           </div>
         )}
@@ -59,7 +65,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
               !item.hidden && (
                 <Accordion.Item
                   key={item.pathname}
-                  className={classNames('flex flex-col rounded-md', {
+                  className={cn('flex flex-col rounded-md', {
                     'bg-slate-100 dark:bg-slate-800':
                       item.items && isLinkStartsWithPathname(currentPath, item.pathname),
                   })}
@@ -81,10 +87,10 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                             ))
                         }
                         basePath={basePath}
-                        sidebarOpen={open}
+                        sidebarOpen={sidebarOpen}
                       />
 
-                      {open && item.items && (
+                      {sidebarOpen && item.items && (
                         <ChevronRightIcon className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200" />
                       )}
                     </Accordion.Trigger>
@@ -104,7 +110,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                                 isChild
                                 active={isLinkStartsWithPathname(currentPath, subPathname)}
                                 basePath={basePath}
-                                sidebarOpen={open}
+                                sidebarOpen={sidebarOpen}
                               />
                             )
                           );
@@ -116,6 +122,12 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
               )
           )}
         </Accordion.Root>
+        <Button
+          className="mt-auto justify-center"
+          prefixIcon={OpenCloseIcon}
+          transparent
+          onClick={toggleSidebar}
+        />
       </nav>
     );
   }

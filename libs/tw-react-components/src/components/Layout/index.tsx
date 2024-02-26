@@ -1,18 +1,21 @@
 import { FC, PropsWithChildren, ReactNode, useRef } from 'react';
 
 import { useLayoutContext } from '../../contexts';
+import { cn } from '../../helpers';
 import { useOutsideClick } from '../../hooks';
 import { Flex } from '../Flex';
 import { Navbar } from '../Navbar';
 import { Sidebar, SidebarProps } from '../Sidebar';
 
 type Props = {
+  className?: string;
   sidebarProps: SidebarProps;
   navbarChildren?: ReactNode;
 };
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
+  className,
   sidebarProps,
   navbarChildren,
 }) => {
@@ -25,18 +28,17 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   );
 
   return (
-    <Flex className="h-screen text-black dark:bg-slate-900 dark:text-white" noGap>
+    <Flex className="h-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
       <Sidebar {...sidebarProps} open={sidebarOpen} ref={sidebarRef} />
       <Flex
-        className="overflow-clip [overflow-clip-margin:1rem]"
+        className="gap-0 overflow-clip [overflow-clip-margin:1rem]"
         direction="column"
         fullHeight
         fullWidth
-        noGap
       >
         <Navbar>{navbarChildren}</Navbar>
         <Flex
-          className="overflow-clip p-3 [overflow-clip-margin:1rem]"
+          className={cn('overflow-clip p-3 [overflow-clip-margin:1rem]', className)}
           direction="column"
           fullWidth
           fullHeight

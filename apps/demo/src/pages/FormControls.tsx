@@ -59,7 +59,7 @@ export const FormControls: FC = () => {
       }));
 
   return (
-    <Flex className="gap-6 overflow-auto" direction="column" fullWidth noGap>
+    <Flex className="gap-6 overflow-auto" direction="column" fullWidth>
       <SelectInput
         label="Size"
         placeholder="Size"

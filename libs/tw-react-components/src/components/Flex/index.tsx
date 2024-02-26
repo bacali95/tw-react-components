@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { forwardRef } from 'react';
 
+import { cn } from '../../helpers';
 import { Block, BlockProps } from '../Block';
 
 type Direction = 'row' | 'column';
@@ -37,7 +37,6 @@ export type FlexProps = BlockProps & {
   direction?: Direction;
   align?: Position;
   justify?: Position | 'between';
-  noGap?: boolean;
 };
 
 export const Flex = forwardRef<HTMLDivElement, FlexProps>(
@@ -50,20 +49,18 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
       direction = 'row',
       align = 'start',
       justify = 'start',
-      noGap,
       ...blockProps
     },
     ref
   ) => (
     <Block
-      className={classNames(
-        className,
-        'flex',
+      className={cn(
+        'flex gap-3',
         wrap && 'flex-wrap',
-        !noGap && 'gap-3',
         directionClasses[direction][reverse ? 'reverse' : 'normal'],
         alignClasses[align],
-        justifyClasses[justify]
+        justifyClasses[justify],
+        className
       )}
       {...blockProps}
       ref={ref}

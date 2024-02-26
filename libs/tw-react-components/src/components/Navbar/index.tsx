@@ -2,19 +2,21 @@ import { MenuIcon } from 'lucide-react';
 import { FC, PropsWithChildren } from 'react';
 
 import { useLayoutContext } from '../../contexts';
+import { Block } from '../Block';
 import { Button } from '../Button';
-import { Card } from '../Card';
 import { Flex } from '../Flex';
 
 export const Navbar: FC<PropsWithChildren> = ({ children }) => {
   const { toggleSidebar } = useLayoutContext();
 
   return (
-    <Card className="border-b border-slate-100 dark:border-slate-700/80" fullWidth>
+    <Block className="border-b border-slate-100 p-3 dark:border-slate-700/80" fullWidth>
       <Flex align="center" justify="between">
-        <Button prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
-        <div className="flex items-center gap-2">{children}</div>
+        <Button className="md:hidden" prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
+        <Flex className="ml-auto gap-2" align="center">
+          {children}
+        </Flex>
       </Flex>
-    </Card>
+    </Block>
   );
 };

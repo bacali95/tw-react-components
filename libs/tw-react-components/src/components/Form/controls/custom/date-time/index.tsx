@@ -1,9 +1,9 @@
-import classNames from 'classnames';
 import dayjs from 'dayjs';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
 import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getDisplayDate } from '../../../../../helpers';
+import { cn } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
 import { BasicInput, BasicInputProps } from '../../primitive';
 import { DateSelector, View } from './DateSelector';
@@ -126,7 +126,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     };
 
     return (
-      <div className={classNames(className, 'relative w-full')} ref={ref}>
+      <div className={cn('relative w-full', className)} ref={ref}>
         <BasicInput
           {...props}
           type="text"

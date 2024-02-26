@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 
+import { cn } from '../../../helpers';
 import { Flex } from '../../Flex';
 
 export type FormGroupProps = PropsWithChildren<{
@@ -10,7 +10,7 @@ export type FormGroupProps = PropsWithChildren<{
 
 export const FormGroup: FC<FormGroupProps> = ({ className, label, children }) => (
   <Flex
-    className={classNames('relative !gap-4 rounded-lg border p-4 dark:border-slate-300', className)}
+    className={cn('relative !gap-4 rounded-lg border p-4 dark:border-slate-300', className)}
     direction="column"
     fullWidth
   >

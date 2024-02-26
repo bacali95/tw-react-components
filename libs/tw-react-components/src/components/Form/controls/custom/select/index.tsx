@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { CheckIcon, ChevronDownIcon } from 'lucide-react';
 import {
   ChangeEvent,
@@ -11,6 +10,7 @@ import {
   useState,
 } from 'react';
 
+import { cn } from '../../../../../helpers';
 import { Block } from '../../../../Block';
 import { Flex } from '../../../../Flex';
 import { List } from '../../../../List';
@@ -199,12 +199,9 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     const RenderOption = (option: SelectItem<T>) => (
       <List.Item
         key={option.id}
-        className={classNames(
-          'w-full cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/40',
-          {
-            'bg-slate-300 dark:bg-slate-900': !!selectedMap[option.id],
-          }
-        )}
+        className={cn('w-full cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/40', {
+          'bg-slate-300 dark:bg-slate-900': !!selectedMap[option.id],
+        })}
         size={props.size}
         onClick={() => handleOnSelect(option.id)}
       >
@@ -218,7 +215,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     return (
       <Block className="contents" ref={containerRef}>
         <Popover open={open} onOpenChange={setOpen}>
-          <Popover.Trigger className={classNames(className, 'w-full')}>
+          <Popover.Trigger className={cn('w-full', className)}>
             <TextInput
               className="[&>div>*]:cursor-pointer"
               inputClassName="text-left"
@@ -257,10 +254,10 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               ) : (
                 <div className="p-2 text-center text-slate-500">No items.</div>
               ))}
-            <Flex className="gap-1 overflow-auto px-1" direction="column" fullWidth noGap>
+            <Flex className="gap-1 overflow-auto px-1" direction="column" fullWidth>
               {filteredItems.map((item, index) =>
                 item.group ? (
-                  <Flex key={item.id} className="gap-1" direction="column" fullWidth noGap>
+                  <Flex key={item.id} className="gap-1" direction="column" fullWidth>
                     <List.Label
                       className="sticky top-0 z-[51] w-full rounded-md bg-slate-200 px-2 py-1 dark:bg-slate-700"
                       size={props.size}

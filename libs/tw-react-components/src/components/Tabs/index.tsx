@@ -1,6 +1,7 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import classNames from 'classnames';
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+
+import { cn } from '../../helpers';
 
 const $Tabs = TabsPrimitive.Root;
 
@@ -10,7 +11,7 @@ const TabsList = forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
-    className={classNames(
+    className={cn(
       'inline-flex h-9 w-full items-center justify-center rounded-lg bg-slate-100 p-1 text-slate-400 dark:bg-slate-700 ',
       className
     )}
@@ -25,7 +26,7 @@ const TabsTrigger = forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Trigger
     ref={ref}
-    className={classNames(
+    className={cn(
       'inline-flex w-full items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50',
       'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow dark:data-[state=active]:bg-slate-900 dark:data-[state=active]:text-white',
       className
@@ -39,7 +40,7 @@ const TabsContent = forwardRef<
   ElementRef<typeof TabsPrimitive.Content>,
   ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content ref={ref} className={classNames('mt-2', className)} {...props} />
+  <TabsPrimitive.Content ref={ref} className={cn('mt-2', className)} {...props} />
 ));
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 

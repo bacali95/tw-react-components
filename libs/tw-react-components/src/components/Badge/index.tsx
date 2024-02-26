@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { LucideIcon } from 'lucide-react';
 import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
 
+import { cn } from '../../helpers';
 import { Size } from '../types';
 
 export type BadgeVariant =
@@ -141,8 +141,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
     ref
   ) => (
     <div
-      className={classNames(
-        className,
+      className={cn(
         'relative flex items-center rounded-full dark:text-white',
         sizeClassNames[size].base,
         variantClassNames[variant][outline ? 'outline' : 'base'],
@@ -151,7 +150,8 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
           [`cursor-pointer ${variantClassNames[variant].hover} ${variantClassNames[variant].active}`]:
             !!props.onClick,
           [sizeClassNames[size].withChildren]: children,
-        }
+        },
+        className
       )}
       {...props}
       ref={ref}

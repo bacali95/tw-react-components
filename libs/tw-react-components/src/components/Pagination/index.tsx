@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -15,6 +14,7 @@ import {
   useMemo,
 } from 'react';
 
+import { cn } from '../../helpers';
 import { usePagination } from '../../hooks';
 import { Flex } from '../Flex';
 
@@ -99,7 +99,7 @@ const PaginationItem: FC<
   PropsWithoutRef<ComponentProps<'div'> & { active?: boolean; disabled?: boolean }>
 > = ({ children, active, disabled, ...props }) => (
   <Flex
-    className={classNames('h-10 w-10 first:rounded-l-md last:rounded-r-md', {
+    className={cn('h-10 w-10 first:rounded-l-md last:rounded-r-md', {
       'opacity-50': disabled,
       'bg-slate-100 dark:bg-slate-700': active,
       'cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700': !disabled && props.onClick,

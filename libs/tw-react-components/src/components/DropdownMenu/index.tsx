@@ -1,8 +1,8 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import classNames from 'classnames';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
 
+import { cn } from '../../helpers';
 import { List } from '../List';
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -124,10 +124,7 @@ DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
 
 const DropdownMenuShortcut = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => {
   return (
-    <span
-      className={classNames('ml-auto text-xs tracking-widest text-slate-500', className)}
-      {...props}
-    />
+    <span className={cn('ml-auto text-xs tracking-widest text-slate-500', className)} {...props} />
   );
 };
 DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';

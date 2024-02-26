@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
   ArrowUpDownIcon,
   ChevronsDownUpIcon,
@@ -11,6 +10,7 @@ import {
 } from 'lucide-react';
 import { ComponentProps, FC, MouseEvent, ReactNode, useMemo, useRef, useState } from 'react';
 
+import { cn } from '../../helpers';
 import { generalComparator, resolveTargetObject } from '../../helpers';
 import { Button, ButtonProps } from '../Button';
 import { Flex } from '../Flex';
@@ -198,7 +198,7 @@ export function DataTable<T>({
           {_columns.map((column, columnIndex) => (
             <Table.HeadCell
               key={columnIndex}
-              className={classNames('group relative', {
+              className={cn('group relative', {
                 'cursor-pointer': !isLoading && sorting && !column.noSorting,
               })}
               align="center"
@@ -227,7 +227,7 @@ export function DataTable<T>({
         {isLoading && (
           <Table.Row>
             <Table.Cell
-              className={classNames('z-10 h-full w-full !p-0', {
+              className={cn('z-10 h-full w-full !p-0', {
                 absolute: rows.length,
               })}
               colSpan={columnsLength}
@@ -248,7 +248,7 @@ export function DataTable<T>({
         {rows.map((item, rowIndex) => [
           <Table.Row
             key={rowIndex}
-            className={classNames(
+            className={cn(
               {
                 'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900':
                   onRowClick || rowExtraContent,

@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
+
+import { cn } from '../../helpers';
 
 export type BlockProps = PropsWithoutRef<
   ComponentProps<'div'> & {
@@ -14,12 +15,12 @@ export type BlockProps = PropsWithoutRef<
 export const Block = forwardRef<HTMLDivElement, BlockProps>(
   ({ children, className, centered, container, fullWidth, fullHeight, ...props }, ref) => (
     <div
-      className={classNames(
-        className,
+      className={cn(
         centered && 'mx-auto',
         container && 'container',
         fullWidth && 'w-full',
-        fullHeight && 'h-full'
+        fullHeight && 'h-full',
+        className
       )}
       {...props}
       ref={ref}

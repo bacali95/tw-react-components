@@ -1,8 +1,8 @@
-import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import { type SidebarItem } from '.';
+import { cn } from '../../helpers';
 import { Tooltip } from '../Tooltip';
 
 export type SidebarItemProps = SidebarItem & {
@@ -35,7 +35,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
   return (
     <ItemWrapper title={title}>
       <Link
-        className={classNames(
+        className={cn(
           'flex h-10 w-full cursor-pointer items-center overflow-hidden rounded-md p-2 font-medium',
           {
             'gap-2': sidebarOpen,

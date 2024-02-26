@@ -1,17 +1,18 @@
-import classNames from 'classnames';
 import { FC } from 'react';
+
+import { cn } from '../../helpers';
 
 type Props = { className?: string; fullScreen?: boolean };
 
 export const Spinner: FC<Props> = ({ className, fullScreen }) => (
   <div
-    className={classNames(
-      className,
+    className={cn(
       'flex w-full items-center justify-center bg-white dark:bg-slate-800',
       {
         'h-screen': fullScreen,
         'h-full': !fullScreen,
-      }
+      },
+      className
     )}
   >
     <svg

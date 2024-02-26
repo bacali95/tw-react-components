@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { LucideIcon } from 'lucide-react';
 import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
 
+import { cn } from '../../helpers';
 import { Size } from '../types';
 
 export type ButtonVariant = 'default' | 'inverse' | 'green' | 'yellow' | 'red';
@@ -93,8 +93,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => (
     <button
-      className={classNames(
-        className,
+      className={cn(
         'relative flex cursor-pointer items-center',
         rounded ? 'rounded-full' : 'rounded-md',
         sizeClassNames[size].base,
@@ -104,7 +103,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [sizeClassNames[size].withChildren]: children,
           [variantClassNames[variant].hover]: !props.disabled,
           [variantClassNames[variant].active]: !props.disabled,
-        }
+        },
+        className
       )}
       type="button"
       {...props}

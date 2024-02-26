@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { LucideIcon, XIcon } from 'lucide-react';
 import {
   ChangeEvent,
@@ -13,6 +12,7 @@ import {
   useMemo,
 } from 'react';
 
+import { cn } from '../../../../helpers';
 import { Size } from '../../../types';
 import { Label } from '../Label';
 
@@ -157,10 +157,10 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
   };
 
   return (
-    <div className={classNames(className, 'w-full dark:text-white')}>
+    <div className={cn('w-full dark:text-white', className)}>
       {type !== 'checkbox' && memoLabel}
       <div
-        className={classNames('group relative flex', {
+        className={cn('group relative flex', {
           'mt-1': label && type !== 'checkbox',
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
@@ -169,8 +169,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         {type === 'textarea' ? (
           <textarea
             id={id}
-            className={classNames(
-              inputClassName,
+            className={cn(
               classes.base.input,
               sizeClasses[size].input.replace(/ h-\d/g, ''),
               {
@@ -178,7 +177,8 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
                 [classes.withoutErrors.input]: !hasErrors,
                 [classes.withErrors.input]: hasErrors,
                 'rounded-r-none border-r-0': SuffixIcon,
-              }
+              },
+              inputClassName
             )}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
@@ -187,14 +187,14 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         ) : type === 'checkbox' ? (
           <input
             id={id}
-            className={classNames(
-              inputClassName,
+            className={cn(
               'rounded border-slate-300 text-blue-600',
               sizeClasses[size].checkbox.input,
               {
                 [classes.base.disabled]: props.disabled,
                 'bg-red-100': hasErrors,
-              }
+              },
+              inputClassName
             )}
             type={type}
             checked={Boolean(props.value)}
@@ -204,12 +204,17 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         ) : (
           <input
             id={id}
-            className={classNames(inputClassName, classes.base.input, sizeClasses[size].input, {
-              [classes.base.disabled]: props.disabled,
-              [classes.withoutErrors.input]: !hasErrors,
-              [classes.withErrors.input]: hasErrors,
-              'rounded-r-none border-r-0': SuffixIcon,
-            })}
+            className={cn(
+              classes.base.input,
+              sizeClasses[size].input,
+              {
+                [classes.base.disabled]: props.disabled,
+                [classes.withoutErrors.input]: !hasErrors,
+                [classes.withErrors.input]: hasErrors,
+                'rounded-r-none border-r-0': SuffixIcon,
+              },
+              inputClassName
+            )}
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
             value={props.value}
@@ -219,7 +224,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
         {type === 'checkbox' && memoLabel}
         {clearable && (onClear || !!props.value) && !props.disabled && (
           <XIcon
-            className={classNames(
+            className={cn(
               'absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-0.5 opacity-0 duration-200 hover:bg-slate-200 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-800',
               sizeClasses[size].clearButton.base,
               {
@@ -255,8 +260,7 @@ export const BasicInputExtension: FC<
   }>
 > = ({ children, className, size, hasErrors, disabled, onClick }) => (
   <div
-    className={classNames(
-      className,
+    className={cn(
       'flex aspect-square items-center justify-center rounded-r-md border peer-focus:ring-1 dark:bg-slate-700',
       sizeClasses[size].suffix.wrapper,
       {
@@ -264,7 +268,8 @@ export const BasicInputExtension: FC<
         [classes.withoutErrors.extension]: !hasErrors,
         [classes.withErrors.extension]: hasErrors,
         'cursor-pointer': onClick,
-      }
+      },
+      className
     )}
     onClick={!disabled ? onClick : undefined}
   >

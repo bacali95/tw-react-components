@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
 import { compareDates } from '../../../../../helpers';
+import { cn } from '../../../../../helpers';
 
 type YearsViewProps = {
   date: Date;
@@ -66,17 +66,14 @@ const Year: FC<YearProps> = ({ date, value, year, minDate, maxDate, selectYear }
 
   return (
     <div
-      className={classNames(
-        'mx-auto flex w-14 items-center justify-center rounded border py-3 text-sm',
-        {
-          'border-blue-500': isEqualThisYear,
-          'border-transparent': !isEqualThisYear,
-          'bg-blue-500 text-white': isSelected,
-          'cursor-pointer': isSelectable,
-          'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
-          'text-slate-400 dark:text-slate-500': !isSelectable,
-        }
-      )}
+      className={cn('mx-auto flex w-14 items-center justify-center rounded border py-3 text-sm', {
+        'border-blue-500': isEqualThisYear,
+        'border-transparent': !isEqualThisYear,
+        'bg-blue-500 text-white': isSelected,
+        'cursor-pointer': isSelectable,
+        'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
+        'text-slate-400 dark:text-slate-500': !isSelectable,
+      })}
       onClick={isSelectable ? selectYear(year) : undefined}
     >
       {year}
