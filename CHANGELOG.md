@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.105](https://github.com/back-n-soft/tw-react-components/compare/v0.0.104...v0.0.105) (2024-02-26)
+
+
+### Bug Fixes
+
+* update table styling ([1aa8203](https://github.com/back-n-soft/tw-react-components/commit/1aa82039ea36b854b58d251a1b56dfeecb9c6543))
+
 ### [0.0.104](https://github.com/back-n-soft/tw-react-components/compare/v0.0.103...v0.0.104) (2024-02-26)
 
 
