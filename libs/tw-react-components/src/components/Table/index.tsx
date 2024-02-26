@@ -38,7 +38,7 @@ const TableHeadCell: FC<ComponentProps<'th'>> = ({ children, className, ...props
 const TableBody: FC<ComponentProps<'tbody'>> = ({ children, className, ...props }) => (
   <tbody
     className={cn(
-      'divide-y divide-slate-200 bg-white dark:divide-slate-700 dark:bg-slate-800',
+      'divide-y divide-slate-200 bg-slate-50 dark:divide-slate-700 dark:bg-slate-800',
       className
     )}
     {...props}

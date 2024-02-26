@@ -4,7 +4,6 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 import { FC, useMemo, useState } from 'react';
 
 import {
-  Card,
   DataTable,
   DataTableColumns,
   DataTablePageSize,
