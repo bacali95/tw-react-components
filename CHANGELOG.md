@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.108](https://github.com/back-n-soft/tw-react-components/compare/v0.0.107...v0.0.108) (2024-02-28)
+
+
+### Bug Fixes
+
+* fix list styling ([e2208af](https://github.com/back-n-soft/tw-react-components/commit/e2208af7aa7205675bf20dac9a871dcc5dde1fc7))
+
 ### [0.0.107](https://github.com/back-n-soft/tw-react-components/compare/v0.0.106...v0.0.107) (2024-02-28)
 
 
