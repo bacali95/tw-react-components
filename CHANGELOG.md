@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.107](https://github.com/back-n-soft/tw-react-components/compare/v0.0.106...v0.0.107) (2024-02-28)
+
+
+### Bug Fixes
+
+* fix table cell padding ([715e7e1](https://github.com/back-n-soft/tw-react-components/commit/715e7e1440f3e02721c77cb15b8bf41409f0a0fb))
+
 ### [0.0.106](https://github.com/back-n-soft/tw-react-components/compare/v0.0.105...v0.0.106) (2024-02-28)
 
 
