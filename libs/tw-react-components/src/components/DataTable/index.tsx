@@ -201,7 +201,7 @@ export function DataTable<T>({
               className={cn('group relative', {
                 'cursor-pointer': !isLoading && sorting && !column.noSorting,
               })}
-              align="center"
+              align={column.align ?? 'left'}
               onClick={
                 !isLoading && sorting && !column.noSorting
                   ? handleSorting(column.field, column.comparator)
@@ -271,7 +271,7 @@ export function DataTable<T>({
               <Table.Cell
                 key={columnIndex}
                 className={column.className}
-                align={column.align ?? 'center'}
+                align={column.align ?? 'left'}
               >
                 {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
               </Table.Cell>
