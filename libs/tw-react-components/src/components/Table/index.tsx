@@ -30,7 +30,7 @@ const TableHead: FC<ComponentProps<'thead'>> = ({ children, className, ...props 
 );
 
 const TableHeadCell: FC<ComponentProps<'th'>> = ({ children, className, ...props }) => (
-  <th className={cn('p-2 font-medium', className)} {...props}>
+  <th className={cn('px-4 py-2 font-medium', className)} {...props}>
     {children}
   </th>
 );
@@ -52,7 +52,7 @@ const TableRow: FC<ComponentProps<'tr'>> = ({ children, ...props }) => (
 );
 
 const TableCell: FC<ComponentProps<'td'>> = ({ children, className, ...props }) => (
-  <td className={cn('p-2', className)} {...props}>
+  <td className={cn('px-4 py-2', className)} {...props}>
     {children}
   </td>
 );
