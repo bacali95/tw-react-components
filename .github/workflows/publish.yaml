@@ -41,7 +41,7 @@ jobs:
         run: yarn nx run tw-react-components:lint
 
       - name: Check the prettiness of the code 💅
-        run: yarn prettier -c .
+        run: yarn prettier:check
 
       - name: Run unit tests 🧪
         run: yarn nx run tw-react-components:test

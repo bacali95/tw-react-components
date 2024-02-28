@@ -82,9 +82,9 @@ const ListIndicator = forwardRef<
   </Flex>
 ));
 
-const ListIcon = forwardRef<SVGSVGElement, { className?:string; icon: LucideIcon }>(({ className, icon: Icon }, ref) => (
-  <Icon className={cn("h-4 w-4", className)} ref={ref} />
-));
+const ListIcon = forwardRef<SVGSVGElement, { className?: string; icon: LucideIcon }>(
+  ({ className, icon: Icon }, ref) => <Icon className={cn('h-4 w-4', className)} ref={ref} />
+);
 
 const ListSeparator = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
   ({ className, ...props }, ref) => (
