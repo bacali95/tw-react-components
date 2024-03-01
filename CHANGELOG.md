@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.111](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.110...v0.0.111) (2024-03-01)
+
+
+### Bug Fixes
+
+* fix sidebar overlay ([ded1c85](https://github.com/NaN-Projects/tw-react-components/commit/ded1c855a006f35784f6af7ad88bd1c5e3ad2f9f))
+
 ### [0.0.110](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.109...v0.0.110) (2024-03-01)
 
 
