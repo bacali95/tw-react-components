@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useLayoutContext } from '../../contexts';
 import { cn } from '../../helpers';
 import { Button } from '../Button';
+import { Flex } from '../Flex';
 import { SidebarItemComp } from './SidebarItem';
 
 export type SidebarItem = {
@@ -24,12 +25,13 @@ export type SidebarProps = {
   basePath?: string;
   smallLogo?: ReactNode;
   fullLogo?: ReactNode;
+  footer?: ReactNode;
 };
 
 export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
-  ({ className, items, basePath = '/', smallLogo, fullLogo }, ref) => {
+  ({ className, items, basePath = '/', smallLogo, fullLogo, footer }, ref) => {
     const location = useLocation();
-    const { sidebarOpen, toggleSidebar } = useLayoutContext();
+    const { sidebarOpen, setSidebarOpen } = useLayoutContext();
 
     const currentPath = useMemo(
       () => location.pathname.replace(basePath, '').replace(/^\/*/, ''),
@@ -50,8 +52,8 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         />
         <nav
           className={cn(
-            'fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 transition-all duration-200 ease-in-out xl:relative dark:bg-slate-900',
-            'border-r border-slate-100 data-[open=false]:-translate-x-full xl:data-[open=false]:w-16 xl:data-[open=true]:w-72 xl:data-[open=false]:translate-x-0 xl:data-[open=false]:hover:w-56 dark:border-slate-700/80',
+            'group/navbar fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 transition-all duration-200 ease-in-out xl:relative dark:bg-slate-900',
+            'border-r border-slate-100 data-[open=false]:-translate-x-full xl:data-[open=false]:w-16 xl:data-[open=true]:w-72 xl:data-[open=false]:translate-x-0 xl:data-[open=false]:hover:w-72 dark:border-slate-700/80',
             className
           )}
           data-open={sidebarOpen}
@@ -95,8 +97,14 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                           sidebarOpen={sidebarOpen}
                         />
 
-                        {sidebarOpen && item.items && (
-                          <ChevronRightIcon className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200" />
+                        {item.items && (
+                          <ChevronRightIcon
+                            className={cn(
+                              'absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 rotate-[var(--rotate-chevron,0deg)] transition-transform duration-200',
+                              !sidebarOpen && 'invisible',
+                              'group-hover/navbar:visible'
+                            )}
+                          />
                         )}
                       </Accordion.Trigger>
                     </Accordion.Header>
@@ -127,12 +135,15 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                 )
             )}
           </Accordion.Root>
-          <Button
-            className="invisible mt-auto justify-center xl:visible"
-            prefixIcon={OpenCloseIcon}
-            transparent
-            onClick={toggleSidebar}
-          />
+          <Flex className="mt-auto" direction="column" fullWidth>
+            {footer}
+            <Button
+              className="invisible w-full justify-center xl:visible"
+              prefixIcon={OpenCloseIcon}
+              transparent
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            />
+          </Flex>
         </nav>
       </>
     );

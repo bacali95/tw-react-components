@@ -4,14 +4,14 @@ export type LayoutContext = {
   theme: ThemeState;
   sidebarOpen: boolean;
   toggleTheme: () => void;
-  toggleSidebar: () => void;
+  setSidebarOpen: (open: boolean) => void;
 };
 
 export const LayoutContext = createContext<LayoutContext | undefined>(undefined);
 
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(getValueFromLocalStorage<ThemeState>(THEME_KEY, 'light'));
-  const [sidebarOpen, setSidebarOpen] = useState(
+  const [sidebarOpen, _setSidebarOpen] = useState(
     getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true)
   );
 
@@ -35,15 +35,15 @@ export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
-  const toggleSidebar = () =>
-    setSidebarOpen((sidebar) => {
-      window.localStorage.setItem(SIDEBAR_KEY, String(!sidebar));
+  const setSidebarOpen = (open: boolean) =>
+    _setSidebarOpen(() => {
+      window.localStorage.setItem(SIDEBAR_KEY, String(open));
 
-      return !sidebar;
+      return open;
     });
 
   return (
-    <LayoutContext.Provider value={{ theme, toggleTheme, sidebarOpen, toggleSidebar }}>
+    <LayoutContext.Provider value={{ theme, toggleTheme, sidebarOpen, setSidebarOpen }}>
       {children}
     </LayoutContext.Provider>
   );

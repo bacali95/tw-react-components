@@ -94,7 +94,7 @@ export const App: FC = () => {
       <Route
         path=""
         element={
-          <Layout sidebarProps={sidebarProps} navbarChildren={<ThemeSwitcher />}>
+          <Layout sidebarProps={sidebarProps} navbarProps={{ rightSlot: <ThemeSwitcher /> }}>
             <Outlet />
           </Layout>
         }
