@@ -24,7 +24,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
 
   useOutsideClick(
     sidebarRef,
-    () => sidebarOpen && window.document.documentElement.offsetWidth < 768 && toggleSidebar()
+    () => sidebarOpen && window.document.documentElement.offsetWidth <= 1024 && toggleSidebar()
   );
 
   return (

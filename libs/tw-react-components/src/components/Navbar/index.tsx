@@ -12,7 +12,13 @@ export const Navbar: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Block className="border-b border-slate-100 p-3 dark:border-slate-700/80" fullWidth>
       <Flex align="center" justify="between">
-        <Button className="md:hidden" prefixIcon={MenuIcon} transparent onClick={toggleSidebar} />
+        <Button
+          className="xl:hidden"
+          size="small"
+          prefixIcon={MenuIcon}
+          transparent
+          onClick={toggleSidebar}
+        />
         <Flex className="ml-auto gap-2" align="center">
           {children}
         </Flex>

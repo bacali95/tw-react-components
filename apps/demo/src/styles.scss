@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-size: 0.8125rem;
+  @apply text-[12px] 2xl:text-[14px];
 
   ::-webkit-scrollbar {
     @apply h-1 w-1 bg-gray-100;

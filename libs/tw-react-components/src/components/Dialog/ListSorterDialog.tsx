@@ -2,6 +2,7 @@ import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { ArrowUpDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { cn } from '../../helpers';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { ListSorter, ListSorterItem, ListSorterProps } from '../ListSorter';
@@ -60,7 +61,7 @@ export function ListSorterDialog<T extends ListSorterItem>({
   return (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
       <Dialog.Content
-        className={className}
+        className={cn('max-h-[90dvh]', className)}
         onPointerDownOutside={(event) => event.preventDefault()}
       >
         <Dialog.Header>{title}</Dialog.Header>
