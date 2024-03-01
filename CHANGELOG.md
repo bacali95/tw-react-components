@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.112](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.111...v0.0.112) (2024-03-01)
+
+
+### Bug Fixes
+
+* fix dialog small screens design ([8ca8c6c](https://github.com/NaN-Projects/tw-react-components/commit/8ca8c6ced3debef5087d2c1ddbfe5a2bdf8b6746))
+
 ### [0.0.111](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.110...v0.0.111) (2024-03-01)
 
 
