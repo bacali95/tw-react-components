@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.114](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.113...v0.0.114) (2024-03-01)
+
+
+### Bug Fixes
+
+* fix ui ([75243f7](https://github.com/NaN-Projects/tw-react-components/commit/75243f79c4affc71d8a4d93ee6dbb362f5f2e11e))
+
 ### [0.0.113](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.112...v0.0.113) (2024-03-01)
 
 
