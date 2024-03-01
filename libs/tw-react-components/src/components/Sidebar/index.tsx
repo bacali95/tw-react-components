@@ -45,7 +45,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
     return (
       <>
         <div
-          className="absolute left-0 top-0 h-full w-full backdrop-blur-sm transition-opacity data-[open=true]:z-50 data-[open=false]:opacity-0 data-[open=true]:opacity-100 xl:hidden"
+          className="absolute left-0 top-0 h-full w-full backdrop-blur-sm transition-opacity data-[open=true]:z-50 data-[open=false]:hidden data-[open=false]:opacity-0 data-[open=true]:opacity-100 xl:hidden"
           data-open={sidebarOpen}
         />
         <nav
