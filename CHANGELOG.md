@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.115](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.114...v0.0.115) (2024-03-03)
+
+
+### Features
+
+* Add hint component ([c0e10fb](https://github.com/NaN-Projects/tw-react-components/commit/c0e10fbc38288527d78d4db74950529525346860))
+
 ### [0.0.114](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.113...v0.0.114) (2024-03-01)
 
 
