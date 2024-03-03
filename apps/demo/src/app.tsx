@@ -7,6 +7,7 @@ import {
   LayersIcon,
   MenuIcon,
   RectangleHorizontalIcon,
+  SquareDotIcon,
   TableIcon,
   TextCursorIcon,
 } from 'lucide-react';
@@ -19,6 +20,7 @@ import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
 import { FormControls } from './pages/FormControls';
+import { Hints } from './pages/Hints';
 import { Home } from './pages/Home';
 import { Menus } from './pages/Menus';
 import { Tables } from './pages/Tables';
@@ -47,6 +49,11 @@ export const App: FC = () => {
               pathname: 'badges',
               title: 'Badges',
               Icon: BadgeIcon,
+            },
+            {
+              pathname: 'hints',
+              title: 'Hints',
+              Icon: SquareDotIcon,
             },
             {
               pathname: 'form-controls',
@@ -104,6 +111,7 @@ export const App: FC = () => {
           <Route path="" element={<Navigate to="buttons" replace />} />
           <Route path="buttons" element={<Buttons />} />
           <Route path="badges" element={<Badges />} />
+          <Route path="hints" element={<Hints />} />
           <Route path="form-controls" element={<FormControls />} />
           <Route path="*" element={<Navigate to="" replace />} />
         </Route>

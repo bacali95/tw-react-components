@@ -7,6 +7,7 @@ export * from './Dialog';
 export * from './DropdownMenu';
 export * from './Flex';
 export * from './Form';
+export * from './Hint';
 export * from './Layout';
 export * from './List';
 export * from './ListSorter';

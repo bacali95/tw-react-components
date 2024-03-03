@@ -60,9 +60,14 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
           ref={ref}
         >
           {smallLogo && fullLogo && (
-            <div className="mb-2 cursor-pointer p-2 py-3 text-center text-2xl">
+            <div className="mb-2 cursor-pointer overflow-hidden whitespace-nowrap p-2 py-3 text-center text-2xl">
               <Link to="/" target="_blank">
-                {sidebarOpen ? fullLogo : smallLogo}
+                <span className={cn('group-hover/navbar:block', !sidebarOpen && 'hidden')}>
+                  {fullLogo}
+                </span>
+                <span className={cn('group-hover/navbar:hidden', sidebarOpen && 'hidden')}>
+                  {smallLogo}
+                </span>
               </Link>
             </div>
           )}
