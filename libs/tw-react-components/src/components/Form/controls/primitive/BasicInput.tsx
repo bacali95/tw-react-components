@@ -37,20 +37,20 @@ export type BasicInputProps<Type extends InputType> = {
 
 const classes = {
   base: {
-    input: 'peer w-full border focus:ring-1 rounded-md shadow-sm overflow-hidden text-ellipsis',
+    input: 'peer w-full border focus:ring-0 rounded-md overflow-hidden text-ellipsis',
     disabled: 'opacity-60',
   },
   withoutErrors: {
     input:
-      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:!border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
+      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
     extension:
-      'border-slate-300 text-slate-600 peer-focus:border-blue-600 peer-focus:ring-blue-600 dark:border-slate-600 dark:text-white',
+      'border-slate-300 text-slate-600 peer-focus:border-blue-600 dark:border-slate-600 dark:text-white',
   },
   withErrors: {
     input:
-      '!border-red-600 dark:bg-slate-700 placeholder-red-900 !ring-red-600 dark:!border-red-500 dark:!placeholder-red-500 dark:!ring-red-600',
+      'border-red-600 placeholder-red-900 focus:border-red-600 dark:border-red-600 dark:placeholder-red-500 dark:bg-slate-700',
     extension:
-      'border-red-600 text-red-600 peer-focus:border-red-600 peer-focus:ring-red-600 dark:border-red-500 dark:text-red-500',
+      'border-red-600 text-red-600 peer-focus:border-red-600 dark:border-red-600 dark:text-red-500',
   },
 };
 
@@ -77,7 +77,7 @@ const sizeClasses: Record<
     },
     clearButton: {
       base: 'h-5 w-5',
-      withSuffixIcon: '!right-8',
+      withSuffixIcon: 'right-8',
     },
   },
   medium: {
@@ -93,7 +93,7 @@ const sizeClasses: Record<
     },
     clearButton: {
       base: 'h-6 w-6',
-      withSuffixIcon: '!right-12',
+      withSuffixIcon: 'right-12',
     },
   },
   large: {
@@ -109,7 +109,7 @@ const sizeClasses: Record<
     },
     clearButton: {
       base: 'h-7 w-7',
-      withSuffixIcon: '!right-16',
+      withSuffixIcon: 'right-16',
     },
   },
 };
@@ -153,7 +153,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
     event.stopPropagation();
 
     onClear?.();
-    !onClear && props.onChange?.({ target: { value: '', checked: false } } as ChangeEvent<any>);
+    props.onChange?.({ target: { value: '', checked: false } } as ChangeEvent<any>);
   };
 
   return (
@@ -261,7 +261,7 @@ export const BasicInputExtension: FC<
 > = ({ children, className, size, hasErrors, disabled, onClick }) => (
   <div
     className={cn(
-      'flex aspect-square items-center justify-center rounded-r-md border peer-focus:ring-1 dark:bg-slate-700',
+      'flex aspect-square items-center justify-center rounded-r-md border border-l-0 dark:bg-slate-700',
       sizeClasses[size].suffix.wrapper,
       {
         [classes.base.disabled]: disabled,
