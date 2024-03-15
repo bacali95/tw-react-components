@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.116](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.115...v0.0.116) (2024-03-15)
+
+
+### Bug Fixes
+
+* fix form inputs styling ([2fb5864](https://github.com/NaN-Projects/tw-react-components/commit/2fb5864a28cd00a778c94a769e7ae9327aae162b))
+
 ### [0.0.115](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.114...v0.0.115) (2024-03-03)
 
 
