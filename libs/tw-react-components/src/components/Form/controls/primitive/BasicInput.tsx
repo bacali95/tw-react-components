@@ -42,15 +42,15 @@ const classes = {
   },
   withoutErrors: {
     input:
-      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
+      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:border-blue-500 dark:focus:border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
     extension:
-      'border-slate-300 text-slate-600 peer-focus:border-blue-600 dark:border-slate-600 dark:text-white',
+      'border-slate-300 text-slate-600 peer-focus:border-blue-500 dark:peer-focus:border-blue-600 dark:border-slate-600 dark:text-white',
   },
   withErrors: {
     input:
-      'border-red-600 placeholder-red-900 focus:border-red-600 dark:border-red-600 dark:placeholder-red-500 dark:bg-slate-700',
+      'border-red-500 placeholder-red-500 focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:placeholder-red-600 dark:bg-slate-700',
     extension:
-      'border-red-600 text-red-600 peer-focus:border-red-600 dark:border-red-600 dark:text-red-500',
+      'border-red-500 text-red-600 peer-focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:text-red-500',
   },
 };
 
