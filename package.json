@@ -2,6 +2,7 @@
   "name": "tw-react-components",
   "version": "0.0.0",
   "license": "MIT",
+  "packageManager": "yarn@4.1.1",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
@@ -100,7 +101,7 @@
     "bumpFiles": "libs/tw-react-components/package.json"
   },
   "volta": {
-    "node": "18.18.0",
-    "yarn": "1.22.19"
+    "node": "20.11.1",
+    "yarn": "4.1.1"
   }
 }
