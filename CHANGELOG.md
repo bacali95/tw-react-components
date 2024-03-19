@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.118](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.117...v0.0.118) (2024-03-19)
+
+
+### Bug Fixes
+
+* stop swipe propagation conditionally ([4795a44](https://github.com/NaN-Projects/tw-react-components/commit/4795a44bbbe519f35e4da517ca45d2990d7442e7))
+
 ### [0.0.117](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.116...v0.0.117) (2024-03-16)
 
 
