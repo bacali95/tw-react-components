@@ -17,15 +17,11 @@ export function useOnSwipe(
       touchEndY = 0;
 
     const onTouchStart = (event: TouchEvent) => {
-      event.stopPropagation();
-
       touchStartX = event.targetTouches[0].clientX;
       touchStartY = event.targetTouches[0].clientY;
     };
 
     const onTouchMove = (event: TouchEvent) => {
-      event.stopPropagation();
-
       touchEndX = event.targetTouches[0].clientX;
       touchEndY = event.targetTouches[0].clientY;
     };
