@@ -4,7 +4,7 @@ type SwipeDirection = 'up' | 'left' | 'bottom' | 'right';
 
 export function useOnSwipe(
   element: RefObject<HTMLElement>,
-  onSwipe: (direction: SwipeDirection) => void,
+  onSwipe: (direction: SwipeDirection) => any | false,
   minSwipeDistance = 50
 ) {
   useEffect(() => {
@@ -31,19 +31,21 @@ export function useOnSwipe(
     };
 
     const onTouchEnd = (event: TouchEvent) => {
-      event.stopPropagation();
-
       const distanceX = touchEndX - touchStartX;
       const distanceY = touchEndY - touchStartY;
 
       if (Math.abs(distanceX) > minSwipeDistance && Math.abs(distanceY) > minSwipeDistance) return;
 
       if (Math.abs(distanceX) > minSwipeDistance) {
-        onSwipe(distanceX > 0 ? 'right' : 'left');
+        if (onSwipe(distanceX > 0 ? 'right' : 'left') !== false) {
+          event.stopPropagation();
+        }
       }
 
       if (Math.abs(distanceY) > minSwipeDistance) {
-        onSwipe(distanceY > 0 ? 'bottom' : 'up');
+        if (onSwipe(distanceY > 0 ? 'bottom' : 'up') !== false) {
+          event.stopPropagation();
+        }
       }
     };
 
