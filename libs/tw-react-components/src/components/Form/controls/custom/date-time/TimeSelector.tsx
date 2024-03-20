@@ -34,7 +34,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
   const increaseMinutes = useLongPress(editDateField('minutes', step));
   const decreaseMinutes = useLongPress(editDateField('minutes', -step));
   const onWheel = (field: 'hours' | 'minutes') => (event: WheelEvent<HTMLSpanElement>) =>
-    editDateField(field, event.deltaY < 0 ? step : -step)();
+    editDateField(field, (event.deltaY < 0 ? 1 : -1) * (field === 'hours' ? 1 : step))();
 
   return (
     <>
