@@ -16,6 +16,7 @@ export type DateTimeInputProps = {
   type?: DateTimeInputType;
   hasErrors?: boolean;
   clearable?: boolean;
+  step?: number;
   minDate?: Date;
   maxDate?: Date;
   displayFormat?: string;
@@ -44,6 +45,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
       value,
       clearable,
       type = 'datetime-local',
+      step = 1,
       minDate,
       maxDate,
       hasErrors,
@@ -58,18 +60,20 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
     const [isOpen, setIsOpen] = useState<boolean>();
     const [calendarView, setCalendarView] = useState<View>('days');
 
-    const date = useMemo(
-      () =>
-        value
-          ? new Date(value)
-          : new Date(
-              Math.min(
-                Math.max(new Date(minDate ?? Date.now()).getTime(), Date.now()),
-                new Date(maxDate ?? Date.now()).getTime()
-              )
-            ),
-      [maxDate, minDate, value]
-    );
+    const date = useMemo(() => {
+      const result = value
+        ? new Date(value)
+        : new Date(
+            Math.min(
+              Math.max(new Date(minDate ?? Date.now()).getTime(), Date.now()),
+              new Date(maxDate ?? Date.now()).getTime()
+            )
+          );
+
+      result.setMinutes(result.getMinutes() - ((result.getMinutes() + step) % step));
+
+      return result;
+    }, [step, maxDate, minDate, value]);
     const displayDate = useMemo(
       () => value && getDisplayDate(date, displayFormat, displayLocale),
       [date, value, displayFormat, displayLocale]
@@ -135,7 +139,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
           hasErrors={hasErrors}
           onClick={handleOnClick}
           onKeyUp={handleOnKeyUp}
-          clearable={!!displayDate}
+          clearable={clearable && !!displayDate}
           onClear={clearDate}
           suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
         />
@@ -164,6 +168,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
                 {type?.includes('time') && (
                   <TimeSelector
                     date={date}
+                    step={step}
                     minDate={minDate}
                     maxDate={maxDate}
                     setNewDate={setNewDate}

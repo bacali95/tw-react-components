@@ -112,6 +112,7 @@ export const FormControls: FC = () => {
                 label="DateTime"
                 placeholder="Select date..."
                 displayFormat="DD-MM-YYYY [at] HH:mm"
+                step={5}
                 minDate={new Date(2010, 1, 5, 13, 44)}
                 maxDate={new Date(2030, 4, 5, 13, 44)}
                 size={inputSize}

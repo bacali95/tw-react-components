@@ -7,13 +7,20 @@ import { useLongPress } from '../../../../../hooks';
 
 type TimeSelectorProps = {
   date: Date;
+  step?: number;
   minDate?: Date;
   maxDate?: Date;
   setNewDate: (date: Date) => void;
 };
 
-export const TimeSelector: FC<TimeSelectorProps> = ({ date, minDate, maxDate, setNewDate }) => {
-  const editDateField = (field: 'hours' | 'minutes', diff: 1 | -1) => () => {
+export const TimeSelector: FC<TimeSelectorProps> = ({
+  date,
+  step = 1,
+  minDate,
+  maxDate,
+  setNewDate,
+}) => {
+  const editDateField = (field: 'hours' | 'minutes', diff: number) => () => {
     const newDate = dayjs(date).add(diff, field).toDate();
 
     if (minDate && compareDates(newDate, new Date(minDate), 'minute') < 0) return;
@@ -24,10 +31,10 @@ export const TimeSelector: FC<TimeSelectorProps> = ({ date, minDate, maxDate, se
 
   const increaseHours = useLongPress(editDateField('hours', 1));
   const decreaseHours = useLongPress(editDateField('hours', -1));
-  const increaseMinutes = useLongPress(editDateField('minutes', 1));
-  const decreaseMinutes = useLongPress(editDateField('minutes', -1));
+  const increaseMinutes = useLongPress(editDateField('minutes', step));
+  const decreaseMinutes = useLongPress(editDateField('minutes', -step));
   const onWheel = (field: 'hours' | 'minutes') => (event: WheelEvent<HTMLSpanElement>) =>
-    editDateField(field, event.deltaY < 0 ? 1 : -1)();
+    editDateField(field, event.deltaY < 0 ? step : -step)();
 
   return (
     <>
@@ -57,12 +64,12 @@ export const TimeSelector: FC<TimeSelectorProps> = ({ date, minDate, maxDate, se
         <div className="flex flex-col items-center justify-center">
           <ChevronUpIcon
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
-            onClick={editDateField('minutes', 1)}
+            onClick={editDateField('minutes', step)}
             {...increaseMinutes}
           />
           <ChevronDownIcon
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
-            onClick={editDateField('minutes', -1)}
+            onClick={editDateField('minutes', -step)}
             {...decreaseMinutes}
           />
         </div>

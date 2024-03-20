@@ -94,7 +94,7 @@ const sizeClassNames: Record<
 > = {
   small: {
     base: 'gap-1.5 p-1.5 text-sm h-7',
-    withChildren: 'px-3',
+    withChildren: 'px-2',
     icon: {
       base: 'h-4 w-4',
       withChildren: 'h-3 w-3',
@@ -102,7 +102,7 @@ const sizeClassNames: Record<
   },
   medium: {
     base: 'gap-2 p-2.5 text-base h-10',
-    withChildren: 'px-4',
+    withChildren: 'px-3',
     icon: {
       base: 'h-5 w-5',
       withChildren: 'h-4 w-4',
@@ -110,7 +110,7 @@ const sizeClassNames: Record<
   },
   large: {
     base: 'gap-2.5 p-3.5 text-xl h-14',
-    withChildren: 'px-5',
+    withChildren: 'px-4',
     icon: {
       base: 'h-7 w-7',
       withChildren: 'h-5 w-5',
