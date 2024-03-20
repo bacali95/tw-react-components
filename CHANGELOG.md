@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.121](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.120...v0.0.121) (2024-03-20)
+
+
+### Bug Fixes
+
+* fix timeselector ([0f7fef5](https://github.com/NaN-Projects/tw-react-components/commit/0f7fef593b43fc3553d66a94e015d173adffa7c1))
+
 ### [0.0.120](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.119...v0.0.120) (2024-03-20)
 
 
