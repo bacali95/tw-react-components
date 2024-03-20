@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.120](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.119...v0.0.120) (2024-03-20)
+
+
+### Features
+
+* add step prop to datetime selector ([5231092](https://github.com/NaN-Projects/tw-react-components/commit/52310922c04132572644ca3c6fa9243a76a05686))
+
 ### [0.0.119](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.118...v0.0.119) (2024-03-19)
 
 
