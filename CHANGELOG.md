@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.122](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.121...v0.0.122) (2024-03-24)
+
+
+### Bug Fixes
+
+* close sidebar on item click ([f057486](https://github.com/NaN-Projects/tw-react-components/commit/f0574867b5b0fb8a5a825c0873fa60675f57ce0d))
+
 ### [0.0.121](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.120...v0.0.121) (2024-03-20)
 
 
