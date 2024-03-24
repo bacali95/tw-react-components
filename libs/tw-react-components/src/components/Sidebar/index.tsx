@@ -10,7 +10,7 @@ import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { SidebarItemComp } from './SidebarItem';
 
-export type SidebarSeparator = { type: 'separator'; title?: string };
+export type SidebarSeparator = { type: 'separator'; title?: string; hidden?: boolean };
 
 export type SidebarItem = {
   type?: 'item';
@@ -78,21 +78,22 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
             </div>
           )}
           <Accordion.Root className="overflow-hidden" type="single" value={parentTab}>
-            {items.map((item, index) =>
-              item.type === 'separator' ? (
-                !item.title ? (
-                  <Block key={index} className="my-2 h-px bg-slate-300 dark:bg-slate-700/80" />
+            {items.map(
+              (item, index) =>
+                !item.hidden &&
+                (item.type === 'separator' ? (
+                  !item.title ? (
+                    <Block key={index} className="my-2 h-px bg-slate-300 dark:bg-slate-700/80" />
+                  ) : (
+                    <Block
+                      key={index}
+                      className="mb-2 mt-6 pl-2 text-sm font-bold text-slate-600 group-hover/navbar:block data-[open=false]:hidden dark:text-slate-500"
+                      data-open={sidebarOpen}
+                    >
+                      {item.title}
+                    </Block>
+                  )
                 ) : (
-                  <Block
-                    key={index}
-                    className="mb-2 mt-6 pl-2 text-sm font-bold text-slate-600 group-hover/navbar:block data-[open=false]:hidden dark:text-slate-500"
-                    data-open={sidebarOpen}
-                  >
-                    {item.title}
-                  </Block>
-                )
-              ) : (
-                !item.hidden && (
                   <Accordion.Item
                     key={item.pathname}
                     className={cn('flex flex-col rounded-md', {
@@ -157,8 +158,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                       </Accordion.Content>
                     )}
                   </Accordion.Item>
-                )
-              )
+                ))
             )}
           </Accordion.Root>
           <Flex className="mt-auto" direction="column" fullWidth>
