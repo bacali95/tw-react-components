@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.124](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.123...v0.0.124) (2024-03-24)
+
+
+### Bug Fixes
+
+* add hidden to sidebar separator ([6cc263f](https://github.com/NaN-Projects/tw-react-components/commit/6cc263f50c91c57806e7bf888c70e4f4f4e7a103))
+
 ### [0.0.123](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.122...v0.0.123) (2024-03-24)
 
 
