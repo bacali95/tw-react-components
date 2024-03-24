@@ -9,6 +9,7 @@ export type SidebarItemProps = SidebarItem & {
   isChild?: boolean;
   basePath: string;
   sidebarOpen: boolean;
+  onClick?: () => void;
 };
 
 export const SidebarItemComp: FC<SidebarItemProps> = ({
@@ -21,6 +22,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
   basePath,
   sidebarOpen,
   items,
+  onClick,
 }) => (
   <Link
     className={cn(
@@ -38,6 +40,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
       }
     )}
     to={[basePath, pathname].join('/').replace(/\/{2,}/g, '/')}
+    onClick={onClick}
   >
     <Icon className="h-5 w-5 min-w-min" size={16} />
     <div className="min-w-max">

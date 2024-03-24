@@ -100,6 +100,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                           }
                           basePath={basePath}
                           sidebarOpen={sidebarOpen}
+                          onClick={item.items?.length ? undefined : () => setSidebarOpen(false)}
                         />
 
                         {item.items && (
@@ -129,6 +130,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                                   active={isLinkStartsWithPathname(currentPath, subPathname)}
                                   basePath={basePath}
                                   sidebarOpen={sidebarOpen}
+                                  onClick={() => setSidebarOpen(false)}
                                 />
                               )
                             );
