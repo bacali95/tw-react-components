@@ -5,11 +5,15 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { useLayoutContext } from '../../contexts';
 import { cn } from '../../helpers';
+import { Block } from '../Block';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { SidebarItemComp } from './SidebarItem';
 
+export type SidebarSeparator = { type: 'separator'; title?: string };
+
 export type SidebarItem = {
+  type?: 'item';
   pathname: string;
   title: string;
   label?: ReactNode;
@@ -21,7 +25,7 @@ export type SidebarItem = {
 export type SidebarProps = {
   open?: boolean;
   className?: string;
-  items: SidebarItem[];
+  items: (SidebarItem | SidebarSeparator)[];
   basePath?: string;
   smallLogo?: ReactNode;
   fullLogo?: ReactNode;
@@ -38,7 +42,9 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
       [basePath, location.pathname]
     );
     const parentTab = useMemo(
-      () => items.find((item) => isLinkStartsWithPathname(currentPath, item.pathname))?.pathname,
+      () =>
+        items.filter(isItem).find((item) => isLinkStartsWithPathname(currentPath, item.pathname))
+          ?.pathname,
       [currentPath, items]
     );
 
@@ -72,8 +78,20 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
             </div>
           )}
           <Accordion.Root className="overflow-hidden" type="single" value={parentTab}>
-            {items.map(
-              (item) =>
+            {items.map((item, index) =>
+              item.type === 'separator' ? (
+                !item.title ? (
+                  <Block key={index} className="my-2 h-px bg-slate-300 dark:bg-slate-700/80" />
+                ) : (
+                  <Block
+                    key={index}
+                    className="mb-2 mt-6 pl-2 text-sm font-bold text-slate-600 group-hover/navbar:block data-[open=false]:hidden dark:text-slate-500"
+                    data-open={sidebarOpen}
+                  >
+                    {item.title}
+                  </Block>
+                )
+              ) : (
                 !item.hidden && (
                   <Accordion.Item
                     key={item.pathname}
@@ -84,7 +102,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                     value={item.pathname}
                   >
                     <Accordion.Header>
-                      <Accordion.Trigger className="relative w-full p-1 data-[state=open]:[--rotate-chevron:90deg]">
+                      <Accordion.Trigger className="relative w-full p-0.5 data-[state=open]:[--rotate-chevron:90deg]">
                         <SidebarItemComp
                           {...item}
                           active={
@@ -140,6 +158,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                     )}
                   </Accordion.Item>
                 )
+              )
             )}
           </Accordion.Root>
           <Flex className="mt-auto" direction="column" fullWidth>
@@ -159,4 +178,8 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
 
 function isLinkStartsWithPathname(link: string, pathname: string) {
   return pathname === '' ? link === pathname : link.startsWith(pathname);
+}
+
+function isItem(item: SidebarItem | SidebarSeparator): item is SidebarItem {
+  return item.type !== 'separator';
 }

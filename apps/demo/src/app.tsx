@@ -35,6 +35,7 @@ export const App: FC = () => {
           title: 'Home',
           Icon: HomeIcon,
         },
+        { type: 'separator', title: 'Components' },
         {
           pathname: 'atoms',
           title: 'Atoms',
