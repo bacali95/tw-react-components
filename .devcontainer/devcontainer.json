@@ -1,8 +1,8 @@
 {
-  "image": "ghcr.io/bacali95/personal-devcontainer:main",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
+    "ghcr.io/devcontainers/features/docker-in-docker:latest": {
+      "version": "latest"
     }
   },
   "customizations": {
