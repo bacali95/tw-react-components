@@ -116,17 +116,22 @@ export type HintBadgeProps = BadgeProps & {
 };
 
 const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
-  ({ size = 'small', placement = 'top-right', variant = 'green', ...props }, ref) => (
+  ({ className, size = 'small', placement = 'top-right', variant = 'green', ...props }, ref) => (
     <Badge
-      className={cn('absolute', {
-        'h-5 px-2': size === 'small',
-        'h-6 px-3': size !== 'small',
-        [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
-        [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',
-        [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.right}`]:
-          placement === 'bottom-right',
-        [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.left}`]: placement === 'bottom-left',
-      })}
+      className={cn(
+        'absolute',
+        {
+          'h-5 px-2': size === 'small',
+          'h-6 px-3': size !== 'small',
+          [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
+          [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',
+          [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.right}`]:
+            placement === 'bottom-right',
+          [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.left}`]:
+            placement === 'bottom-left',
+        },
+        className
+      )}
       size={size}
       variant={variant}
       {...props}

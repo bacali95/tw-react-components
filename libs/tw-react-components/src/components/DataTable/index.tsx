@@ -15,6 +15,7 @@ import { generalComparator, resolveTargetObject } from '../../helpers';
 import { Button, ButtonProps } from '../Button';
 import { Flex } from '../Flex';
 import { SelectInput } from '../Form';
+import { Hint, HintBadgeProps, HintDotProps } from '../Hint';
 import { Pagination, PaginationProps } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
@@ -54,7 +55,10 @@ export type DataTablePageSize = (typeof possiblePageSize)[number];
 export type DataTableAction<T> = {
   icon: LucideIcon;
   label?: string;
-  hasNotification?: (item: T, rowIndex: number) => boolean;
+  hasNotification?: (
+    item: T,
+    rowIndex: number
+  ) => { type: 'badge'; props: HintBadgeProps } | { type: 'dot'; props: HintDotProps } | boolean;
   color?: ButtonProps['variant'];
   hide?: boolean | ((item: T) => boolean);
   onClick: (item: T, rowIndex: number) => void;
@@ -283,25 +287,29 @@ export function DataTable<T>({
                     .filter((action) =>
                       typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
                     )
-                    .map((action, actionIndex) => (
-                      <div key={actionIndex} className="relative">
-                        <Button
-                          size="small"
-                          prefixIcon={action.icon}
-                          variant={action.color}
-                          onClick={handleActionClicked(action, item, rowIndex)}
-                          children={action.label}
-                        />
-                        {action.hasNotification?.(item, rowIndex) && (
-                          <div className="absolute -right-1 -top-1">
-                            <div className="relative flex items-center">
-                              <div className="h-2 w-2 rounded-full bg-red-500" />
-                              <div className="absolute -left-0.5 -top-0.5 h-3 w-3 animate-ping rounded-full bg-red-500" />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                    .map((action, actionIndex) => {
+                      const notification = action.hasNotification?.(item, rowIndex);
+
+                      return (
+                        <div key={actionIndex} className="relative">
+                          <Button
+                            size="small"
+                            prefixIcon={action.icon}
+                            variant={action.color}
+                            onClick={handleActionClicked(action, item, rowIndex)}
+                            children={action.label}
+                          />
+                          {notification &&
+                            (notification === true ? (
+                              <Hint.Dot />
+                            ) : notification.type === 'dot' ? (
+                              <Hint.Dot {...notification.props} />
+                            ) : (
+                              <Hint.Badge {...notification.props} />
+                            ))}
+                        </div>
+                      );
+                    })}
                 </Flex>
               </Table.Cell>
             )}

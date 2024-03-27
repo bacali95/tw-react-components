@@ -80,7 +80,10 @@ export const Tables: FC = () => {
           {
             color: 'yellow',
             icon: PencilIcon,
-            hasNotification: (user) => user.gender === 'Male',
+            hasNotification: (user) =>
+              user.gender === 'Male'
+                ? { type: 'badge', props: { children: 1, className: 'text-xs' } }
+                : false,
             onClick: (item) => alert(`Edit clicked for ${item.firstName}!`),
           },
           {
