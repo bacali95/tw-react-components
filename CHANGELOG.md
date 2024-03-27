@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.125](https://github.com/back-n-soft/tw-react-components/compare/v0.0.124...v0.0.125) (2024-03-27)
+
+
+### Features
+
+* update data-table row notification ([92b87fc](https://github.com/back-n-soft/tw-react-components/commit/92b87fc312813fce60e9ddd94e1e1988757a95ff))
+
 ### [0.0.124](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.123...v0.0.124) (2024-03-24)
 
 
