@@ -38,7 +38,7 @@ const DialogContent = forwardRef<
       ref={ref}
       className={cn(
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
-        'fixed left-[50%] top-[50%] z-50 flex w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded-lg bg-white p-3 shadow-lg duration-200 xl:gap-4 xl:p-4 dark:bg-slate-800 dark:text-white',
+        'fixed left-[50%] top-[50%] z-50 flex w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded-lg border bg-white p-3 shadow-md duration-200 xl:gap-4 xl:p-4 dark:border-slate-700/80 dark:bg-slate-900 dark:text-white',
         className,
         fullScreen && 'h-full max-h-none w-full max-w-none rounded-none',
       )}
@@ -46,12 +46,10 @@ const DialogContent = forwardRef<
     >
       {children}
       <DialogPrimitive.Close
-        className="!absolute right-3 top-3 opacity-70 ring-offset-white transition-opacity hover:opacity-100 disabled:pointer-events-none xl:right-4 xl:top-4"
+        className="!absolute right-1 top-1 opacity-70 ring-offset-white transition-opacity hover:opacity-100 disabled:pointer-events-none xl:right-2 xl:top-2"
         asChild
       >
-        <Button prefixIcon={XIcon} size="small">
-          <span className="sr-only">Close</span>
-        </Button>
+        <Button prefixIcon={XIcon} size="small" variant="text" />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>

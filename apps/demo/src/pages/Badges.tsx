@@ -1,99 +1,96 @@
-import { ArrowLeftIcon, ArrowRightIcon, XIcon } from 'lucide-react';
-import { FC, ReactNode } from 'react';
+import { ArrowLeftIcon, ArrowRightIcon, HomeIcon } from 'lucide-react';
+import { FC } from 'react';
 
-import { Badge, BadgeVariant, Flex } from 'tw-react-components';
+import { Badge, Flex } from 'tw-react-components';
 
-const variants: BadgeVariant[] = ['default', 'red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+import { colors } from '../colors';
 
-export const Badges: FC = () => {
-  const RenderVariants = ({ children }: { children: (variant: BadgeVariant) => ReactNode }) =>
-    variants.map((variant, index) => <span key={index}>{children(variant)}</span>);
-
-  return (
-    <>
-      <Flex className="gap-2" direction="column">
-        <p className="text-lg">Simple badges</p>
-        <Flex className="!gap-2">
-          <RenderVariants>
-            {(variant) => (
-              <Badge
-                className="capitalize"
-                variant={variant}
-                onClick={() => alert(`Badge ${variant} clicked!`)}
-              >
-                {variant}
-              </Badge>
-            )}
-          </RenderVariants>
-        </Flex>
-        <p className="text-lg">Outline badges</p>
-        <Flex className="!gap-2">
-          <RenderVariants>
-            {(variant) => (
-              <Badge
-                className="capitalize"
-                variant={variant}
-                outline
-                onClick={() => alert(`Badge ${variant} clicked!`)}
-              >
-                {variant}
-              </Badge>
-            )}
-          </RenderVariants>
-        </Flex>
-        <p className="text-lg">Badges Sizes</p>
-        <Flex wrap>
-          <RenderVariants>
-            {(variant) => (
-              <Flex align="end">
-                <Badge variant={variant} size="small">
-                  Small
-                </Badge>
-                <Badge variant={variant} size="medium">
-                  Medium
-                </Badge>
-                <Badge variant={variant} size="large">
-                  Big
-                </Badge>
-              </Flex>
-            )}
-          </RenderVariants>
-        </Flex>
-        <p className="text-lg">Badges with prefix icons</p>
-        <Flex className="!gap-2">
-          <RenderVariants>
-            {(variant) => (
-              <Badge className="capitalize" prefixIcon={ArrowLeftIcon} variant={variant}>
-                {variant}
-              </Badge>
-            )}
-          </RenderVariants>
-        </Flex>
-        <p className="text-lg">Badges with suffix icons</p>
-        <Flex className="!gap-2">
-          <RenderVariants>
-            {(variant) => (
-              <Badge className="capitalize" suffixIcon={ArrowRightIcon} variant={variant}>
-                {variant}
-              </Badge>
-            )}
-          </RenderVariants>
-        </Flex>
-        <p className="text-lg">Icon badges</p>
-        <Flex className="!gap-2">
-          <RenderVariants>
-            {(variant) => <Badge prefixIcon={XIcon} variant={variant} />}
-          </RenderVariants>
-        </Flex>
-      </Flex>
-      <Flex>
-        <Badge variant="inverse" onClick={() => alert('Badge inverse clicked!')}>
-          Inverse
+export const Badges: FC = () => (
+  <Flex className="gap-2 overflow-auto" direction="column">
+    <p className="text-lg">Filled buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Badge key={color} className="capitalize" color={color}>
+          {color}
         </Badge>
-        <Badge variant="inverse" outline onClick={() => alert('Badge inverse clicked!')}>
-          Inverse
+      ))}
+    </Flex>
+    <p className="text-lg">Outlined badges</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Badge key={color} className="capitalize" color={color} variant="outlined">
+          {color}
         </Badge>
-      </Flex>
-    </>
-  );
-};
+      ))}
+    </Flex>
+    <p className="text-lg">Disabled badges</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Badge key={color} className="capitalize" color={color} disabled>
+          {color}
+        </Badge>
+      ))}
+    </Flex>
+    <p className="text-lg">Badges Sizes</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Badge className="capitalize" color={color}>
+            {color}
+          </Badge>
+          <Badge className="capitalize" color={color} size="medium">
+            {color}
+          </Badge>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Rounded Badges</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Badge className="capitalize" color={color} rounded>
+            {color}
+          </Badge>
+          <Badge className="capitalize" color={color} size="medium" rounded>
+            {color}
+          </Badge>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Badges with prefix icons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Badge className="capitalize" color={color} prefixIcon={ArrowLeftIcon}>
+            {color}
+          </Badge>
+          <Badge className="capitalize" color={color} size="medium" prefixIcon={ArrowLeftIcon}>
+            {color}
+          </Badge>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Badges with suffix icons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Badge className="capitalize" color={color} suffixIcon={ArrowRightIcon}>
+            {color}
+          </Badge>
+          <Badge className="capitalize" color={color} size="medium" suffixIcon={ArrowRightIcon}>
+            {color}
+          </Badge>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Icon badges</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Badge className="capitalize" color={color} prefixIcon={HomeIcon} />
+          <Badge className="capitalize" color={color} size="medium" prefixIcon={HomeIcon} />
+        </Flex>
+      ))}
+    </Flex>
+  </Flex>
+);

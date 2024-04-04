@@ -64,10 +64,10 @@ export const FormDialog = <T extends FieldValues>({
           {extraAction}
           <Dialog.Footer className="ml-auto">
             <Dialog.Close asChild>
-              <Button variant="red">{cancelLabel}</Button>
+              <Button color="red">{cancelLabel}</Button>
             </Dialog.Close>
             <Button
-              variant="green"
+              color="green"
               type="submit"
               form={`form-${id}`}
               disabled={form.formState.isSubmitting}

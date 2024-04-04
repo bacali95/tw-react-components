@@ -67,7 +67,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         >
           {smallLogo && fullLogo && (
             <div className="mb-2 cursor-pointer overflow-hidden whitespace-nowrap p-2 py-3 text-center text-2xl">
-              <Link to="/" target="_blank">
+              <Link to="/">
                 <span className={cn('group-hover/navbar:block', !sidebarOpen && 'hidden')}>
                   {fullLogo}
                 </span>
@@ -165,8 +165,8 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
             {footer}
             <Button
               className="invisible w-full justify-center xl:visible"
+              variant="text"
               prefixIcon={OpenCloseIcon}
-              transparent
               onClick={() => setSidebarOpen(!sidebarOpen)}
             />
           </Flex>

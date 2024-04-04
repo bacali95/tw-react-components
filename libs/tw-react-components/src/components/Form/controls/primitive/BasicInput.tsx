@@ -96,22 +96,6 @@ const sizeClasses: Record<
       withSuffixIcon: 'right-12',
     },
   },
-  large: {
-    label: 'text-lg',
-    input: 'text-lg py-3 px-4 h-14',
-    checkbox: {
-      input: 'w-6 h-6',
-      wrapper: 'h-10 gap-2',
-    },
-    suffix: {
-      wrapper: 'h-14',
-      icon: 'h-6 w-6',
-    },
-    clearButton: {
-      base: 'h-7 w-7',
-      withSuffixIcon: 'right-16',
-    },
-  },
 };
 
 export const BasicInput = forwardRef(function BasicInput<Type extends InputType>(

@@ -1,4 +1,28 @@
-export type Size = 'small' | 'medium' | 'large';
+export type Size = 'small' | 'medium';
+
+export type Color =
+  | 'slate'
+  | 'gray'
+  | 'zinc'
+  | 'neutral'
+  | 'stone'
+  | 'red'
+  | 'orange'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'green'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'blue'
+  | 'indigo'
+  | 'violet'
+  | 'fuchsia'
+  | 'purple'
+  | 'pink'
+  | 'rose';
 
 type NextDepth = {
   '1': never;

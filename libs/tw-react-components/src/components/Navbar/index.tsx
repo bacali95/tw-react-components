@@ -21,7 +21,7 @@ export const Navbar: FC<NavbarProps> = ({ leftSlot, rightSlot }) => {
           <Button
             className="xl:hidden"
             prefixIcon={MenuIcon}
-            transparent
+            variant="text"
             onClick={() => setSidebarOpen(true)}
           />
           {leftSlot}

@@ -1,0 +1,26 @@
+import { Color } from 'tw-react-components';
+
+export const colors: Color[] = [
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone',
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'fuchsia',
+  'purple',
+  'pink',
+  'rose',
+];

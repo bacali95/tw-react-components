@@ -29,10 +29,10 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
       {children}
       <Dialog.Footer>
         <Dialog.Close asChild>
-          <Button variant="red">{noLabel ?? 'No'}</Button>
+          <Button color="red">{noLabel ?? 'No'}</Button>
         </Dialog.Close>
         <Dialog.Close asChild>
-          <Button variant="green" onClick={onConfirm}>
+          <Button color="green" onClick={onConfirm}>
             {yesLabel ?? 'Yes'}
           </Button>
         </Dialog.Close>

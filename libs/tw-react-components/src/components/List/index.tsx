@@ -22,7 +22,6 @@ const ListContent = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
 const labelSizeClasses: Record<Size, string> = {
   small: 'p-1 text-sm',
   medium: 'px-2 py-1.5',
-  large: 'px-3 py-2 text-lg',
 };
 
 const ListItem = forwardRef<

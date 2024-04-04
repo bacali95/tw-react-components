@@ -10,16 +10,15 @@ import {
 } from 'lucide-react';
 import { ComponentProps, FC, MouseEvent, ReactNode, useMemo, useRef, useState } from 'react';
 
-import { cn } from '../../helpers';
-import { generalComparator, resolveTargetObject } from '../../helpers';
-import { Button, ButtonProps } from '../Button';
+import { cn, generalComparator, resolveTargetObject } from '../../helpers';
+import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { SelectInput } from '../Form';
 import { Hint, HintBadgeProps, HintDotProps } from '../Hint';
 import { Pagination, PaginationProps } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
-import { Paths, ResolvePath } from '../types';
+import { Color, Paths, ResolvePath } from '../types';
 
 export type DataTableColumn<T, Field extends Paths<T> = Paths<T>> = {
   className?: string;
@@ -59,7 +58,7 @@ export type DataTableAction<T> = {
     item: T,
     rowIndex: number,
   ) => { type: 'badge'; props: HintBadgeProps } | { type: 'dot'; props: HintDotProps } | boolean;
-  color?: ButtonProps['variant'];
+  color?: Color;
   hide?: boolean | ((item: T) => boolean);
   onClick: (item: T, rowIndex: number) => void;
 };
@@ -297,7 +296,7 @@ export function DataTable<T>({
                           <Button
                             size="small"
                             prefixIcon={action.icon}
-                            variant={action.color}
+                            color={action.color}
                             onClick={handleActionClicked(action, item, rowIndex)}
                             children={action.label}
                           />

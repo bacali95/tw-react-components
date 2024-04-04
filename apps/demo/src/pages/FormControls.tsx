@@ -67,7 +67,6 @@ export const FormControls: FC = () => {
         items={[
           { id: 'small', label: 'Small', value: 'small' },
           { id: 'medium', label: 'medium', value: 'medium' },
-          { id: 'large', label: 'large', value: 'large' },
         ]}
         onChange={setInputSize}
       />
@@ -133,10 +132,10 @@ export const FormControls: FC = () => {
                 search
               />
               <Flex justify="end" fullWidth>
-                <Button variant="red" onClick={() => form.reset()} size={inputSize}>
+                <Button color="red" onClick={() => form.reset()} size={inputSize}>
                   Clear
                 </Button>
-                <Button type="submit" variant="green" size={inputSize}>
+                <Button type="submit" color="green" size={inputSize}>
                   Submit
                 </Button>
               </Flex>
@@ -221,7 +220,7 @@ export const FormControls: FC = () => {
               clearable
               search
             />
-            <Button className="self-end" type="submit" variant="green" size={inputSize}>
+            <Button className="self-end" type="submit" color="green" size={inputSize}>
               Submit
             </Button>
           </Flex>

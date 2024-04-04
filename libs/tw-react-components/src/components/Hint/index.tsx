@@ -3,7 +3,7 @@ import { ElementRef, PropsWithChildren, forwardRef } from 'react';
 import { cn } from '../../helpers';
 import { Badge, BadgeProps, BadgeVariant } from '../Badge';
 import { Block } from '../Block';
-import { Size } from '../types';
+import { Color, Size } from '../types';
 
 const HintRoot = forwardRef<HTMLDivElement, PropsWithChildren>(({ children }, ref) => (
   <Block className="relative" ref={ref}>
@@ -14,7 +14,7 @@ HintRoot.displayName = 'HintRoot';
 
 export type HintPlacement = 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
 
-export type HintVariant = Exclude<BadgeVariant, 'default' | 'inverse'>;
+export type HintVariant = BadgeVariant;
 
 const dotSizeClassNames: Record<
   Size,
@@ -34,38 +34,47 @@ const dotSizeClassNames: Record<
     bottom: '-bottom-1',
     left: '-left-1',
   },
-  large: {
-    base: 'h-4 w-4',
-    top: '-top-1.5',
-    right: '-right-1.5',
-    bottom: '-bottom-1.5',
-    left: '-left-1.5',
-  },
 };
 
-const variantClassNames: Record<HintVariant, string> = {
+const colorClassNames: Record<Color, string> = {
+  slate: 'bg-slate-500 dark:bg-slate-600',
+  gray: 'bg-gray-500 dark:bg-gray-600',
+  zinc: 'bg-zinc-500 dark:bg-zinc-600',
+  neutral: 'bg-neutral-500 dark:bg-neutral-600',
+  stone: 'bg-stone-500 dark:bg-stone-600',
   red: 'bg-red-500 dark:bg-red-600',
   orange: 'bg-orange-500 dark:bg-orange-600',
+  amber: 'bg-amber-500 dark:bg-amber-600',
   yellow: 'bg-yellow-500 dark:bg-yellow-600',
+  lime: 'bg-lime-500 dark:bg-lime-600',
   green: 'bg-green-500 dark:bg-green-600',
+  emerald: 'bg-emerald-500 dark:bg-emerald-600',
+  teal: 'bg-teal-500 dark:bg-teal-600',
+  cyan: 'bg-cyan-500 dark:bg-cyan-600',
+  sky: 'bg-sky-500 dark:bg-sky-600',
   blue: 'bg-blue-500 dark:bg-blue-600',
+  indigo: 'bg-indigo-500 dark:bg-indigo-600',
+  violet: 'bg-violet-500 dark:bg-violet-600',
+  fuchsia: 'bg-fuchsia-500 dark:bg-fuchsia-600',
   purple: 'bg-purple-500 dark:bg-purple-600',
+  pink: 'bg-pink-500 dark:bg-pink-600',
+  rose: 'bg-rose-500 dark:bg-rose-600',
 };
 
 export type HintDotProps = {
   size?: Size;
   placement?: HintPlacement;
-  variant?: HintVariant;
+  color?: Color;
   ping?: boolean;
 };
 
 const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
-  ({ size = 'medium', placement = 'top-right', variant = 'green', ping }, ref) => (
+  ({ size = 'medium', placement = 'top-right', color = 'green', ping }, ref) => (
     <>
       <Block
         className={cn(
           'absolute rounded-full ',
-          variantClassNames[variant],
+          colorClassNames[color],
           dotSizeClassNames[size].base,
           {
             [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].left}`]:
@@ -84,7 +93,7 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
         <Block
           className={cn(
             'absolute animate-ping rounded-full ',
-            variantClassNames[variant],
+            colorClassNames[color],
             dotSizeClassNames[size].base,
             {
               [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].left}`]:
@@ -116,13 +125,12 @@ export type HintBadgeProps = BadgeProps & {
 };
 
 const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
-  ({ className, size = 'small', placement = 'top-right', variant = 'green', ...props }, ref) => (
+  ({ className, size = 'small', placement = 'top-right', ...props }, ref) => (
     <Badge
       className={cn(
-        'absolute',
+        'absolute px-1',
+        size === 'small' ? 'h-5' : 'h-6',
         {
-          'h-5 px-2': size === 'small',
-          'h-6 px-3': size !== 'small',
           [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
           [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',
           [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.right}`]:
@@ -133,7 +141,6 @@ const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
         className,
       )}
       size={size}
-      variant={variant}
       {...props}
       ref={ref}
     />

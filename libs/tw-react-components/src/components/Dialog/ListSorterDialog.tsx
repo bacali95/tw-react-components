@@ -74,9 +74,9 @@ export function ListSorterDialog<T extends ListSorterItem>({
         />
         <Dialog.Footer>
           <Dialog.Close asChild>
-            <Button variant="red">{cancelLabel ?? 'Cancel'}</Button>
+            <Button color="red">{cancelLabel ?? 'Cancel'}</Button>
           </Dialog.Close>
-          <Button variant="green" onClick={preFinish}>
+          <Button color="green" onClick={preFinish}>
             {submitLabel ?? 'Submit'}
           </Button>
         </Dialog.Footer>

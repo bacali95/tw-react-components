@@ -1,120 +1,151 @@
-import { ArrowLeftIcon, ArrowRightIcon, Trash2Icon, XIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, HomeIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { Button, Flex } from 'tw-react-components';
 
+import { colors } from '../colors';
+
+const mockOnClick = () => void 0;
+
 export const Buttons: FC = () => (
-  <>
-    <Flex className="gap-2" direction="column">
-      <p className="text-lg">Simple buttons</p>
-      <Flex className="!gap-2">
-        <Button>Primary</Button>
-        <Button variant="green">Green</Button>
-        <Button variant="yellow">Yellow</Button>
-        <Button variant="red">Red</Button>
-      </Flex>
-      <p className="text-lg">Transparent buttons</p>
-      <Flex className="!gap-2">
-        <Button transparent>Primary</Button>
-        <Button transparent variant="green">
-          Green
+  <Flex className="gap-2 overflow-auto" direction="column">
+    <p className="text-lg">Filled buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Button key={color} className="capitalize" color={color} onClick={mockOnClick}>
+          {color}
         </Button>
-        <Button transparent variant="yellow">
-          Yellow
-        </Button>
-        <Button transparent variant="red">
-          Red
-        </Button>
-      </Flex>
-      <p className="text-lg">Disabled buttons</p>
-      <Flex className="!gap-2">
-        <Button disabled>Primary</Button>
-        <Button variant="green" disabled>
-          Green
-        </Button>
-        <Button variant="yellow" disabled>
-          Yellow
-        </Button>
-        <Button variant="red" disabled>
-          Red
-        </Button>
-      </Flex>
-      <p className="text-lg">Buttons Sizes</p>
-      <Flex className="!gap-2" align="end">
-        <Button size="small">Small</Button>
-        <Button size="medium">Medium</Button>
-        <Button size="large">Big</Button>
-        <Button size="small" variant="green" prefixIcon={ArrowLeftIcon}>
-          Small
-        </Button>
-        <Button size="medium" variant="green" prefixIcon={ArrowLeftIcon}>
-          Medium
-        </Button>
-        <Button size="large" variant="green" prefixIcon={ArrowLeftIcon}>
-          Big
-        </Button>
-        <Button size="small" variant="yellow" prefixIcon={XIcon} />
-        <Button size="medium" variant="yellow" prefixIcon={XIcon} />
-        <Button size="large" variant="yellow" prefixIcon={XIcon} />
-      </Flex>
-      <p className="text-lg">Rounded Buttons</p>
-      <Flex className="!gap-2" align="end">
-        <Button size="small" rounded>
-          Small
-        </Button>
-        <Button size="medium" rounded>
-          Medium
-        </Button>
-        <Button size="large" rounded>
-          Big
-        </Button>
-        <Button size="small" rounded variant="green" prefixIcon={ArrowLeftIcon}>
-          Small
-        </Button>
-        <Button size="medium" rounded variant="green" prefixIcon={ArrowLeftIcon}>
-          Medium
-        </Button>
-        <Button size="large" rounded variant="green" prefixIcon={ArrowLeftIcon}>
-          Big
-        </Button>
-        <Button size="small" rounded variant="yellow" prefixIcon={Trash2Icon} />
-        <Button size="medium" rounded variant="yellow" prefixIcon={Trash2Icon} />
-        <Button size="large" rounded variant="yellow" prefixIcon={Trash2Icon} />
-      </Flex>
-      <p className="text-lg">Buttons with prefix icons</p>
-      <Flex className="!gap-2">
-        <Button prefixIcon={ArrowLeftIcon}>Primary</Button>
-        <Button prefixIcon={ArrowLeftIcon} variant="green">
-          Green
-        </Button>
-        <Button prefixIcon={ArrowLeftIcon} variant="yellow">
-          Yellow
-        </Button>
-        <Button prefixIcon={ArrowLeftIcon} variant="red">
-          Red
-        </Button>
-      </Flex>
-      <p className="text-lg">Buttons with suffix icons</p>
-      <Flex className="!gap-2">
-        <Button suffixIcon={ArrowRightIcon}>Primary</Button>
-        <Button suffixIcon={ArrowRightIcon} variant="green">
-          Green
-        </Button>
-        <Button suffixIcon={ArrowRightIcon} variant="yellow">
-          Yellow
-        </Button>
-        <Button suffixIcon={ArrowRightIcon} variant="red">
-          Red
-        </Button>
-      </Flex>
-      <p className="text-lg">Icon buttons</p>
-      <Flex className="!gap-2">
-        <Button prefixIcon={XIcon} />
-        <Button prefixIcon={XIcon} variant="green" />
-        <Button prefixIcon={XIcon} variant="yellow" />
-        <Button prefixIcon={XIcon} variant="red" />
-      </Flex>
+      ))}
     </Flex>
-    <Button variant="inverse">Inverse</Button>
-  </>
+    <p className="text-lg">Outlined buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Button
+          key={color}
+          className="capitalize"
+          color={color}
+          variant="outlined"
+          onClick={mockOnClick}
+        >
+          {color}
+        </Button>
+      ))}
+    </Flex>
+    <p className="text-lg">Text buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Button
+          key={color}
+          className="capitalize"
+          color={color}
+          variant="text"
+          onClick={mockOnClick}
+        >
+          {color}
+        </Button>
+      ))}
+    </Flex>
+    <p className="text-lg">Disabled buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Button key={color} className="capitalize" color={color} disabled onClick={mockOnClick}>
+          {color}
+        </Button>
+      ))}
+    </Flex>
+    <p className="text-lg">Buttons Sizes</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Button className="capitalize" color={color} size="small" onClick={mockOnClick}>
+            {color}
+          </Button>
+          <Button className="capitalize" color={color} onClick={mockOnClick}>
+            {color}
+          </Button>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Rounded Buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Button className="capitalize" color={color} size="small" rounded onClick={mockOnClick}>
+            {color}
+          </Button>
+          <Button className="capitalize" color={color} rounded onClick={mockOnClick}>
+            {color}
+          </Button>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Buttons with prefix icons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Button
+            className="capitalize"
+            color={color}
+            size="small"
+            prefixIcon={ArrowLeftIcon}
+            onClick={mockOnClick}
+          >
+            {color}
+          </Button>
+          <Button
+            className="capitalize"
+            color={color}
+            prefixIcon={ArrowLeftIcon}
+            onClick={mockOnClick}
+          >
+            {color}
+          </Button>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Buttons with suffix icons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Button
+            className="capitalize"
+            color={color}
+            size="small"
+            suffixIcon={ArrowRightIcon}
+            onClick={mockOnClick}
+          >
+            {color}
+          </Button>
+          <Button
+            className="capitalize"
+            color={color}
+            suffixIcon={ArrowRightIcon}
+            onClick={mockOnClick}
+          >
+            {color}
+          </Button>
+        </Flex>
+      ))}
+    </Flex>
+    <p className="text-lg">Icon buttons</p>
+    <Flex className="gap-2" wrap>
+      {colors.map((color) => (
+        <Flex key={color} direction="column">
+          <Button
+            className="capitalize"
+            color={color}
+            size="small"
+            prefixIcon={HomeIcon}
+            onClick={mockOnClick}
+          />
+          <Button
+            className="capitalize"
+            color={color}
+            prefixIcon={HomeIcon}
+            onClick={mockOnClick}
+          />
+        </Flex>
+      ))}
+    </Flex>
+  </Flex>
 );

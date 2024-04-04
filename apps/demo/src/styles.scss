@@ -2,24 +2,38 @@
 @tailwind base;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Inter var';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/Inter-roman.var.woff2?v=3.18') format('woff2');
+  font-named-instance: Regular;
+}
+
 html {
+  scroll-behavior: smooth;
+  font-family: 'Inter var', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+
   @apply text-[12px] 2xl:text-[14px];
 
   ::-webkit-scrollbar {
-    @apply h-1 w-1 bg-gray-100;
+    @apply h-1 w-1 bg-slate-100;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 hover:bg-gray-400;
+    @apply bg-slate-300 hover:bg-slate-400;
   }
 
   &.dark {
     ::-webkit-scrollbar {
-      @apply bg-gray-900;
+      @apply bg-slate-900;
     }
 
     ::-webkit-scrollbar-thumb {
-      @apply border-gray-900 bg-gray-700 hover:bg-gray-600;
+      @apply border-slate-900 bg-slate-700 hover:bg-slate-600;
     }
   }
 }
