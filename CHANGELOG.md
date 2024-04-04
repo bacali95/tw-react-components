@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.127](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.126...v0.0.127) (2024-04-04)
+
+
+### Features
+
+* refactor button, badge and hint components ([90194b4](https://github.com/NaN-Projects/tw-react-components/commit/90194b45ea20d5991f00cb564cf94ee107beb607))
+
 ### [0.0.126](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.124...v0.0.126) (2024-04-04)
 
 
