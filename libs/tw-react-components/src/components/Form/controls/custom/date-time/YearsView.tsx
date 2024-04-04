@@ -47,19 +47,19 @@ type YearProps = {
 const Year: FC<YearProps> = ({ date, value, year, minDate, maxDate, selectYear }) => {
   const dayDate = useMemo(
     () => new Date(year, date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()),
-    [date, year]
+    [date, year],
   );
 
   const isSelectable = useMemo(
     () =>
       (!minDate || compareDates(dayDate, new Date(minDate), 'year') >= 0) &&
       (!maxDate || compareDates(dayDate, new Date(maxDate), 'year') <= 0),
-    [dayDate, minDate, maxDate]
+    [dayDate, minDate, maxDate],
   );
 
   const isSelected = useMemo(
     () => !!value && !compareDates(dayDate, new Date(value), 'year'),
-    [dayDate, value]
+    [dayDate, value],
   );
 
   const isEqualThisYear = useMemo(() => !compareDates(dayDate, new Date(), 'year'), [dayDate]);

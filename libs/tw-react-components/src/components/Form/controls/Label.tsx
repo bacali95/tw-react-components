@@ -28,7 +28,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
           'text-slate-700 dark:text-slate-100': !hasErrors,
           'text-red-600 dark:text-red-500': hasErrors,
         },
-        className
+        className,
       )}
       htmlFor={htmlFor}
     >

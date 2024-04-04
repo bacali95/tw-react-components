@@ -76,7 +76,7 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
               placement === 'bottom-right',
             [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].left}`]:
               placement === 'bottom-left',
-          }
+          },
         )}
         ref={ref}
       />
@@ -95,12 +95,12 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
                 placement === 'bottom-right',
               [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].left}`]:
                 placement === 'bottom-left',
-            }
+            },
           )}
         />
       )}
     </>
-  )
+  ),
 );
 HintDot.displayName = 'HintDot';
 
@@ -130,14 +130,14 @@ const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
           [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.left}`]:
             placement === 'bottom-left',
         },
-        className
+        className,
       )}
       size={size}
       variant={variant}
       {...props}
       ref={ref}
     />
-  )
+  ),
 );
 HintBadge.displayName = 'HintBadge';
 

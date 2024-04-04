@@ -21,7 +21,7 @@ export const ThemeSwitcher: FC<Props> = ({ className }) => {
           'bg-blue-700': darkMode,
           'bg-slate-100': !darkMode,
         },
-        className
+        className,
       )}
     >
       <div

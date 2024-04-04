@@ -94,7 +94,7 @@ export const App: FC = () => {
       smallLogo: 'SL',
       fullLogo: 'Full Logo',
     }),
-    []
+    [],
   );
 
   return (

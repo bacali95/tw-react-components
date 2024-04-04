@@ -5,7 +5,7 @@ type SwipeDirection = 'up' | 'left' | 'bottom' | 'right';
 export function useOnSwipe(
   element: RefObject<HTMLElement>,
   onSwipe: (direction: SwipeDirection) => any | false,
-  minSwipeDistance = 50
+  minSwipeDistance = 50,
 ) {
   useEffect(() => {
     if (!element.current) return;

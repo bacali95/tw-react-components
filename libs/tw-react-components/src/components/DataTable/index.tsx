@@ -57,7 +57,7 @@ export type DataTableAction<T> = {
   label?: string;
   hasNotification?: (
     item: T,
-    rowIndex: number
+    rowIndex: number,
   ) => { type: 'badge'; props: HintBadgeProps } | { type: 'dot'; props: HintDotProps } | boolean;
   color?: ButtonProps['variant'];
   hide?: boolean | ((item: T) => boolean);
@@ -107,20 +107,20 @@ export function DataTable<T>({
   const allRowsExpanded = useMemo(
     () =>
       rowExtraContent ? rows.every((row) => expandedRows[rowExtraContent.idGetter(row)]) : false,
-    [expandedRows, rowExtraContent, rows]
+    [expandedRows, rowExtraContent, rows],
   );
 
   const _columns: DataTableColumn<T>[] = useMemo(
     () =>
       (Array.isArray(columns) ? columns : Object.values(columns)).filter(
-        (column) => !(column as DataTableColumn<T>).hide
+        (column) => !(column as DataTableColumn<T>).hide,
       ) as DataTableColumn<T>[],
-    [columns]
+    [columns],
   );
 
   const columnsLength = useMemo(
     () => (rowExtraContent ? 1 : 0) + _columns.length + Math.min(1, actions.length),
-    [_columns.length, actions.length, rowExtraContent]
+    [_columns.length, actions.length, rowExtraContent],
   );
 
   const handleSorting =
@@ -172,7 +172,7 @@ export function DataTable<T>({
       ...prev,
       ...rows.reduce(
         (acc, row) => ({ ...acc, [rowExtraContent.idGetter(row)]: !allRowsExpanded }),
-        {}
+        {},
       ),
     }));
   };
@@ -181,7 +181,7 @@ export function DataTable<T>({
     event.stopPropagation();
 
     setExpandedRows((prev) =>
-      rowExtraContent?.singleExpansion ? { [id]: !prev[id] } : { ...prev, [id]: !prev[id] }
+      rowExtraContent?.singleExpansion ? { [id]: !prev[id] } : { ...prev, [id]: !prev[id] },
     );
   };
 
@@ -259,7 +259,7 @@ export function DataTable<T>({
                 'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/40':
                   onRowClick || rowExtraContent,
               },
-              rowClassName?.(item, rowIndex)
+              rowClassName?.(item, rowIndex),
             )}
             onClick={handleRowClicked(item, rowIndex)}
           >
@@ -287,7 +287,7 @@ export function DataTable<T>({
                 <Flex align="center" justify="center">
                   {actions
                     .filter((action) =>
-                      typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item)
+                      typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item),
                     )
                     .map((action, actionIndex) => {
                       const notification = action.hasNotification?.(item, rowIndex);

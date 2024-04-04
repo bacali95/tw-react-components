@@ -27,16 +27,16 @@ export const Tables: FC = () => {
         ? people.sort((a, b) =>
             sorting.direction === 'asc'
               ? sorting.comparator(a[sorting.field], b[sorting.field])
-              : sorting.comparator(b[sorting.field], a[sorting.field])
+              : sorting.comparator(b[sorting.field], a[sorting.field]),
           )
         : people),
     ],
-    [sorting]
+    [sorting],
   );
 
   const rows = useMemo(
     () => sortedPeople.slice(page * pageSize, (page + 1) * pageSize),
-    [page, pageSize, sortedPeople]
+    [page, pageSize, sortedPeople],
   );
 
   const columns: DataTableColumns<Person> = {

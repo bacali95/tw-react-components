@@ -11,12 +11,12 @@ const ListContent = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
     <Block
       className={cn(
         'z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white p-1 text-slate-700 shadow-md dark:border-slate-800 dark:bg-slate-800 dark:text-white',
-        className
+        className,
       )}
       ref={ref}
       {...props}
     />
-  )
+  ),
 );
 
 const labelSizeClasses: Record<Size, string> = {
@@ -37,7 +37,7 @@ const ListItem = forwardRef<
       labelSizeClasses[size],
       'relative cursor-default select-none gap-2 rounded-md outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
       inset && 'pl-8',
-      className
+      className,
     )}
     align="center"
     ref={ref}
@@ -57,7 +57,7 @@ const ListLabel = forwardRef<
       labelSizeClasses[size],
       'font-semibold text-slate-900 dark:text-slate-300',
       inset && 'pl-8',
-      className
+      className,
     )}
     ref={ref}
     {...props}
@@ -83,7 +83,7 @@ const ListIndicator = forwardRef<
 ));
 
 const ListIcon = forwardRef<SVGSVGElement, { className?: string; icon: LucideIcon }>(
-  ({ className, icon: Icon }, ref) => <Icon className={cn('h-4 w-4', className)} ref={ref} />
+  ({ className, icon: Icon }, ref) => <Icon className={cn('h-4 w-4', className)} ref={ref} />,
 );
 
 const ListSeparator = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
@@ -93,7 +93,7 @@ const ListSeparator = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>
       ref={ref}
       {...props}
     />
-  )
+  ),
 );
 
 export const List = Object.assign(ListContent, {

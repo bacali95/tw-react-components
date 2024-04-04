@@ -130,7 +130,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
     onSuffixIconClick,
     ...props
   }: BasicInputProps<Type>,
-  ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
+  ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
 ): JSX.Element {
   const id = useId();
   const memoLabel = useMemo(
@@ -146,7 +146,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           {label}
         </Label>
       ),
-    [description, hasErrors, id, label, props.required, size]
+    [description, hasErrors, id, label, props.required, size],
   );
 
   const handleClear = (event: MouseEvent) => {
@@ -178,7 +178,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
                 [classes.withErrors.input]: hasErrors,
                 'rounded-r-none border-r-0': SuffixIcon,
               },
-              inputClassName
+              inputClassName,
             )}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
@@ -194,7 +194,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
                 [classes.base.disabled]: props.disabled,
                 'bg-red-100': hasErrors,
               },
-              inputClassName
+              inputClassName,
             )}
             type={type}
             checked={Boolean(props.value)}
@@ -213,7 +213,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
                 [classes.withErrors.input]: hasErrors,
                 'rounded-r-none border-r-0': SuffixIcon,
               },
-              inputClassName
+              inputClassName,
             )}
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
@@ -229,7 +229,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               sizeClasses[size].clearButton.base,
               {
                 [sizeClasses[size].clearButton.withSuffixIcon]: SuffixIcon,
-              }
+              },
             )}
             onClick={handleClear}
           />
@@ -269,7 +269,7 @@ export const BasicInputExtension: FC<
         [classes.withErrors.extension]: hasErrors,
         'cursor-pointer': onClick,
       },
-      className
+      className,
     )}
     onClick={!disabled ? onClick : undefined}
   >

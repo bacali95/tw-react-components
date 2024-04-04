@@ -267,5 +267,5 @@ export const countriesItems: SelectItem<string, true>[] = Object.entries(countri
     label: continent,
     group: true,
     items: countries.map((country) => ({ id: country, value: country, label: country })),
-  })
+  }),
 );

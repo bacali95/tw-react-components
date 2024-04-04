@@ -12,7 +12,7 @@ export const LayoutContext = createContext<LayoutContext | undefined>(undefined)
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(getValueFromLocalStorage<ThemeState>(THEME_KEY, 'light'));
   const [sidebarOpen, _setSidebarOpen] = useState(
-    getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true)
+    getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true),
   );
 
   useEffect(() => {

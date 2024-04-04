@@ -8,5 +8,5 @@ export const Card = forwardRef<HTMLDivElement, BlockProps>(
     <Block className={cn('rounded-lg p-3 dark:bg-slate-800', className)} {...blockProps} ref={ref}>
       {children}
     </Block>
-  )
+  ),
 );

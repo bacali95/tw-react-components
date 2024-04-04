@@ -10,7 +10,7 @@
       "inputs": ["default", "^production"],
       "cache": true
     },
-    "lint": {
+    "@nx/eslint:lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
     },
@@ -56,5 +56,6 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo",
+  "useInferencePlugins": false
 }

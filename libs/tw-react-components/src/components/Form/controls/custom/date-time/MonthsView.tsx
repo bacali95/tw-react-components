@@ -67,19 +67,19 @@ const Month: FC<MonthProps> = ({
 }) => {
   const dayDate = useMemo(
     () => new Date(year, month, date.getDate(), date.getHours(), date.getMinutes()),
-    [date, month, year]
+    [date, month, year],
   );
 
   const isSelectable = useMemo(
     () =>
       (!minDate || compareDates(dayDate, new Date(minDate), 'month') >= 0) &&
       (!maxDate || compareDates(dayDate, new Date(maxDate), 'month') <= 0),
-    [dayDate, minDate, maxDate]
+    [dayDate, minDate, maxDate],
   );
 
   const isSelected = useMemo(
     () => !!value && !compareDates(dayDate, new Date(value), 'month'),
-    [dayDate, value]
+    [dayDate, value],
   );
 
   const isEqualThisMonth = useMemo(() => !compareDates(dayDate, new Date(), 'month'), [dayDate]);

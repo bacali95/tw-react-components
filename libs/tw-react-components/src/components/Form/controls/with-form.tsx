@@ -32,18 +32,18 @@ export type WithFormProps<
   Props = Type extends DateTimeInputType
     ? DateTimeInputProps
     : Type extends SelectInputType
-    ? SelectInputProps
-    : Omit<BasicInputProps<Type>, 'type'>
+      ? SelectInputProps
+      : Omit<BasicInputProps<Type>, 'type'>,
 > = {
   name: string;
   pattern?: RegExp;
   validate?: Type extends 'number'
     ? Validate<number, any>
     : Type extends DateTimeInputType
-    ? Validate<Date, any>
-    : Type extends SelectInputType
-    ? Validate<any, any>
-    : Validate<string, any>;
+      ? Validate<Date, any>
+      : Type extends SelectInputType
+        ? Validate<any, any>
+        : Validate<string, any>;
 } & Omit<Props, 'pattern' | keyof Omit<ControllerRenderProps, 'disabled'>>;
 
 function withForm<
@@ -52,8 +52,8 @@ function withForm<
   Props = Type extends DateTimeInputType
     ? DateTimeInputProps
     : Type extends SelectInputType
-    ? SelectInputProps
-    : BasicInputProps<Type>
+      ? SelectInputProps
+      : BasicInputProps<Type>,
 >(Component: ForwardRefExoticComponent<Props>) {
   return forwardRef<HtmlElement, WithFormProps<Type, Props>>(
     ({ name, pattern, validate, ...props }, ref) => {
@@ -84,7 +84,7 @@ function withForm<
           )}
         />
       );
-    }
+    },
   );
 }
 

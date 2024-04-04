@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export function useLongPress(
   callback: () => void,
-  ms = 100
+  ms = 100,
 ): {
   onMouseDown: () => void;
   onMouseUp: () => void;

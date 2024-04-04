@@ -82,8 +82,8 @@ export const Pagination: FC<PaginationProps> = ({
               Math.floor(
                 totalItems && !(totalItems % pageSize)
                   ? (totalItems - 1) / pageSize
-                  : totalItems / pageSize
-              )
+                  : totalItems / pageSize,
+              ),
             )
           }
           disabled={currentPage + 1 === totalPages || disabled}

@@ -18,7 +18,7 @@ const TableHead: FC<ComponentProps<'thead'>> = ({ children, className, ...props 
   <thead
     className={cn(
       'bg-slate-100 text-slate-800 dark:bg-slate-700/80 dark:text-slate-300',
-      className
+      className,
     )}
     {...props}
   >
@@ -36,7 +36,7 @@ const TableBody: FC<ComponentProps<'tbody'>> = ({ children, className, ...props 
   <tbody
     className={cn(
       'divide-y divide-slate-200 bg-slate-50/80 dark:divide-slate-700 dark:bg-slate-800',
-      className
+      className,
     )}
     {...props}
   >
@@ -58,7 +58,7 @@ const TableFooter: FC<ComponentProps<'tfoot'>> = ({ children, className, ...prop
   <tfoot
     className={cn(
       'bg-slate-100 text-slate-800 dark:bg-slate-700/80 dark:text-slate-300',
-      className
+      className,
     )}
     {...props}
   >

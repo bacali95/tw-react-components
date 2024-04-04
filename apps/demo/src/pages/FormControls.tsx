@@ -33,7 +33,7 @@ const countriesItems: SelectItem<string, true>[] = Object.entries(countriesByCon
     label: continent,
     group: true,
     items: countries.map((country) => ({ id: country, value: country, label: country })),
-  })
+  }),
 );
 
 export const FormControls: FC = () => {

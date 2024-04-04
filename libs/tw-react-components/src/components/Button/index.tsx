@@ -90,7 +90,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       suffixIcon: SuffixIcon,
       ...props
     },
-    ref
+    ref,
   ) => (
     <button
       className={cn(
@@ -104,7 +104,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [variantClassNames[variant].hover]: !props.disabled,
           [variantClassNames[variant].active]: !props.disabled,
         },
-        className
+        className,
       )}
       type="button"
       {...props}
@@ -126,5 +126,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         />
       )}
     </button>
-  )
+  ),
 );

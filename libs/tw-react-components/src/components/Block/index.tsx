@@ -20,12 +20,12 @@ export const Block = forwardRef<HTMLDivElement, BlockProps>(
         container && 'container',
         fullWidth && 'w-full',
         fullHeight && 'h-full',
-        className
+        className,
       )}
       {...props}
       ref={ref}
     >
       {children}
     </div>
-  )
+  ),
 );

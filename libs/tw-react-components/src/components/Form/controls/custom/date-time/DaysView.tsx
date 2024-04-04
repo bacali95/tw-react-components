@@ -100,7 +100,7 @@ export const DaysView: FC<DaysViewProps> = ({
 
         setNewDate(newDate);
       },
-    [date, maxDate, minDate, month, setNewDate, year]
+    [date, maxDate, minDate, month, setNewDate, year],
   );
 
   return (
@@ -185,12 +185,12 @@ const Day: FC<DayProps> = ({
     () =>
       (!minDate || compareDates(dayDate, new Date(minDate), 'day') >= 0) &&
       (!maxDate || compareDates(dayDate, new Date(maxDate), 'day') <= 0),
-    [minDate, dayDate, maxDate]
+    [minDate, dayDate, maxDate],
   );
 
   const isSelected = useMemo(
     () => !!value && !compareDates(dayDate, new Date(value), 'day'),
-    [dayDate, value]
+    [dayDate, value],
   );
 
   const isEqualToday = useMemo(() => !compareDates(dayDate, new Date(), 'day'), [dayDate]);

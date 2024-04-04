@@ -51,7 +51,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
       justify = 'start',
       ...blockProps
     },
-    ref
+    ref,
   ) => (
     <Block
       className={cn(
@@ -60,12 +60,12 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
         directionClasses[direction][reverse ? 'reverse' : 'normal'],
         alignClasses[align],
         justifyClasses[justify],
-        className
+        className,
       )}
       {...blockProps}
       ref={ref}
     >
       {children}
     </Block>
-  )
+  ),
 );

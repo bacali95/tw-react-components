@@ -13,7 +13,7 @@ const TabsList = forwardRef<
     ref={ref}
     className={cn(
       'inline-flex h-9 w-full items-center justify-center rounded-lg bg-slate-100 p-1 text-slate-400 dark:bg-slate-700 ',
-      className
+      className,
     )}
     {...props}
   />
@@ -29,7 +29,7 @@ const TabsTrigger = forwardRef<
     className={cn(
       'inline-flex w-full items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50',
       'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow dark:data-[state=active]:bg-slate-900 dark:data-[state=active]:text-white',
-      className
+      className,
     )}
     {...props}
   />

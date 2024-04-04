@@ -16,5 +16,5 @@ root.render(
         </LayoutContextProvider>
       </HashRouter>
     </Suspense>
-  </StrictMode>
+  </StrictMode>,
 );

@@ -12,7 +12,7 @@ export const Spinner: FC<Props> = ({ className, fullScreen }) => (
         'h-screen': fullScreen,
         'h-full': !fullScreen,
       },
-      className
+      className,
     )}
   >
     <svg

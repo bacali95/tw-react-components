@@ -90,13 +90,13 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       parentRef,
       ...props
     }: SelectInputProps<T>,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>,
   ): JSX.Element => {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const pureItems = useMemo(
       () => items.flatMap((item: SelectItem<T, boolean>) => (item.group ? item.items : [item])),
-      [items]
+      [items],
     );
     const selectedItems = useMemo<SelectItem<T>[]>(
       () =>
@@ -106,12 +106,12 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
               ? [pureItems.find((item) => selectPredicate(item.value, value))!]
               : []
             : Array.isArray(value)
-            ? value
-                .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
-                .filter(Boolean)
-            : []
+              ? value
+                  .map((v) => pureItems.find((item) => selectPredicate(item.value, v))!)
+                  .filter(Boolean)
+              : []
           : [],
-      [multiple, pureItems, selectPredicate, value]
+      [multiple, pureItems, selectPredicate, value],
     );
 
     const filteredItems = useMemo(
@@ -121,22 +121,22 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
           : items.flatMap<SelectItem<T, boolean>>((item: SelectItem<T, boolean>) =>
               item.group
                 ? item.items.some((subItem) =>
-                    subItem.label.toLowerCase().includes(searchValue.toLowerCase())
+                    subItem.label.toLowerCase().includes(searchValue.toLowerCase()),
                   )
                   ? [
                       {
                         ...item,
                         items: item.items.filter((subItem) =>
-                          subItem.label.toLowerCase().includes(searchValue.toLowerCase())
+                          subItem.label.toLowerCase().includes(searchValue.toLowerCase()),
                         ),
                       },
                     ]
                   : []
                 : item.label.toLowerCase().includes(searchValue.toLowerCase())
-                ? [item]
-                : []
+                  ? [item]
+                  : [],
             ),
-      [items, search, searchValue]
+      [items, search, searchValue],
     );
 
     const text = useMemo(
@@ -146,16 +146,16 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
             ? selectedItems[0].label
             : selectedItems.map((item) => item.label).join(', ')
           : undefined,
-      [multiple, selectedItems]
+      [multiple, selectedItems],
     );
 
     const selectedMap = useMemo(
       () =>
         selectedItems.reduce<Record<string | number, T>>(
           (prev, curr) => ({ ...prev, [curr.id]: curr.value }),
-          {}
+          {},
         ),
-      [selectedItems]
+      [selectedItems],
     );
 
     const handleOnSelect = (id: string | number) => {
@@ -174,7 +174,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
             [
               ...selectedItems.map((item) => item.value),
               pureItems.find((item) => item.id === id)?.value,
-            ].filter(Boolean) as T[]
+            ].filter(Boolean) as T[],
           );
         }
       }
@@ -273,14 +273,14 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                   </Flex>
                 ) : (
                   <RenderOption key={item.id} {...item} />
-                )
+                ),
               )}
             </Flex>
           </Popover.Content>
         </Popover>
       </Block>
     );
-  }
+  },
 ) as (<T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element) & {
   readonly $$typeof: symbol;
 };

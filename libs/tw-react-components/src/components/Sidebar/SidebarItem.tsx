@@ -37,7 +37,7 @@ export const SidebarItemComp: FC<SidebarItemProps> = ({
         'text-slate-500 dark:text-slate-400': !active,
         'hover:bg-slate-100 dark:hover:bg-slate-800': !active && !isChild,
         'hover:bg-slate-200 dark:hover:bg-slate-900': !active && isChild,
-      }
+      },
     )}
     to={[basePath, pathname].join('/').replace(/\/{2,}/g, '/')}
     onClick={onClick}

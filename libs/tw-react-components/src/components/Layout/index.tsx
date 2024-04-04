@@ -24,13 +24,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useOnSwipe(screenRef, (direction) =>
-    direction === 'right' ? setSidebarOpen(true) : direction === 'left' && setSidebarOpen(false)
+    direction === 'right' ? setSidebarOpen(true) : direction === 'left' && setSidebarOpen(false),
   );
 
   useOutsideClick(
     sidebarRef,
     () =>
-      sidebarOpen && window.document.documentElement.offsetWidth <= 1024 && setSidebarOpen(false)
+      sidebarOpen && window.document.documentElement.offsetWidth <= 1024 && setSidebarOpen(false),
   );
 
   return (

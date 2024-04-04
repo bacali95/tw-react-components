@@ -138,7 +138,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
       suffixIcon: SuffixIcon,
       ...props
     },
-    ref
+    ref,
   ) => (
     <div
       className={cn(
@@ -151,7 +151,7 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
             !!props.onClick,
           [sizeClassNames[size].withChildren]: children,
         },
-        className
+        className,
       )}
       {...props}
       ref={ref}
@@ -172,5 +172,5 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         />
       )}
     </div>
-  )
+  ),
 );

@@ -37,12 +37,12 @@ export function ListSorter<T extends ListSorterItem>({
 }: ListSorterProps<T>): ReactElement {
   const adaptedItems = useMemo(
     () => items.map((value, index) => ({ id: idResolver(value, index), value })),
-    [idResolver, items]
+    [idResolver, items],
   );
 
   const sensors = useSensors(
     useSensor(PointerSensor),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
