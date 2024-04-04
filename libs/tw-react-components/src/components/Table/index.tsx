@@ -4,12 +4,9 @@ import { cn } from '../../helpers';
 import { Flex } from '../Flex';
 
 const $Table: FC<ComponentProps<'table'>> = ({ children, className, ...props }) => (
-  <Flex className="overflow-auto rounded-lg" fullWidth>
+  <Flex className={cn('overflow-auto rounded-lg', className)} fullWidth>
     <table
-      className={cn(
-        'min-w-full divide-y divide-slate-200 dark:divide-slate-700 dark:text-white',
-        className
-      )}
+      className="min-w-full divide-y divide-slate-200 dark:divide-slate-700 dark:text-white"
       {...props}
     >
       {children}

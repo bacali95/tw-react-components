@@ -65,6 +65,7 @@ export type DataTableAction<T> = {
 };
 
 export type DataTableProps<T> = {
+  className?: string;
   rows: T[];
   columns: DataTableColumn<T>[] | DataTableColumns<T>;
   sorting?: {
@@ -88,6 +89,7 @@ function defaultRender<T>(item: T, field: Paths<T>): ReactNode {
 }
 
 export function DataTable<T>({
+  className,
   columns,
   rows,
   sorting,
@@ -184,7 +186,7 @@ export function DataTable<T>({
   };
 
   return (
-    <Table>
+    <Table className={cn('border dark:border-slate-700/80', className)}>
       <Table.Head className="sticky top-0 z-10">
         <Table.Row>
           {rowExtraContent && (
