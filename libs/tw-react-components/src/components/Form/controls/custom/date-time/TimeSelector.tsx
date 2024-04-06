@@ -52,7 +52,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
             {...decreaseHours}
           />
         </div>
-        <div className="flex items-center rounded-lg border border-slate-100 bg-slate-100 text-right dark:border-slate-700 dark:bg-slate-700">
+        <div className="flex items-center rounded-lg border border-slate-100 bg-slate-100 text-right dark:border-slate-700 dark:bg-slate-800">
           <span className="flex px-2" onWheel={onWheel('hours')}>
             {date.getHours().toString().padStart(2, '0')}
           </span>

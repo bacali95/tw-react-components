@@ -7,7 +7,7 @@ type Props = { className?: string; fullScreen?: boolean };
 export const Spinner: FC<Props> = ({ className, fullScreen }) => (
   <div
     className={cn(
-      'flex w-full items-center justify-center bg-white dark:bg-slate-800',
+      'flex w-full items-center justify-center bg-white dark:bg-slate-900',
       {
         'h-screen': fullScreen,
         'h-full': !fullScreen,

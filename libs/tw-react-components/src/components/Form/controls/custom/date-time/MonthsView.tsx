@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { compareDates } from '../../../../../helpers';
-import { cn } from '../../../../../helpers';
+import { cn, compareDates } from '../../../../../helpers';
 import { useMonths } from '../../../../../hooks';
 
 type MonthsViewProps = {

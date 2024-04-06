@@ -15,7 +15,7 @@ export const Navbar: FC<NavbarProps> = ({ leftSlot, rightSlot }) => {
   const { setSidebarOpen } = useLayoutContext();
 
   return (
-    <Block className="border-b p-3 dark:border-slate-700/80" fullWidth>
+    <Block className="border-b p-3 dark:border-slate-700" fullWidth>
       <Flex align="center" justify="between">
         <Flex align="center">
           <Button

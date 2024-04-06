@@ -6,7 +6,7 @@ import { Block, BlockProps } from '../Block';
 export const Card = forwardRef<HTMLDivElement, BlockProps>(
   ({ children, className, ...blockProps }, ref) => (
     <Block
-      className={cn('rounded-lg border p-3 dark:border-slate-700/80 dark:bg-slate-800', className)}
+      className={cn('rounded-lg border p-3 dark:border-slate-700 dark:bg-slate-900', className)}
       {...blockProps}
       ref={ref}
     >

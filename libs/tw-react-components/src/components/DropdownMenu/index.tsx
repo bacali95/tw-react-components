@@ -104,7 +104,7 @@ const DropdownMenuLabel = forwardRef<
     inset?: boolean;
   }
 >(({ className, inset, children, ...props }, ref) => (
-  <DropdownMenuPrimitive.Label ref={ref} {...props}>
+  <DropdownMenuPrimitive.Label ref={ref} {...props} asChild>
     <List.Label className={className} inset={inset}>
       {children}
     </List.Label>

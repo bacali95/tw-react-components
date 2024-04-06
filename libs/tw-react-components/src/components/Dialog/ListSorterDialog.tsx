@@ -44,12 +44,12 @@ export function ListSorterDialog<T extends ListSorterItem>({
   const customRenderer = (item: T, index: number, listeners?: SyntheticListenerMap) => (
     <Flex
       align="center"
-      className="gap-4 p-4 focus:outline-none dark:bg-slate-800 hover:dark:bg-slate-800/50"
+      className="gap-4 p-4 focus:outline-none dark:bg-slate-900 hover:dark:bg-slate-800"
     >
       <Flex
         align="center"
         justify="center"
-        className="cursor-move rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-900"
+        className="cursor-move rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-700"
         {...listeners}
       >
         <ArrowUpDownIcon className="h-5 w-5" />
@@ -66,7 +66,7 @@ export function ListSorterDialog<T extends ListSorterItem>({
       >
         <Dialog.Header>{title}</Dialog.Header>
         <ListSorter
-          className="divide-y overflow-auto rounded-lg border dark:divide-slate-600 dark:border-slate-600 dark:text-white"
+          className="divide-y overflow-auto rounded-lg border dark:divide-slate-700 dark:border-slate-700 dark:text-white"
           items={sortedItems}
           idResolver={idResolver}
           renderer={customRenderer}

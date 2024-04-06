@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { compareDates } from '../../../../../helpers';
-import { cn } from '../../../../../helpers';
+import { cn, compareDates } from '../../../../../helpers';
 
 type YearsViewProps = {
   date: Date;

@@ -1,20 +1,19 @@
-import { CheckIcon, ChevronDownIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import {
   ChangeEvent,
   ForwardedRef,
+  JSX,
   ReactNode,
   RefObject,
   forwardRef,
+  useCallback,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 
 import { cn } from '../../../../../helpers';
-import { Block } from '../../../../Block';
+import { DropdownMenu } from '../../../../DropdownMenu';
 import { Flex } from '../../../../Flex';
-import { List } from '../../../../List';
-import { Popover } from '../../../../Popover';
 import { BasicInputProps, TextInput } from '../../primitive';
 
 export type SelectInputType = 'select';
@@ -158,27 +157,30 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       [selectedItems],
     );
 
-    const handleOnSelect = (id: string | number) => {
-      !multiple && setOpen(false);
-      if (!multiple) {
-        if (clearable && selectedItems[0]?.id === id) {
-          onChange?.(undefined);
-        } else {
-          onChange?.(pureItems.find((item) => item.id === id)?.value);
+    const handleOnSelect = useCallback(
+      (id: string | number) => {
+        !multiple && setOpen(false);
+        if (!multiple) {
+          if (clearable && selectedItems[0]?.id === id) {
+            onChange?.(undefined);
+          } else {
+            onChange?.(pureItems.find((item) => item.id === id)?.value);
+          }
+        } else if (multiple) {
+          if (selectedMap[id]) {
+            onChange?.(selectedItems.filter((item) => item.id !== id).map((item) => item.value));
+          } else {
+            onChange?.(
+              [
+                ...selectedItems.map((item) => item.value),
+                pureItems.find((item) => item.id === id)?.value,
+              ].filter(Boolean) as T[],
+            );
+          }
         }
-      } else if (multiple) {
-        if (selectedMap[id]) {
-          onChange?.(selectedItems.filter((item) => item.id !== id).map((item) => item.value));
-        } else {
-          onChange?.(
-            [
-              ...selectedItems.map((item) => item.value),
-              pureItems.find((item) => item.id === id)?.value,
-            ].filter(Boolean) as T[],
-          );
-        }
-      }
-    };
+      },
+      [clearable, multiple, onChange, pureItems, selectedItems, selectedMap],
+    );
 
     const handleOnSearchValueChange = (event: ChangeEvent<HTMLInputElement>) =>
       setSearchValue(event.target.value);
@@ -196,45 +198,49 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       setSearchValue('');
     };
 
-    const RenderOption = (option: SelectItem<T>) => (
-      <List.Item
-        key={option.id}
-        className={cn('w-full cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/40', {
-          'bg-slate-300 dark:bg-slate-900': !!selectedMap[option.id],
-        })}
-        size={props.size}
-        onClick={() => handleOnSelect(option.id)}
-      >
-        <span>{renderItem(option, !!selectedMap[option.id])}</span>
-        {!!selectedMap[option.id] && <CheckIcon className="ml-auto h-5 w-5" />}
-      </List.Item>
+    const GroupComponent = multiple ? DropdownMenu.Group : DropdownMenu.RadioGroup;
+    const ItemComponent = multiple ? DropdownMenu.CheckboxItem : DropdownMenu.RadioItem;
+
+    const RenderOption = useCallback(
+      (option: SelectItem<T>) => {
+        return (
+          <ItemComponent
+            className={cn('w-full cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700', {
+              'bg-slate-200 dark:bg-slate-700': selectedMap[option.id],
+            })}
+            value={String(option.id)}
+            checked={!!selectedMap[option.id]}
+            onSelect={(event) => {
+              multiple && event.preventDefault();
+              handleOnSelect(option.id);
+            }}
+          >
+            <span>{renderItem(option, !!selectedMap[option.id])}</span>
+          </ItemComponent>
+        );
+      },
+      [ItemComponent, handleOnSelect, multiple, renderItem, selectedMap],
     );
 
-    const containerRef = useRef<HTMLDivElement>(null);
-
     return (
-      <Block className="contents" ref={containerRef}>
-        <Popover open={open} onOpenChange={setOpen}>
-          <Popover.Trigger className={cn('w-full', className)}>
-            <TextInput
-              className="[&>div>*]:cursor-pointer"
-              inputClassName="text-left"
-              {...props}
-              value={text ?? ''}
-              clearable={clearable && !!selectedItems.length}
-              onClear={handleOnClear}
-              suffixIcon={ChevronDownIcon}
-              ref={ref}
-              readOnly
-            />
-          </Popover.Trigger>
-          <Popover.Content
-            className="flex max-h-80 w-[calc(var(--radix-popover-trigger-width))] flex-col overflow-hidden px-0"
-            container={containerRef.current}
-          >
-            {search && (
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenu.Trigger className={cn('w-full', className)}>
+          <TextInput
+            className="[&>div>*]:cursor-pointer"
+            inputClassName="text-left"
+            {...props}
+            value={text ?? ''}
+            clearable={clearable && !!selectedItems.length}
+            onClear={handleOnClear}
+            suffixIcon={ChevronDownIcon}
+            ref={ref}
+            readOnly
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content className="flex max-h-80 w-[calc(var(--radix-popper-anchor-width))] flex-col overflow-hidden">
+          {search && (
+            <>
               <TextInput
-                className="px-1 pb-1"
                 value={searchValue}
                 placeholder="Search..."
                 size={props.size}
@@ -242,43 +248,44 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                 clearable={!!searchValue.length}
                 onClear={clearSearchValue}
               />
-            )}
-            {filteredItems.length === 0 &&
-              (allowAddition && searchValue ? (
-                <button
-                  className="mx-1 rounded bg-slate-100 p-2 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
-                  onClick={handleOnAddItemClicked}
-                >
-                  Add '{searchValue}'
-                </button>
+              <DropdownMenu.Separator className="w-full" />
+            </>
+          )}
+          {filteredItems.length === 0 &&
+            (allowAddition && searchValue ? (
+              <button
+                className="rounded bg-slate-100 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
+                onClick={handleOnAddItemClicked}
+              >
+                Add '{searchValue}'
+              </button>
+            ) : (
+              <div className="text-center text-slate-500">No items.</div>
+            ))}
+          <GroupComponent
+            className="flex flex-col gap-1 overflow-auto"
+            value={!multiple && selectedItems.length ? String(selectedItems[0].id) : undefined}
+          >
+            {filteredItems.map((item, index) =>
+              item.group ? (
+                <Flex key={item.id} className="gap-1" direction="column" fullWidth>
+                  <DropdownMenu.Label className="sticky top-0 z-[51] w-full rounded-md border bg-white py-1 dark:bg-slate-900">
+                    {item.label}
+                  </DropdownMenu.Label>
+                  {item.items.map((subItem) => (
+                    <RenderOption key={subItem.id} {...subItem} />
+                  ))}
+                  {index < filteredItems.length - 1 && (
+                    <div className="mb-1 h-px w-full bg-slate-200 dark:bg-slate-700" />
+                  )}
+                </Flex>
               ) : (
-                <div className="p-2 text-center text-slate-500">No items.</div>
-              ))}
-            <Flex className="gap-1 overflow-auto px-1" direction="column" fullWidth>
-              {filteredItems.map((item, index) =>
-                item.group ? (
-                  <Flex key={item.id} className="gap-1" direction="column" fullWidth>
-                    <List.Label
-                      className="sticky top-0 z-[51] w-full rounded-md bg-slate-200 px-2 py-1 dark:bg-slate-700"
-                      size={props.size}
-                    >
-                      {item.label}
-                    </List.Label>
-                    {item.items.map((subItem) => (
-                      <RenderOption key={subItem.id} {...subItem} />
-                    ))}
-                    {index < filteredItems.length - 1 && (
-                      <div className="mb-1 h-px w-full bg-slate-200 dark:bg-slate-700" />
-                    )}
-                  </Flex>
-                ) : (
-                  <RenderOption key={item.id} {...item} />
-                ),
-              )}
-            </Flex>
-          </Popover.Content>
-        </Popover>
-      </Block>
+                <RenderOption key={item.id} {...item} />
+              ),
+            )}
+          </GroupComponent>
+        </DropdownMenu.Content>
+      </DropdownMenu>
     );
   },
 ) as (<T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element) & {

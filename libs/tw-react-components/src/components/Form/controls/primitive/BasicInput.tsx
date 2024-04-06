@@ -4,6 +4,7 @@ import {
   ComponentProps,
   FC,
   ForwardedRef,
+  JSX,
   MouseEvent,
   PropsWithChildren,
   ReactNode,
@@ -35,22 +36,23 @@ export type BasicInputProps<Type extends InputType> = {
   'id' | 'ref' | 'size'
 >;
 
-const classes = {
+const inputClasses = {
   base: {
-    input: 'peer w-full border focus:ring-0 rounded-md overflow-hidden text-ellipsis',
+    input:
+      'dark:bg-transparent peer w-full border focus:ring-0 rounded-md overflow-hidden text-ellipsis',
     disabled: 'opacity-60',
   },
   withoutErrors: {
     input:
-      'border-slate-300 dark:border-slate-600 dark:bg-slate-700 focus:border-blue-500 dark:focus:border-blue-600 dark:placeholder-slate-500 dark:placeholder-slate-400',
+      'border-slate-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-600 dark:placeholder-slate-400',
     extension:
-      'border-slate-300 text-slate-600 peer-focus:border-blue-500 dark:peer-focus:border-blue-600 dark:border-slate-600 dark:text-white',
+      'bg-white dark:bg-transparent border-slate-300 text-slate-600 peer-focus:border-blue-500 dark:peer-focus:border-blue-600 dark:border-slate-700 dark:text-white',
   },
   withErrors: {
     input:
-      'border-red-500 placeholder-red-500 focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:placeholder-red-600 dark:bg-slate-700',
+      'text-red-600 border-red-500 placeholder-red-500 focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:placeholder-red-600',
     extension:
-      'border-red-500 text-red-600 peer-focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:text-red-500',
+      'text-red-600 border-red-500 peer-focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:text-red-500',
   },
 };
 
@@ -154,12 +156,12 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           <textarea
             id={id}
             className={cn(
-              classes.base.input,
+              inputClasses.base.input,
               sizeClasses[size].input.replace(/ h-\d/g, ''),
               {
-                [classes.base.disabled]: props.disabled,
-                [classes.withoutErrors.input]: !hasErrors,
-                [classes.withErrors.input]: hasErrors,
+                [inputClasses.base.disabled]: props.disabled,
+                [inputClasses.withoutErrors.input]: !hasErrors,
+                [inputClasses.withErrors.input]: hasErrors,
                 'rounded-r-none border-r-0': SuffixIcon,
               },
               inputClassName,
@@ -175,7 +177,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               'rounded border-slate-300 text-blue-600',
               sizeClasses[size].checkbox.input,
               {
-                [classes.base.disabled]: props.disabled,
+                [inputClasses.base.disabled]: props.disabled,
                 'bg-red-100': hasErrors,
               },
               inputClassName,
@@ -189,12 +191,12 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
           <input
             id={id}
             className={cn(
-              classes.base.input,
+              inputClasses.base.input,
               sizeClasses[size].input,
               {
-                [classes.base.disabled]: props.disabled,
-                [classes.withoutErrors.input]: !hasErrors,
-                [classes.withErrors.input]: hasErrors,
+                [inputClasses.base.disabled]: props.disabled,
+                [inputClasses.withoutErrors.input]: !hasErrors,
+                [inputClasses.withErrors.input]: hasErrors,
                 'rounded-r-none border-r-0': SuffixIcon,
               },
               inputClassName,
@@ -216,6 +218,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
               },
             )}
             onClick={handleClear}
+            onPointerDown={(event) => event.stopPropagation()}
           />
         )}
         {type !== 'checkbox' && SuffixIcon && (
@@ -245,17 +248,18 @@ export const BasicInputExtension: FC<
 > = ({ children, className, size, hasErrors, disabled, onClick }) => (
   <div
     className={cn(
-      'flex aspect-square items-center justify-center rounded-r-md border border-l-0 dark:bg-slate-700',
+      'flex aspect-square items-center justify-center rounded-r-md border border-l-0',
       sizeClasses[size].suffix.wrapper,
       {
-        [classes.base.disabled]: disabled,
-        [classes.withoutErrors.extension]: !hasErrors,
-        [classes.withErrors.extension]: hasErrors,
+        [inputClasses.base.disabled]: disabled,
+        [inputClasses.withoutErrors.extension]: !hasErrors,
+        [inputClasses.withErrors.extension]: hasErrors,
         'cursor-pointer': onClick,
       },
       className,
     )}
     onClick={!disabled ? onClick : undefined}
+    onPointerDown={(event) => event.stopPropagation()}
   >
     {children}
   </div>

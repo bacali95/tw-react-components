@@ -1,7 +1,6 @@
 import { FC, useCallback, useMemo } from 'react';
 
-import { compareDates } from '../../../../../helpers';
-import { cn } from '../../../../../helpers';
+import { cn, compareDates } from '../../../../../helpers';
 import { useDays } from '../../../../../hooks';
 
 type DaysViewProps = {
@@ -201,7 +200,7 @@ const Day: FC<DayProps> = ({
         'border-2 border-blue-500': isEqualToday,
         'bg-blue-500 text-white': isSelected,
         'cursor-pointer': isSelectable,
-        'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
+        'hover:bg-blue-100 dark:hover:bg-blue-800': isSelectable && !isSelected,
         'text-slate-400 dark:text-slate-500': !isSelectable || !primary,
       })}
       onClick={isSelectable ? setDayNumber(day, month, year) : undefined}

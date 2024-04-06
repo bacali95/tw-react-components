@@ -185,7 +185,7 @@ export function DataTable<T>({
   };
 
   return (
-    <Table className={cn('border dark:border-slate-700/80', className)}>
+    <Table className={cn('border dark:border-slate-700', className)}>
       <Table.Head className="sticky top-0 z-10">
         <Table.Row>
           {rowExtraContent && (
@@ -282,7 +282,7 @@ export function DataTable<T>({
               </Table.Cell>
             ))}
             {actions.length > 0 && (
-              <Table.Cell>
+              <Table.Cell className="py-3">
                 <Flex align="center" justify="center">
                   {actions
                     .filter((action) =>
@@ -325,14 +325,14 @@ export function DataTable<T>({
         ])}
       </Table.Body>
       {pagination && (
-        <Table.Footer className="sticky bottom-0">
-          <Table.Row>
+        <Table.Footer className="sticky -bottom-px">
+          <Table.Row className="border-t dark:border-slate-700">
             <Table.Cell colSpan={columnsLength}>
               <Flex justify="end" ref={footerRef}>
                 <Pagination disabled={isLoading} {...pagination} />
                 {pagination.onPageSizeChange && (
                   <SelectInput
-                    className="!w-32"
+                    className="w-32"
                     value={pagination.pageSize ?? 10}
                     items={possiblePageSize.map((pageSize) => ({
                       id: pageSize,

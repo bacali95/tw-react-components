@@ -469,7 +469,7 @@ const sizeClassNames: Record<
     },
   },
   medium: {
-    base: 'gap-2 text-base h-9',
+    base: 'gap-2 text-base h-10',
     withChildren: 'px-2.5',
     icon: {
       base: 'h-5 w-5',

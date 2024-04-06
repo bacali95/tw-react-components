@@ -2,8 +2,7 @@ import dayjs from 'dayjs';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
 import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
-import { getDisplayDate } from '../../../../../helpers';
-import { cn } from '../../../../../helpers';
+import { cn, getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
 import { BasicInput, BasicInputProps } from '../../primitive';
 import { DateSelector, View } from './DateSelector';
@@ -146,7 +145,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
 
         {isOpen && (
           <div
-            className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+            className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
             tabIndex={0}
             onBlur={handleOnBlur}
             ref={calendarRef}

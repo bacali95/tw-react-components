@@ -75,15 +75,21 @@ export const Tables: FC = () => {
             </Flex>
           ),
         }}
-        rowClassName={(item) => (item.gender === 'Female' ? 'bg-pink-500/20' : 'bg-blue-500/20')}
+        // rowClassName={(item) => (item.gender === 'Female' ? 'bg-pink-500/20' : 'bg-blue-500/20')}
         actions={[
           {
             color: 'yellow',
             icon: PencilIcon,
             hasNotification: (user) =>
               user.gender === 'Male'
-                ? { type: 'badge', props: { children: 1, className: 'text-xs' } }
-                : false,
+                ? {
+                    type: 'badge',
+                    props: {
+                      children: 1,
+                      className: 'text-xs rounded-full aspect-square justify-center',
+                    },
+                  }
+                : { type: 'dot', props: { ping: true } },
             onClick: (item) => alert(`Edit clicked for ${item.firstName}!`),
           },
           {

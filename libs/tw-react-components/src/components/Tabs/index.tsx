@@ -3,7 +3,13 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
 
 import { cn } from '../../helpers';
 
-const $Tabs = TabsPrimitive.Root;
+const $Tabs = forwardRef<
+  ElementRef<typeof TabsPrimitive.Root>,
+  ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Root ref={ref} className={cn('flex flex-col gap-2', className)} {...props} />
+));
+$Tabs.displayName = TabsPrimitive.Root.displayName;
 
 const TabsList = forwardRef<
   ElementRef<typeof TabsPrimitive.List>,
@@ -12,7 +18,7 @@ const TabsList = forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'inline-flex h-9 w-full items-center justify-center rounded-lg bg-slate-100 p-1 text-slate-400 dark:bg-slate-700 ',
+      'inline-flex w-full items-center justify-center gap-1 rounded-lg border bg-slate-100 p-1 text-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-500',
       className,
     )}
     {...props}
@@ -27,8 +33,8 @@ const TabsTrigger = forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'inline-flex w-full items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50',
-      'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow dark:data-[state=active]:bg-slate-900 dark:data-[state=active]:text-white',
+      'inline-flex w-full items-center justify-center whitespace-nowrap rounded-md px-2 py-1.5 font-medium transition-all hover:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800',
+      'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow dark:data-[state=active]:bg-slate-700 dark:data-[state=active]:text-white',
       className,
     )}
     {...props}
@@ -36,13 +42,7 @@ const TabsTrigger = forwardRef<
 ));
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
-const TabsContent = forwardRef<
-  ElementRef<typeof TabsPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content ref={ref} className={cn('mt-2', className)} {...props} />
-));
-TabsContent.displayName = TabsPrimitive.Content.displayName;
+const TabsContent = TabsPrimitive.Content;
 
 export const Tabs = Object.assign($Tabs, {
   List: TabsList,

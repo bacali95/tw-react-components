@@ -59,7 +59,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         <nav
           className={cn(
             'group/navbar fixed left-0 top-0 z-50 flex h-full w-56 shrink-0 flex-col bg-white p-2 transition-all duration-200 ease-in-out xl:relative dark:bg-slate-900',
-            'border-r data-[open=false]:-translate-x-full xl:data-[open=false]:w-16 xl:data-[open=true]:w-72 xl:data-[open=false]:translate-x-0 xl:data-[open=false]:hover:w-72 dark:border-slate-700/80',
+            'border-r data-[open=false]:-translate-x-full xl:data-[open=false]:w-16 xl:data-[open=true]:w-72 xl:data-[open=false]:translate-x-0 xl:data-[open=false]:hover:w-72 dark:border-slate-700',
             className,
           )}
           data-open={sidebarOpen}
@@ -83,7 +83,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
                 !item.hidden &&
                 (item.type === 'separator' ? (
                   !item.title ? (
-                    <Block key={index} className="my-2 h-px bg-slate-300 dark:bg-slate-700/80" />
+                    <Block key={index} className="my-2 h-px bg-slate-300 dark:bg-slate-700" />
                   ) : (
                     <Block
                       key={index}
