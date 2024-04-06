@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.128](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.127...v0.0.128) (2024-04-06)
+
+
+### Features
+
+* redesign dark mode ([5887ac8](https://github.com/NaN-Projects/tw-react-components/commit/5887ac85258ddd1a094bb66f09d375b8b49189d7))
+
 ### [0.0.127](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.126...v0.0.127) (2024-04-04)
 
 
