@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.129](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.128...v0.0.129) (2024-04-07)
+
+
+### Bug Fixes
+
+* fix table hover style ([e2d223e](https://github.com/NaN-Projects/tw-react-components/commit/e2d223e2d81de793bb68c00c776f3df6494c774b))
+
 ### [0.0.128](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.127...v0.0.128) (2024-04-06)
 
 
