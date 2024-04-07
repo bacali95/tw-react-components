@@ -255,7 +255,7 @@ export function DataTable<T>({
             key={rowIndex}
             className={cn(
               {
-                'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/40':
+                'cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800':
                   onRowClick || rowExtraContent,
               },
               rowClassName?.(item, rowIndex),

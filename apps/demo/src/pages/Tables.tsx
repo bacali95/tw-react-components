@@ -75,7 +75,7 @@ export const Tables: FC = () => {
             </Flex>
           ),
         }}
-        // rowClassName={(item) => (item.gender === 'Female' ? 'bg-pink-500/20' : 'bg-blue-500/20')}
+        rowClassName={(item) => (item.gender === 'Female' ? 'bg-pink-500/20' : 'bg-blue-500/20')}
         actions={[
           {
             color: 'yellow',
