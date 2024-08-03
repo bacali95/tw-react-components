@@ -36,15 +36,10 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   return (
     <Flex className="h-screen gap-0 text-black dark:bg-slate-900 dark:text-white" ref={screenRef}>
       <Sidebar {...sidebarProps} open={sidebarOpen} ref={sidebarRef} />
-      <Flex
-        className="gap-0 overflow-clip [overflow-clip-margin:1rem]"
-        direction="column"
-        fullHeight
-        fullWidth
-      >
+      <Flex className="gap-0 overflow-hidden" direction="column" fullHeight fullWidth>
         <Navbar {...navbarProps} />
         <Flex
-          className={cn('overflow-clip p-3 [overflow-clip-margin:1rem]', className)}
+          className={cn('overflow-hidden p-3', className)}
           direction="column"
           fullWidth
           fullHeight
