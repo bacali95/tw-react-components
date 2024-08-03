@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.130](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.129...v0.0.130) (2024-08-03)
+
+
+### Bug Fixes
+
+* fix layout overflow ([8844d7b](https://github.com/NaN-Projects/tw-react-components/commit/8844d7bafe9d06d27bd3fa428c786bfa0c90f6d6))
+
 ### [0.0.129](https://github.com/NaN-Projects/tw-react-components/compare/v0.0.128...v0.0.129) (2024-04-07)
 
 
