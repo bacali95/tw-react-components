@@ -6,14 +6,12 @@ runs:
   steps:
     - name: Set Yarn version
       shell: bash
-      run: yarn set version 4.1.1
+      run: yarn set version 4.4.1
 
-    - name: Setup NodeJs 20 💿
+    - name: Setup NodeJs 22 💿
       uses: actions/setup-node@v4
       with:
-        node-version: 20
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@back-n-soft'
+        node-version: 22
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
