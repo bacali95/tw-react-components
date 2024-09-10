@@ -7,3 +7,5 @@ CHANGELOG.md
 
 /.nx/cache
 /.yarn
+
+/.nx/workspace-data
