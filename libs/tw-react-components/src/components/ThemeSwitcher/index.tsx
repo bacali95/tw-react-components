@@ -1,9 +1,8 @@
-import { Switch } from '@headlessui/react';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { FC } from 'react';
 
 import { useLayoutContext } from '../../contexts';
-import { cn } from '../../helpers';
+import { Switch } from '../Switch';
 
 type Props = { className?: string };
 
@@ -13,29 +12,16 @@ export const ThemeSwitcher: FC<Props> = ({ className }) => {
 
   return (
     <Switch
+      className={className}
       checked={darkMode}
-      onChange={toggleTheme}
-      className={cn(
-        'flex h-8 w-14 items-center rounded-full border p-1 dark:border-blue-700',
-        {
-          'bg-blue-700': darkMode,
-          'bg-slate-100': !darkMode,
-        },
-        className,
-      )}
-    >
-      <div
-        className={cn('flex transform transition duration-200 ease-in-out', {
-          'translate-x-6': darkMode,
-          'translate-x-0': !darkMode,
-        })}
-      >
-        {darkMode ? (
-          <MoonIcon className="h-6 w-6 rounded-full bg-slate-800 p-1 text-white" />
+      onCheckedChange={toggleTheme}
+      thumbProps={{
+        children: darkMode ? (
+          <MoonIcon className="h-6 w-6 rounded-full bg-slate-900 p-1 text-white" />
         ) : (
-          <SunIcon className="h-6 w-6 rounded-full bg-slate-200 p-1 text-black" />
-        )}
-      </div>
-    </Switch>
+          <SunIcon className="h-6 w-6 rounded-full bg-white p-1 text-black" />
+        ),
+      }}
+    />
   );
 };
