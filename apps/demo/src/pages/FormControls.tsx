@@ -145,7 +145,7 @@ export const FormControls: FC = () => {
       </Flex>
       <Flex className="px-2" direction="column" fullWidth>
         <p className="mb-2">
-          Without <code className="rounded bg-slate-100 p-1 dark:bg-slate-900 ">use-form-hook</code>{' '}
+          Without <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
           context
         </p>
         <form

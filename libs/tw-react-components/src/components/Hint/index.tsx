@@ -73,7 +73,7 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
     <>
       <Block
         className={cn(
-          'absolute rounded-full ',
+          'absolute rounded-full',
           colorClassNames[color],
           dotSizeClassNames[size].base,
           {
@@ -92,7 +92,7 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
       {ping && (
         <Block
           className={cn(
-            'absolute animate-ping rounded-full ',
+            'absolute animate-ping rounded-full',
             colorClassNames[color],
             dotSizeClassNames[size].base,
             {
