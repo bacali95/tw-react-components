@@ -1,6 +1,11 @@
 name: 'Setup environment'
 description: 'This action will checkout code, setup node and retrieve the cache'
 
+inputs:
+  npm-token:
+    description: NPM Token
+    required: false
+
 runs:
   using: composite
   steps:
@@ -12,16 +17,17 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: 22
+        token: ${{ inputs.npm-token }}
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       shell: bash
       run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
 
-    - name: Setup node modules cache 📦
-      uses: actions/cache@v4
-      id: yarn-cache
-      if: inputs.skip-install != 'true'
+    - name: Restore yarn cache 📦
+      uses: actions/cache/restore@v4
+      id: yarn-cache-restore
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
@@ -31,3 +37,10 @@ runs:
     - name: Install packages 🏭
       shell: bash
       run: yarn --immutable
+
+    - name: Save yarn cache 📦
+      uses: actions/cache/save@v4
+      if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
