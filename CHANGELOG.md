@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.133](https://github.com/bacali95/tw-react-components/compare/v0.0.132...v0.0.133) (2024-09-10)
+
+
+### Bug Fixes
+
+* ThemeSwitch is now using RadixUI Switch instead of HeadlessUI one ([43300d0](https://github.com/bacali95/tw-react-components/commit/43300d0181eb6dd2456317edd476f8234792ea1b))
+
 ### [0.0.132](https://github.com/bacali95/tw-react-components/compare/v0.0.131...v0.0.132) (2024-09-10)
 
 ### [0.0.131](https://github.com/bacali95/tw-react-components/compare/v0.0.130...v0.0.131) (2024-09-10)
