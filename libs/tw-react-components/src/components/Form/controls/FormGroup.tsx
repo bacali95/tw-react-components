@@ -10,7 +10,7 @@ export type FormGroupProps = PropsWithChildren<{
 
 export const FormGroup: FC<FormGroupProps> = ({ className, label, children }) => (
   <Flex
-    className={cn('relative !gap-4 rounded-lg border p-4 dark:border-slate-300', className)}
+    className={cn('relative !gap-4 rounded-lg border p-4 dark:border-slate-700', className)}
     direction="column"
     fullWidth
   >
