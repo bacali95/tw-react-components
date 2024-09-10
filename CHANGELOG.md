@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.135](https://github.com/bacali95/tw-react-components/compare/v0.0.133...v0.0.135) (2024-09-10)
+
+
+### Bug Fixes
+
+* fix FormGroup border color ([22bda64](https://github.com/bacali95/tw-react-components/commit/22bda6495ea7761ca926dff1fd455da7c01f3ccc))
+
 ### [0.0.134](https://github.com/bacali95/tw-react-components/compare/v0.0.133...v0.0.134) (2024-09-10)
 
 
