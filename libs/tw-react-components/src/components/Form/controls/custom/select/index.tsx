@@ -61,6 +61,7 @@ export type SelectInputProps<T = any> = {
     | 'extensionClassName'
     | 'name'
     | 'label'
+    | 'description'
     | 'size'
     | 'placeholder'
     | 'required'

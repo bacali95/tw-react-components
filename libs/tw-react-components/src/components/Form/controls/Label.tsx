@@ -32,14 +32,13 @@ export const Label: FC<PropsWithChildren<Props>> = ({
       )}
       htmlFor={htmlFor}
     >
-      <span>
-        {children} {required && <span className="text-red-600">*</span>}
-      </span>
+      {children}
       {description && (
-        <Tooltip content={<div className="max-w-xs">{description}</div>} placement="right" asChild>
-          <HelpCircle className="h-5 w-5" />
+        <Tooltip content={<div className="max-w-xs">{description}</div>} placement="top" asChild>
+          <HelpCircle className="h-4 w-4" />
         </Tooltip>
       )}
+      {required && <span className="text-red-600">*</span>}
     </label>
   );
 };
