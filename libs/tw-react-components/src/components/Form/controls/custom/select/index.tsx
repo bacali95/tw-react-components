@@ -233,6 +233,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
             clearable={clearable && !!selectedItems.length}
             onClear={handleOnClear}
             suffixIcon={ChevronDownIcon}
+            onSuffixIconClick={() => setOpen((open) => !open)}
             ref={ref}
             readOnly
           />

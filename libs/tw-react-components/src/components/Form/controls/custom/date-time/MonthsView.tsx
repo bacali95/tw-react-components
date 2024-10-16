@@ -7,8 +7,8 @@ type MonthsViewProps = {
   date: Date;
   value?: string | Date | null;
   year: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   locale?: string;
   selectMonth: (month: number) => () => void;
 };
@@ -49,8 +49,8 @@ type MonthProps = {
   shortName: string;
   month: number;
   year: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   selectMonth: (month: number) => () => void;
 };
 

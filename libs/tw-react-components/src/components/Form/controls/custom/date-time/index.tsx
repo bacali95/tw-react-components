@@ -16,8 +16,8 @@ export type DateTimeInputProps = {
   hasErrors?: boolean;
   clearable?: boolean;
   step?: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   displayFormat?: string;
   displayLocale?: string;
   onChange?: (date?: Date | null) => void;
@@ -141,6 +141,7 @@ export const DateTimeInput = forwardRef<HTMLDivElement, DateTimeInputProps>(
           clearable={clearable && !!displayDate}
           onClear={clearDate}
           suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
+          onSuffixIconClick={handleOnClick}
         />
 
         {isOpen && (

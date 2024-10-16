@@ -8,8 +8,8 @@ import { useLongPress } from '../../../../../hooks';
 type TimeSelectorProps = {
   date: Date;
   step?: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   setNewDate: (date: Date) => void;
 };
 

@@ -6,8 +6,8 @@ type YearsViewProps = {
   date: Date;
   value?: string | Date | null;
   years: number[];
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   selectYear: (month: number) => () => void;
 };
 
@@ -38,8 +38,8 @@ type YearProps = {
   date: Date;
   value?: string | Date | null;
   year: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   selectYear: (month: number) => () => void;
 };
 

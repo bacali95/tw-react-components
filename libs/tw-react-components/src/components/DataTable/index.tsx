@@ -225,7 +225,9 @@ export function DataTable<T>({
                 ))}
             </Table.HeadCell>
           ))}
-          {actions.length > 0 && <Table.HeadCell align="center">Actions</Table.HeadCell>}
+          {actions.filter((action) => !action.hide).length > 0 && (
+            <Table.HeadCell align="center">Actions</Table.HeadCell>
+          )}
         </Table.Row>
       </Table.Head>
       <Table.Body className="relative">
@@ -281,7 +283,7 @@ export function DataTable<T>({
                 {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
               </Table.Cell>
             ))}
-            {actions.length > 0 && (
+            {actions.filter((action) => !action.hide).length > 0 && (
               <Table.Cell className="py-3">
                 <Flex align="center" justify="center">
                   {actions

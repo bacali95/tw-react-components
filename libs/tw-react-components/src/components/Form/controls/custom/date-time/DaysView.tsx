@@ -8,8 +8,8 @@ type DaysViewProps = {
   value?: string | Date | null;
   month: number;
   year: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   locale?: string;
   setNewDate: (date: Date) => void;
 };
@@ -162,8 +162,8 @@ type DayProps = {
   day: number;
   month: number;
   year: number;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   primary?: boolean;
   setDayNumber: (day: number, month: number, year: number) => () => void;
 };

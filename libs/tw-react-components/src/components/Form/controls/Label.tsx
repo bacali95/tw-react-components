@@ -36,7 +36,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
         {children} {required && <span className="text-red-600">*</span>}
       </span>
       {description && (
-        <Tooltip content={<div className="max-w-xs">{description}</div>} placement="right">
+        <Tooltip content={<div className="max-w-xs">{description}</div>} placement="right" asChild>
           <HelpCircle className="h-5 w-5" />
         </Tooltip>
       )}

@@ -11,8 +11,8 @@ export type View = 'days' | 'months' | 'years';
 type DateSelectorProps = {
   date: Date;
   value?: string | Date | null;
-  minDate?: Date;
-  maxDate?: Date;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   locale?: string;
   calendarView: View;
   setCalendarView: (view: View) => void;
