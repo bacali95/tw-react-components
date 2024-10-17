@@ -6,6 +6,8 @@ import {
   DateTimeInput,
   DateTimeInputProps,
   DateTimeInputType,
+  FileInput,
+  FileInputProps,
   SelectInput,
   SelectInputProps,
   SelectInputType,
@@ -57,7 +59,7 @@ function withForm<
 >(Component: ForwardRefExoticComponent<Props>) {
   return forwardRef<HtmlElement, WithFormProps<Type, Props>>((props, ref) => {
     const { name, pattern, validate, ...restProps } = props as WithFormProps<Type, Props>;
-    const { control } = useFormContext();
+    const { control, formState } = useFormContext();
 
     return (
       <Controller
@@ -77,7 +79,10 @@ function withForm<
             {...(restProps as Props)}
             {...field}
             value={field.value ?? ''}
-            disabled={field.disabled ?? (restProps as ComponentProps<'input'>).disabled}
+            disabled={
+              (field.disabled ?? (restProps as ComponentProps<'input'>).disabled) ||
+              formState.isSubmitting
+            }
             hasErrors={fieldState.error}
             ref={mergeRefs([ref, field.ref])}
           />
@@ -96,4 +101,5 @@ export const FormInputs = {
   Checkbox: withForm<'checkbox', HTMLInputElement, CheckboxInputProps>(CheckboxInput),
   DateTime: withForm<'datetime-local', HTMLDivElement, DateTimeInputProps>(DateTimeInput),
   Select: withForm<'select', HTMLInputElement, SelectInputProps>(SelectInput),
+  File: withForm<'file', HTMLInputElement, FileInputProps>(FileInput),
 };
