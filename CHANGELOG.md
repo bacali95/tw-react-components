@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.136](https://github.com/bacali95/tw-react-components/compare/v0.0.135...v0.0.136) (2024-10-21)
+
+
+### Features
+
+* add form file input ([59cdc5d](https://github.com/bacali95/tw-react-components/commit/59cdc5d40f121ad285018aec198f4cecbba16148))
+* Add unit to number form input ([bdcfb11](https://github.com/bacali95/tw-react-components/commit/bdcfb1107cb8bcf14ca9fc63bb9c990873380905))
+
+### Bug Fixes
+
+* hide data table actions column when actions prop is empty ([d47462d](https://github.com/bacali95/tw-react-components/commit/d47462d86fcdc9778b72a068f580ecca13e9133e))
+
 ### [0.0.135](https://github.com/bacali95/tw-react-components/compare/v0.0.133...v0.0.135) (2024-09-10)
 
 
