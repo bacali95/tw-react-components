@@ -2,7 +2,7 @@
   "name": "tw-react-components",
   "version": "0.0.0",
   "license": "MIT",
-  "packageManager": "yarn@4.4.1",
+  "packageManager": "yarn@4.5.1",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
@@ -99,6 +99,6 @@
   },
   "volta": {
     "node": "22.8.0",
-    "yarn": "4.4.1"
+    "yarn": "4.5.1"
   }
 }
