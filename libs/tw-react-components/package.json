@@ -18,6 +18,9 @@
   },
   "exports": {
     ".": {},
+    "./global.css": {
+      "default": "./global.css"
+    },
     "./tailwindcss-plugin.cjs": {
       "default": "./tailwindcss-plugin.cjs"
     }
