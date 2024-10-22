@@ -2,18 +2,13 @@ import { FC, PropsWithChildren, createContext, useContext, useEffect, useState }
 
 export type LayoutContext = {
   theme: ThemeState;
-  sidebarOpen: boolean;
   toggleTheme: () => void;
-  setSidebarOpen: (open: boolean) => void;
 };
 
 export const LayoutContext = createContext<LayoutContext | undefined>(undefined);
 
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(getValueFromLocalStorage<ThemeState>(THEME_KEY, 'light'));
-  const [sidebarOpen, _setSidebarOpen] = useState(
-    getValueFromLocalStorage<boolean>(SIDEBAR_KEY, true),
-  );
 
   useEffect(() => {
     if (theme) {
@@ -35,18 +30,7 @@ export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   };
 
-  const setSidebarOpen = (open: boolean) =>
-    _setSidebarOpen(() => {
-      window.localStorage.setItem(SIDEBAR_KEY, String(open));
-
-      return open;
-    });
-
-  return (
-    <LayoutContext.Provider value={{ theme, toggleTheme, sidebarOpen, setSidebarOpen }}>
-      {children}
-    </LayoutContext.Provider>
-  );
+  return <LayoutContext.Provider value={{ theme, toggleTheme }}>{children}</LayoutContext.Provider>;
 };
 
 export function useLayoutContext() {
@@ -62,8 +46,6 @@ export function useLayoutContext() {
 export type ThemeState = 'dark' | 'light';
 
 export const THEME_KEY = 'tw-react-components__theme';
-
-export const SIDEBAR_KEY = 'tw-react-components__sidebar';
 
 function getValueFromLocalStorage<T extends string | boolean>(key: string, _default: T): T {
   const transformers: Record<any, (value: any) => any> = {

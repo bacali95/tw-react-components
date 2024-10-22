@@ -29,70 +29,74 @@ import { Tabs } from './pages/Tabs';
 export const App: FC = () => {
   const sidebarProps: SidebarProps = useMemo(
     () => ({
+      smallLogo: 'SL',
+      fullLogo: 'Full Logo',
       items: [
         {
-          pathname: '',
-          title: 'Home',
-          Icon: HomeIcon,
-        },
-        { type: 'separator', title: 'Components' },
-        {
-          pathname: 'atoms',
-          title: 'Atoms',
-          Icon: AtomIcon,
+          type: 'group',
           items: [
             {
-              pathname: 'buttons',
-              title: 'Buttons',
-              Icon: RectangleHorizontalIcon,
+              pathname: '',
+              title: 'Home',
+              Icon: HomeIcon,
             },
             {
-              pathname: 'badges',
-              title: 'Badges',
-              Icon: BadgeIcon,
+              pathname: 'atoms',
+              title: 'Atoms',
+              Icon: AtomIcon,
+              items: [
+                {
+                  pathname: 'buttons',
+                  title: 'Buttons',
+                  Icon: RectangleHorizontalIcon,
+                },
+                {
+                  pathname: 'badges',
+                  title: 'Badges',
+                  Icon: BadgeIcon,
+                },
+                {
+                  pathname: 'hints',
+                  title: 'Hints',
+                  Icon: SquareDotIcon,
+                },
+                {
+                  pathname: 'form-controls',
+                  title: 'Form Controls',
+                  Icon: TextCursorIcon,
+                },
+              ],
             },
             {
-              pathname: 'hints',
-              title: 'Hints',
-              Icon: SquareDotIcon,
-            },
-            {
-              pathname: 'form-controls',
-              title: 'Form Controls',
-              Icon: TextCursorIcon,
-            },
-          ],
-        },
-        {
-          pathname: 'molecules',
-          title: 'Molecules',
-          Icon: FolderIcon,
-          items: [
-            {
-              pathname: 'menus',
-              title: 'Menus',
-              Icon: MenuIcon,
-            },
-            {
-              pathname: 'dialogs',
-              title: 'Dialogs',
-              Icon: LayersIcon,
-            },
-            {
-              pathname: 'tables',
-              title: 'Tables',
-              Icon: TableIcon,
-            },
-            {
-              pathname: 'tabs',
-              title: 'Tabs',
-              Icon: Columns2Icon,
+              pathname: 'molecules',
+              title: 'Molecules',
+              Icon: FolderIcon,
+              items: [
+                {
+                  pathname: 'menus',
+                  title: 'Menus',
+                  Icon: MenuIcon,
+                },
+                {
+                  pathname: 'dialogs',
+                  title: 'Dialogs',
+                  Icon: LayersIcon,
+                },
+                {
+                  pathname: 'tables',
+                  title: 'Tables',
+                  Icon: TableIcon,
+                },
+                {
+                  pathname: 'tabs',
+                  title: 'Tabs',
+                  Icon: Columns2Icon,
+                },
+              ],
             },
           ],
         },
       ],
-      smallLogo: 'SL',
-      fullLogo: 'Full Logo',
     }),
     [],
   );

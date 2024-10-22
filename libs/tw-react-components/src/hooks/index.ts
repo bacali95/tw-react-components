@@ -1,4 +1,5 @@
 export * from './useDays';
+export * from './useIsMobile';
 export * from './useLongPress';
 export * from './useMonths';
 export * from './useOnSwipe';
