@@ -43,14 +43,10 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
       <Sidebar collapsible="icon" {...sidebarProps.root}>
         <Sidebar.Header>
           {sidebarProps.smallLogo && sidebarProps.fullLogo && (
-            <div className="cursor-pointer overflow-hidden whitespace-nowrap p-2 text-center">
+            <div className="cursor-pointer overflow-hidden whitespace-nowrap py-2 text-center text-lg">
               <Link to="/">
-                <span className="group-hover/navbar:block group-data-[state=collapsed]:hidden">
-                  {sidebarProps.fullLogo}
-                </span>
-                <span className="group-hover/navbar:hidden group-data-[state=expanded]:hidden">
-                  {sidebarProps.smallLogo}
-                </span>
+                <span className="group-data-[state=collapsed]:hidden">{sidebarProps.fullLogo}</span>
+                <span className="group-data-[state=expanded]:hidden">{sidebarProps.smallLogo}</span>
               </Link>
             </div>
           )}

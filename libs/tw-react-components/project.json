@@ -21,7 +21,7 @@
         "updateBuildableProjectDepsInPackageJson": true,
         "assets": [
           {
-            "glob": "(global.css|tailwindcss-plugin.cjs)",
+            "glob": "(index.css|tailwindcss-plugin.cjs)",
             "input": "libs/tw-react-components",
             "output": "/"
           }

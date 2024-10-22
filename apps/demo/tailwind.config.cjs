@@ -11,6 +11,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwindcss-animate'),
-    require('tw-react-components/tailwindcss-plugin.cjs'),
+    require(join(__dirname, '../../libs/tw-react-components/tailwindcss-plugin.cjs')),
   ],
 };
