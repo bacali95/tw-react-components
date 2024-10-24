@@ -18,7 +18,10 @@
   },
   "exports": {
     ".": {},
-    "./tailwindcss-plugin.cjs": {
+    "./css": {
+      "default": "./index.css"
+    },
+    "./config": {
       "default": "./tailwindcss-plugin.cjs"
     }
   }

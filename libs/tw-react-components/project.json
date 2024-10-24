@@ -18,7 +18,14 @@
         "generateExportsField": true,
         "rollupConfig": "libs/tw-react-components/rollup.config.js",
         "babelUpwardRootMode": true,
-        "updateBuildableProjectDepsInPackageJson": true
+        "updateBuildableProjectDepsInPackageJson": true,
+        "assets": [
+          {
+            "glob": "(index.css|tailwindcss-plugin.cjs)",
+            "input": "libs/tw-react-components",
+            "output": "/"
+          }
+        ]
       }
     },
     "lint": {
