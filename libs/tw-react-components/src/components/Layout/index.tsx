@@ -15,8 +15,7 @@ export type SidebarItem = {
   items?: SidebarItem[];
 };
 
-export type SidebarProps = {
-  root?: ComponentProps<typeof Sidebar>;
+export type SidebarProps = ComponentProps<typeof Sidebar> & {
   basePath?: string;
   smallLogo?: ReactNode;
   fullLogo?: ReactNode;
@@ -35,28 +34,28 @@ type Props = {
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
   className,
-  sidebarProps,
+  sidebarProps: { basePath, smallLogo, fullLogo, items, ...sidebarProps },
   navbarProps,
 }) => {
   return (
     <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
-      <Sidebar collapsible="icon" {...sidebarProps.root}>
+      <Sidebar collapsible="icon" {...sidebarProps}>
         <Sidebar.Header>
-          {sidebarProps.smallLogo && sidebarProps.fullLogo && (
+          {smallLogo && fullLogo && (
             <div className="cursor-pointer overflow-hidden whitespace-nowrap py-2 text-center text-lg">
               <Link to="/">
-                <span className="group-data-[state=collapsed]:hidden">{sidebarProps.fullLogo}</span>
-                <span className="group-data-[state=expanded]:hidden">{sidebarProps.smallLogo}</span>
+                <span className="group-data-[state=collapsed]:hidden">{fullLogo}</span>
+                <span className="group-data-[state=expanded]:hidden">{smallLogo}</span>
               </Link>
             </div>
           )}
         </Sidebar.Header>
         <Sidebar.Content className="gap-0">
-          {sidebarProps.items.map((item, index) =>
+          {items.map((item, index) =>
             item.type === 'item' ? (
               <Sidebar.Group key={index}>
                 <Sidebar.Menu>
-                  <RenderSideBarItem basePath={sidebarProps.basePath} {...item} />
+                  <RenderSideBarItem basePath={basePath} {...item} />
                 </Sidebar.Menu>
               </Sidebar.Group>
             ) : (
@@ -65,7 +64,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
                 <Sidebar.GroupContent>
                   <Sidebar.Menu>
                     {item.items.map((item, index) => (
-                      <RenderSideBarItem key={index} basePath={sidebarProps.basePath} {...item} />
+                      <RenderSideBarItem key={index} basePath={basePath} {...item} />
                     ))}
                   </Sidebar.Menu>
                 </Sidebar.GroupContent>

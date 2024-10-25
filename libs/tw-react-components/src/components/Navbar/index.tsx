@@ -1,16 +1,18 @@
 import { FC, ReactNode } from 'react';
 
+import { cn } from '../../helpers';
 import { Block } from '../Block';
 import { Flex } from '../Flex';
 import { Sidebar } from '../Sidebar';
 
 export type NavbarProps = {
+  className?: string;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
 };
 
-export const Navbar: FC<NavbarProps> = ({ leftSlot, rightSlot }) => (
-  <Block className="border-b p-3 dark:border-slate-700" fullWidth>
+export const Navbar: FC<NavbarProps> = ({ className, leftSlot, rightSlot }) => (
+  <Block className={cn('border-b p-3 dark:border-slate-700', className)} fullWidth>
     <Flex align="center" justify="between">
       <Flex align="center">
         <Sidebar.Trigger />
