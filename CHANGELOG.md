@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.138](https://github.com/bacali95/tw-react-components/compare/v0.0.137...v0.0.138) (2024-10-25)
+
+
+### Features
+
+* add props to layout component ([91330b1](https://github.com/bacali95/tw-react-components/commit/91330b1a1781abb6a78f7b69efbf27300890690b))
+
 ### [0.0.137](https://github.com/bacali95/tw-react-components/compare/v0.0.136...v0.0.137) (2024-10-25)
 
 
