@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.137](https://github.com/bacali95/tw-react-components/compare/v0.0.136...v0.0.137) (2024-10-25)
+
+
+### Features
+
+* new sidebar component ([bf73baa](https://github.com/bacali95/tw-react-components/commit/bf73baa79ea92eff54dcb1013e2b626074493a42))
+
 ### [0.0.136](https://github.com/bacali95/tw-react-components/compare/v0.0.135...v0.0.136) (2024-10-21)
 
 
