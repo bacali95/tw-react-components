@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.141](https://github.com/bacali95/tw-react-components/compare/v0.0.140...v0.0.141) (2024-10-26)
+
+
+### Features
+
+* add footer slot in layout ([70a91c2](https://github.com/bacali95/tw-react-components/commit/70a91c2d5b0517a1943ce132104ea750f66a54a3))
+
 ### [0.0.140](https://github.com/bacali95/tw-react-components/compare/v0.0.139...v0.0.140) (2024-10-26)
 
 
