@@ -23,18 +23,19 @@ export type SidebarProps = ComponentProps<typeof Sidebar> & {
     | ({ type: 'item' } & SidebarItem)
     | { type: 'group'; title?: string; items: SidebarItem[] }
   )[];
+  footer?: ReactNode;
 };
 
 type Props = {
   className?: string;
   sidebarProps: SidebarProps;
-  navbarProps: NavbarProps;
+  navbarProps?: NavbarProps;
 };
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
   className,
-  sidebarProps: { basePath, smallLogo, fullLogo, items, ...sidebarProps },
+  sidebarProps: { basePath, smallLogo, fullLogo, items, footer, ...sidebarProps },
   navbarProps,
 }) => {
   return (
@@ -72,10 +73,11 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
             ),
           )}
         </Sidebar.Content>
+        {footer && <Sidebar.Footer>{footer}</Sidebar.Footer>}
         <Sidebar.Rail />
       </Sidebar>
       <Flex className="gap-0 overflow-hidden" direction="column" fullHeight fullWidth>
-        <Navbar {...navbarProps} />
+        {navbarProps && <Navbar {...navbarProps} />}
         <Flex
           className={cn('overflow-hidden p-3', className)}
           direction="column"
