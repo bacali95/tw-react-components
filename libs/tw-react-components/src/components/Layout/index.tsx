@@ -17,8 +17,7 @@ export type SidebarItem = {
 
 export type SidebarProps = ComponentProps<typeof Sidebar> & {
   basePath?: string;
-  smallLogo?: ReactNode;
-  fullLogo?: ReactNode;
+  header?: ReactNode;
   items: (
     | ({ type: 'item' } & SidebarItem)
     | { type: 'group'; title?: string; items: SidebarItem[] }
@@ -35,22 +34,19 @@ type Props = {
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
   className,
-  sidebarProps: { basePath, smallLogo, fullLogo, items, footer, ...sidebarProps },
+  sidebarProps: { basePath, header, items, footer, ...sidebarProps },
   navbarProps,
 }) => {
   return (
     <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
       <Sidebar collapsible="icon" {...sidebarProps}>
-        <Sidebar.Header>
-          {smallLogo && fullLogo && (
-            <div className="cursor-pointer overflow-hidden whitespace-nowrap py-2 text-center text-lg">
-              <Link to="/">
-                <span className="group-data-[state=collapsed]:hidden">{fullLogo}</span>
-                <span className="group-data-[state=expanded]:hidden">{smallLogo}</span>
-              </Link>
-            </div>
-          )}
-        </Sidebar.Header>
+        {header && (
+          <Sidebar.Header>
+            <Sidebar.Menu>
+              <Sidebar.MenuItem>{header}</Sidebar.MenuItem>
+            </Sidebar.Menu>
+          </Sidebar.Header>
+        )}
         <Sidebar.Content className="gap-0">
           {items.map((item, index) =>
             item.type === 'item' ? (
@@ -73,7 +69,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
             ),
           )}
         </Sidebar.Content>
-        {footer && <Sidebar.Footer>{footer}</Sidebar.Footer>}
+        {footer && (
+          <Sidebar.Footer>
+            <Sidebar.Menu>
+              <Sidebar.MenuItem>{footer}</Sidebar.MenuItem>
+            </Sidebar.Menu>
+          </Sidebar.Footer>
+        )}
         <Sidebar.Rail />
       </Sidebar>
       <Flex className="gap-0 overflow-hidden" direction="column" fullHeight fullWidth>

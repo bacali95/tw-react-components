@@ -12,9 +12,9 @@ import {
   TextCursorIcon,
 } from 'lucide-react';
 import { FC, useMemo } from 'react';
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-import { Layout, SidebarProps, ThemeSelector } from 'tw-react-components';
+import { Layout, Sidebar, SidebarProps, ThemeSelector } from 'tw-react-components';
 
 import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
@@ -29,8 +29,21 @@ import { Tabs } from './pages/Tabs';
 export const App: FC = () => {
   const sidebarProps: SidebarProps = useMemo(
     () => ({
-      smallLogo: 'SL',
-      fullLogo: 'Full Logo',
+      header: (
+        <Link to="/">
+          <Sidebar.MenuButton
+            size="lg"
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          >
+            <img
+              className="h-8 w-8 rounded-lg"
+              src="https://ui-avatars.com/api/?name=TWC&background=1d4ed8&color=fff"
+              alt="TwUI"
+            />
+            <span className="truncate font-semibold">Tailwind React Components</span>
+          </Sidebar.MenuButton>
+        </Link>
+      ),
       items: [
         {
           type: 'group',
