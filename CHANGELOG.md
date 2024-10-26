@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.146](https://github.com/bacali95/tw-react-components/compare/v0.0.145...v0.0.146) (2024-10-26)
+
+
+### Bug Fixes
+
+* remove font-family from tw- config ([3569755](https://github.com/bacali95/tw-react-components/commit/3569755757b587f177c92139800a9d45c7ffadca))
+
 ### [0.0.145](https://github.com/bacali95/tw-react-components/compare/v0.0.144...v0.0.145) (2024-10-26)
 
 
