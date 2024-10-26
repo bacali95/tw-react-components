@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.143](https://github.com/bacali95/tw-react-components/compare/v0.0.142...v0.0.143) (2024-10-26)
+
+
+### Features
+
+* add show ids state in layout context ([44b87e0](https://github.com/bacali95/tw-react-components/commit/44b87e01fb100f9fa855656c4781421c13327cf7))
+
 ### [0.0.142](https://github.com/bacali95/tw-react-components/compare/v0.0.141...v0.0.142) (2024-10-26)
 
 
