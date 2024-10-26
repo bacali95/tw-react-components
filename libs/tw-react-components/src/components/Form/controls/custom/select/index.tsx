@@ -256,13 +256,13 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
           {filteredItems.length === 0 &&
             (allowAddition && searchValue ? (
               <button
-                className="rounded bg-slate-100 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
+                className="rounded bg-slate-100 py-1.5 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
                 onClick={handleOnAddItemClicked}
               >
                 Add '{searchValue}'
               </button>
             ) : (
-              <div className="text-center text-slate-500">No items.</div>
+              <div className="py-1.5 text-center text-slate-500">No items.</div>
             ))}
           <GroupComponent
             className="flex flex-col gap-1 overflow-auto"

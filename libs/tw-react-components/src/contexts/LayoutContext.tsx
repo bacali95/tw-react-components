@@ -8,6 +8,8 @@ export type LayoutContext = {
   theme: ThemeState;
   resolvedTheme: Exclude<ThemeState, 'system'>;
   setTheme: (theme: ThemeState) => void;
+  showIds: boolean;
+  toggleShowIds: () => void;
 };
 
 export const LayoutContext = createContext<LayoutContext | undefined>(undefined);
@@ -16,8 +18,12 @@ export const THEME_MEDIA_QUERY = '(prefers-color-scheme: dark)';
 export const THEME_COOKIE_NAME = 'theme:state';
 export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
+export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
+export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, _setTheme] = useState(getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'));
+  const [showIds, _setShowIds] = useState(getValueFromCookie<boolean>(SHOW_IDS_COOKIE_NAME, false));
 
   const [resolvedTheme, setResolvedTheme] = useState(() =>
     theme === 'system' ? getSystemTheme() : theme,
@@ -56,8 +62,18 @@ export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
     document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${THEME_COOKIE_MAX_AGE}`;
   };
 
+  const toggleShowIds = () =>
+    _setShowIds((showIds) => {
+      const newValue = !showIds;
+
+      // This sets the cookie to keep the showIds state.
+      document.cookie = `${SHOW_IDS_COOKIE_NAME}=${newValue}; path=/; max-age=${SHOW_IDS_COOKIE_MAX_AGE}`;
+
+      return newValue;
+    });
+
   return (
-    <LayoutContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <LayoutContext.Provider value={{ theme, resolvedTheme, setTheme, showIds, toggleShowIds }}>
       {children}
     </LayoutContext.Provider>
   );

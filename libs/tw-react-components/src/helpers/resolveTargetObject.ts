@@ -1,6 +1,10 @@
-export function resolveTargetObject(payload: any, fieldChain: string[]): any {
+export function resolveTargetObject(payload: any, fieldChain: string[], defaultValue?: any): any {
   if (!fieldChain.length) {
-    return payload;
+    return payload || defaultValue;
+  }
+
+  if (!payload && defaultValue) {
+    return defaultValue;
   }
 
   if (typeof payload !== 'object' || !payload) {
@@ -20,8 +24,8 @@ export function resolveTargetObject(payload: any, fieldChain: string[]): any {
       throw new Error('Index out of payload boundaries!');
     }
 
-    return resolveTargetObject(payload[index], rest);
+    return resolveTargetObject(payload[index], rest, defaultValue);
   }
 
-  return resolveTargetObject(payload[key], rest);
+  return resolveTargetObject(payload[key], rest, defaultValue);
 }

@@ -84,7 +84,7 @@ export type DataTableProps<T> = {
 };
 
 function defaultRender<T>(item: T, field: Paths<T>): ReactNode {
-  return resolveTargetObject(item, field.split('.')) as ReactNode;
+  return resolveTargetObject(item, field.split('.'), '-') as ReactNode;
 }
 
 export function DataTable<T>({
