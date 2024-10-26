@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.145](https://github.com/bacali95/tw-react-components/compare/v0.0.144...v0.0.145) (2024-10-26)
+
+
+### Bug Fixes
+
+* fix missing hidden sidebar items prop ([a33962d](https://github.com/bacali95/tw-react-components/commit/a33962de8ad818cd8461293e6d1f71e5c2632252))
+
 ### [0.0.144](https://github.com/bacali95/tw-react-components/compare/v0.0.143...v0.0.144) (2024-10-26)
 
 
