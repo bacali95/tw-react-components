@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.144](https://github.com/bacali95/tw-react-components/compare/v0.0.143...v0.0.144) (2024-10-26)
+
+
+### Bug Fixes
+
+* fix resolveTargetObject ([c3adc55](https://github.com/bacali95/tw-react-components/commit/c3adc5575519b394c4b7882739c1a316d1f44cc8))
+
 ### [0.0.143](https://github.com/bacali95/tw-react-components/compare/v0.0.142...v0.0.143) (2024-10-26)
 
 
