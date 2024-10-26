@@ -20,7 +20,7 @@ export type SidebarProps = ComponentProps<typeof Sidebar> & {
   header?: ReactNode;
   items: (
     | ({ type: 'item' } & SidebarItem)
-    | { type: 'group'; title?: string; items: SidebarItem[] }
+    | { type: 'group'; title?: string; hidden?: boolean; items: SidebarItem[] }
   )[];
   footer?: ReactNode;
 };
@@ -48,26 +48,30 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
           </Sidebar.Header>
         )}
         <Sidebar.Content className="gap-0">
-          {items.map((item, index) =>
-            item.type === 'item' ? (
-              <Sidebar.Group key={index}>
-                <Sidebar.Menu>
-                  <RenderSideBarItem basePath={basePath} {...item} />
-                </Sidebar.Menu>
-              </Sidebar.Group>
-            ) : (
-              <Sidebar.Group key={index}>
-                {item.title && <Sidebar.GroupLabel>{item.title}</Sidebar.GroupLabel>}
-                <Sidebar.GroupContent>
+          {items
+            .filter((item) => !item.hidden)
+            .map((item, index) =>
+              item.type === 'item' ? (
+                <Sidebar.Group key={index}>
                   <Sidebar.Menu>
-                    {item.items.map((item, index) => (
-                      <RenderSideBarItem key={index} basePath={basePath} {...item} />
-                    ))}
+                    <RenderSideBarItem basePath={basePath} {...item} />
                   </Sidebar.Menu>
-                </Sidebar.GroupContent>
-              </Sidebar.Group>
-            ),
-          )}
+                </Sidebar.Group>
+              ) : (
+                <Sidebar.Group key={index}>
+                  {item.title && <Sidebar.GroupLabel>{item.title}</Sidebar.GroupLabel>}
+                  <Sidebar.GroupContent>
+                    <Sidebar.Menu>
+                      {item.items
+                        .filter((subItem) => !subItem.hidden)
+                        .map((subItem, index) => (
+                          <RenderSideBarItem key={index} basePath={basePath} {...subItem} />
+                        ))}
+                    </Sidebar.Menu>
+                  </Sidebar.GroupContent>
+                </Sidebar.Group>
+              ),
+            )}
         </Sidebar.Content>
         {footer && (
           <Sidebar.Footer>
@@ -129,16 +133,21 @@ const RenderSideBarItem: FC<SidebarItem & { basePath?: string }> = ({
       </Sidebar.MenuButton>
       {items && (
         <Sidebar.MenuSub>
-          {items.map((subItem, index) => (
-            <Sidebar.MenuSubItem key={index}>
-              <Sidebar.MenuSubButton
-                asChild
-                isActive={isLinkStartsWithPathname(currentPath, `${pathname}/${subItem.pathname}`)}
-              >
-                <Link to={`${pathname}/${subItem.pathname}`}>{subItem.title}</Link>
-              </Sidebar.MenuSubButton>
-            </Sidebar.MenuSubItem>
-          ))}
+          {items
+            .filter((subItem) => !subItem.hidden)
+            .map((subItem, index) => (
+              <Sidebar.MenuSubItem key={index}>
+                <Sidebar.MenuSubButton
+                  asChild
+                  isActive={isLinkStartsWithPathname(
+                    currentPath,
+                    `${pathname}/${subItem.pathname}`,
+                  )}
+                >
+                  <Link to={`${pathname}/${subItem.pathname}`}>{subItem.title}</Link>
+                </Sidebar.MenuSubButton>
+              </Sidebar.MenuSubItem>
+            ))}
         </Sidebar.MenuSub>
       )}
     </Sidebar.MenuItem>
