@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.142](https://github.com/bacali95/tw-react-components/compare/v0.0.141...v0.0.142) (2024-10-26)
+
+
+### Features
+
+* use header instead of logo for sidebar ([d175d4a](https://github.com/bacali95/tw-react-components/commit/d175d4a46aac21521643e2db68f03bfd5be0b4a8))
+
 ### [0.0.141](https://github.com/bacali95/tw-react-components/compare/v0.0.140...v0.0.141) (2024-10-26)
 
 
