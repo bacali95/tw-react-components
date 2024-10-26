@@ -1,11 +1,21 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
+import {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ElementRef,
+  FC,
+  HTMLAttributes,
+  forwardRef,
+} from 'react';
 
 import { cn } from '../../helpers';
 import { Button } from '../Button';
 
-const $Dialog = DialogPrimitive.Root;
+const $Dialog: FC<ComponentProps<typeof DialogPrimitive.Root>> = (props) => (
+  <DialogPrimitive.Root {...props} />
+);
+$Dialog.displayName = DialogPrimitive.Root.displayName;
 
 const DialogTrigger = DialogPrimitive.Trigger;
 
@@ -20,7 +30,7 @@ const DialogOverlay = forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 backdrop-blur-sm',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
       className,
     )}
     {...props}
@@ -37,20 +47,22 @@ const DialogContent = forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
-        'fixed left-[50%] top-[50%] z-50 flex w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-3 rounded-lg border bg-white p-3 shadow-md duration-200 xl:gap-4 xl:p-4 dark:border-slate-700 dark:bg-slate-900 dark:text-white',
+        'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
+        'fixed left-[50%] top-[50%] z-50 flex max-h-[95dvh] w-full max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col gap-4 rounded-lg border p-4 shadow-lg duration-200',
         className,
         fullScreen && 'h-full max-h-none w-full max-w-none rounded-none',
       )}
+      aria-describedby="dialog-content"
       {...props}
     >
       {children}
       <DialogPrimitive.Close
-        className="!absolute right-1 top-1 opacity-70 ring-offset-white transition-opacity hover:opacity-100 disabled:pointer-events-none xl:right-2 xl:top-2"
+        className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-2 top-2 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         asChild
       >
         <Button prefixIcon={XIcon} size="small" variant="text" />
       </DialogPrimitive.Close>
+      <DialogPrimitive.Description className="hidden" />
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
@@ -75,7 +87,7 @@ const DialogTitle = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+    className={cn('text-foreground text-lg font-semibold', className)}
     {...props}
   />
 ));
@@ -87,7 +99,7 @@ const DialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-slate-600 dark:text-slate-400', className)}
+    className={cn('text-muted-foreground text-sm', className)}
     {...props}
   />
 ));

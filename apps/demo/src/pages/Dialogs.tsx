@@ -10,6 +10,7 @@ import {
   FormInputs,
   ListSorterDialog,
   PdfViewerDialog,
+  Sheet,
   Tooltip,
 } from 'tw-react-components';
 
@@ -52,9 +53,11 @@ export const Dialogs: FC = () => {
           <Button onClick={toggleDialog('simple')}>Simple dialog</Button>
         </Dialog.Trigger>
         <Dialog.Content>
-          <Dialog.Header>Simple Dialog</Dialog.Header>
+          <Dialog.Header>
+            <Dialog.Title>Simple Dialog</Dialog.Title>
+          </Dialog.Header>
           <p>
-            Your payment has been successfully submitted. We’ve sent you an email with all of the
+            Your payment has been successfully submitted. We've sent you an email with all of the
             details of your{' '}
             <Tooltip className="w-fit" content="Simple Tooltip">
               order.
@@ -71,16 +74,18 @@ export const Dialogs: FC = () => {
       >
         Are you sure you want to delete this item?
       </ConfirmDialog>
-      <Button onClick={toggleDialog('form')}>Form dialog</Button>
-      <FormDialog
-        title="Form Dialog"
-        form={form}
-        onSubmit={handleLogin}
-        open={openDialogs['form']}
-        onClose={toggleDialog('form')}
-        extraAction={<Button>Action</Button>}
-      >
-        <Flex direction="column" fullWidth>
+      <Flex>
+        <Button onClick={toggleDialog('form')}>Form dialog</Button>
+        <Button onClick={toggleDialog('form-sheet')}>Form Sheet</Button>
+        <FormDialog
+          title="Form Dialog"
+          form={form}
+          onSubmit={handleLogin}
+          open={openDialogs['form'] || openDialogs['form-sheet']}
+          onClose={openDialogs['form'] ? toggleDialog('form') : toggleDialog('form-sheet')}
+          extraAction={<Button>Action</Button>}
+          as={openDialogs['form-sheet'] ? Sheet : Dialog}
+        >
           <FormInputs.Text name="username" label="Username" required />
           <FormInputs.Password name="password" label="Password" required />
           <FormInputs.Select
@@ -92,8 +97,8 @@ export const Dialogs: FC = () => {
             clearable
             search
           />
-        </Flex>
-      </FormDialog>
+        </FormDialog>
+      </Flex>
       <Button onClick={toggleDialog('pdf')}>Pdf dialog</Button>
       <PdfViewerDialog
         title="Pdf Dialog"

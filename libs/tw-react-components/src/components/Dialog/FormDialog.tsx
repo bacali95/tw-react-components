@@ -7,17 +7,21 @@ import {
   UseFormReturn,
 } from 'react-hook-form';
 
+import { cn } from '../../helpers';
 import { Button } from '../Button';
+import { Sheet } from '../Sheet';
 import { Dialog } from './Dialog';
 
 type Props<T extends FieldValues> = {
   className?: string;
+  formClassName?: string;
   open: boolean;
   title: ReactNode;
   form: UseFormReturn<T>;
   submitLabel?: string;
   cancelLabel?: string;
   extraAction?: ReactNode;
+  as?: typeof Dialog | typeof Sheet;
   onSubmit: SubmitHandler<T>;
   onInvalid?: SubmitErrorHandler<T>;
   onClose: () => void;
@@ -25,6 +29,7 @@ type Props<T extends FieldValues> = {
 
 export const FormDialog = <T extends FieldValues>({
   className,
+  formClassName,
   open,
   title,
   form,
@@ -32,6 +37,7 @@ export const FormDialog = <T extends FieldValues>({
   submitLabel = 'Submit',
   cancelLabel = 'Cancel',
   extraAction,
+  as: As = Sheet,
   onSubmit,
   onInvalid,
   onClose,
@@ -47,25 +53,26 @@ export const FormDialog = <T extends FieldValues>({
   };
 
   return (
-    <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-      <Dialog.Content
-        className={className}
-        onPointerDownOutside={(event) => event.preventDefault()}
-      >
-        <Dialog.Header>
-          <Dialog.Title>{title}</Dialog.Title>
-        </Dialog.Header>
+    <As open={open} onOpenChange={(value) => !value && onClose()}>
+      <As.Content className={className}>
+        <As.Header>
+          <As.Title>{title}</As.Title>
+        </As.Header>
         <FormProvider {...form}>
-          <form id={`form-${id}`} onSubmit={form.handleSubmit(handleSubmit, onInvalid)}>
+          <form
+            id={`form-${id}`}
+            className={cn('flex h-full w-full flex-col gap-3 overflow-auto', formClassName)}
+            onSubmit={form.handleSubmit(handleSubmit, onInvalid)}
+          >
             {children}
           </form>
         </FormProvider>
-        <Dialog.Footer className="w-full sm:justify-between">
+        <As.Footer className="w-full sm:justify-between">
           {extraAction}
-          <Dialog.Footer className="ml-auto">
-            <Dialog.Close asChild>
+          <As.Footer className="ml-auto">
+            <As.Close asChild>
               <Button color="red">{cancelLabel}</Button>
-            </Dialog.Close>
+            </As.Close>
             <Button
               color="green"
               type="submit"
@@ -74,9 +81,9 @@ export const FormDialog = <T extends FieldValues>({
             >
               {submitLabel}
             </Button>
-          </Dialog.Footer>
-        </Dialog.Footer>
-      </Dialog.Content>
-    </Dialog>
+          </As.Footer>
+        </As.Footer>
+      </As.Content>
+    </As>
   );
 };

@@ -22,7 +22,7 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
   onClose,
 }) => (
   <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-    <Dialog.Content onPointerDownOutside={(event) => event.preventDefault()}>
+    <Dialog.Content>
       <Dialog.Header>
         <Dialog.Title>{title}</Dialog.Title>
       </Dialog.Header>

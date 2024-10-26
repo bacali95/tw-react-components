@@ -13,13 +13,17 @@
   font-named-instance: Regular;
 }
 
+* {
+  @apply border-border;
+}
+
 html {
   scroll-behavior: smooth;
   font-family: 'Inter var', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 
-  @apply text-[13px] 2xl:text-[14px];
+  @apply bg-background text-foreground text-[13px] 2xl:text-[14px];
 
   ::-webkit-scrollbar {
     @apply h-1 w-1 bg-slate-100;
