@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.140](https://github.com/bacali95/tw-react-components/compare/v0.0.139...v0.0.140) (2024-10-26)
+
+
+### Features
+
+* add system theme ([6f12208](https://github.com/bacali95/tw-react-components/commit/6f12208b83fc2595b1bdf36fbe34622b38c3f10c))
+
 ### [0.0.139](https://github.com/bacali95/tw-react-components/compare/v0.0.138...v0.0.139) (2024-10-26)
 
 
