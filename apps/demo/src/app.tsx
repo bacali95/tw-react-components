@@ -14,7 +14,7 @@ import {
 import { FC, useMemo } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-import { Layout, SidebarProps, ThemeSwitcher } from 'tw-react-components';
+import { Layout, SidebarProps, ThemeSelector } from 'tw-react-components';
 
 import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
@@ -106,7 +106,10 @@ export const App: FC = () => {
       <Route
         path=""
         element={
-          <Layout sidebarProps={sidebarProps} navbarProps={{ rightSlot: <ThemeSwitcher /> }}>
+          <Layout
+            sidebarProps={sidebarProps}
+            navbarProps={{ className: 'py-2', rightSlot: <ThemeSelector /> }}
+          >
             <Outlet />
           </Layout>
         }

@@ -1,36 +1,66 @@
 import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 
+import { getValueFromCookie } from '../helpers';
+
+export type ThemeState = 'dark' | 'light' | 'system';
+
 export type LayoutContext = {
   theme: ThemeState;
-  toggleTheme: () => void;
+  resolvedTheme: Exclude<ThemeState, 'system'>;
+  setTheme: (theme: ThemeState) => void;
 };
 
 export const LayoutContext = createContext<LayoutContext | undefined>(undefined);
 
+export const THEME_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+export const THEME_COOKIE_NAME = 'theme:state';
+export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+
 export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [theme, setTheme] = useState(getValueFromLocalStorage<ThemeState>(THEME_KEY, 'light'));
+  const [theme, _setTheme] = useState(getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'));
+
+  const [resolvedTheme, setResolvedTheme] = useState(() =>
+    theme === 'system' ? getSystemTheme() : theme,
+  );
 
   useEffect(() => {
-    if (theme) {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+    if (resolvedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
+  }, [resolvedTheme]);
+
+  useEffect(() => {
+    if (theme !== 'system') {
+      setResolvedTheme(theme);
+      return;
+    }
+
+    setResolvedTheme(getSystemTheme());
+
+    const handleMediaQuery = (e: MediaQueryListEvent | MediaQueryList) =>
+      setResolvedTheme(getSystemTheme(e));
+
+    const mediaQuery = window.matchMedia(THEME_MEDIA_QUERY);
+
+    mediaQuery.addEventListener('change', handleMediaQuery);
+
+    return () => mediaQuery.removeEventListener('change', handleMediaQuery);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((theme) => {
-      const newValue = theme === 'dark' ? 'light' : 'dark';
+  const setTheme = (theme: ThemeState) => {
+    _setTheme(theme);
 
-      window.localStorage.setItem(THEME_KEY, newValue);
-
-      return newValue;
-    });
+    // This sets the cookie to keep the theme state.
+    document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${THEME_COOKIE_MAX_AGE}`;
   };
 
-  return <LayoutContext.Provider value={{ theme, toggleTheme }}>{children}</LayoutContext.Provider>;
+  return (
+    <LayoutContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+      {children}
+    </LayoutContext.Provider>
+  );
 };
 
 export function useLayoutContext() {
@@ -43,17 +73,8 @@ export function useLayoutContext() {
   return context;
 }
 
-export type ThemeState = 'dark' | 'light';
+function getSystemTheme(e?: MediaQueryList | MediaQueryListEvent) {
+  if (!e) e = window.matchMedia(THEME_MEDIA_QUERY);
 
-export const THEME_KEY = 'tw-react-components__theme';
-
-function getValueFromLocalStorage<T extends string | boolean>(key: string, _default: T): T {
-  const transformers: Record<any, (value: any) => any> = {
-    string: String,
-    boolean: (value) => value === 'true',
-  };
-
-  return typeof window !== 'undefined'
-    ? transformers[typeof _default]((window.localStorage.getItem(key) as T) ?? _default)
-    : _default;
+  return e.matches ? 'dark' : 'light';
 }

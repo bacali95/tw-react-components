@@ -15,7 +15,7 @@ import {
   useState,
 } from 'react';
 
-import { cn } from '../../helpers';
+import { cn, getValueFromCookie } from '../../helpers';
 import { useIsMobile, useOnSwipe } from '../../hooks';
 import { Button } from '../Button';
 import { BasicInput } from '../Form';
@@ -24,12 +24,12 @@ import { Sheet } from '../Sheet';
 import { Skeleton } from '../Skeleton';
 import { Tooltip } from '../Tooltip';
 
-const SIDEBAR_COOKIE_NAME = 'sidebar:state';
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = '16rem';
-const SIDEBAR_WIDTH_MOBILE = '18rem';
-const SIDEBAR_WIDTH_ICON = '3rem';
-const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
+export const SIDEBAR_COOKIE_NAME = 'sidebar:state';
+export const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+export const SIDEBAR_WIDTH = '16rem';
+export const SIDEBAR_WIDTH_MOBILE = '18rem';
+export const SIDEBAR_WIDTH_ICON = '3rem';
+export const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 
 export type SidebarContext = {
   state: 'expanded' | 'collapsed';
@@ -78,7 +78,9 @@ export const SidebarContextProvider = forwardRef<
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
-    const [_open, _setOpen] = useState(defaultOpen);
+    const [_open, _setOpen] = useState(
+      getValueFromCookie<boolean>(SIDEBAR_COOKIE_NAME, defaultOpen),
+    );
     const open = openProp ?? _open;
     const setOpen = useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
@@ -86,10 +88,12 @@ export const SidebarContextProvider = forwardRef<
           return setOpenProp?.(typeof value === 'function' ? value(open) : value);
         }
 
-        _setOpen(value);
+        const newValue = typeof value === 'function' ? value(open) : value;
+
+        _setOpen(newValue);
 
         // This sets the cookie to keep the sidebar state.
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        document.cookie = `${SIDEBAR_COOKIE_NAME}=${newValue}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       },
       [setOpenProp, open],
     );
@@ -272,7 +276,7 @@ const SidebarTrigger = forwardRef<ElementRef<typeof Button>, ComponentProps<type
         data-sidebar="trigger"
         variant="text"
         suffixIcon={PanelLeft}
-        className={cn('h-7 w-7', className)}
+        className={className}
         onClick={(event) => {
           onClick?.(event);
           toggleSidebar();

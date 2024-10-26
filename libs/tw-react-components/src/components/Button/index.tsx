@@ -485,6 +485,7 @@ export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   rounded?: boolean;
   prefixIcon?: LucideIcon;
   suffixIcon?: LucideIcon;
+  unstyled?: boolean;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -498,6 +499,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       rounded,
       prefixIcon: PrefixIcon,
       suffixIcon: SuffixIcon,
+      unstyled,
       ...props
     },
     ref,
@@ -510,7 +512,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         rounded ? 'rounded-full' : 'rounded-md',
         props.disabled
           ? 'cursor-not-allowed opacity-50'
-          : props.onClick
+          : !unstyled
             ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active}`
             : 'cursor-default',
         children ? `${sizeClassNames[size].withChildren} aspect-[initial]` : 'justify-center',

@@ -22,7 +22,7 @@ export * from './Spinner';
 export * from './Switch';
 export * from './Table';
 export * from './Tabs';
-export * from './ThemeSwitcher';
+export * from './ThemeSelector';
 export * from './Tooltip';
 
 export * from './types';
