@@ -1,13 +1,11 @@
 export function resolveTargetObject(payload: any, fieldChain: string[], defaultValue?: any): any {
   if (!fieldChain.length) {
-    return payload || defaultValue;
-  }
-
-  if (!payload && defaultValue) {
-    return defaultValue;
+    return payload === null ? payload : payload || defaultValue;
   }
 
   if (typeof payload !== 'object' || !payload) {
+    if (defaultValue) return defaultValue;
+
     throw new Error(`Could not resolve field ${fieldChain[0]} because payload is not an object!`);
   }
 
