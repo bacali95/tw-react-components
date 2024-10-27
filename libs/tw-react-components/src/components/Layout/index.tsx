@@ -1,8 +1,9 @@
-import { LucideIcon } from 'lucide-react';
+import { ChevronRightIcon, LucideIcon } from 'lucide-react';
 import { ComponentProps, FC, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { cn } from '../../helpers';
+import { Collapsible } from '../Collapsible';
 import { Flex } from '../Flex';
 import { Navbar, NavbarProps } from '../Navbar';
 import { Sidebar, useSidebar } from '../Sidebar';
@@ -22,6 +23,7 @@ export type SidebarProps = ComponentProps<typeof Sidebar> & {
     | ({ type: 'item' } & SidebarItem)
     | { type: 'group'; title?: string; hidden?: boolean; items: SidebarItem[] }
   )[];
+  extraContent?: ReactNode;
   footer?: ReactNode;
 };
 
@@ -34,7 +36,7 @@ type Props = {
 export const Layout: FC<PropsWithChildren<Props>> = ({
   children,
   className,
-  sidebarProps: { basePath, header, items, footer, ...sidebarProps },
+  sidebarProps: { basePath, header, items, extraContent, footer, ...sidebarProps },
   navbarProps,
 }) => {
   return (
@@ -72,6 +74,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
                 </Sidebar.Group>
               ),
             )}
+          {extraContent}
         </Sidebar.Content>
         {footer && (
           <Sidebar.Footer>
@@ -112,45 +115,72 @@ const RenderSideBarItem: FC<SidebarItem & { basePath?: string }> = ({
     [basePath, location.pathname],
   );
 
+  if (!items?.filter((subItem) => !subItem.hidden).length) {
+    return (
+      <Sidebar.MenuItem>
+        <Sidebar.MenuButton asChild isActive={isLinkStartsWithPathname(currentPath, pathname)}>
+          <Link to={pathname} className="font-medium">
+            {Icon && <Icon />}
+            {title}
+          </Link>
+        </Sidebar.MenuButton>
+      </Sidebar.MenuItem>
+    );
+  }
+
+  const isOpen =
+    open &&
+    (isLinkStartsWithPathname(currentPath, pathname) ||
+      items.some((subItem) =>
+        isLinkStartsWithPathname(currentPath, `${pathname}/${subItem.pathname}`),
+      ));
+
   return (
-    <Sidebar.MenuItem>
-      <Sidebar.MenuButton
-        asChild
-        tooltip={title}
-        isActive={
-          isLinkStartsWithPathname(currentPath, pathname) &&
-          (!items ||
-            (!open &&
-              items.some((item) =>
-                isLinkStartsWithPathname(currentPath, `${pathname}/${item.pathname}`),
-              )))
-        }
-      >
-        <Link to={pathname} className="font-medium">
-          {Icon && <Icon />}
-          {title}
-        </Link>
-      </Sidebar.MenuButton>
-      {items && (
-        <Sidebar.MenuSub>
-          {items
-            .filter((subItem) => !subItem.hidden)
-            .map((subItem, index) => (
-              <Sidebar.MenuSubItem key={index}>
-                <Sidebar.MenuSubButton
-                  asChild
-                  isActive={isLinkStartsWithPathname(
-                    currentPath,
-                    `${pathname}/${subItem.pathname}`,
-                  )}
-                >
-                  <Link to={`${pathname}/${subItem.pathname}`}>{subItem.title}</Link>
-                </Sidebar.MenuSubButton>
-              </Sidebar.MenuSubItem>
-            ))}
-        </Sidebar.MenuSub>
-      )}
-    </Sidebar.MenuItem>
+    <Collapsible asChild open={isOpen} className="group/collapsible">
+      <Sidebar.MenuItem>
+        <Collapsible.Trigger asChild>
+          <Sidebar.MenuButton
+            asChild
+            tooltip={title}
+            isActive={
+              open
+                ? currentPath === pathname &&
+                  !items.some((subItem) =>
+                    isLinkStartsWithPathname(currentPath, `${pathname}/${subItem.pathname}`),
+                  )
+                : isLinkStartsWithPathname(currentPath, pathname)
+            }
+          >
+            <Link to={pathname} className="font-medium">
+              {Icon && <Icon />}
+              {title}
+              <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+            </Link>
+          </Sidebar.MenuButton>
+        </Collapsible.Trigger>
+        {items && (
+          <Collapsible.Content>
+            <Sidebar.MenuSub>
+              {items
+                .filter((subItem) => !subItem.hidden)
+                .map((subItem, index) => (
+                  <Sidebar.MenuSubItem key={index}>
+                    <Sidebar.MenuSubButton
+                      asChild
+                      isActive={isLinkStartsWithPathname(
+                        currentPath,
+                        `${pathname}/${subItem.pathname}`,
+                      )}
+                    >
+                      <Link to={`${pathname}/${subItem.pathname}`}>{subItem.title}</Link>
+                    </Sidebar.MenuSubButton>
+                  </Sidebar.MenuSubItem>
+                ))}
+            </Sidebar.MenuSub>
+          </Collapsible.Content>
+        )}
+      </Sidebar.MenuItem>
+    </Collapsible>
   );
 };
 

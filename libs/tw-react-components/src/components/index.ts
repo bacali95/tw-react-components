@@ -2,6 +2,7 @@ export * from './Badge';
 export * from './Block';
 export * from './Button';
 export * from './Card';
+export * from './Collapsible';
 export * from './DataTable';
 export * from './Dialog';
 export * from './DropdownMenu';
