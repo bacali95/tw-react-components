@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.147](https://github.com/bacali95/tw-react-components/compare/v0.0.146...v0.0.147) (2024-10-27)
+
+
+### Features
+
+* add collapsible feature to sidebar items ([9c0e32a](https://github.com/bacali95/tw-react-components/commit/9c0e32a5e2a5a0647f5134f4555f597b34bfe838))
+
 ### [0.0.146](https://github.com/bacali95/tw-react-components/compare/v0.0.145...v0.0.146) (2024-10-26)
 
 
