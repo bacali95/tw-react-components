@@ -100,7 +100,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
     );
     const selectedItems = useMemo<SelectItem<T>[]>(
       () =>
-        value
+        isNotNullOrUndefined(value)
           ? !multiple
             ? pureItems.find((item) => selectPredicate(item.value, value))
               ? [pureItems.find((item) => selectPredicate(item.value, value))!]
@@ -168,7 +168,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
             onChange?.(pureItems.find((item) => item.id === id)?.value);
           }
         } else if (multiple) {
-          if (selectedMap[id]) {
+          if (isNotNullOrUndefined(selectedMap[id])) {
             onChange?.(selectedItems.filter((item) => item.id !== id).map((item) => item.value));
           } else {
             onChange?.(
@@ -207,16 +207,16 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         return (
           <ItemComponent
             className={cn('w-full cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700', {
-              'bg-slate-200 dark:bg-slate-700': selectedMap[option.id],
+              'bg-slate-200 dark:bg-slate-700': isNotNullOrUndefined(selectedMap[option.id]),
             })}
             value={String(option.id)}
-            checked={!!selectedMap[option.id]}
+            checked={isNotNullOrUndefined(selectedMap[option.id])}
             onSelect={(event) => {
               multiple && event.preventDefault();
               handleOnSelect(option.id);
             }}
           >
-            <span>{renderItem(option, !!selectedMap[option.id])}</span>
+            <span>{renderItem(option, isNotNullOrUndefined(selectedMap[option.id]))}</span>
           </ItemComponent>
         );
       },
@@ -293,3 +293,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
 ) as (<T>(props: SelectInputProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element) & {
   readonly $$typeof: symbol;
 };
+
+function isNotNullOrUndefined<T>(value: T | null | undefined): value is T {
+  return value !== null && value !== undefined;
+}
