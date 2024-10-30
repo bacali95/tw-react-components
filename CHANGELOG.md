@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.148](https://github.com/bacali95/tw-react-components/compare/v0.0.147...v0.0.148) (2024-10-30)
+
+
+### Bug Fixes
+
+* fix checking selected value select input ([acbf5c6](https://github.com/bacali95/tw-react-components/commit/acbf5c6683b0f7a9416172b3e3b9826a652138ff))
+
 ### [0.0.147](https://github.com/bacali95/tw-react-components/compare/v0.0.146...v0.0.147) (2024-10-27)
 
 
