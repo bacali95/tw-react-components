@@ -225,9 +225,11 @@ export function DataTable<T>({
                 ))}
             </Table.HeadCell>
           ))}
-          {actions.filter((action) => !action.hide).length > 0 && (
-            <Table.HeadCell align="center">Actions</Table.HeadCell>
-          )}
+          {actions.filter((action) =>
+            rows.some((item) =>
+              typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item),
+            ),
+          ).length > 0 && <Table.HeadCell align="center">Actions</Table.HeadCell>}
         </Table.Row>
       </Table.Head>
       <Table.Body className="relative">
@@ -283,7 +285,9 @@ export function DataTable<T>({
                 {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
               </Table.Cell>
             ))}
-            {actions.filter((action) => !action.hide).length > 0 && (
+            {actions.filter((action) =>
+              typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item),
+            ).length > 0 && (
               <Table.Cell className="py-3">
                 <Flex align="center" justify="center">
                   {actions
