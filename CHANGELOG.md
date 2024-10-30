@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.149](https://github.com/bacali95/tw-react-components/compare/v0.0.148...v0.0.149) (2024-10-30)
+
+
+### Bug Fixes
+
+* fix hiding actions column in data table ([68d17d2](https://github.com/bacali95/tw-react-components/commit/68d17d2ffe89dcdf92640d6832c9f77bb1b453fd))
+
 ### [0.0.148](https://github.com/bacali95/tw-react-components/compare/v0.0.147...v0.0.148) (2024-10-30)
 
 
