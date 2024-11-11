@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import localeData from 'dayjs/plugin/localeData';
+import localeData from 'dayjs/plugin/localeData.js';
 import { useMemo } from 'react';
 
 dayjs.extend(localeData);

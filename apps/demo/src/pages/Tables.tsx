@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat.js';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 import { FC, useMemo, useState } from 'react';
 
