@@ -21,8 +21,13 @@ export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
 export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
-export const LayoutContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [theme, _setTheme] = useState(getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'));
+export const LayoutContextProvider: FC<PropsWithChildren<{ defaultTheme?: ThemeState }>> = ({
+  children,
+  defaultTheme,
+}) => {
+  const [theme, _setTheme] = useState(
+    defaultTheme ?? getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'),
+  );
   const [showIds, _setShowIds] = useState(getValueFromCookie<boolean>(SHOW_IDS_COOKIE_NAME, false));
 
   const [resolvedTheme, setResolvedTheme] = useState(() =>
@@ -90,6 +95,8 @@ export function useLayoutContext() {
 }
 
 function getSystemTheme(e?: MediaQueryList | MediaQueryListEvent) {
+  if (typeof window === 'undefined') return 'light';
+
   if (!e) e = window.matchMedia(THEME_MEDIA_QUERY);
 
   return e.matches ? 'dark' : 'light';
