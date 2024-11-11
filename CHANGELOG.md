@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.151](https://github.com/bacali95/tw-react-components/compare/v0.0.150...v0.0.151) (2024-11-11)
+
+
+### Bug Fixes
+
+* fix ssr issues ([057d160](https://github.com/bacali95/tw-react-components/commit/057d1608e97d8be39f392a7d11a7257adbabad04))
+
 ### [0.0.150](https://github.com/bacali95/tw-react-components/compare/v0.0.149...v0.0.150) (2024-11-11)
 
 
