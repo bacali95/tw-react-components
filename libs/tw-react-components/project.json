@@ -12,11 +12,11 @@
         "outputPath": "dist/libs/tw-react-components",
         "main": "libs/tw-react-components/src/index.ts",
         "tsConfig": "libs/tw-react-components/tsconfig.lib.json",
-        "format": ["cjs", "esm"],
+        "format": ["esm"],
         "compiler": "tsc",
         "external": "all",
         "generateExportsField": true,
-        "rollupConfig": "libs/tw-react-components/rollup.config.js",
+        "rollupConfig": "libs/tw-react-components/rollup.config.cjs",
         "babelUpwardRootMode": true,
         "updateBuildableProjectDepsInPackageJson": true,
         "assets": [

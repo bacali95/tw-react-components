@@ -4,6 +4,7 @@
   "version": "0.0.149",
   "license": "MIT",
   "homepage": "https://bacali95.github.io/tw-react-components",
+  "type": "module",
   "author": {
     "name": "Nasreddine Bac Ali",
     "email": "nasreddine.bacali95@gmail.com",

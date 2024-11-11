@@ -1,6 +1,6 @@
 import { ChevronRightIcon, LucideIcon } from 'lucide-react';
 import { ComponentProps, FC, PropsWithChildren, ReactNode, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import type { LinkProps, useLocation } from 'react-router-dom';
 
 import { cn } from '../../helpers';
 import { Collapsible } from '../Collapsible';
@@ -31,6 +31,8 @@ type Props = {
   className?: string;
   sidebarProps: SidebarProps;
   navbarProps?: NavbarProps;
+  Link: FC<LinkProps>;
+  useLocation: typeof useLocation;
 };
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
@@ -38,6 +40,8 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   className,
   sidebarProps: { basePath, header, items, extraContent, footer, ...sidebarProps },
   navbarProps,
+  Link,
+  useLocation,
 }) => {
   return (
     <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
@@ -56,7 +60,12 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
               item.type === 'item' ? (
                 <Sidebar.Group key={index}>
                   <Sidebar.Menu>
-                    <RenderSideBarItem basePath={basePath} {...item} />
+                    <RenderSideBarItem
+                      basePath={basePath}
+                      Link={Link}
+                      useLocation={useLocation}
+                      {...item}
+                    />
                   </Sidebar.Menu>
                 </Sidebar.Group>
               ) : (
@@ -67,7 +76,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
                       {item.items
                         .filter((subItem) => !subItem.hidden)
                         .map((subItem, index) => (
-                          <RenderSideBarItem key={index} basePath={basePath} {...subItem} />
+                          <RenderSideBarItem
+                            key={index}
+                            basePath={basePath}
+                            Link={Link}
+                            useLocation={useLocation}
+                            {...subItem}
+                          />
                         ))}
                     </Sidebar.Menu>
                   </Sidebar.GroupContent>
@@ -100,13 +115,9 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-const RenderSideBarItem: FC<SidebarItem & { basePath?: string }> = ({
-  basePath = '/',
-  pathname,
-  title,
-  Icon,
-  items,
-}) => {
+const RenderSideBarItem: FC<
+  SidebarItem & { basePath?: string; Link: FC<LinkProps>; useLocation: typeof useLocation }
+> = ({ basePath = '/', pathname, title, Icon, items, Link, useLocation }) => {
   const location = useLocation();
   const { open } = useSidebar();
 
