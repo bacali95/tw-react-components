@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.150](https://github.com/bacali95/tw-react-components/compare/v0.0.149...v0.0.150) (2024-11-11)
+
+
+### Features
+
+* remove react-router-dom dependency ([baeab21](https://github.com/bacali95/tw-react-components/commit/baeab2134e1ce243f7841c7c89812144347b019f))
+
 ### [0.0.149](https://github.com/bacali95/tw-react-components/compare/v0.0.148...v0.0.149) (2024-10-30)
 
 
