@@ -21,14 +21,15 @@ export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
 export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
-export const LayoutContextProvider: FC<PropsWithChildren<{ defaultTheme?: ThemeState }>> = ({
-  children,
-  defaultTheme,
-}) => {
+export const LayoutContextProvider: FC<
+  PropsWithChildren<Pick<LayoutContext, 'theme' | 'showIds'>>
+> = ({ children, theme: defaultTheme, showIds: defaultShowIds }) => {
   const [theme, _setTheme] = useState(
     defaultTheme ?? getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'),
   );
-  const [showIds, _setShowIds] = useState(getValueFromCookie<boolean>(SHOW_IDS_COOKIE_NAME, false));
+  const [showIds, _setShowIds] = useState(
+    defaultShowIds ?? getValueFromCookie<boolean>(SHOW_IDS_COOKIE_NAME, false),
+  );
 
   const [resolvedTheme, setResolvedTheme] = useState(() =>
     theme === 'system' ? getSystemTheme() : theme,
