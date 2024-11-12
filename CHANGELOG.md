@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.153](https://github.com/bacali95/tw-react-components/compare/v0.0.152...v0.0.153) (2024-11-12)
+
+
+### Features
+
+* add default show ids prop to layout context ([ce86842](https://github.com/bacali95/tw-react-components/commit/ce868423325ca1a3ce4430e9c657c8dbbff4ff98))
+
 ### [0.0.152](https://github.com/bacali95/tw-react-components/compare/v0.0.151...v0.0.152) (2024-11-11)
 
 
