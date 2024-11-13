@@ -22,7 +22,7 @@ export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
 export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
 export const LayoutContextProvider: FC<
-  PropsWithChildren<Pick<LayoutContext, 'theme' | 'showIds'>>
+  PropsWithChildren<Partial<Pick<LayoutContext, 'theme' | 'showIds'>>>
 > = ({ children, theme: defaultTheme, showIds: defaultShowIds }) => {
   const [theme, _setTheme] = useState(
     defaultTheme ?? getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'),
