@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.154](https://github.com/bacali95/tw-react-components/compare/v0.0.153...v0.0.154) (2024-11-13)
+
+
+### Bug Fixes
+
+* fix layout context props types ([0e8a30c](https://github.com/bacali95/tw-react-components/commit/0e8a30cb7f33163661f1b4057d99caf269411836))
+
 ### [0.0.153](https://github.com/bacali95/tw-react-components/compare/v0.0.152...v0.0.153) (2024-11-12)
 
 
