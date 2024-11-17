@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.155](https://github.com/bacali95/tw-react-components/compare/v0.0.154...v0.0.155) (2024-11-17)
+
+
+### Bug Fixes
+
+* fix export index.css file ([54b4531](https://github.com/bacali95/tw-react-components/commit/54b4531bced96a8428e3475d0dd0abd1b481fbee))
+
 ### [0.0.154](https://github.com/bacali95/tw-react-components/compare/v0.0.153...v0.0.154) (2024-11-13)
 
 
