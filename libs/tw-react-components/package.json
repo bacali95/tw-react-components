@@ -22,6 +22,9 @@
     "./css": {
       "default": "./index.css"
     },
+    "./index.css": {
+      "default": "./index.css"
+    },
     "./config": {
       "default": "./tailwindcss-plugin.cjs"
     }
