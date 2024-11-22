@@ -1,6 +1,6 @@
 import { ChevronRightIcon, LucideIcon } from 'lucide-react';
 import { ComponentProps, FC, PropsWithChildren, ReactNode, useMemo } from 'react';
-import type { LinkProps, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router';
 
 import { cn } from '../../helpers';
 import { Collapsible } from '../Collapsible';
@@ -31,8 +31,6 @@ type Props = {
   className?: string;
   sidebarProps: SidebarProps;
   navbarProps?: NavbarProps;
-  Link: FC<LinkProps>;
-  useLocation: typeof useLocation;
 };
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
@@ -40,8 +38,6 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   className,
   sidebarProps: { basePath, header, items, extraContent, footer, ...sidebarProps },
   navbarProps,
-  Link,
-  useLocation,
 }) => {
   return (
     <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
@@ -60,12 +56,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
               item.type === 'item' ? (
                 <Sidebar.Group key={index}>
                   <Sidebar.Menu>
-                    <RenderSideBarItem
-                      basePath={basePath}
-                      Link={Link}
-                      useLocation={useLocation}
-                      {...item}
-                    />
+                    <RenderSideBarItem basePath={basePath} {...item} />
                   </Sidebar.Menu>
                 </Sidebar.Group>
               ) : (
@@ -76,13 +67,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
                       {item.items
                         .filter((subItem) => !subItem.hidden)
                         .map((subItem, index) => (
-                          <RenderSideBarItem
-                            key={index}
-                            basePath={basePath}
-                            Link={Link}
-                            useLocation={useLocation}
-                            {...subItem}
-                          />
+                          <RenderSideBarItem key={index} basePath={basePath} {...subItem} />
                         ))}
                     </Sidebar.Menu>
                   </Sidebar.GroupContent>
@@ -115,9 +100,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-const RenderSideBarItem: FC<
-  SidebarItem & { basePath?: string; Link: FC<LinkProps>; useLocation: typeof useLocation }
-> = ({ basePath = '/', pathname, title, Icon, items, Link, useLocation }) => {
+const RenderSideBarItem: FC<SidebarItem & { basePath?: string }> = ({
+  basePath = '/',
+  pathname,
+  title,
+  Icon,
+  items,
+}) => {
   const location = useLocation();
   const { open } = useSidebar();
 
@@ -129,45 +118,33 @@ const RenderSideBarItem: FC<
   if (!items?.filter((subItem) => !subItem.hidden).length) {
     return (
       <Sidebar.MenuItem>
-        <Sidebar.MenuButton asChild isActive={isLinkStartsWithPathname(currentPath, pathname)}>
-          <Link to={pathname} className="font-medium">
-            {Icon && <Icon />}
-            {title}
-          </Link>
-        </Sidebar.MenuButton>
+        <NavLink to={pathname} className="font-medium">
+          {({ isActive }) => (
+            <Sidebar.MenuButton isActive={isActive}>
+              {Icon && <Icon />}
+              {title}
+            </Sidebar.MenuButton>
+          )}
+        </NavLink>
       </Sidebar.MenuItem>
     );
   }
 
-  const isOpen =
-    open &&
-    (isLinkStartsWithPathname(currentPath, pathname) ||
-      items.some((subItem) =>
-        isLinkStartsWithPathname(currentPath, `${pathname}/${subItem.pathname}`),
-      ));
+  const isOpen = open && isLinkStartsWithPathname(currentPath, pathname);
 
   return (
     <Collapsible asChild open={isOpen} className="group/collapsible">
       <Sidebar.MenuItem>
         <Collapsible.Trigger asChild>
-          <Sidebar.MenuButton
-            asChild
-            tooltip={title}
-            isActive={
-              open
-                ? currentPath === pathname &&
-                  !items.some((subItem) =>
-                    isLinkStartsWithPathname(currentPath, `${pathname}/${subItem.pathname}`),
-                  )
-                : isLinkStartsWithPathname(currentPath, pathname)
-            }
-          >
-            <Link to={pathname} className="font-medium">
-              {Icon && <Icon />}
-              {title}
-              <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-            </Link>
-          </Sidebar.MenuButton>
+          <NavLink to={pathname} className="font-medium">
+            {({ isActive }) => (
+              <Sidebar.MenuButton tooltip={title} isActive={!open && isActive}>
+                {Icon && <Icon />}
+                {title}
+                <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              </Sidebar.MenuButton>
+            )}
+          </NavLink>
         </Collapsible.Trigger>
         {items && (
           <Collapsible.Content>
@@ -176,15 +153,13 @@ const RenderSideBarItem: FC<
                 .filter((subItem) => !subItem.hidden)
                 .map((subItem, index) => (
                   <Sidebar.MenuSubItem key={index}>
-                    <Sidebar.MenuSubButton
-                      asChild
-                      isActive={isLinkStartsWithPathname(
-                        currentPath,
-                        `${pathname}/${subItem.pathname}`,
+                    <NavLink to={`${pathname}/${subItem.pathname}`}>
+                      {({ isActive }) => (
+                        <Sidebar.MenuSubButton isActive={isActive}>
+                          {subItem.title}
+                        </Sidebar.MenuSubButton>
                       )}
-                    >
-                      <Link to={`${pathname}/${subItem.pathname}`}>{subItem.title}</Link>
-                    </Sidebar.MenuSubButton>
+                    </NavLink>
                   </Sidebar.MenuSubItem>
                 ))}
             </Sidebar.MenuSub>

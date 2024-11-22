@@ -1,6 +1,6 @@
 import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router';
 
 import { LayoutContextProvider, SidebarContextProvider, Spinner } from 'tw-react-components';
 

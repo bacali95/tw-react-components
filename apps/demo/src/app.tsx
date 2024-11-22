@@ -12,7 +12,7 @@ import {
   TextCursorIcon,
 } from 'lucide-react';
 import { FC, useMemo } from 'react';
-import { Link, Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, Outlet, Route, Routes } from 'react-router';
 
 import { Layout, Sidebar, SidebarProps, ThemeSelector } from 'tw-react-components';
 
@@ -122,8 +122,6 @@ export const App: FC = () => {
           <Layout
             sidebarProps={sidebarProps}
             navbarProps={{ className: 'py-2', rightSlot: <ThemeSelector /> }}
-            Link={Link}
-            useLocation={useLocation}
           >
             <Outlet />
           </Layout>
