@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.156](https://github.com/bacali95/tw-react-components/compare/v0.0.155...v0.0.156) (2024-11-22)
+
+
+### Features
+
+* upgrade react-router to 7.0.0 ([56ff2cf](https://github.com/bacali95/tw-react-components/commit/56ff2cfbc5ffc169bbfd019b6bad2aac3a089df8))
+
 ### [0.0.155](https://github.com/bacali95/tw-react-components/compare/v0.0.154...v0.0.155) (2024-11-17)
 
 
