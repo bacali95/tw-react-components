@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
-import { Block, BlockProps } from '../Block';
+import type { BlockProps } from '../Block';
+import { Block } from '../Block';
 
 type Direction = 'row' | 'column';
 

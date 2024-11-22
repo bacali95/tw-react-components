@@ -1,10 +1,8 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeft } from 'lucide-react';
+import type { CSSProperties, ComponentProps, ElementRef } from 'react';
 import {
-  CSSProperties,
-  ComponentProps,
-  ElementRef,
   createContext,
   forwardRef,
   useCallback,

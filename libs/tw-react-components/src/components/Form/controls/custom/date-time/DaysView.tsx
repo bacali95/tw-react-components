@@ -1,4 +1,5 @@
-import { FC, useCallback, useMemo } from 'react';
+import type { FC } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { cn, compareDates } from '../../../../../helpers';
 import { useDays } from '../../../../../hooks';

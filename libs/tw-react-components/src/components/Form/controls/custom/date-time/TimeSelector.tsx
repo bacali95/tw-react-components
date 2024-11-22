@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
-import { FC, WheelEvent } from 'react';
+import type { FC, WheelEvent } from 'react';
 
 import { compareDates } from '../../../../../helpers';
 import { useLongPress } from '../../../../../hooks';

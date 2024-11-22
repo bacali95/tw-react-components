@@ -1,32 +1,34 @@
-import { ComponentProps, ForwardRefExoticComponent, forwardRef } from 'react';
-import { Controller, ControllerRenderProps, Validate, useFormContext } from 'react-hook-form';
+import type { ComponentProps, ForwardRefExoticComponent } from 'react';
+import { forwardRef } from 'react';
+import type { ControllerRenderProps, Validate } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { mergeRefs } from '../../../helpers';
-import {
-  DateTimeInput,
+import type {
   DateTimeInputProps,
   DateTimeInputType,
-  FileInput,
   FileInputProps,
-  SelectInput,
   SelectInputProps,
   SelectInputType,
 } from './custom';
-import {
+import { DateTimeInput, FileInput, SelectInput } from './custom';
+import type {
   BasicInputProps,
-  CheckboxInput,
   CheckboxInputProps,
-  EmailInput,
   EmailInputProps,
   InputType,
-  NumberInput,
   NumberInputProps,
-  PasswordInput,
   PasswordInputProps,
-  TextInput,
   TextInputProps,
-  TextareaInput,
   TextareaInputProps,
+} from './primitive';
+import {
+  CheckboxInput,
+  EmailInput,
+  NumberInput,
+  PasswordInput,
+  TextInput,
+  TextareaInput,
 } from './primitive';
 
 export type WithFormProps<

@@ -1,20 +1,12 @@
 import { ChevronDownIcon } from 'lucide-react';
-import {
-  ChangeEvent,
-  ForwardedRef,
-  JSX,
-  ReactNode,
-  RefObject,
-  forwardRef,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import type { ChangeEvent, ForwardedRef, JSX, ReactNode, RefObject } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 
 import { cn } from '../../../../../helpers';
 import { DropdownMenu } from '../../../../DropdownMenu';
 import { Flex } from '../../../../Flex';
-import { BasicInputProps, TextInput } from '../../primitive';
+import type { BasicInputProps } from '../../primitive';
+import { TextInput } from '../../primitive';
 
 export type SelectInputType = 'select';
 

@@ -1,4 +1,4 @@
-import { SelectItem } from 'tw-react-components';
+import type { SelectItem } from 'tw-react-components';
 
 export const countriesByContinent = {
   Asia: ['Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh'],

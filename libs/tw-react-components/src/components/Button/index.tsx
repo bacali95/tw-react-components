@@ -1,8 +1,9 @@
-import { LucideIcon } from 'lucide-react';
-import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
+import type { LucideIcon } from 'lucide-react';
+import type { ComponentProps, PropsWithoutRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
-import { Color, Size } from '../types';
+import type { Color, Size } from '../types';
 
 export type ButtonVariant = 'filled' | 'outlined' | 'text';
 

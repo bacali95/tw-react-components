@@ -1,10 +1,11 @@
-import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
+import type { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { ArrowUpDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { Button } from '../Button';
 import { Flex } from '../Flex';
-import { ListSorter, ListSorterItem, ListSorterProps } from '../ListSorter';
+import type { ListSorterItem, ListSorterProps } from '../ListSorter';
+import { ListSorter } from '../ListSorter';
 import { Dialog } from './Dialog';
 
 export type ListSorterDialogProps<T extends ListSorterItem> = {

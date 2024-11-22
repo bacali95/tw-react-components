@@ -11,10 +11,12 @@ import {
   TableIcon,
   TextCursorIcon,
 } from 'lucide-react';
-import { FC, useMemo } from 'react';
-import { Link, Navigate, Outlet, Route, Routes } from 'react-router';
+import type { FC } from 'react';
+import { useMemo } from 'react';
+import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 
-import { Layout, Sidebar, SidebarProps, ThemeSelector } from 'tw-react-components';
+import type { SidebarProps } from 'tw-react-components';
+import { Layout, Sidebar, ThemeSelector } from 'tw-react-components';
 
 import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
@@ -122,6 +124,8 @@ export const App: FC = () => {
           <Layout
             sidebarProps={sidebarProps}
             navbarProps={{ className: 'py-2', rightSlot: <ThemeSelector /> }}
+            NavLink={NavLink}
+            useLocation={useLocation}
           >
             <Outlet />
           </Layout>

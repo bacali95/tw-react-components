@@ -1,5 +1,5 @@
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import { useLayoutContext } from '../../contexts';
 import { Button } from '../Button';

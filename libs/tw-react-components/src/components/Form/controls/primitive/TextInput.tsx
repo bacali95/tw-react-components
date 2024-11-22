@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 
-import { BasicInput, BasicInputProps } from './BasicInput';
+import type { BasicInputProps } from './BasicInput';
+import { BasicInput } from './BasicInput';
 
 export type TextInputProps = Omit<BasicInputProps<'text'>, 'type'>;
 

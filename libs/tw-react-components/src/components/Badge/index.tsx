@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 
-import { Button, ButtonProps, ButtonVariant } from '../Button';
+import type { ButtonProps, ButtonVariant } from '../Button';
+import { Button } from '../Button';
 
 export type BadgeVariant = Exclude<ButtonVariant, 'text'>;
 

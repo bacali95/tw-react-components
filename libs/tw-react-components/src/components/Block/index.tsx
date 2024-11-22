@@ -1,4 +1,5 @@
-import { ComponentProps, PropsWithoutRef, forwardRef } from 'react';
+import type { ComponentProps, PropsWithoutRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
 

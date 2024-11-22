@@ -1,7 +1,9 @@
-import { ReactNode, forwardRef } from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../../../helpers';
-import { BasicInput, BasicInputProps } from './BasicInput';
+import type { BasicInputProps } from './BasicInput';
+import { BasicInput } from './BasicInput';
 
 export type NumberInputProps = Omit<BasicInputProps<'number'>, 'type'> & { unit?: ReactNode };
 

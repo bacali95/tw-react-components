@@ -1,4 +1,5 @@
-import dayjs, { OpUnitType } from 'dayjs';
+import type { OpUnitType } from 'dayjs';
+import dayjs from 'dayjs';
 
 export function compareDates(date1: Date, date2: Date, startOf?: OpUnitType) {
   if (startOf) {

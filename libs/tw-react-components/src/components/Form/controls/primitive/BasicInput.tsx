@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import {
+import type {
   ChangeEvent,
   ComponentProps,
   FC,
@@ -8,13 +8,11 @@ import {
   MouseEvent,
   PropsWithChildren,
   ReactNode,
-  forwardRef,
-  useId,
-  useMemo,
 } from 'react';
+import { forwardRef, useId, useMemo } from 'react';
 
 import { cn } from '../../../../helpers';
-import { Size } from '../../../types';
+import type { Size } from '../../../types';
 import { Label } from '../Label';
 
 export type InputType = ComponentProps<'input'>['type'] | 'textarea';

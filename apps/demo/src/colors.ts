@@ -1,4 +1,4 @@
-import { Color } from 'tw-react-components';
+import type { Color } from 'tw-react-components';
 
 export const colors: Color[] = [
   'slate',

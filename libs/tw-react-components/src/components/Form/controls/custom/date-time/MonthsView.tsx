@@ -1,4 +1,5 @@
-import { FC, useMemo } from 'react';
+import type { FC } from 'react';
+import { useMemo } from 'react';
 
 import { cn, compareDates } from '../../../../../helpers';
 import { useMonths } from '../../../../../hooks';

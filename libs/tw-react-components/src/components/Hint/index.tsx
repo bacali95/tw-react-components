@@ -1,9 +1,11 @@
-import { ElementRef, PropsWithChildren, forwardRef } from 'react';
+import type { ElementRef, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
-import { Badge, BadgeProps, BadgeVariant } from '../Badge';
+import type { BadgeProps, BadgeVariant } from '../Badge';
+import { Badge } from '../Badge';
 import { Block } from '../Block';
-import { Color, Size } from '../types';
+import type { Color, Size } from '../types';
 
 const HintRoot = forwardRef<HTMLDivElement, PropsWithChildren>(({ children }, ref) => (
   <Block className="relative" ref={ref}>

@@ -1,11 +1,14 @@
 import dayjs from 'dayjs';
 import { CalendarIcon, ClockIcon } from 'lucide-react';
-import { FocusEvent, KeyboardEvent, forwardRef, useEffect, useMemo, useRef, useState } from 'react';
+import type { FocusEvent, KeyboardEvent } from 'react';
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import { cn, getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
-import { BasicInput, BasicInputProps } from '../../primitive';
-import { DateSelector, View } from './DateSelector';
+import type { BasicInputProps } from '../../primitive';
+import { BasicInput } from '../../primitive';
+import type { View } from './DateSelector';
+import { DateSelector } from './DateSelector';
 import { TimeSelector } from './TimeSelector';
 
 export type DateTimeInputType = 'date' | 'time' | 'datetime-local';

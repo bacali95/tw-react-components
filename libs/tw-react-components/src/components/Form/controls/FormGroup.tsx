@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import { cn } from '../../../helpers';
 import { Flex } from '../../Flex';

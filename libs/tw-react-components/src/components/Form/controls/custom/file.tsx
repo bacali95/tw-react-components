@@ -2,7 +2,8 @@ import { CloudUploadIcon } from 'lucide-react';
 import { forwardRef, useRef } from 'react';
 
 import { cn } from '../../../../helpers';
-import { BasicInputProps, TextInput } from '../primitive';
+import type { BasicInputProps } from '../primitive';
+import { TextInput } from '../primitive';
 
 export type FileInputProps = {
   value?: string | null;

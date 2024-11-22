@@ -1,7 +1,10 @@
 import { DollarSignIcon } from 'lucide-react';
-import { ChangeEvent, FC, useState } from 'react';
-import { FormProvider, SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
+import type { ChangeEvent, FC } from 'react';
+import { useState } from 'react';
+import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
+import type { SelectItem, Size } from 'tw-react-components';
 import {
   Button,
   CheckboxInput,
@@ -10,8 +13,6 @@ import {
   FormInputs,
   NumberInput,
   SelectInput,
-  SelectItem,
-  Size,
   TextInput,
   TextareaInput,
 } from 'tw-react-components';

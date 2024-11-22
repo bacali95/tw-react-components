@@ -25,6 +25,7 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
       "rules": {
+        "@typescript-eslint/consistent-type-imports": ["warn", { "prefer": "type-imports" }],
         "@typescript-eslint/no-non-null-assertion": 0,
         "@typescript-eslint/no-explicit-any": 0,
         "jsx-a11y/anchor-has-content": 0

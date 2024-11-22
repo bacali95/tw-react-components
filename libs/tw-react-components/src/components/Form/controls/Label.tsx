@@ -1,5 +1,5 @@
 import { HelpCircle } from 'lucide-react';
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { cn } from '../../../helpers';
 import { Tooltip } from '../../Tooltip';

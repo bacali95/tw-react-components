@@ -1,7 +1,8 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { forwardRef, useState } from 'react';
 
-import { BasicInput, BasicInputProps } from './BasicInput';
+import type { BasicInputProps } from './BasicInput';
+import { BasicInput } from './BasicInput';
 
 export type PasswordInputProps = Omit<BasicInputProps<'number'>, 'type'>;
 

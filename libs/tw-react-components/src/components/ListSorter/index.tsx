@@ -1,13 +1,13 @@
+import type { DragEndEvent } from '@dnd-kit/core';
 import {
   DndContext,
-  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
-import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
+import type { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { restrictToFirstScrollableAncestor } from '@dnd-kit/modifiers';
 import {
   SortableContext,
@@ -16,7 +16,8 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { ReactElement, ReactNode, useMemo } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { useMemo } from 'react';
 
 export type ListSorterItem = number | string | boolean | Record<'rank', number>;
 

@@ -1,10 +1,11 @@
-import { LucideIcon } from 'lucide-react';
-import { ComponentPropsWithoutRef, forwardRef } from 'react';
+import type { LucideIcon } from 'lucide-react';
+import type { ComponentPropsWithoutRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
 import { Block } from '../Block';
 import { Flex } from '../Flex';
-import { Size } from '../types';
+import type { Size } from '../types';
 
 const ListContent = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
   ({ className, ...props }, ref) => (

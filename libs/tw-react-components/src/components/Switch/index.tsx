@@ -1,5 +1,6 @@
 import * as SwitchPrimitives from '@radix-ui/react-switch';
-import { ComponentProps, ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react';
+import type { ComponentProps, ComponentPropsWithoutRef, ElementRef } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
 

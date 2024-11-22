@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon, HomeIcon } from 'lucide-react';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import { Badge, Flex } from 'tw-react-components';
 

@@ -1,16 +1,17 @@
-import { PropsWithChildren, ReactNode, useId } from 'react';
-import {
+import type { PropsWithChildren, ReactNode } from 'react';
+import { useId } from 'react';
+import type {
   FieldValues,
-  FormProvider,
   SubmitErrorHandler,
   SubmitHandler,
   UseFormReturn,
 } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 
 import { cn } from '../../helpers';
 import { Button } from '../Button';
 import { Sheet } from '../Sheet';
-import { Dialog } from './Dialog';
+import type { Dialog } from './Dialog';
 
 type Props<T extends FieldValues> = {
   className?: string;

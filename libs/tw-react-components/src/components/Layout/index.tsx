@@ -1,11 +1,14 @@
-import { ChevronRightIcon, LucideIcon } from 'lucide-react';
-import { ComponentProps, FC, PropsWithChildren, ReactNode, useMemo } from 'react';
-import { NavLink, useLocation } from 'react-router';
+import type { LucideIcon } from 'lucide-react';
+import { ChevronRightIcon } from 'lucide-react';
+import type { ComponentProps, FC, PropsWithChildren, ReactNode } from 'react';
+import { useMemo } from 'react';
+import type { NavLinkProps, useLocation } from 'react-router';
 
 import { cn } from '../../helpers';
 import { Collapsible } from '../Collapsible';
 import { Flex } from '../Flex';
-import { Navbar, NavbarProps } from '../Navbar';
+import type { NavbarProps } from '../Navbar';
+import { Navbar } from '../Navbar';
 import { Sidebar, useSidebar } from '../Sidebar';
 
 export type SidebarItem = {
@@ -31,6 +34,8 @@ type Props = {
   className?: string;
   sidebarProps: SidebarProps;
   navbarProps?: NavbarProps;
+  NavLink: FC<NavLinkProps>;
+  useLocation: typeof useLocation;
 };
 
 export const Layout: FC<PropsWithChildren<Props>> = ({
@@ -38,6 +43,8 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   className,
   sidebarProps: { basePath, header, items, extraContent, footer, ...sidebarProps },
   navbarProps,
+  NavLink,
+  useLocation,
 }) => {
   return (
     <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
@@ -56,7 +63,12 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
               item.type === 'item' ? (
                 <Sidebar.Group key={index}>
                   <Sidebar.Menu>
-                    <RenderSideBarItem basePath={basePath} {...item} />
+                    <RenderSideBarItem
+                      basePath={basePath}
+                      {...item}
+                      NavLink={NavLink}
+                      useLocation={useLocation}
+                    />
                   </Sidebar.Menu>
                 </Sidebar.Group>
               ) : (
@@ -67,7 +79,13 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
                       {item.items
                         .filter((subItem) => !subItem.hidden)
                         .map((subItem, index) => (
-                          <RenderSideBarItem key={index} basePath={basePath} {...subItem} />
+                          <RenderSideBarItem
+                            key={index}
+                            basePath={basePath}
+                            {...subItem}
+                            NavLink={NavLink}
+                            useLocation={useLocation}
+                          />
                         ))}
                     </Sidebar.Menu>
                   </Sidebar.GroupContent>
@@ -100,13 +118,9 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
   );
 };
 
-const RenderSideBarItem: FC<SidebarItem & { basePath?: string }> = ({
-  basePath = '/',
-  pathname,
-  title,
-  Icon,
-  items,
-}) => {
+const RenderSideBarItem: FC<
+  SidebarItem & { basePath?: string } & Pick<Props, 'NavLink' | 'useLocation'>
+> = ({ basePath = '/', pathname, title, Icon, items, NavLink, useLocation }) => {
   const location = useLocation();
   const { open } = useSidebar();
 

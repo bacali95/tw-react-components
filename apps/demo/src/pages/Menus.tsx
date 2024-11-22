@@ -12,7 +12,7 @@ import {
   UserPlusIcon,
   UsersIcon,
 } from 'lucide-react';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 import { Button, DropdownMenu } from 'tw-react-components';
 

@@ -1,24 +1,27 @@
+import type { LucideIcon } from 'lucide-react';
 import {
   ArrowUpDownIcon,
   ChevronsDownUpIcon,
   ChevronsUpDownIcon,
-  LucideIcon,
   MinusIcon,
   PlusIcon,
   SortAscIcon,
   SortDescIcon,
 } from 'lucide-react';
-import { ComponentProps, FC, MouseEvent, ReactNode, useMemo, useRef, useState } from 'react';
+import type { ComponentProps, FC, MouseEvent, ReactNode } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { cn, generalComparator, resolveTargetObject } from '../../helpers';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import { SelectInput } from '../Form';
-import { Hint, HintBadgeProps, HintDotProps } from '../Hint';
-import { Pagination, PaginationProps } from '../Pagination';
+import type { HintBadgeProps, HintDotProps } from '../Hint';
+import { Hint } from '../Hint';
+import type { PaginationProps } from '../Pagination';
+import { Pagination } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
-import { Color, Paths, ResolvePath } from '../types';
+import type { Color, Paths, ResolvePath } from '../types';
 
 export type DataTableColumn<T, Field extends Paths<T> = Paths<T>> = {
   className?: string;

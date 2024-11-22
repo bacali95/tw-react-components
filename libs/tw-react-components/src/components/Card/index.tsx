@@ -1,7 +1,8 @@
 import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
-import { Block, BlockProps } from '../Block';
+import type { BlockProps } from '../Block';
+import { Block } from '../Block';
 
 export const Card = forwardRef<HTMLDivElement, BlockProps>(
   ({ children, className, ...blockProps }, ref) => (

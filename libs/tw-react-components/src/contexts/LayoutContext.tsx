@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
+import type { FC, PropsWithChildren } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 import { getValueFromCookie } from '../helpers';
 

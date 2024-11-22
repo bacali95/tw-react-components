@@ -1,13 +1,13 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
-import {
+import type {
   ComponentProps,
   ComponentPropsWithoutRef,
   ElementRef,
   FC,
   HTMLAttributes,
-  forwardRef,
 } from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '../../helpers';
 import { Button } from '../Button';

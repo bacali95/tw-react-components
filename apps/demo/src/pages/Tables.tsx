@@ -1,18 +1,14 @@
 import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat.js';
 import { PencilIcon, TrashIcon } from 'lucide-react';
-import { FC, useMemo, useState } from 'react';
+import type { FC } from 'react';
+import { useMemo, useState } from 'react';
 
-import {
-  DataTable,
-  DataTableColumns,
-  DataTablePageSize,
-  DataTableSorting,
-  Flex,
-  getDisplayDate,
-} from 'tw-react-components';
+import type { DataTableColumns, DataTablePageSize, DataTableSorting } from 'tw-react-components';
+import { DataTable, Flex, getDisplayDate } from 'tw-react-components';
 
-import { Person, people } from '../data/people';
+import type { Person } from '../data/people';
+import { people } from '../data/people';
 
 dayjs.extend(LocalizedFormat);
 

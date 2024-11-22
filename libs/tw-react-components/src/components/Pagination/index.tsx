@@ -4,15 +4,8 @@ import {
   ChevronsLeftIcon,
   ChevronsRightIcon,
 } from 'lucide-react';
-import {
-  ComponentProps,
-  Dispatch,
-  FC,
-  PropsWithoutRef,
-  SetStateAction,
-  useEffect,
-  useMemo,
-} from 'react';
+import type { ComponentProps, Dispatch, FC, PropsWithoutRef, SetStateAction } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { cn } from '../../helpers';
 import { usePagination } from '../../hooks';
