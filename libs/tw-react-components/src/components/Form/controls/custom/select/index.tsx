@@ -62,21 +62,27 @@ export type SelectInputProps<T = any> = {
     | 'readOnly'
   >;
 
+const defaultRenderItem = <T,>(item: SelectItem<T>, selected?: boolean) => item.label;
+
+const defaultSearchPredicate = <T,>(item: SelectItem<T>, searchValue: string) =>
+  item.label.toLowerCase().includes(searchValue.toLowerCase());
+
+const defaultSelectPredicate = <T,>(a: T, b: T) => a === b;
+
 export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
   <T,>(
     {
       className,
       items,
-      renderItem = (item: SelectItem<T>) => item.label,
+      renderItem = defaultRenderItem,
       value,
       multiple,
       clearable,
       allowAddition,
       onNewItemAdded,
       search,
-      searchPredicate = (item, searchValue) =>
-        item.label.toLowerCase().includes(searchValue.toLowerCase()),
-      selectPredicate = (a, b) => a === b,
+      searchPredicate = defaultSearchPredicate,
+      selectPredicate = defaultSelectPredicate,
       onChange,
       readOnly,
       parentRef,
@@ -112,23 +118,21 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
           ? items
           : items.flatMap<SelectItem<T, boolean>>((item: SelectItem<T, boolean>) =>
               item.group
-                ? item.items.some((subItem) =>
-                    subItem.label.toLowerCase().includes(searchValue.toLowerCase()),
-                  )
+                ? item.items.some((subItem) => searchPredicate(subItem, searchValue))
                   ? [
                       {
                         ...item,
                         items: item.items.filter((subItem) =>
-                          subItem.label.toLowerCase().includes(searchValue.toLowerCase()),
+                          searchPredicate(subItem, searchValue),
                         ),
                       },
                     ]
                   : []
-                : item.label.toLowerCase().includes(searchValue.toLowerCase())
+                : searchPredicate(item, searchValue)
                   ? [item]
                   : [],
             ),
-      [items, search, searchValue],
+      [items, search, searchPredicate, searchValue],
     );
 
     const text = useMemo(
@@ -175,8 +179,11 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
       [clearable, multiple, onChange, pureItems, selectedItems, selectedMap],
     );
 
-    const handleOnSearchValueChange = (event: ChangeEvent<HTMLInputElement>) =>
+    const handleOnSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+      event.stopPropagation();
+
       setSearchValue(event.target.value);
+    };
 
     const clearSearchValue = () => setSearchValue('');
 
@@ -239,6 +246,8 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
                 placeholder="Search..."
                 size={props.size}
                 onChange={handleOnSearchValueChange}
+                onKeyUp={(event) => event.stopPropagation()}
+                onKeyDown={(event) => event.stopPropagation()}
                 clearable={!!searchValue.length}
                 onClear={clearSearchValue}
               />
