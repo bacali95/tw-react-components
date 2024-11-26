@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.159](https://github.com/bacali95/tw-react-components/compare/v0.0.158...v0.0.159) (2024-11-26)
+
+
+### Bug Fixes
+
+* fix select component ([790e006](https://github.com/bacali95/tw-react-components/commit/790e006fb220cef770b98fd30299140f49a63fd9))
+
 ### [0.0.158](https://github.com/bacali95/tw-react-components/compare/v0.0.157...v0.0.158) (2024-11-22)
 
 
