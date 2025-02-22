@@ -11,7 +11,7 @@ runs:
   steps:
     - name: Set Yarn version
       shell: bash
-      run: yarn set version 4.4.1
+      run: yarn set version 4.6.0
 
     - name: Setup NodeJs 22 💿
       uses: actions/setup-node@v4
