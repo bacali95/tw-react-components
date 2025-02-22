@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.160](https://github.com/bacali95/tw-react-components/compare/v0.0.159...v0.0.160) (2025-02-22)
+
+
+### Bug Fixes
+
+* update components sizes ([bdb3a71](https://github.com/bacali95/tw-react-components/commit/bdb3a71b8457d58257940c2631fbda96df383d14))
+
 ### [0.0.159](https://github.com/bacali95/tw-react-components/compare/v0.0.158...v0.0.159) (2024-11-26)
 
 
