@@ -11,6 +11,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   ({ unit, ...props }, ref) => (
     <BasicInput
       type="number"
+      inputClassName={cn(props.clearable && !!props.value && 'pr-8', props.className)}
       {...props}
       suffixIcon={
         unit

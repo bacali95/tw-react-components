@@ -23,14 +23,14 @@ const dotSizeClassNames: Record<
   { base: string; top: string; right: string; bottom: string; left: string }
 > = {
   small: {
-    base: 'h-2 w-2',
+    base: 'h-1.5 w-1.5',
     top: '-top-0.5',
     right: '-right-0.5',
     bottom: '-bottom-0.5',
     left: '-left-0.5',
   },
   medium: {
-    base: 'h-3 w-3',
+    base: 'h-2.5 w-2.5',
     top: '-top-1',
     right: '-right-1',
     bottom: '-bottom-1',
@@ -130,8 +130,8 @@ const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
   ({ className, size = 'small', placement = 'top-right', ...props }, ref) => (
     <Badge
       className={cn(
-        'absolute px-1',
-        size === 'small' ? 'h-5' : 'h-6',
+        'absolute z-10 px-1',
+        size === 'small' ? 'h-4' : 'h-5',
         {
           [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
           [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',

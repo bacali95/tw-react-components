@@ -71,7 +71,7 @@ export const FormControls: FC = () => {
         ]}
         onChange={setInputSize}
       />
-      <Flex className="px-2" direction="column" fullWidth>
+      <Flex direction="column" fullWidth>
         <p className="mb-2">
           With <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
           context
@@ -144,7 +144,7 @@ export const FormControls: FC = () => {
           </form>
         </FormProvider>
       </Flex>
-      <Flex className="px-2" direction="column" fullWidth>
+      <Flex direction="column" fullWidth>
         <p className="mb-2">
           Without <code className="rounded bg-slate-100 p-1 dark:bg-slate-900">use-form-hook</code>{' '}
           context

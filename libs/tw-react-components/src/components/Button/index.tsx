@@ -462,19 +462,19 @@ const sizeClassNames: Record<
   }
 > = {
   small: {
-    base: 'gap-1.5 text-sm h-7',
+    base: 'gap-1 text-sm h-6',
+    withChildren: 'px-1.5',
+    icon: {
+      base: 'h-3 w-3',
+      withChildren: 'h-2 w-2',
+    },
+  },
+  medium: {
+    base: 'gap-1.5 text-base h-9',
     withChildren: 'px-2',
     icon: {
       base: 'h-4 w-4',
       withChildren: 'h-3 w-3',
-    },
-  },
-  medium: {
-    base: 'gap-2 text-base h-10',
-    withChildren: 'px-2.5',
-    icon: {
-      base: 'h-5 w-5',
-      withChildren: 'h-4 w-4',
     },
   },
 };

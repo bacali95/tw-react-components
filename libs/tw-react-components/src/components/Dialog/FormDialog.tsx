@@ -62,7 +62,7 @@ export const FormDialog = <T extends FieldValues>({
         <FormProvider {...form}>
           <form
             id={`form-${id}`}
-            className={cn('flex h-full w-full flex-col gap-3 overflow-auto', formClassName)}
+            className={cn('flex h-full w-full flex-col gap-2 overflow-auto', formClassName)}
             onSubmit={form.handleSubmit(handleSubmit, onInvalid)}
           >
             {children}

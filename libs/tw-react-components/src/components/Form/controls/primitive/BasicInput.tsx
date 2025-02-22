@@ -65,35 +65,35 @@ const sizeClasses: Record<
   }
 > = {
   small: {
-    label: 'text-sm',
-    input: 'text-sm py-1 px-2 h-7',
+    label: 'text-xs',
+    input: 'text-xs py-1 px-2 h-6',
     checkbox: {
-      input: 'w-4 h-4',
+      input: 'w-3 h-3',
       wrapper: 'h-6 gap-1',
     },
     suffix: {
-      wrapper: 'h-7',
-      icon: 'h-4 w-4 mx-1.5',
+      wrapper: 'h-6',
+      icon: 'h-3 w-3 mx-1.5',
     },
     clearButton: {
-      base: 'h-5 w-5',
+      base: 'h-4 w-4',
       withSuffixIcon: 'right-8',
     },
   },
   medium: {
-    label: 'text-base',
-    input: 'text-base py-2 px-3 h-10',
+    label: 'text-sm',
+    input: 'text-sm py-2 px-3 h-9',
     checkbox: {
-      input: 'w-5 h-5',
+      input: 'w-4 h-4',
       wrapper: 'h-8 gap-2',
     },
     suffix: {
-      wrapper: 'h-10',
-      icon: 'w-5 h-5 mx-2',
+      wrapper: 'h-9',
+      icon: 'w-4 h-4 mx-2',
     },
     clearButton: {
-      base: 'h-6 w-6',
-      withSuffixIcon: 'right-12',
+      base: 'h-5 w-5',
+      withSuffixIcon: 'right-9',
     },
   },
 };

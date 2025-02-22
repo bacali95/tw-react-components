@@ -56,7 +56,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
   ) => (
     <Block
       className={cn(
-        'flex gap-3',
+        'flex gap-2',
         wrap && 'flex-wrap',
         directionClasses[direction][reverse ? 'reverse' : 'normal'],
         alignClasses[align],

@@ -42,7 +42,7 @@ export const App: FC = () => {
               src="https://ui-avatars.com/api/?name=TWC&background=1d4ed8&color=fff"
               alt="TwUI"
             />
-            <span className="truncate font-semibold">Tailwind React Components</span>
+            <span className="truncate text-lg font-semibold">TW Components</span>
           </Sidebar.MenuButton>
         </Link>
       ),

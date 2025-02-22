@@ -18,7 +18,7 @@ export const Navbar: FC<NavbarProps> = ({
   leftSlot,
   rightSlot,
 }) => (
-  <Block className={cn('border-b p-3 dark:border-slate-700', className)} fullWidth>
+  <Block className={cn('border-b p-2 dark:border-slate-700', className)} fullWidth>
     <Flex align="center" justify="between">
       <Flex align="center">
         <Sidebar.Trigger className={sidebarTriggerClassName} />
