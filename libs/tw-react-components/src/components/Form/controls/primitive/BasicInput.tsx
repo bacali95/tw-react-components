@@ -3,7 +3,6 @@ import type {
   ChangeEvent,
   ComponentProps,
   FC,
-  JSX,
   MouseEvent,
   PropsWithChildren,
   ReactNode,

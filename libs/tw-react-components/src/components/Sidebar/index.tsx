@@ -1,7 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeft } from 'lucide-react';
-import type { CSSProperties, ComponentProps, ElementRef, FC } from 'react';
+import type { CSSProperties, ComponentProps, FC } from 'react';
 import {
   createContext,
   useCallback,
@@ -153,7 +153,7 @@ export const SidebarContextProvider: FC<
 };
 SidebarContextProvider.displayName = 'SidebarContextProvider';
 
-const $Sidebar: FC<
+const SidebarComp: FC<
   ComponentProps<'div'> & {
     side?: 'left' | 'right';
     variant?: 'sidebar' | 'floating' | 'inset';
@@ -246,7 +246,7 @@ const $Sidebar: FC<
     </div>
   );
 };
-$Sidebar.displayName = 'Sidebar';
+SidebarComp.displayName = 'Sidebar';
 
 const SidebarTrigger: FC<ComponentProps<typeof Button>> = ({ className, onClick, ...props }) => {
   const { toggleSidebar } = useSidebar();
@@ -605,7 +605,7 @@ const SidebarMenuSubButton: FC<
 };
 SidebarMenuSubButton.displayName = 'SidebarMenuSubButton';
 
-export const Sidebar = Object.assign($Sidebar, {
+export const Sidebar = Object.assign(SidebarComp, {
   Content: SidebarContent,
   Footer: SidebarFooter,
   Group: SidebarGroup,
