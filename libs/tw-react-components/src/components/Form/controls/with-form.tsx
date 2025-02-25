@@ -46,7 +46,7 @@ export type WithFormProps<
       : Type extends SelectInputType
         ? Validate<any, any>
         : Validate<string, any>;
-} & Omit<Props, 'pattern' | keyof Omit<ControllerRenderProps, 'disabled'>>;
+} & Omit<Props, 'pattern' | keyof Omit<ControllerRenderProps, 'disabled' | 'ref'>>;
 
 function withForm<
   Type extends InputType | SelectInputType,
