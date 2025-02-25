@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.162](https://github.com/bacali95/tw-react-components/compare/v0.0.161...v0.0.162) (2025-02-25)
+
+
+### Features
+
+* upgrade to react 19 ([3aa6d58](https://github.com/bacali95/tw-react-components/commit/3aa6d58d537f891471a9fe90d28345afbad68a5b))
+
 ### [0.0.161](https://github.com/bacali95/tw-react-components/compare/v0.0.160...v0.0.161) (2025-02-22)
 
 ### [0.0.160](https://github.com/bacali95/tw-react-components/compare/v0.0.159...v0.0.160) (2025-02-22)
