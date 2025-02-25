@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.163](https://github.com/bacali95/tw-react-components/compare/v0.0.162...v0.0.163) (2025-02-25)
+
+
+### Bug Fixes
+
+* fix lint ([efa3eb2](https://github.com/bacali95/tw-react-components/commit/efa3eb2299aaf70ba375d23e0bde00e0ea1afdae))
+
 ### [0.0.162](https://github.com/bacali95/tw-react-components/compare/v0.0.161...v0.0.162) (2025-02-25)
 
 
