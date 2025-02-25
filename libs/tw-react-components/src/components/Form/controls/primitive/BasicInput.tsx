@@ -3,13 +3,12 @@ import type {
   ChangeEvent,
   ComponentProps,
   FC,
-  ForwardedRef,
   JSX,
   MouseEvent,
   PropsWithChildren,
   ReactNode,
 } from 'react';
-import { forwardRef, useId, useMemo } from 'react';
+import { useId, useMemo } from 'react';
 
 import { cn } from '../../../../helpers';
 import type { Size } from '../../../types';
@@ -31,7 +30,7 @@ export type BasicInputProps<Type extends InputType> = {
   onSuffixIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
 } & Omit<
   Type extends 'textarea' ? ComponentProps<'textarea'> : ComponentProps<'input'>,
-  'id' | 'ref' | 'size'
+  'id' | 'size'
 >;
 
 const inputClasses = {
@@ -98,24 +97,21 @@ const sizeClasses: Record<
   },
 };
 
-export const BasicInput = forwardRef(function BasicInput<Type extends InputType>(
-  {
-    className,
-    inputClassName,
-    extensionClassName,
-    type = 'text' as Type,
-    label,
-    description,
-    size = 'medium',
-    hasErrors,
-    clearable,
-    suffixIcon: SuffixIcon,
-    onClear,
-    onSuffixIconClick,
-    ...props
-  }: BasicInputProps<Type>,
-  ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>,
-): JSX.Element {
+export const BasicInput = <Type extends InputType>({
+  className,
+  inputClassName,
+  extensionClassName,
+  type = 'text' as Type,
+  label,
+  description,
+  size = 'medium',
+  hasErrors,
+  clearable,
+  suffixIcon: SuffixIcon,
+  onClear,
+  onSuffixIconClick,
+  ...props
+}: BasicInputProps<Type>) => {
   const id = useId();
   const memoLabel = useMemo(
     () =>
@@ -166,7 +162,6 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             )}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
-            ref={ref as ForwardedRef<HTMLTextAreaElement>}
           />
         ) : type === 'checkbox' ? (
           <input
@@ -183,7 +178,6 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             type={type}
             checked={Boolean(props.value)}
             {...(props as ComponentProps<'input'>)}
-            ref={ref as ForwardedRef<HTMLInputElement>}
           />
         ) : (
           <input
@@ -202,7 +196,6 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
             value={props.value}
-            ref={ref as ForwardedRef<HTMLInputElement>}
           />
         )}
         {type === 'checkbox' && memoLabel}
@@ -233,7 +226,7 @@ export const BasicInput = forwardRef(function BasicInput<Type extends InputType>
       </div>
     </div>
   );
-});
+};
 
 export const BasicInputExtension: FC<
   PropsWithChildren<{

@@ -1,6 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import type { ComponentProps, PropsWithoutRef } from 'react';
-import { forwardRef } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import { cn } from '../../helpers';
 import type { Color, Size } from '../types';
@@ -479,7 +478,7 @@ const sizeClassNames: Record<
   },
 };
 
-export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
+export type ButtonProps = ComponentProps<'button'> & {
   size?: Size;
   color?: Color;
   variant?: ButtonVariant;
@@ -489,55 +488,49 @@ export type ButtonProps = PropsWithoutRef<ComponentProps<'button'>> & {
   unstyled?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      children,
+export const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  size = 'medium',
+  color = 'slate',
+  variant = 'filled',
+  rounded,
+  prefixIcon: PrefixIcon,
+  suffixIcon: SuffixIcon,
+  unstyled,
+  ...props
+}) => (
+  <button
+    className={cn(
+      'relative flex aspect-square items-center font-medium duration-200',
+      sizeClassNames[size].base,
+      variantClassNames[variant][color].base,
+      rounded ? 'rounded-full' : 'rounded-md',
+      props.disabled
+        ? 'cursor-not-allowed opacity-50'
+        : !unstyled
+          ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active}`
+          : 'cursor-default',
+      children ? `${sizeClassNames[size].withChildren} aspect-[initial]` : 'justify-center',
       className,
-      size = 'medium',
-      color = 'slate',
-      variant = 'filled',
-      rounded,
-      prefixIcon: PrefixIcon,
-      suffixIcon: SuffixIcon,
-      unstyled,
-      ...props
-    },
-    ref,
-  ) => (
-    <button
-      className={cn(
-        'relative flex aspect-square items-center font-medium duration-200',
-        sizeClassNames[size].base,
-        variantClassNames[variant][color].base,
-        rounded ? 'rounded-full' : 'rounded-md',
-        props.disabled
-          ? 'cursor-not-allowed opacity-50'
-          : !unstyled
-            ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active}`
-            : 'cursor-default',
-        children ? `${sizeClassNames[size].withChildren} aspect-[initial]` : 'justify-center',
-        className,
-      )}
-      type="button"
-      {...props}
-      ref={ref}
-    >
-      {PrefixIcon && (
-        <PrefixIcon
-          className={
-            children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
-          }
-        />
-      )}
-      {children}
-      {SuffixIcon && (
-        <SuffixIcon
-          className={
-            children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
-          }
-        />
-      )}
-    </button>
-  ),
+    )}
+    type="button"
+    {...props}
+  >
+    {PrefixIcon && (
+      <PrefixIcon
+        className={
+          children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+        }
+      />
+    )}
+    {children}
+    {SuffixIcon && (
+      <SuffixIcon
+        className={
+          children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+        }
+      />
+    )}
+  </button>
 );

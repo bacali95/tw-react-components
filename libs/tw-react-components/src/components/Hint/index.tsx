@@ -1,5 +1,4 @@
-import type { ElementRef, PropsWithChildren } from 'react';
-import { forwardRef } from 'react';
+import type { FC, PropsWithChildren, Ref } from 'react';
 
 import { cn } from '../../helpers';
 import type { BadgeProps, BadgeVariant } from '../Badge';
@@ -7,11 +6,11 @@ import { Badge } from '../Badge';
 import { Block } from '../Block';
 import type { Color, Size } from '../types';
 
-const HintRoot = forwardRef<HTMLDivElement, PropsWithChildren>(({ children }, ref) => (
+const HintRoot: FC<PropsWithChildren<{ ref?: Ref<HTMLDivElement> }>> = ({ children, ref }) => (
   <Block className="relative" ref={ref}>
     {children}
   </Block>
-));
+);
 HintRoot.displayName = 'HintRoot';
 
 export type HintPlacement = 'top-left' | 'top-right' | 'bottom-right' | 'bottom-left';
@@ -68,14 +67,34 @@ export type HintDotProps = {
   placement?: HintPlacement;
   color?: Color;
   ping?: boolean;
+  ref?: Ref<HTMLDivElement>;
 };
 
-const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
-  ({ size = 'medium', placement = 'top-right', color = 'green', ping }, ref) => (
-    <>
+const HintDot: FC<HintDotProps> = ({
+  size = 'medium',
+  placement = 'top-right',
+  color = 'green',
+  ping,
+  ref,
+}) => (
+  <>
+    <Block
+      className={cn('absolute rounded-full', colorClassNames[color], dotSizeClassNames[size].base, {
+        [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].left}`]:
+          placement === 'top-left',
+        [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].right}`]:
+          placement === 'top-right',
+        [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].right}`]:
+          placement === 'bottom-right',
+        [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].left}`]:
+          placement === 'bottom-left',
+      })}
+      ref={ref}
+    />
+    {ping && (
       <Block
         className={cn(
-          'absolute rounded-full',
+          'absolute animate-ping rounded-full',
           colorClassNames[color],
           dotSizeClassNames[size].base,
           {
@@ -89,29 +108,9 @@ const HintDot = forwardRef<HTMLDivElement, HintDotProps>(
               placement === 'bottom-left',
           },
         )}
-        ref={ref}
       />
-      {ping && (
-        <Block
-          className={cn(
-            'absolute animate-ping rounded-full',
-            colorClassNames[color],
-            dotSizeClassNames[size].base,
-            {
-              [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].left}`]:
-                placement === 'top-left',
-              [`${dotSizeClassNames[size].top} ${dotSizeClassNames[size].right}`]:
-                placement === 'top-right',
-              [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].right}`]:
-                placement === 'bottom-right',
-              [`${dotSizeClassNames[size].bottom} ${dotSizeClassNames[size].left}`]:
-                placement === 'bottom-left',
-            },
-          )}
-        />
-      )}
-    </>
-  ),
+    )}
+  </>
 );
 HintDot.displayName = 'HintDot';
 
@@ -126,27 +125,28 @@ export type HintBadgeProps = BadgeProps & {
   placement?: HintPlacement;
 };
 
-const HintBadge = forwardRef<ElementRef<typeof Badge>, HintBadgeProps>(
-  ({ className, size = 'small', placement = 'top-right', ...props }, ref) => (
-    <Badge
-      className={cn(
-        'absolute z-10 px-1',
-        size === 'small' ? 'h-4' : 'h-5',
-        {
-          [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
-          [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',
-          [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.right}`]:
-            placement === 'bottom-right',
-          [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.left}`]:
-            placement === 'bottom-left',
-        },
-        className,
-      )}
-      size={size}
-      {...props}
-      ref={ref}
-    />
-  ),
+const HintBadge: FC<HintBadgeProps> = ({
+  className,
+  size = 'small',
+  placement = 'top-right',
+  ...props
+}) => (
+  <Badge
+    className={cn(
+      'absolute z-10 px-1',
+      size === 'small' ? 'h-4' : 'h-5',
+      {
+        [`${badgeSizeClassNames.top} ${badgeSizeClassNames.left}`]: placement === 'top-left',
+        [`${badgeSizeClassNames.top} ${badgeSizeClassNames.right}`]: placement === 'top-right',
+        [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.right}`]:
+          placement === 'bottom-right',
+        [`${badgeSizeClassNames.bottom} ${badgeSizeClassNames.left}`]: placement === 'bottom-left',
+      },
+      className,
+    )}
+    size={size}
+    {...props}
+  />
 );
 HintBadge.displayName = 'HintBadge';
 

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 type SwipeDirection = 'up' | 'left' | 'bottom' | 'right';
 
 export function useOnSwipe(
-  element: RefObject<HTMLElement>,
+  element: RefObject<HTMLElement | null>,
   onSwipe: (direction: SwipeDirection) => any | false,
   minSwipeDistance = 50,
 ) {

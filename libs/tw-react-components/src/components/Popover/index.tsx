@@ -1,6 +1,5 @@
 import * as PopoverPrimitive from '@radix-ui/react-popover';
-import type { ComponentPropsWithoutRef, ElementRef } from 'react';
-import { forwardRef } from 'react';
+import type { ComponentProps, FC } from 'react';
 
 import { cn } from '../../helpers';
 
@@ -8,13 +7,11 @@ const $Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
 
-const PopoverContent = forwardRef<
-  ElementRef<typeof PopoverPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & { container?: HTMLElement | null }
->(({ className, align = 'center', sideOffset = 4, container, ...props }, ref) => (
+const PopoverContent: FC<
+  ComponentProps<typeof PopoverPrimitive.Content> & { container?: HTMLElement | null }
+> = ({ className, align = 'center', sideOffset = 4, container, ...props }) => (
   <PopoverPrimitive.Portal container={container}>
     <PopoverPrimitive.Content
-      ref={ref}
       align={align}
       sideOffset={sideOffset}
       className={cn(
@@ -27,7 +24,7 @@ const PopoverContent = forwardRef<
       {...props}
     />
   </PopoverPrimitive.Portal>
-));
+);
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
 export const Popover = Object.assign($Popover, {

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import type { FC } from 'react';
 
 import { cn } from '../../helpers';
 import type { BlockProps } from '../Block';
@@ -40,33 +40,27 @@ export type FlexProps = BlockProps & {
   justify?: Position | 'between';
 };
 
-export const Flex = forwardRef<HTMLDivElement, FlexProps>(
-  (
-    {
-      children,
+export const Flex: FC<FlexProps> = ({
+  children,
+  className,
+  reverse,
+  wrap,
+  direction = 'row',
+  align = 'start',
+  justify = 'start',
+  ...blockProps
+}) => (
+  <Block
+    className={cn(
+      'flex gap-2',
+      wrap && 'flex-wrap',
+      directionClasses[direction][reverse ? 'reverse' : 'normal'],
+      alignClasses[align],
+      justifyClasses[justify],
       className,
-      reverse,
-      wrap,
-      direction = 'row',
-      align = 'start',
-      justify = 'start',
-      ...blockProps
-    },
-    ref,
-  ) => (
-    <Block
-      className={cn(
-        'flex gap-2',
-        wrap && 'flex-wrap',
-        directionClasses[direction][reverse ? 'reverse' : 'normal'],
-        alignClasses[align],
-        justifyClasses[justify],
-        className,
-      )}
-      {...blockProps}
-      ref={ref}
-    >
-      {children}
-    </Block>
-  ),
+    )}
+    {...blockProps}
+  >
+    {children}
+  </Block>
 );

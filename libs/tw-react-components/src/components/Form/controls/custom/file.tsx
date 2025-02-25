@@ -1,5 +1,5 @@
 import { CloudUploadIcon } from 'lucide-react';
-import { forwardRef, useRef } from 'react';
+import { type FC, useRef } from 'react';
 
 import { cn } from '../../../../helpers';
 import type { BasicInputProps } from '../primitive';
@@ -25,43 +25,46 @@ export type FileInputProps = {
   | 'disabled'
 >;
 
-export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
-  ({ className, value, onChange, onFileChange, accept, ...props }, ref) => {
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+export const FileInput: FC<FileInputProps> = ({
+  className,
+  value,
+  onChange,
+  onFileChange,
+  accept,
+  ...props
+}) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const handleFileChange = async ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(files);
+  const handleFileChange = async ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (files && files.length > 0) {
+      const file = files[0];
 
-      if (files && files.length > 0) {
-        const file = files[0];
-        console.log(file, file.name, onChange, onFileChange);
+      onChange?.(file.name);
+      onFileChange?.(file);
+    }
+  };
 
-        onChange?.(file.name);
-        onFileChange?.(file);
-      }
-    };
-
-    return (
-      <>
-        <TextInput
-          className={cn('[&>div>*]:cursor-pointer', className)}
-          inputClassName="text-left"
-          {...props}
-          value={value ?? ''}
-          onClick={() => fileInputRef.current?.click()}
-          suffixIcon={CloudUploadIcon}
-          onSuffixIconClick={() => fileInputRef.current?.click()}
-          ref={ref}
-          readOnly
-        />
-        <input
-          ref={(ref) => (fileInputRef.current = ref)}
-          type="file"
-          hidden
-          accept={accept}
-          onChange={handleFileChange}
-        />
-      </>
-    );
-  },
-);
+  return (
+    <>
+      <TextInput
+        className={cn('[&>div>*]:cursor-pointer', className)}
+        inputClassName="text-left"
+        {...props}
+        value={value ?? ''}
+        onClick={() => fileInputRef.current?.click()}
+        suffixIcon={CloudUploadIcon}
+        onSuffixIconClick={() => fileInputRef.current?.click()}
+        readOnly
+      />
+      <input
+        ref={(ref) => {
+          fileInputRef.current = ref;
+        }}
+        type="file"
+        hidden
+        accept={accept}
+        onChange={handleFileChange}
+      />
+    </>
+  );
+};

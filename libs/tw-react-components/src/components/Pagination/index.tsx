@@ -4,7 +4,7 @@ import {
   ChevronsLeftIcon,
   ChevronsRightIcon,
 } from 'lucide-react';
-import type { ComponentProps, Dispatch, FC, PropsWithoutRef, SetStateAction } from 'react';
+import type { ComponentProps, Dispatch, FC, SetStateAction } from 'react';
 import { useEffect, useMemo } from 'react';
 
 import { cn } from '../../helpers';
@@ -88,9 +88,12 @@ export const Pagination: FC<PaginationProps> = ({
   );
 };
 
-const PaginationItem: FC<
-  PropsWithoutRef<ComponentProps<'div'> & { active?: boolean; disabled?: boolean }>
-> = ({ children, active, disabled, ...props }) => (
+const PaginationItem: FC<ComponentProps<'div'> & { active?: boolean; disabled?: boolean }> = ({
+  children,
+  active,
+  disabled,
+  ...props
+}) => (
   <Flex
     className={cn('w-9 text-sm first:rounded-l-md last:rounded-r-md', {
       'text-slate-400 dark:text-slate-500': disabled,

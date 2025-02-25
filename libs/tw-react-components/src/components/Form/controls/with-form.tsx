@@ -1,9 +1,7 @@
-import type { ComponentProps, ForwardRefExoticComponent } from 'react';
-import { forwardRef } from 'react';
+import type { ComponentProps, FC } from 'react';
 import type { ControllerRenderProps, Validate } from 'react-hook-form';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { mergeRefs } from '../../../helpers';
 import type {
   DateTimeInputProps,
   DateTimeInputType,
@@ -52,14 +50,13 @@ export type WithFormProps<
 
 function withForm<
   Type extends InputType | SelectInputType,
-  HtmlElement extends HTMLInputElement | HTMLTextAreaElement | HTMLDivElement,
   Props = Type extends DateTimeInputType
     ? DateTimeInputProps
     : Type extends SelectInputType
       ? SelectInputProps
       : BasicInputProps<Type>,
->(Component: ForwardRefExoticComponent<Props>) {
-  return forwardRef<HtmlElement, WithFormProps<Type, Props>>((props, ref) => {
+>(Component: FC<Props>): FC<WithFormProps<Type, Props>> {
+  return (props) => {
     const { name, pattern, validate, ...restProps } = props as WithFormProps<Type, Props>;
     const { control, formState } = useFormContext();
 
@@ -86,22 +83,21 @@ function withForm<
               formState.isSubmitting
             }
             hasErrors={fieldState.error}
-            ref={mergeRefs([ref, field.ref])}
           />
         )}
       />
     );
-  });
+  };
 }
 
 export const FormInputs = {
-  Text: withForm<'text', HTMLInputElement, TextInputProps>(TextInput),
-  Email: withForm<'email', HTMLInputElement, EmailInputProps>(EmailInput),
-  Password: withForm<'password', HTMLInputElement, PasswordInputProps>(PasswordInput),
-  Textarea: withForm<'textarea', HTMLTextAreaElement, TextareaInputProps>(TextareaInput),
-  Number: withForm<'number', HTMLInputElement, NumberInputProps>(NumberInput),
-  Checkbox: withForm<'checkbox', HTMLInputElement, CheckboxInputProps>(CheckboxInput),
-  DateTime: withForm<'datetime-local', HTMLDivElement, DateTimeInputProps>(DateTimeInput),
-  Select: withForm<'select', HTMLInputElement, SelectInputProps>(SelectInput),
-  File: withForm<'file', HTMLInputElement, FileInputProps>(FileInput),
+  Text: withForm<'text', TextInputProps>(TextInput),
+  Email: withForm<'email', EmailInputProps>(EmailInput),
+  Password: withForm<'password', PasswordInputProps>(PasswordInput),
+  Textarea: withForm<'textarea', TextareaInputProps>(TextareaInput),
+  Number: withForm<'number', NumberInputProps>(NumberInput),
+  Checkbox: withForm<'checkbox', CheckboxInputProps>(CheckboxInput),
+  DateTime: withForm<'datetime-local', DateTimeInputProps>(DateTimeInput),
+  Select: withForm<'select', SelectInputProps>(SelectInput),
+  File: withForm<'file', FileInputProps>(FileInput),
 };

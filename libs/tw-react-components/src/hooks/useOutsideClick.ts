@@ -1,7 +1,7 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
 
-export function useOutsideClick(ref: RefObject<HTMLDivElement>, callback: () => void): void {
+export function useOutsideClick(ref: RefObject<HTMLDivElement | null>, callback: () => void): void {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref?.current && !ref.current.contains(event.target as any)) {

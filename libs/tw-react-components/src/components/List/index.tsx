@@ -1,23 +1,19 @@
 import type { LucideIcon } from 'lucide-react';
-import type { ComponentPropsWithoutRef } from 'react';
-import { forwardRef } from 'react';
+import type { ComponentProps, FC, Ref } from 'react';
 
 import { cn } from '../../helpers';
 import { Block } from '../Block';
 import { Flex } from '../Flex';
 import type { Size } from '../types';
 
-const ListContent = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
-  ({ className, ...props }, ref) => (
-    <Block
-      className={cn(
-        'z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white p-1 text-slate-700 shadow-md dark:border-slate-700 dark:bg-slate-900 dark:text-white',
-        className,
-      )}
-      ref={ref}
-      {...props}
-    />
-  ),
+const ListContent: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
+  <Block
+    className={cn(
+      'z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white p-1 text-slate-700 shadow-md dark:border-slate-700 dark:bg-slate-900 dark:text-white',
+      className,
+    )}
+    {...props}
+  />
 );
 
 const labelSizeClasses: Record<Size, string> = {
@@ -25,13 +21,12 @@ const labelSizeClasses: Record<Size, string> = {
   medium: 'px-2 py-1.5',
 };
 
-const ListItem = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<'div'> & {
+const ListItem: FC<
+  ComponentProps<'div'> & {
     size?: Size;
     inset?: boolean;
   }
->(({ className, size = 'medium', inset, ...props }, ref) => (
+> = ({ className, size = 'medium', inset, ...props }) => (
   <Flex
     className={cn(
       labelSizeClasses[size],
@@ -40,18 +35,16 @@ const ListItem = forwardRef<
       className,
     )}
     align="center"
-    ref={ref}
     {...props}
   />
-));
+);
 
-const ListLabel = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<'div'> & {
+const ListLabel: FC<
+  ComponentProps<'div'> & {
     size?: Size;
     inset?: boolean;
   }
->(({ className, size = 'medium', inset, ...props }, ref) => (
+> = ({ className, size = 'medium', inset, ...props }) => (
   <Block
     className={cn(
       labelSizeClasses[size],
@@ -59,41 +52,34 @@ const ListLabel = forwardRef<
       inset && 'pl-8',
       className,
     )}
-    ref={ref}
     {...props}
   />
-));
+);
 
-const ListIndicator = forwardRef<
-  HTMLDivElement,
-  ComponentPropsWithoutRef<'div'> & {
+const ListIndicator: FC<
+  ComponentProps<'div'> & {
     icon: LucideIcon;
     iconClassName: string;
   }
->(({ className, icon: Icon, iconClassName, ...props }, ref) => (
+> = ({ className, icon: Icon, iconClassName, ...props }) => (
   <Flex
     className={cn('absolute left-2 h-3.5 w-3.5', className)}
     align="center"
     justify="center"
-    ref={ref}
     {...props}
   >
     <Icon className={iconClassName} />
   </Flex>
-));
-
-const ListIcon = forwardRef<SVGSVGElement, { className?: string; icon: LucideIcon }>(
-  ({ className, icon: Icon }, ref) => <Icon className={cn('h-4 w-4', className)} ref={ref} />,
 );
 
-const ListSeparator = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>(
-  ({ className, ...props }, ref) => (
-    <Block
-      className={cn('-mx-1 my-1 h-px bg-slate-100 dark:bg-slate-700', className)}
-      ref={ref}
-      {...props}
-    />
-  ),
+const ListIcon: FC<{ className?: string; icon: LucideIcon; ref?: Ref<SVGSVGElement> }> = ({
+  className,
+  icon: Icon,
+  ref,
+}) => <Icon className={cn('h-4 w-4', className)} ref={ref} />;
+
+const ListSeparator: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
+  <Block className={cn('-mx-1 my-1 h-px bg-slate-100 dark:bg-slate-700', className)} {...props} />
 );
 
 export const List = Object.assign(ListContent, {

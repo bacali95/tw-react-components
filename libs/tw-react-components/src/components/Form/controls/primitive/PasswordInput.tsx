@@ -1,12 +1,12 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { forwardRef, useState } from 'react';
+import { type FC, useState } from 'react';
 
 import type { BasicInputProps } from './BasicInput';
 import { BasicInput } from './BasicInput';
 
 export type PasswordInputProps = Omit<BasicInputProps<'number'>, 'type'>;
 
-export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((props, ref) => {
+export const PasswordInput: FC<PasswordInputProps> = (props) => {
   const [type, setType] = useState<'text' | 'password'>('password');
 
   const toggleType = () => setType((type) => (type === 'text' ? 'password' : 'text'));
@@ -17,7 +17,6 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((p
       {...props}
       suffixIcon={type === 'password' ? EyeIcon : EyeOffIcon}
       onSuffixIconClick={toggleType}
-      ref={ref}
     />
   );
-});
+};
