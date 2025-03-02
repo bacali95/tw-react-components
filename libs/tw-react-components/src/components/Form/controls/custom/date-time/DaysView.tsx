@@ -12,6 +12,7 @@ type DaysViewProps = {
   minDate?: Date | null;
   maxDate?: Date | null;
   locale?: string;
+  dataTestId?: string;
   setNewDate: (date: Date) => void;
 };
 
@@ -23,6 +24,7 @@ export const DaysView: FC<DaysViewProps> = ({
   minDate,
   maxDate,
   locale,
+  dataTestId = 'days-view',
   setNewDate,
 }) => {
   const days = useDays(locale);
@@ -104,12 +106,13 @@ export const DaysView: FC<DaysViewProps> = ({
   );
 
   return (
-    <div className="gap-1 px-3 py-2">
+    <div className="gap-1 px-3 py-2" data-testid={dataTestId}>
       <div className="grid grid-cols-7">
         {days.map((day, index) => (
           <span
             key={index}
             className="flex h-8 w-8 items-center justify-center text-xs uppercase text-slate-500 dark:text-slate-400"
+            data-testid={`${dataTestId}-weekday-${index}`}
           >
             {day.shortName}
           </span>
@@ -126,6 +129,7 @@ export const DaysView: FC<DaysViewProps> = ({
             minDate={minDate}
             maxDate={maxDate}
             setDayNumber={setDayNumber}
+            dataTestId={dataTestId}
           />
         ))}
         {monthDays.map((dayNumber, index) => (
@@ -139,6 +143,7 @@ export const DaysView: FC<DaysViewProps> = ({
             maxDate={maxDate}
             primary
             setDayNumber={setDayNumber}
+            dataTestId={dataTestId}
           />
         ))}
         {suffixDays.map((dayNumber, index) => (
@@ -151,6 +156,7 @@ export const DaysView: FC<DaysViewProps> = ({
             minDate={minDate}
             maxDate={maxDate}
             setDayNumber={setDayNumber}
+            dataTestId={dataTestId}
           />
         ))}
       </div>
@@ -166,6 +172,7 @@ type DayProps = {
   minDate?: Date | null;
   maxDate?: Date | null;
   primary?: boolean;
+  dataTestId?: string;
   setDayNumber: (day: number, month: number, year: number) => () => void;
 };
 
@@ -177,6 +184,7 @@ const Day: FC<DayProps> = ({
   minDate,
   maxDate,
   primary,
+  dataTestId = 'day',
   setDayNumber,
 }) => {
   const dayDate = useMemo(() => new Date(year, month, day), [day, month, year]);
@@ -205,6 +213,7 @@ const Day: FC<DayProps> = ({
         'text-slate-400 dark:text-slate-500': !isSelectable || !primary,
       })}
       onClick={isSelectable ? setDayNumber(day, month, year) : undefined}
+      data-testid={`${dataTestId}-day-${day}`}
     >
       {day}
     </div>

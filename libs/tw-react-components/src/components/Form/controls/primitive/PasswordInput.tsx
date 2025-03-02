@@ -6,7 +6,10 @@ import { BasicInput } from './BasicInput';
 
 export type PasswordInputProps = Omit<BasicInputProps<'number'>, 'type'>;
 
-export const PasswordInput: FC<PasswordInputProps> = (props) => {
+export const PasswordInput: FC<PasswordInputProps> = ({
+  dataTestId = 'password-input',
+  ...props
+}) => {
   const [type, setType] = useState<'text' | 'password'>('password');
 
   const toggleType = () => setType((type) => (type === 'text' ? 'password' : 'text'));
@@ -14,6 +17,7 @@ export const PasswordInput: FC<PasswordInputProps> = (props) => {
   return (
     <BasicInput
       type={type}
+      dataTestId={dataTestId}
       {...props}
       suffixIcon={type === 'password' ? EyeIcon : EyeOffIcon}
       onSuffixIconClick={toggleType}

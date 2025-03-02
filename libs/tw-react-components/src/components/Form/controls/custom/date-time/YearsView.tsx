@@ -10,6 +10,7 @@ type YearsViewProps = {
   minDate?: Date | null;
   maxDate?: Date | null;
   selectYear: (month: number) => () => void;
+  dataTestId?: string;
 };
 
 export const YearsView: FC<YearsViewProps> = ({
@@ -19,8 +20,9 @@ export const YearsView: FC<YearsViewProps> = ({
   minDate,
   maxDate,
   selectYear,
+  dataTestId = 'years-view',
 }) => (
-  <div className="grid grid-cols-4 gap-1 px-3 py-2">
+  <div className="grid grid-cols-4 gap-1 px-3 py-2" data-testid={dataTestId}>
     {years.map((year, index) => (
       <Year
         key={index}
@@ -30,6 +32,7 @@ export const YearsView: FC<YearsViewProps> = ({
         minDate={minDate}
         maxDate={maxDate}
         selectYear={selectYear}
+        dataTestId={dataTestId}
       />
     ))}
   </div>
@@ -42,9 +45,18 @@ type YearProps = {
   minDate?: Date | null;
   maxDate?: Date | null;
   selectYear: (month: number) => () => void;
+  dataTestId?: string;
 };
 
-const Year: FC<YearProps> = ({ date, value, year, minDate, maxDate, selectYear }) => {
+const Year: FC<YearProps> = ({
+  date,
+  value,
+  year,
+  minDate,
+  maxDate,
+  dataTestId = 'year',
+  selectYear,
+}) => {
   const dayDate = useMemo(
     () => new Date(year, date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()),
     [date, year],
@@ -75,6 +87,7 @@ const Year: FC<YearProps> = ({ date, value, year, minDate, maxDate, selectYear }
         'text-slate-400 dark:text-slate-500': !isSelectable,
       })}
       onClick={isSelectable ? selectYear(year) : undefined}
+      data-testid={`${dataTestId}-year-${year}`}
     >
       {year}
     </div>

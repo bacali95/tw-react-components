@@ -23,6 +23,7 @@ export type FileInputProps = {
   | 'required'
   | 'hasErrors'
   | 'disabled'
+  | 'dataTestId'
 >;
 
 export const FileInput: FC<FileInputProps> = ({
@@ -31,6 +32,7 @@ export const FileInput: FC<FileInputProps> = ({
   onChange,
   onFileChange,
   accept,
+  dataTestId = 'file-input',
   ...props
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -54,6 +56,7 @@ export const FileInput: FC<FileInputProps> = ({
         onClick={() => fileInputRef.current?.click()}
         suffixIcon={CloudUploadIcon}
         onSuffixIconClick={() => fileInputRef.current?.click()}
+        dataTestId={dataTestId}
         readOnly
       />
       <input
@@ -64,6 +67,7 @@ export const FileInput: FC<FileInputProps> = ({
         hidden
         accept={accept}
         onChange={handleFileChange}
+        data-testid={`${dataTestId}-hidden`}
       />
     </>
   );

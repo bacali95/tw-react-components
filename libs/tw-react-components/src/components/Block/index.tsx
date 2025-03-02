@@ -8,6 +8,7 @@ export type BlockProps = ComponentProps<'div'> & {
   container?: boolean;
   fullWidth?: boolean;
   fullHeight?: boolean;
+  dataTestId?: string;
 };
 
 export const Block: FC<BlockProps> = ({
@@ -17,9 +18,11 @@ export const Block: FC<BlockProps> = ({
   container,
   fullWidth,
   fullHeight,
+  dataTestId = 'block',
   ...props
 }) => (
   <div
+    data-testid={dataTestId}
     className={cn(
       centered && 'mx-auto',
       container && 'container',

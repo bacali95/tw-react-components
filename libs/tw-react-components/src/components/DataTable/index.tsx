@@ -84,6 +84,7 @@ export type DataTableProps<T> = {
   noDataMessage?: ReactNode;
   onRowClick?: DataTableAction<T>['onClick'];
   rowClassName?: (item: T, rowIndex: number) => string | undefined;
+  dataTestId?: string;
 };
 
 function defaultRender<T>(item: T, field: Paths<T>): ReactNode {
@@ -102,6 +103,7 @@ export function DataTable<T>({
   noDataMessage,
   onRowClick,
   rowClassName,
+  dataTestId = 'data-table',
 }: DataTableProps<T>) {
   const footerRef = useRef<HTMLDivElement>(null);
 
@@ -188,17 +190,18 @@ export function DataTable<T>({
   };
 
   return (
-    <Table className={cn('border dark:border-slate-700', className)}>
-      <Table.Head className="sticky top-0 z-10">
-        <Table.Row>
+    <Table className={cn('border dark:border-slate-700', className)} dataTestId={dataTestId}>
+      <Table.Head className="sticky top-0 z-10" dataTestId={`${dataTestId}-head`}>
+        <Table.Row dataTestId={`${dataTestId}-header-row`}>
           {rowExtraContent && (
-            <Table.HeadCell align="center">
+            <Table.HeadCell align="center" dataTestId={`${dataTestId}-expand-header`}>
               {!rowExtraContent.singleExpansion && (
                 <ExpandButton
                   folded={!allRowsExpanded}
                   foldComponent={ChevronsDownUpIcon}
                   unfoldComponent={ChevronsUpDownIcon}
                   onClick={handleExpandAll}
+                  dataTestId={`${dataTestId}-expand-all-button`}
                 />
               )}
             </Table.HeadCell>
@@ -215,6 +218,7 @@ export function DataTable<T>({
                   ? handleSorting(column.field, column.comparator)
                   : undefined
               }
+              dataTestId={`${dataTestId}-column-${column.field}`}
             >
               {column.header}
               {sorting &&
@@ -232,25 +236,33 @@ export function DataTable<T>({
             rows.some((item) =>
               typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item),
             ),
-          ).length > 0 && <Table.HeadCell align="center">Actions</Table.HeadCell>}
+          ).length > 0 && (
+            <Table.HeadCell align="center" dataTestId={`${dataTestId}-actions-header`}>
+              Actions
+            </Table.HeadCell>
+          )}
         </Table.Row>
       </Table.Head>
-      <Table.Body className="relative">
+      <Table.Body className="relative" dataTestId={`${dataTestId}-body`}>
         {isLoading && (
-          <Table.Row>
+          <Table.Row dataTestId={`${dataTestId}-loading-row`}>
             <Table.Cell
               className={cn('z-10 h-full w-full p-0', {
                 absolute: rows.length,
               })}
               colSpan={columnsLength}
+              dataTestId={`${dataTestId}-loading-cell`}
             >
-              <Spinner className="bg-white/50 py-4 dark:bg-slate-700/50" />
+              <Spinner
+                className="bg-white/50 py-4 dark:bg-slate-700/50"
+                dataTestId={`${dataTestId}-spinner`}
+              />
             </Table.Cell>
           </Table.Row>
         )}
         {!isLoading && !rows.length && (
-          <Table.Row>
-            <Table.Cell colSpan={columnsLength}>
+          <Table.Row dataTestId={`${dataTestId}-empty-row`}>
+            <Table.Cell colSpan={columnsLength} dataTestId={`${dataTestId}-empty-cell`}>
               <Flex className="text-slate-500" justify="center">
                 {noDataMessage ?? 'No data'}
               </Flex>
@@ -268,14 +280,20 @@ export function DataTable<T>({
               rowClassName?.(item, rowIndex),
             )}
             onClick={handleRowClicked(item, rowIndex)}
+            dataTestId={`${dataTestId}-row-${rowIndex}`}
           >
             {rowExtraContent && (
-              <Table.Cell className="w-min" align="center">
+              <Table.Cell
+                className="w-min"
+                align="center"
+                dataTestId={`${dataTestId}-expand-cell-${rowIndex}`}
+              >
                 <ExpandButton
                   folded={!expandedRows[rowExtraContent.idGetter(item)]}
                   foldComponent={MinusIcon}
                   unfoldComponent={PlusIcon}
                   onClick={handleExpandRow(rowExtraContent.idGetter(item))}
+                  dataTestId={`${dataTestId}-expand-button-${rowIndex}`}
                 />
               </Table.Cell>
             )}
@@ -284,6 +302,7 @@ export function DataTable<T>({
                 key={columnIndex}
                 className={column.className}
                 align={column.align ?? 'left'}
+                dataTestId={`${dataTestId}-cell-${rowIndex}-${column.field}`}
               >
                 {column.render?.(item, rowIndex) ?? defaultRender(item, column.field)}
               </Table.Cell>
@@ -291,7 +310,7 @@ export function DataTable<T>({
             {actions.filter((action) =>
               typeof action.hide === 'boolean' ? !action.hide : !action.hide?.(item),
             ).length > 0 && (
-              <Table.Cell className="py-3">
+              <Table.Cell className="py-3" dataTestId={`${dataTestId}-actions-cell-${rowIndex}`}>
                 <Flex align="center" justify="center">
                   {actions
                     .filter((action) =>
@@ -308,6 +327,7 @@ export function DataTable<T>({
                             color={action.color}
                             onClick={handleActionClicked(action, item, rowIndex)}
                             children={action.label}
+                            dataTestId={`${dataTestId}-action-button-${rowIndex}-${actionIndex}`}
                           />
                           {notification &&
                             (notification === true ? (
@@ -325,8 +345,15 @@ export function DataTable<T>({
             )}
           </Table.Row>,
           rowExtraContent && expandedRows[rowExtraContent.idGetter(item)] && (
-            <Table.Row key={`${rowIndex}-expanded`}>
-              <Table.Cell className="p-0" colSpan={columnsLength}>
+            <Table.Row
+              key={`${rowIndex}-expanded`}
+              dataTestId={`${dataTestId}-expanded-row-${rowIndex}`}
+            >
+              <Table.Cell
+                className="p-0"
+                colSpan={columnsLength}
+                dataTestId={`${dataTestId}-expanded-cell-${rowIndex}`}
+              >
                 <rowExtraContent.component item={item} rowIndex={rowIndex} />
               </Table.Cell>
             </Table.Row>
@@ -334,11 +361,18 @@ export function DataTable<T>({
         ])}
       </Table.Body>
       {pagination && (
-        <Table.Footer className="sticky -bottom-px">
-          <Table.Row className="border-t dark:border-slate-700">
-            <Table.Cell colSpan={columnsLength}>
+        <Table.Footer className="sticky -bottom-px" dataTestId={`${dataTestId}-footer`}>
+          <Table.Row
+            className="border-t dark:border-slate-700"
+            dataTestId={`${dataTestId}-footer-row`}
+          >
+            <Table.Cell colSpan={columnsLength} dataTestId={`${dataTestId}-footer-cell`}>
               <Flex justify="end" ref={footerRef}>
-                <Pagination disabled={isLoading} {...pagination} />
+                <Pagination
+                  disabled={isLoading}
+                  {...pagination}
+                  dataTestId={`${dataTestId}-pagination`}
+                />
                 {pagination.onPageSizeChange && (
                   <SelectInput
                     className="w-32"
@@ -353,6 +387,7 @@ export function DataTable<T>({
                     }
                     disabled={isLoading}
                     parentRef={footerRef}
+                    dataTestId={`${dataTestId}-page-size-select`}
                   />
                 )}
               </Flex>
@@ -369,6 +404,7 @@ type ExpandButtonProps = {
   foldComponent: LucideIcon;
   unfoldComponent: LucideIcon;
   onClick: (event: MouseEvent) => void;
+  dataTestId?: string;
 };
 
 const ExpandButton: FC<ExpandButtonProps> = ({
@@ -376,6 +412,7 @@ const ExpandButton: FC<ExpandButtonProps> = ({
   foldComponent,
   unfoldComponent,
   onClick,
+  dataTestId,
 }) => {
   const Icon = folded ? unfoldComponent : foldComponent;
 
@@ -383,6 +420,7 @@ const ExpandButton: FC<ExpandButtonProps> = ({
     <Icon
       className="h-6 w-6 cursor-pointer rounded p-1 hover:bg-slate-300 hover:dark:bg-slate-600"
       onClick={onClick}
+      data-testid={dataTestId}
     />
   );
 };

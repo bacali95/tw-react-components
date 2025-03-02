@@ -61,6 +61,7 @@ export type SelectInputProps<T = any> = {
     | 'disabled'
     | 'readOnly'
     | 'ref'
+    | 'dataTestId'
   >;
 
 const defaultRenderItem = <T,>(item: SelectItem<T>, selected?: boolean) => item.label;
@@ -85,6 +86,7 @@ export const SelectInput = <T,>({
   onChange,
   readOnly,
   parentRef,
+  dataTestId = 'select-input',
   ...props
 }: SelectInputProps<T>): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -197,7 +199,7 @@ export const SelectInput = <T,>({
   const ItemComponent = multiple ? DropdownMenu.CheckboxItem : DropdownMenu.RadioItem;
 
   const RenderOption = useCallback(
-    (option: SelectItem<T>) => {
+    (option: SelectItem<T> & { dataTestId?: string }) => {
       return (
         <ItemComponent
           className={cn('w-full cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700', {
@@ -209,6 +211,7 @@ export const SelectInput = <T,>({
             multiple && event.preventDefault();
             handleOnSelect(option.id);
           }}
+          dataTestId={option.dataTestId}
         >
           <span>{renderItem(option, isNotNullOrUndefined(selectedMap[option.id]))}</span>
         </ItemComponent>
@@ -219,7 +222,10 @@ export const SelectInput = <T,>({
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenu.Trigger className={cn('w-full', className)}>
+      <DropdownMenu.Trigger
+        className={cn('w-full', className)}
+        dataTestId={`${dataTestId}-trigger`}
+      >
         <TextInput
           className="[&>div>*]:cursor-pointer"
           inputClassName="text-left"
@@ -230,9 +236,13 @@ export const SelectInput = <T,>({
           suffixIcon={ChevronDownIcon}
           onSuffixIconClick={() => setOpen((open) => !open)}
           readOnly
+          dataTestId={dataTestId}
         />
       </DropdownMenu.Trigger>
-      <DropdownMenu.Content className="flex max-h-80 w-[calc(var(--radix-popper-anchor-width))] flex-col overflow-hidden">
+      <DropdownMenu.Content
+        className="flex max-h-80 w-[calc(var(--radix-popper-anchor-width))] flex-col overflow-hidden"
+        dataTestId={`${dataTestId}-content`}
+      >
         {search && (
           <>
             <TextInput
@@ -244,8 +254,9 @@ export const SelectInput = <T,>({
               onKeyDown={(event) => event.stopPropagation()}
               clearable={!!searchValue.length}
               onClear={clearSearchValue}
+              dataTestId={`${dataTestId}-search`}
             />
-            <DropdownMenu.Separator className="w-full" />
+            <DropdownMenu.Separator className="w-full" dataTestId={`${dataTestId}-separator`} />
           </>
         )}
         {filteredItems.length === 0 &&
@@ -253,31 +264,45 @@ export const SelectInput = <T,>({
             <button
               className="rounded bg-slate-100 py-1.5 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
               onClick={handleOnAddItemClicked}
+              data-testid={`${dataTestId}-add-button`}
             >
               Add '{searchValue}'
             </button>
           ) : (
-            <div className="py-1.5 text-center text-slate-500">No items.</div>
+            <div
+              className="py-1.5 text-center text-slate-500"
+              data-testid={`${dataTestId}-no-items`}
+            >
+              No items.
+            </div>
           ))}
         <GroupComponent
           className="flex flex-col gap-1 overflow-auto"
           value={!multiple && selectedItems.length ? String(selectedItems[0].id) : undefined}
+          dataTestId={`${dataTestId}-group`}
         >
           {filteredItems.map((item, index) =>
             item.group ? (
               <Flex key={item.id} className="gap-1" direction="column" fullWidth>
-                <DropdownMenu.Label className="sticky top-0 z-[51] w-full rounded-md border bg-white py-1 dark:bg-slate-900">
+                <DropdownMenu.Label
+                  className="sticky top-0 z-[51] w-full rounded-md border bg-white py-1 dark:bg-slate-900"
+                  dataTestId={`${dataTestId}-group-label-${item.id}`}
+                >
                   {item.label}
                 </DropdownMenu.Label>
                 {item.items.map((subItem) => (
-                  <RenderOption key={subItem.id} {...subItem} />
+                  <RenderOption
+                    key={subItem.id}
+                    {...subItem}
+                    dataTestId={`${dataTestId}-item-${subItem.id}`}
+                  />
                 ))}
                 {index < filteredItems.length - 1 && (
                   <div className="mb-1 h-px w-full bg-slate-200 dark:bg-slate-700" />
                 )}
               </Flex>
             ) : (
-              <RenderOption key={item.id} {...item} />
+              <RenderOption key={item.id} {...item} dataTestId={`${dataTestId}-item-${item.id}`} />
             ),
           )}
         </GroupComponent>

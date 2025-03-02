@@ -5,6 +5,7 @@ import { BasicInput } from './BasicInput';
 
 export type CheckboxInputProps = Omit<BasicInputProps<'checkbox'>, 'type'>;
 
-export const CheckboxInput: FC<CheckboxInputProps> = (props) => (
-  <BasicInput type="checkbox" {...props} />
-);
+export const CheckboxInput: FC<CheckboxInputProps> = ({
+  dataTestId = 'checkbox-input',
+  ...props
+}) => <BasicInput type="checkbox" dataTestId={dataTestId} {...props} />;

@@ -7,5 +7,7 @@ export default {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/tw-react-components',
+  coverageDirectory: '../../coverage',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
 };

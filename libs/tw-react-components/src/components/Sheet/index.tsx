@@ -6,26 +6,23 @@ import type { ComponentProps, FC, HTMLAttributes } from 'react';
 import { cn } from '../../helpers';
 import { Button } from '../Button';
 
-const $Sheet: FC<ComponentProps<typeof SheetPrimitive.Root>> = (props) => (
-  <SheetPrimitive.Root {...props} />
-);
-$Sheet.displayName = SheetPrimitive.Root.displayName;
-
 const SheetTrigger = SheetPrimitive.Trigger;
 
 const SheetClose = SheetPrimitive.Close;
 
 const SheetPortal = SheetPrimitive.Portal;
 
-const SheetOverlay: FC<ComponentProps<typeof SheetPrimitive.Overlay>> = ({
-  className,
-  ...props
-}) => (
+type SheetOverlayProps = ComponentProps<typeof SheetPrimitive.Overlay> & {
+  dataTestId?: string;
+};
+
+const SheetOverlay: FC<SheetOverlayProps> = ({ className, dataTestId, ...props }) => (
   <SheetPrimitive.Overlay
     className={cn(
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
       className,
     )}
+    data-testid={dataTestId}
     {...props}
   />
 );
@@ -52,16 +49,29 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends ComponentProps<typeof SheetPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+    VariantProps<typeof sheetVariants> {
+  dataTestId?: string;
+}
 
-const SheetContent: FC<SheetContentProps> = ({ side = 'right', className, children, ...props }) => (
+const SheetContent: FC<SheetContentProps> = ({
+  side = 'right',
+  className,
+  children,
+  dataTestId = 'sheet-content',
+  ...props
+}) => (
   <SheetPortal>
-    <SheetOverlay />
-    <SheetPrimitive.Content className={cn(sheetVariants({ side }), className)} {...props}>
+    <SheetOverlay dataTestId={`${dataTestId}-overlay`} />
+    <SheetPrimitive.Content
+      className={cn(sheetVariants({ side }), className)}
+      data-testid={dataTestId}
+      {...props}
+    >
       {children}
       <SheetPrimitive.Close
         className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-2 top-2 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         asChild
+        data-testid={`${dataTestId}-close-button`}
       >
         <Button prefixIcon={XIcon} size="small" variant="text" />
       </SheetPrimitive.Close>
@@ -71,39 +81,63 @@ const SheetContent: FC<SheetContentProps> = ({ side = 'right', className, childr
 );
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
-const SheetHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-2 text-center sm:text-left', className)} {...props} />
+type SheetHeaderProps = HTMLAttributes<HTMLDivElement> & {
+  dataTestId?: string;
+};
+
+const SheetHeader = ({ className, dataTestId = 'sheet-header', ...props }: SheetHeaderProps) => (
+  <div
+    className={cn('flex flex-col space-y-2 text-center sm:text-left', className)}
+    data-testid={dataTestId}
+    {...props}
+  />
 );
 SheetHeader.displayName = 'SheetHeader';
 
-const SheetFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+type SheetFooterProps = HTMLAttributes<HTMLDivElement> & {
+  dataTestId?: string;
+};
+
+const SheetFooter = ({ className, dataTestId = 'sheet-footer', ...props }: SheetFooterProps) => (
   <div
     className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );
 SheetFooter.displayName = 'SheetFooter';
 
-const SheetTitle: FC<ComponentProps<typeof SheetPrimitive.Title>> = ({ className, ...props }) => (
+type SheetTitleProps = ComponentProps<typeof SheetPrimitive.Title> & {
+  dataTestId?: string;
+};
+
+const SheetTitle: FC<SheetTitleProps> = ({ className, dataTestId = 'sheet-title', ...props }) => (
   <SheetPrimitive.Title
     className={cn('text-foreground text-lg font-semibold', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
-const SheetDescription: FC<ComponentProps<typeof SheetPrimitive.Description>> = ({
+type SheetDescriptionProps = ComponentProps<typeof SheetPrimitive.Description> & {
+  dataTestId?: string;
+};
+
+const SheetDescription: FC<SheetDescriptionProps> = ({
   className,
+  dataTestId = 'sheet-description',
   ...props
 }) => (
   <SheetPrimitive.Description
     className={cn('text-muted-foreground text-sm', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );
 SheetDescription.displayName = SheetPrimitive.Description.displayName;
 
-export const Sheet = Object.assign($Sheet, {
+export const Sheet = Object.assign(SheetPrimitive.Root, {
   Portal: SheetPortal,
   Overlay: SheetOverlay,
   Trigger: SheetTrigger,

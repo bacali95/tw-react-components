@@ -26,6 +26,7 @@ type Props<T extends FieldValues> = {
   onSubmit: SubmitHandler<T>;
   onInvalid?: SubmitErrorHandler<T>;
   onClose: () => void;
+  dataTestId?: string;
 };
 
 export const FormDialog = <T extends FieldValues>({
@@ -42,43 +43,40 @@ export const FormDialog = <T extends FieldValues>({
   onSubmit,
   onInvalid,
   onClose,
+  dataTestId = 'form-dialog',
 }: PropsWithChildren<Props<T>>) => {
   const id = useId();
 
-  const handleSubmit: SubmitHandler<T> = async (data, event) => {
-    try {
-      await onSubmit(data, event);
-    } catch {
-      // do nothering
-    }
-  };
-
   return (
     <As open={open} onOpenChange={(value) => !value && onClose()}>
-      <As.Content className={className}>
-        <As.Header>
-          <As.Title>{title}</As.Title>
+      <As.Content className={className} dataTestId={`${dataTestId}-content`}>
+        <As.Header dataTestId={`${dataTestId}-header`}>
+          <As.Title dataTestId={`${dataTestId}-title`}>{title}</As.Title>
         </As.Header>
         <FormProvider {...form}>
           <form
             id={`form-${id}`}
             className={cn('flex h-full w-full flex-col gap-2 overflow-auto', formClassName)}
-            onSubmit={form.handleSubmit(handleSubmit, onInvalid)}
+            onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+            data-testid={`${dataTestId}-form`}
           >
             {children}
           </form>
         </FormProvider>
-        <As.Footer className="w-full sm:justify-between">
+        <As.Footer className="w-full sm:justify-between" dataTestId={`${dataTestId}-footer`}>
           {extraAction}
-          <As.Footer className="ml-auto">
+          <As.Footer className="ml-auto" dataTestId={`${dataTestId}-actions`}>
             <As.Close asChild>
-              <Button color="red">{cancelLabel}</Button>
+              <Button color="red" dataTestId={`${dataTestId}-cancel-button`}>
+                {cancelLabel}
+              </Button>
             </As.Close>
             <Button
               color="green"
               type="submit"
               form={`form-${id}`}
               disabled={form.formState.isSubmitting}
+              dataTestId={`${dataTestId}-submit-button`}
             >
               {submitLabel}
             </Button>

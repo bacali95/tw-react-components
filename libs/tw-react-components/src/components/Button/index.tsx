@@ -486,6 +486,7 @@ export type ButtonProps = ComponentProps<'button'> & {
   prefixIcon?: LucideIcon;
   suffixIcon?: LucideIcon;
   unstyled?: boolean;
+  dataTestId?: string;
 };
 
 export const Button: FC<ButtonProps> = ({
@@ -498,6 +499,7 @@ export const Button: FC<ButtonProps> = ({
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
   unstyled,
+  dataTestId = 'button',
   ...props
 }) => (
   <button
@@ -514,6 +516,7 @@ export const Button: FC<ButtonProps> = ({
       children ? `${sizeClassNames[size].withChildren} aspect-[initial]` : 'justify-center',
       className,
     )}
+    data-testid={dataTestId}
     type="button"
     {...props}
   >

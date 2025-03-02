@@ -6,6 +6,6 @@ import { BasicInput } from './BasicInput';
 
 export type EmailInputProps = Omit<BasicInputProps<'email'>, 'type'>;
 
-export const EmailInput: FC<EmailInputProps> = (props) => (
-  <BasicInput type="email" {...props} suffixIcon={AtSignIcon} />
+export const EmailInput: FC<EmailInputProps> = ({ dataTestId = 'email-input', ...props }) => (
+  <BasicInput type="email" dataTestId={dataTestId} {...props} suffixIcon={AtSignIcon} />
 );

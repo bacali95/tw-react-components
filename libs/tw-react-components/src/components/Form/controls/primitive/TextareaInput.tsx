@@ -5,6 +5,7 @@ import { BasicInput } from './BasicInput';
 
 export type TextareaInputProps = Omit<BasicInputProps<'textarea'>, 'type'>;
 
-export const TextareaInput: FC<TextareaInputProps> = (props) => (
-  <BasicInput type="textarea" {...props} />
-);
+export const TextareaInput: FC<TextareaInputProps> = ({
+  dataTestId = 'textarea-input',
+  ...props
+}) => <BasicInput type="textarea" dataTestId={dataTestId} {...props} />;

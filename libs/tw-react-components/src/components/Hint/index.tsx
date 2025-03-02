@@ -6,8 +6,13 @@ import { Badge } from '../Badge';
 import { Block } from '../Block';
 import type { Color, Size } from '../types';
 
-const HintRoot: FC<PropsWithChildren<{ ref?: Ref<HTMLDivElement> }>> = ({ children, ref }) => (
-  <Block className="relative" ref={ref}>
+export type HintRootProps = PropsWithChildren<{
+  ref?: Ref<HTMLDivElement>;
+  dataTestId?: string;
+}>;
+
+const HintRoot: FC<HintRootProps> = ({ children, ref, dataTestId = 'hint' }) => (
+  <Block className="relative" ref={ref} dataTestId={dataTestId}>
     {children}
   </Block>
 );
@@ -68,6 +73,7 @@ export type HintDotProps = {
   color?: Color;
   ping?: boolean;
   ref?: Ref<HTMLDivElement>;
+  dataTestId?: string;
 };
 
 const HintDot: FC<HintDotProps> = ({
@@ -76,6 +82,7 @@ const HintDot: FC<HintDotProps> = ({
   color = 'green',
   ping,
   ref,
+  dataTestId = 'hint-dot',
 }) => (
   <>
     <Block
@@ -90,6 +97,7 @@ const HintDot: FC<HintDotProps> = ({
           placement === 'bottom-left',
       })}
       ref={ref}
+      data-testid={dataTestId}
     />
     {ping && (
       <Block
@@ -123,12 +131,14 @@ const badgeSizeClassNames: { top: string; right: string; bottom: string; left: s
 
 export type HintBadgeProps = BadgeProps & {
   placement?: HintPlacement;
+  dataTestId?: string;
 };
 
 const HintBadge: FC<HintBadgeProps> = ({
   className,
   size = 'small',
   placement = 'top-right',
+  dataTestId = 'hint-badge',
   ...props
 }) => (
   <Badge
@@ -145,6 +155,7 @@ const HintBadge: FC<HintBadgeProps> = ({
       className,
     )}
     size={size}
+    dataTestId={dataTestId}
     {...props}
   />
 );

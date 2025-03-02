@@ -16,25 +16,38 @@ const DialogPortal = DialogPrimitive.Portal;
 
 const DialogClose = DialogPrimitive.Close;
 
-const DialogOverlay: FC<ComponentProps<typeof DialogPrimitive.Overlay>> = ({
-  className,
-  ...props
-}) => (
+// Adding dataTestId to the Overlay component props
+type DialogOverlayProps = ComponentProps<typeof DialogPrimitive.Overlay> & {
+  dataTestId?: string;
+};
+
+const DialogOverlay: FC<DialogOverlayProps> = ({ className, dataTestId, ...props }) => (
   <DialogPrimitive.Overlay
     className={cn(
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80',
       className,
     )}
+    data-testid={dataTestId}
     {...props}
   />
 );
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const DialogContent: FC<
-  ComponentProps<typeof DialogPrimitive.Content> & { fullScreen?: boolean }
-> = ({ className, fullScreen, children, ...props }) => (
+// Adding dataTestId to the Content component props
+type DialogContentProps = ComponentProps<typeof DialogPrimitive.Content> & {
+  fullScreen?: boolean;
+  dataTestId?: string;
+};
+
+const DialogContent: FC<DialogContentProps> = ({
+  className,
+  fullScreen,
+  children,
+  dataTestId = 'dialog-content',
+  ...props
+}) => (
   <DialogPortal>
-    <DialogOverlay />
+    <DialogOverlay dataTestId={`${dataTestId}-overlay`} />
     <DialogPrimitive.Content
       className={cn(
         'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
@@ -43,12 +56,14 @@ const DialogContent: FC<
         fullScreen && 'h-full max-h-none w-full max-w-none rounded-none',
       )}
       aria-describedby="dialog-content"
+      data-testid={dataTestId}
       {...props}
     >
       {children}
       <DialogPrimitive.Close
         className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-2 top-2 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
         asChild
+        data-testid={`${dataTestId}-close-button`}
       >
         <Button prefixIcon={XIcon} size="small" variant="text" />
       </DialogPrimitive.Close>
@@ -58,33 +73,65 @@ const DialogContent: FC<
 );
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const DialogHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-1.5 text-left', className)} {...props} />
+// Adding dataTestId to the Header component props
+type DialogHeaderProps = HTMLAttributes<HTMLDivElement> & {
+  dataTestId?: string;
+};
+
+const DialogHeader = ({ className, dataTestId = 'dialog-header', ...props }: DialogHeaderProps) => (
+  <div
+    className={cn('flex flex-col space-y-1.5 text-left', className)}
+    data-testid={dataTestId}
+    {...props}
+  />
 );
 DialogHeader.displayName = 'DialogHeader';
 
-const DialogFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => (
+// Adding dataTestId to the Footer component props
+type DialogFooterProps = HTMLAttributes<HTMLDivElement> & {
+  dataTestId?: string;
+};
+
+const DialogFooter = ({ className, dataTestId = 'dialog-footer', ...props }: DialogFooterProps) => (
   <div
     className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );
 DialogFooter.displayName = 'DialogFooter';
 
-const DialogTitle: FC<ComponentProps<typeof DialogPrimitive.Title>> = ({ className, ...props }) => (
+// Adding dataTestId to the Title component props
+type DialogTitleProps = ComponentProps<typeof DialogPrimitive.Title> & {
+  dataTestId?: string;
+};
+
+const DialogTitle: FC<DialogTitleProps> = ({
+  className,
+  dataTestId = 'dialog-title',
+  ...props
+}) => (
   <DialogPrimitive.Title
     className={cn('text-foreground text-lg font-semibold', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-const DialogDescription: FC<ComponentProps<typeof DialogPrimitive.Description>> = ({
+// Adding dataTestId to the Description component props
+type DialogDescriptionProps = ComponentProps<typeof DialogPrimitive.Description> & {
+  dataTestId?: string;
+};
+
+const DialogDescription: FC<DialogDescriptionProps> = ({
   className,
+  dataTestId = 'dialog-description',
   ...props
 }) => (
   <DialogPrimitive.Description
     className={cn('text-muted-foreground text-sm', className)}
+    data-testid={dataTestId}
     {...props}
   />
 );

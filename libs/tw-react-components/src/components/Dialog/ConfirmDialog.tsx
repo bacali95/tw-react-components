@@ -10,6 +10,7 @@ type Props = {
   noLabel?: string;
   onConfirm: () => void;
   onClose: () => void;
+  dataTestId?: string;
 };
 
 export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
@@ -20,19 +21,22 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
   noLabel,
   onConfirm,
   onClose,
+  dataTestId = 'confirm-dialog',
 }) => (
   <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-    <Dialog.Content>
-      <Dialog.Header>
-        <Dialog.Title>{title}</Dialog.Title>
+    <Dialog.Content dataTestId={`${dataTestId}-content`}>
+      <Dialog.Header dataTestId={`${dataTestId}-header`}>
+        <Dialog.Title dataTestId={`${dataTestId}-title`}>{title}</Dialog.Title>
       </Dialog.Header>
       {children}
-      <Dialog.Footer>
+      <Dialog.Footer dataTestId={`${dataTestId}-footer`}>
         <Dialog.Close asChild>
-          <Button color="red">{noLabel ?? 'No'}</Button>
+          <Button color="red" data-testid={`${dataTestId}-no-button`}>
+            {noLabel ?? 'No'}
+          </Button>
         </Dialog.Close>
         <Dialog.Close asChild>
-          <Button color="green" onClick={onConfirm}>
+          <Button color="green" onClick={onConfirm} data-testid={`${dataTestId}-yes-button`}>
             {yesLabel ?? 'Yes'}
           </Button>
         </Dialog.Close>

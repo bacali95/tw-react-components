@@ -8,14 +8,22 @@ type Props = {
   url?: string;
   data?: string;
   onClose: () => void;
+  dataTestId?: string;
 };
 
-export const PdfViewerDialog: FC<Props> = ({ open, title, url, data, onClose }) => {
+export const PdfViewerDialog: FC<Props> = ({
+  open,
+  title,
+  url,
+  data,
+  onClose,
+  dataTestId = 'pdf-viewer-dialog',
+}) => {
   return !(url || data) ? null : (
     <Dialog open={open} onOpenChange={(value) => !value && onClose()}>
-      <Dialog.Content className="h-[95dvh] max-w-[95dvw]">
-        <Dialog.Header>
-          <Dialog.Title>{title}</Dialog.Title>
+      <Dialog.Content className="h-[95dvh] max-w-[95dvw]" dataTestId={`${dataTestId}-content`}>
+        <Dialog.Header dataTestId={`${dataTestId}-header`}>
+          <Dialog.Title dataTestId={`${dataTestId}-title`}>{title}</Dialog.Title>
         </Dialog.Header>
         {(url || data) && (
           <embed
@@ -24,6 +32,7 @@ export const PdfViewerDialog: FC<Props> = ({ open, title, url, data, onClose }) 
             type="application/pdf"
             width="100%"
             height="100%"
+            data-testid={`${dataTestId}-embed`}
           />
         )}
       </Dialog.Content>

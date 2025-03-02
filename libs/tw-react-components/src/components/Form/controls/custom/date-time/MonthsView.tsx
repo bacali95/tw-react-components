@@ -12,6 +12,7 @@ type MonthsViewProps = {
   maxDate?: Date | null;
   locale?: string;
   selectMonth: (month: number) => () => void;
+  dataTestId?: string;
 };
 
 export const MonthsView: FC<MonthsViewProps> = ({
@@ -22,11 +23,12 @@ export const MonthsView: FC<MonthsViewProps> = ({
   maxDate,
   locale,
   selectMonth,
+  dataTestId = 'months-view',
 }) => {
   const months = useMonths(locale);
 
   return (
-    <div className="grid grid-cols-4 gap-1 px-3 py-2">
+    <div className="grid grid-cols-4 gap-1 px-3 py-2" data-testid={dataTestId}>
       {months.map((month, index) => (
         <Month
           key={index}
@@ -38,6 +40,7 @@ export const MonthsView: FC<MonthsViewProps> = ({
           minDate={minDate}
           maxDate={maxDate}
           selectMonth={selectMonth}
+          dataTestId={dataTestId}
         />
       ))}
     </div>
@@ -52,6 +55,7 @@ type MonthProps = {
   year: number;
   minDate?: Date | null;
   maxDate?: Date | null;
+  dataTestId?: string;
   selectMonth: (month: number) => () => void;
 };
 
@@ -63,6 +67,7 @@ const Month: FC<MonthProps> = ({
   year,
   minDate,
   maxDate,
+  dataTestId = 'month',
   selectMonth,
 }) => {
   const dayDate = useMemo(
@@ -95,6 +100,7 @@ const Month: FC<MonthProps> = ({
         'text-slate-400 dark:text-slate-500': !isSelectable,
       })}
       onClick={isSelectable ? selectMonth(month) : undefined}
+      data-testid={`${dataTestId}-month-${month}`}
     >
       {shortName}
     </div>

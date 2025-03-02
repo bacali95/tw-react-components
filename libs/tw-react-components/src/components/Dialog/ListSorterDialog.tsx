@@ -13,6 +13,7 @@ export type ListSorterDialogProps<T extends ListSorterItem> = {
   open: boolean;
   title: string;
   onClose: () => void;
+  dataTestId?: string;
 } & Omit<ListSorterProps<T>, 'onChange'> & {
     cancelLabel?: string;
     submitLabel?: string;
@@ -30,14 +31,15 @@ export function ListSorterDialog<T extends ListSorterItem>({
   submitLabel,
   onSubmit,
   onClose,
+  dataTestId = 'list-sorter-dialog',
 }: ListSorterDialogProps<T>) {
   const [sortedItems, setSortedItems] = useState<T[]>(structuredClone(items));
 
   useEffect(() => {
-    return () => {
+    if (!open) {
       setSortedItems(structuredClone(items));
-    };
-  }, [items]);
+    }
+  }, [items, open]);
 
   const preFinish = () => onSubmit(sortedItems);
 
@@ -45,11 +47,13 @@ export function ListSorterDialog<T extends ListSorterItem>({
     <Flex
       align="center"
       className="gap-4 p-4 focus:outline-none dark:bg-slate-900 hover:dark:bg-slate-800"
+      data-testid={`${dataTestId}-item-${index}`}
     >
       <Flex
         align="center"
         justify="center"
         className="cursor-move rounded-lg p-2 hover:bg-slate-200 dark:hover:bg-slate-700"
+        data-testid={`${dataTestId}-drag-handle-${index}`}
         {...listeners}
       >
         <ArrowUpDownIcon className="h-5 w-5" />
@@ -63,9 +67,10 @@ export function ListSorterDialog<T extends ListSorterItem>({
       <Dialog.Content
         className={className}
         onPointerDownOutside={(event) => event.preventDefault()}
+        dataTestId={`${dataTestId}-content`}
       >
-        <Dialog.Header>
-          <Dialog.Title>{title}</Dialog.Title>
+        <Dialog.Header dataTestId={`${dataTestId}-header`}>
+          <Dialog.Title dataTestId={`${dataTestId}-title`}>{title}</Dialog.Title>
         </Dialog.Header>
         <ListSorter
           className="divide-y overflow-auto rounded-lg border dark:divide-slate-700 dark:border-slate-700 dark:text-white"
@@ -73,12 +78,15 @@ export function ListSorterDialog<T extends ListSorterItem>({
           idResolver={idResolver}
           renderer={customRenderer}
           onChange={setSortedItems}
+          dataTestId={`${dataTestId}-sorter`}
         />
-        <Dialog.Footer>
+        <Dialog.Footer dataTestId={`${dataTestId}-footer`}>
           <Dialog.Close asChild>
-            <Button color="red">{cancelLabel ?? 'Cancel'}</Button>
+            <Button color="red" dataTestId={`${dataTestId}-cancel-button`}>
+              {cancelLabel ?? 'Cancel'}
+            </Button>
           </Dialog.Close>
-          <Button color="green" onClick={preFinish}>
+          <Button color="green" onClick={preFinish} dataTestId={`${dataTestId}-submit-button`}>
             {submitLabel ?? 'Submit'}
           </Button>
         </Dialog.Footer>

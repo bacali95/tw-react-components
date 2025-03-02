@@ -18,6 +18,7 @@ type DateSelectorProps = {
   calendarView: View;
   setCalendarView: (view: View) => void;
   setNewDate: (date: Date) => void;
+  dataTestId?: string;
 };
 
 export const DateSelector: FC<DateSelectorProps> = ({
@@ -29,6 +30,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
   calendarView,
   setCalendarView,
   setNewDate,
+  dataTestId = 'date-selector',
 }) => {
   const months = useMonths(locale);
 
@@ -94,23 +96,34 @@ export const DateSelector: FC<DateSelectorProps> = ({
   };
 
   return (
-    <div className="select-none">
+    <div className="select-none" data-testid={dataTestId}>
       <div className="flex justify-between px-3 pt-2">
         <div
           className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-slate-700"
           onClick={editCalendarViewPage('subtract')}
+          data-testid={`${dataTestId}-prev`}
         >
           <ChevronLeftIcon className="h-5 w-5 text-slate-400" />
         </div>
         <div
           className="flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition duration-100 ease-in-out hover:bg-slate-100 dark:hover:bg-slate-700"
           onClick={nextCalendarView}
+          data-testid={`${dataTestId}-view-selector`}
         >
-          {calendarView === 'days' && <span className="capitalize">{months[month].name}</span>}
+          {calendarView === 'days' && (
+            <span className="capitalize" data-testid={`${dataTestId}-month`}>
+              {months[month].name}
+            </span>
+          )}
           {calendarView !== 'years' ? (
-            <span className="text-slate-500 dark:text-slate-300">{year}</span>
+            <span className="text-slate-500 dark:text-slate-300" data-testid={`${dataTestId}-year`}>
+              {year}
+            </span>
           ) : (
-            <span className="text-slate-500 dark:text-slate-300">
+            <span
+              className="text-slate-500 dark:text-slate-300"
+              data-testid={`${dataTestId}-year-range`}
+            >
               {yearsRange[0]} - {yearsRange[11]}
             </span>
           )}
@@ -118,6 +131,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
         <div
           className="flex cursor-pointer items-center justify-center rounded-lg px-1 transition duration-100 ease-in-out hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-slate-700"
           onClick={editCalendarViewPage('add')}
+          data-testid={`${dataTestId}-next`}
         >
           <ChevronRightIcon className="h-5 w-5 text-slate-400" />
         </div>
@@ -132,6 +146,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
           maxDate={maxDate}
           locale={locale}
           setNewDate={setNewDate}
+          dataTestId={`${dataTestId}-days`}
         />
       ) : calendarView === 'months' ? (
         <MonthsView
@@ -142,6 +157,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
           maxDate={maxDate}
           locale={locale}
           selectMonth={selectMonth}
+          dataTestId={`${dataTestId}-months`}
         />
       ) : (
         <YearsView
@@ -151,6 +167,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
           minDate={minDate}
           maxDate={maxDate}
           selectYear={selectYear}
+          dataTestId={`${dataTestId}-years`}
         />
       )}
     </div>

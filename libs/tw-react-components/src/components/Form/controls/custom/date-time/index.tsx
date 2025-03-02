@@ -39,6 +39,7 @@ export type DateTimeInputProps = {
   | 'onBlur'
   | 'size'
   | 'readOnly'
+  | 'dataTestId'
 >;
 
 export const DateTimeInput: FC<DateTimeInputProps> = ({
@@ -55,6 +56,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
   displayFormat = 'dddd, MMMM Do YYYY, HH:mm:ss',
   displayLocale = 'en',
   ref,
+  dataTestId = 'date-time-input',
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>();
@@ -143,6 +145,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
         onClear={clearDate}
         suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
         onSuffixIconClick={handleOnClick}
+        dataTestId={dataTestId}
       />
 
       {isOpen && (
@@ -151,6 +154,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
           tabIndex={0}
           onBlur={handleOnBlur}
           ref={calendarRef}
+          data-testid={`${dataTestId}-popup`}
         >
           {type?.includes('date') && (
             <DateSelector
@@ -162,10 +166,14 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
               calendarView={calendarView}
               setCalendarView={setCalendarView}
               setNewDate={setNewDate}
+              dataTestId={`${dataTestId}-date-selector`}
             />
           )}
           {calendarView === 'days' && (
-            <div className="flex select-none items-center justify-end gap-2 px-3 py-2">
+            <div
+              className="flex select-none items-center justify-end gap-2 px-3 py-2"
+              data-testid={`${dataTestId}-time-selector`}
+            >
               {type?.includes('time') && (
                 <TimeSelector
                   date={date}
@@ -173,11 +181,13 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
                   minDate={minDate}
                   maxDate={maxDate}
                   setNewDate={setNewDate}
+                  dataTestId={`${dataTestId}-time-selector`}
                 />
               )}
               <div
                 className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-slate-100 dark:text-blue-500 dark:hover:bg-slate-700"
                 onClick={() => setIsOpen(false)}
+                data-testid={`${dataTestId}-ok`}
               >
                 OK
               </div>

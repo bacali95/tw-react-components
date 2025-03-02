@@ -27,6 +27,7 @@ export type BasicInputProps<Type extends InputType> = {
   suffixIcon?: FC<ComponentProps<'svg'>>;
   onClear?: () => void;
   onSuffixIconClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  dataTestId?: string;
 } & Omit<
   Type extends 'textarea' ? ComponentProps<'textarea'> : ComponentProps<'input'>,
   'id' | 'size'
@@ -109,6 +110,7 @@ export const BasicInput = <Type extends InputType>({
   suffixIcon: SuffixIcon,
   onClear,
   onSuffixIconClick,
+  dataTestId = 'basic-input',
   ...props
 }: BasicInputProps<Type>) => {
   const id = useId();
@@ -144,6 +146,7 @@ export const BasicInput = <Type extends InputType>({
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
         title={type !== 'textarea' && typeof props.value === 'string' ? props.value : undefined}
+        data-testid={dataTestId}
       >
         {type === 'textarea' ? (
           <textarea
@@ -161,6 +164,7 @@ export const BasicInput = <Type extends InputType>({
             )}
             {...(props as ComponentProps<'textarea'>)}
             value={props.value}
+            data-testid={`${dataTestId}-textarea`}
           />
         ) : type === 'checkbox' ? (
           <input
@@ -177,6 +181,7 @@ export const BasicInput = <Type extends InputType>({
             type={type}
             checked={Boolean(props.value)}
             {...(props as ComponentProps<'input'>)}
+            data-testid={`${dataTestId}-checkbox`}
           />
         ) : (
           <input
@@ -195,6 +200,7 @@ export const BasicInput = <Type extends InputType>({
             type={type ?? 'text'}
             {...(props as ComponentProps<'input'>)}
             value={props.value}
+            data-testid={`${dataTestId}-input`}
           />
         )}
         {type === 'checkbox' && memoLabel}
@@ -209,6 +215,7 @@ export const BasicInput = <Type extends InputType>({
             )}
             onClick={handleClear}
             onPointerDown={(event) => event.stopPropagation()}
+            data-testid={`${dataTestId}-clear`}
           />
         )}
         {type !== 'checkbox' && SuffixIcon && (
@@ -218,6 +225,7 @@ export const BasicInput = <Type extends InputType>({
             size={size}
             disabled={props.disabled}
             onClick={onSuffixIconClick}
+            dataTestId={`${dataTestId}-suffix`}
           >
             <SuffixIcon className={sizeClasses[size].suffix.icon} />
           </BasicInputExtension>
@@ -233,9 +241,10 @@ export const BasicInputExtension: FC<
     size: Size;
     hasErrors?: boolean;
     disabled?: boolean;
+    dataTestId?: string;
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   }>
-> = ({ children, className, size, hasErrors, disabled, onClick }) => (
+> = ({ children, className, size, hasErrors, disabled, onClick, dataTestId }) => (
   <div
     className={cn(
       'flex aspect-square items-center justify-center rounded-r-md border border-l-0',
@@ -250,6 +259,7 @@ export const BasicInputExtension: FC<
     )}
     onClick={!disabled ? onClick : undefined}
     onPointerDown={(event) => event.stopPropagation()}
+    data-testid={dataTestId}
   >
     {children}
   </div>

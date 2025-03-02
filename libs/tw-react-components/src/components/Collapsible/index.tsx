@@ -1,12 +1,33 @@
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import type { ComponentProps, FC } from 'react';
 
-const $Collapsible = CollapsiblePrimitive.Root;
+type CollapsibleRootProps = ComponentProps<typeof CollapsiblePrimitive.Root> & {
+  dataTestId?: string;
+};
 
-const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;
+const CollapsibleRoot: FC<CollapsibleRootProps> = ({ dataTestId = 'collapsible', ...props }) => (
+  <CollapsiblePrimitive.Root data-testid={dataTestId} {...props} />
+);
 
-const CollapsibleContent = CollapsiblePrimitive.CollapsibleContent;
+type CollapsibleTriggerProps = ComponentProps<typeof CollapsiblePrimitive.Trigger> & {
+  dataTestId?: string;
+};
 
-export const Collapsible = Object.assign($Collapsible, {
+const CollapsibleTrigger: FC<CollapsibleTriggerProps> = ({
+  dataTestId = 'collapsible-trigger',
+  ...props
+}) => <CollapsiblePrimitive.Trigger data-testid={dataTestId} {...props} />;
+
+type CollapsibleContentProps = ComponentProps<typeof CollapsiblePrimitive.Content> & {
+  dataTestId?: string;
+};
+
+const CollapsibleContent: FC<CollapsibleContentProps> = ({
+  dataTestId = 'collapsible-content',
+  ...props
+}) => <CollapsiblePrimitive.Content data-testid={dataTestId} {...props} />;
+
+export const Collapsible = Object.assign(CollapsibleRoot, {
   Trigger: CollapsibleTrigger,
   Content: CollapsibleContent,
 });

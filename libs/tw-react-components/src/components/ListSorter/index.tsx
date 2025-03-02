@@ -24,6 +24,7 @@ export type ListSorterItem = number | string | boolean | Record<'rank', number>;
 export type ListSorterProps<T extends ListSorterItem> = {
   className?: string;
   items: T[];
+  dataTestId?: string;
   idResolver: (item: T, index: number) => string;
   renderer: (item: T, index: number, listeners?: SyntheticListenerMap) => ReactNode;
   onChange: (items: T[]) => void;
@@ -32,6 +33,7 @@ export type ListSorterProps<T extends ListSorterItem> = {
 export function ListSorter<T extends ListSorterItem>({
   className,
   items,
+  dataTestId = 'list-sorter',
   idResolver,
   renderer,
   onChange,
@@ -73,9 +75,15 @@ export function ListSorter<T extends ListSorterItem>({
       onDragEnd={onDragEnd}
     >
       <SortableContext items={adaptedItems} strategy={verticalListSortingStrategy}>
-        <div className={className}>
+        <div className={className} data-testid={dataTestId}>
           {adaptedItems.map((item, index) => (
-            <SortableItem key={item.id} item={item} index={index} renderer={renderer} />
+            <SortableItem
+              key={item.id}
+              item={item}
+              index={index}
+              renderer={renderer}
+              dataTestId={dataTestId}
+            />
           ))}
         </div>
       </SortableContext>
@@ -86,19 +94,21 @@ export function ListSorter<T extends ListSorterItem>({
 type SortableItemProps<T extends ListSorterItem> = {
   item: { id: string; value: T };
   index: number;
+  dataTestId?: string;
   renderer: (item: T, index: number, listeners?: SyntheticListenerMap) => ReactNode;
 };
 
 function SortableItem<T extends ListSorterItem>({
   item,
   index,
+  dataTestId,
   renderer,
 }: SortableItemProps<T>): ReactElement {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: item.id });
   const style = { transform: CSS.Transform.toString(transform), transition };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes}>
+    <div ref={setNodeRef} style={style} {...attributes} data-testid={`${dataTestId}-item-${index}`}>
       {renderer(item.value, index, listeners)}
     </div>
   );

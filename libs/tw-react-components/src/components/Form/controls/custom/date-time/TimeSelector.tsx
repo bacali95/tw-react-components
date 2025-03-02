@@ -11,6 +11,7 @@ type TimeSelectorProps = {
   minDate?: Date | null;
   maxDate?: Date | null;
   setNewDate: (date: Date) => void;
+  dataTestId?: string;
 };
 
 export const TimeSelector: FC<TimeSelectorProps> = ({
@@ -19,6 +20,7 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
   minDate,
   maxDate,
   setNewDate,
+  dataTestId = 'time-selector',
 }) => {
   const editDateField = (field: 'hours' | 'minutes', diff: number) => () => {
     const newDate = dayjs(date).add(diff, field).toDate();
@@ -45,19 +47,29 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('hours', 1)}
             {...increaseHours}
+            data-testid={`${dataTestId}-hours-up`}
           />
           <ChevronDownIcon
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('hours', -1)}
             {...decreaseHours}
+            data-testid={`${dataTestId}-hours-down`}
           />
         </div>
         <div className="flex items-center rounded-lg border border-slate-100 bg-slate-100 text-right dark:border-slate-700 dark:bg-slate-800">
-          <span className="flex px-2" onWheel={onWheel('hours')}>
+          <span
+            className="flex px-2"
+            onWheel={onWheel('hours')}
+            data-testid={`${dataTestId}-hours`}
+          >
             {date.getHours().toString().padStart(2, '0')}
           </span>
           <span>:</span>
-          <span className="flex px-2" onWheel={onWheel('minutes')}>
+          <span
+            className="flex px-2"
+            onWheel={onWheel('minutes')}
+            data-testid={`${dataTestId}-minutes`}
+          >
             {date.getMinutes().toString().padStart(2, '0')}
           </span>
         </div>
@@ -66,11 +78,13 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('minutes', step)}
             {...increaseMinutes}
+            data-testid={`${dataTestId}-minutes-up`}
           />
           <ChevronDownIcon
             className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('minutes', -step)}
             {...decreaseMinutes}
+            data-testid={`${dataTestId}-minutes-down`}
           />
         </div>
       </div>

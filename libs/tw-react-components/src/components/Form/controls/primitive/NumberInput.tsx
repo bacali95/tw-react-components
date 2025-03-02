@@ -6,10 +6,15 @@ import { BasicInput } from './BasicInput';
 
 export type NumberInputProps = Omit<BasicInputProps<'number'>, 'type'> & { unit?: ReactNode };
 
-export const NumberInput: FC<NumberInputProps> = ({ unit, ...props }) => (
+export const NumberInput: FC<NumberInputProps> = ({
+  unit,
+  dataTestId = 'number-input',
+  ...props
+}) => (
   <BasicInput
     type="number"
     inputClassName={cn(props.clearable && !!props.value && 'pr-8', props.className)}
+    dataTestId={dataTestId}
     {...props}
     suffixIcon={
       unit

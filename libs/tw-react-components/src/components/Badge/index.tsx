@@ -7,8 +7,9 @@ export type BadgeVariant = Exclude<ButtonVariant, 'text'>;
 
 export type BadgeProps = Omit<ButtonProps, 'variant'> & {
   variant?: BadgeVariant;
+  dataTestId?: string;
 };
 
-export const Badge: FC<BadgeProps> = ({ size = 'small', ...props }) => (
-  <Button size={size} {...props} />
+export const Badge: FC<BadgeProps> = ({ size = 'small', dataTestId = 'badge', ...props }) => (
+  <Button size={size} dataTestId={dataTestId} {...props} />
 );
