@@ -123,6 +123,7 @@ export const BasicInput = <Type extends InputType>({
           description={description}
           required={props.required}
           hasErrors={hasErrors}
+          dataTestId={`${dataTestId}-label`}
         >
           {label}
         </Label>

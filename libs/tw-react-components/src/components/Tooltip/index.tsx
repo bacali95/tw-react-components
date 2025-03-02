@@ -8,12 +8,22 @@ export type TooltipProps = PropsWithChildren<{
   content: ReactNode;
   asChild?: boolean;
   placement?: TooltipPrimitive.TooltipContentProps['side'];
+  dataTestId?: string;
 }>;
 
-export const Tooltip: FC<TooltipProps> = ({ children, className, content, asChild, placement }) => (
+export const Tooltip: FC<TooltipProps> = ({
+  children,
+  className,
+  content,
+  asChild,
+  placement,
+  dataTestId = 'tooltip',
+}) => (
   <TooltipPrimitive.Provider delayDuration={200}>
     <TooltipPrimitive.Root>
-      <TooltipPrimitive.Trigger asChild={asChild}>{children}</TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Trigger asChild={asChild} data-testid={`${dataTestId}-trigger`}>
+        {children}
+      </TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Content
           className={cn(
@@ -23,6 +33,7 @@ export const Tooltip: FC<TooltipProps> = ({ children, className, content, asChil
           )}
           side={placement}
           sideOffset={5}
+          data-testid={`${dataTestId}-content`}
         >
           {content}
         </TooltipPrimitive.Content>

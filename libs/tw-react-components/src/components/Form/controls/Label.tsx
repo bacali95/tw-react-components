@@ -10,6 +10,7 @@ type Props = {
   required?: boolean;
   hasErrors?: boolean;
   htmlFor?: string;
+  dataTestId?: string;
 };
 
 export const Label: FC<PropsWithChildren<Props>> = ({
@@ -19,6 +20,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
   required,
   hasErrors,
   htmlFor,
+  dataTestId = 'label',
 }) => {
   return !children ? null : (
     <label
@@ -31,10 +33,16 @@ export const Label: FC<PropsWithChildren<Props>> = ({
         className,
       )}
       htmlFor={htmlFor}
+      data-testid={dataTestId}
     >
       {children}
       {description && (
-        <Tooltip content={<div className="max-w-xs">{description}</div>} placement="top" asChild>
+        <Tooltip
+          content={<div className="max-w-xs">{description}</div>}
+          placement="top"
+          asChild
+          dataTestId={`${dataTestId}-description-tooltip`}
+        >
           <HelpCircle className="h-4 w-4" />
         </Tooltip>
       )}
