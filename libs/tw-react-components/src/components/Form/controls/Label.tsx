@@ -43,7 +43,7 @@ export const Label: FC<PropsWithChildren<Props>> = ({
           asChild
           dataTestId={`${dataTestId}-description-tooltip`}
         >
-          <HelpCircle className="h-4 w-4" />
+          <HelpCircle className="h-4 w-4" data-testid={`${dataTestId}-description-tooltip-icon`} />
         </Tooltip>
       )}
       {required && <span className="text-red-600">*</span>}
