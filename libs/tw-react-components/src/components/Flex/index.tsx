@@ -48,6 +48,7 @@ export const Flex: FC<FlexProps> = ({
   direction = 'row',
   align = 'start',
   justify = 'start',
+  dataTestId = 'flex',
   ...blockProps
 }) => (
   <Block
@@ -59,6 +60,7 @@ export const Flex: FC<FlexProps> = ({
       justifyClasses[justify],
       className,
     )}
+    dataTestId={dataTestId}
     {...blockProps}
   >
     {children}
