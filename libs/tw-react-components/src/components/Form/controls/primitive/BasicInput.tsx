@@ -139,7 +139,7 @@ export const BasicInput = <Type extends InputType>({
   };
 
   return (
-    <div className={cn('w-full dark:text-white', className)}>
+    <div className={cn('w-full dark:text-white', className)} data-testid={dataTestId}>
       {type !== 'checkbox' && memoLabel}
       <div
         className={cn('group relative flex', {
@@ -147,7 +147,6 @@ export const BasicInput = <Type extends InputType>({
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
         })}
         title={type !== 'textarea' && typeof props.value === 'string' ? props.value : undefined}
-        data-testid={dataTestId}
       >
         {type === 'textarea' ? (
           <textarea

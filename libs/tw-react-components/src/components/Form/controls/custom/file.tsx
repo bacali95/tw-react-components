@@ -28,6 +28,7 @@ export type FileInputProps = {
 
 export const FileInput: FC<FileInputProps> = ({
   className,
+  inputClassName,
   value,
   onChange,
   onFileChange,
@@ -50,7 +51,7 @@ export const FileInput: FC<FileInputProps> = ({
     <>
       <TextInput
         className={cn('[&>div>*]:cursor-pointer', className)}
-        inputClassName="text-left"
+        inputClassName={cn('text-left', inputClassName)}
         {...props}
         value={value ?? ''}
         onClick={() => fileInputRef.current?.click()}

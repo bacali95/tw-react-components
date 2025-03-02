@@ -273,7 +273,7 @@ export const SelectInput = <T,>({
               className="py-1.5 text-center text-slate-500"
               data-testid={`${dataTestId}-no-items`}
             >
-              No items.
+              No items
             </div>
           ))}
         <GroupComponent
