@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test tw-react-components --coverage",
+    "test": "nx run tw-react-components:test --coverage",
     "lint": "nx lint",
     "prettier:check": "nx format:check",
     "prettier:fix": "nx format:write",
