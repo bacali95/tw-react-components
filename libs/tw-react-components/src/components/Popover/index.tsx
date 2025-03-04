@@ -5,15 +5,32 @@ import { cn } from '../../helpers';
 
 const $Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+const PopoverTrigger: FC<
+  ComponentProps<typeof PopoverPrimitive.Trigger> & {
+    dataTestId?: string;
+  }
+> = ({ dataTestId = 'popover-trigger', ...props }) => (
+  <PopoverPrimitive.Trigger data-testid={dataTestId} {...props} />
+);
 
 const PopoverContent: FC<
-  ComponentProps<typeof PopoverPrimitive.Content> & { container?: HTMLElement | null }
-> = ({ className, align = 'center', sideOffset = 4, container, ...props }) => (
+  ComponentProps<typeof PopoverPrimitive.Content> & {
+    container?: HTMLElement | null;
+    dataTestId?: string;
+  }
+> = ({
+  className,
+  align = 'center',
+  sideOffset = 4,
+  container,
+  dataTestId = 'popover-content',
+  ...props
+}) => (
   <PopoverPrimitive.Portal container={container}>
     <PopoverPrimitive.Content
       align={align}
       sideOffset={sideOffset}
+      data-testid={dataTestId}
       className={cn(
         'z-50 rounded-md border bg-white p-1 shadow-md outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-white',
         'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
