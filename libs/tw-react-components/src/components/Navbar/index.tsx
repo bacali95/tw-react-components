@@ -10,6 +10,7 @@ export type NavbarProps = {
   sidebarTriggerClassName?: string;
   leftSlot?: ReactNode;
   rightSlot?: ReactNode;
+  dataTestId?: string;
 };
 
 export const Navbar: FC<NavbarProps> = ({
@@ -17,8 +18,13 @@ export const Navbar: FC<NavbarProps> = ({
   sidebarTriggerClassName,
   leftSlot,
   rightSlot,
+  dataTestId = 'navbar',
 }) => (
-  <Block className={cn('border-b p-2 dark:border-slate-700', className)} fullWidth>
+  <Block
+    className={cn('border-b p-2 dark:border-slate-700', className)}
+    fullWidth
+    dataTestId={dataTestId}
+  >
     <Flex align="center" justify="between">
       <Flex align="center">
         <Sidebar.Trigger className={sidebarTriggerClassName} />
