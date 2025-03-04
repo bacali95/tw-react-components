@@ -100,7 +100,7 @@ const DropdownMenuSubContent: FC<DropdownMenuSubContentProps> = ({
 }) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.SubContent {...props} asChild>
-      <List className={className} data-testid={dataTestId}>
+      <List className={className} dataTestId={dataTestId}>
         {children}
       </List>
     </DropdownMenuPrimitive.SubContent>
@@ -121,7 +121,7 @@ const DropdownMenuContent: FC<DropdownMenuContentProps> = ({
 }) => (
   <DropdownMenuPrimitive.Portal>
     <DropdownMenuPrimitive.Content sideOffset={sideOffset} {...props} asChild>
-      <List className={className} data-testid={dataTestId}>
+      <List className={className} dataTestId={dataTestId}>
         {children}
       </List>
     </DropdownMenuPrimitive.Content>
