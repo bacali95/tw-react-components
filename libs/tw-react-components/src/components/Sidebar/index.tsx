@@ -49,13 +49,13 @@ export function useSidebar() {
   return context;
 }
 
-export const SidebarContextProvider: FC<
-  ComponentProps<'div'> & {
-    defaultOpen?: boolean;
-    open?: boolean;
-    onOpenChange?: (open: boolean) => void;
-  }
-> = ({
+export type SidebarContextProviderProps = ComponentProps<'div'> & {
+  defaultOpen?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export const SidebarContextProvider: FC<SidebarContextProviderProps> = ({
   defaultOpen = true,
   open: openProp,
   onOpenChange: setOpenProp,
@@ -153,18 +153,20 @@ export const SidebarContextProvider: FC<
 };
 SidebarContextProvider.displayName = 'SidebarContextProvider';
 
-const SidebarComp: FC<
-  ComponentProps<'div'> & {
-    side?: 'left' | 'right';
-    variant?: 'sidebar' | 'floating' | 'inset';
-    collapsible?: 'offcanvas' | 'icon' | 'none';
-  }
-> = ({
+export type SidebarProps = ComponentProps<'div'> & {
+  side?: 'left' | 'right';
+  variant?: 'sidebar' | 'floating' | 'inset';
+  collapsible?: 'offcanvas' | 'icon' | 'none';
+  dataTestId?: string;
+};
+
+const SidebarComp: FC<SidebarProps> = ({
   side = 'left',
   variant = 'sidebar',
   collapsible = 'offcanvas',
   className,
   children,
+  dataTestId = 'sidebar',
   ...props
 }) => {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
@@ -172,6 +174,7 @@ const SidebarComp: FC<
   if (collapsible === 'none') {
     return (
       <div
+        data-testid={dataTestId}
         className={cn(
           'bg-sidebar text-sidebar-foreground flex h-full w-[--sidebar-width] flex-col',
           className,
@@ -187,6 +190,7 @@ const SidebarComp: FC<
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         <Sheet.Content
+          data-testid={dataTestId}
           data-sidebar="sidebar"
           data-mobile="true"
           className="bg-sidebar text-sidebar-foreground w-[--sidebar-width] p-0 [&>button]:hidden"
@@ -223,6 +227,7 @@ const SidebarComp: FC<
         )}
       />
       <div
+        data-testid={dataTestId}
         className={cn(
           'fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex',
           side === 'left'
@@ -248,11 +253,19 @@ const SidebarComp: FC<
 };
 SidebarComp.displayName = 'Sidebar';
 
-const SidebarTrigger: FC<ComponentProps<typeof Button>> = ({ className, onClick, ...props }) => {
+export type SidebarTriggerProps = ComponentProps<typeof Button> & { dataTestId?: string };
+
+const SidebarTrigger: FC<SidebarTriggerProps> = ({
+  className,
+  onClick,
+  dataTestId = 'sidebar-trigger',
+  ...props
+}) => {
   const { toggleSidebar } = useSidebar();
 
   return (
     <Button
+      data-testid={dataTestId}
       data-sidebar="trigger"
       variant="text"
       suffixIcon={PanelLeft}
@@ -267,11 +280,18 @@ const SidebarTrigger: FC<ComponentProps<typeof Button>> = ({ className, onClick,
 };
 SidebarTrigger.displayName = 'SidebarTrigger';
 
-const SidebarRail: FC<ComponentProps<'button'>> = ({ className, ...props }) => {
+export type SidebarRailProps = ComponentProps<'button'> & { dataTestId?: string };
+
+const SidebarRail: FC<SidebarRailProps> = ({
+  className,
+  dataTestId = 'sidebar-rail',
+  ...props
+}) => {
   const { toggleSidebar } = useSidebar();
 
   return (
     <button
+      data-testid={dataTestId}
       data-sidebar="rail"
       aria-label="Toggle Sidebar"
       tabIndex={-1}
@@ -292,8 +312,15 @@ const SidebarRail: FC<ComponentProps<'button'>> = ({ className, ...props }) => {
 };
 SidebarRail.displayName = 'SidebarRail';
 
-const SidebarInset: FC<ComponentProps<'main'>> = ({ className, ...props }) => (
+export type SidebarInsetProps = ComponentProps<'main'> & { dataTestId?: string };
+
+const SidebarInset: FC<SidebarInsetProps> = ({
+  className,
+  dataTestId = 'sidebar-inset',
+  ...props
+}) => (
   <main
+    data-testid={dataTestId}
     className={cn(
       'bg-background relative flex min-h-svh flex-1 flex-col',
       'peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow',
@@ -304,8 +331,15 @@ const SidebarInset: FC<ComponentProps<'main'>> = ({ className, ...props }) => (
 );
 SidebarInset.displayName = 'SidebarInset';
 
-const SidebarInput: FC<ComponentProps<typeof BasicInput>> = ({ className, ...props }) => (
+export type SidebarInputProps = ComponentProps<typeof BasicInput> & { dataTestId?: string };
+
+const SidebarInput: FC<SidebarInputProps> = ({
+  className,
+  dataTestId = 'sidebar-input',
+  ...props
+}) => (
   <BasicInput
+    dataTestId={dataTestId}
     data-sidebar="input"
     className={cn('focus-visible:ring-sidebar-ring focus-visible:ring-2', className)}
     {...props}
@@ -313,18 +347,47 @@ const SidebarInput: FC<ComponentProps<typeof BasicInput>> = ({ className, ...pro
 );
 SidebarInput.displayName = 'SidebarInput';
 
-const SidebarHeader: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
-  <div data-sidebar="header" className={cn('flex flex-col gap-2 p-2', className)} {...props} />
+export type SidebarHeaderProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarHeader: FC<SidebarHeaderProps> = ({
+  className,
+  dataTestId = 'sidebar-header',
+  ...props
+}) => (
+  <div
+    data-testid={dataTestId}
+    data-sidebar="header"
+    className={cn('flex flex-col gap-2 p-2', className)}
+    {...props}
+  />
 );
 SidebarHeader.displayName = 'SidebarHeader';
 
-const SidebarFooter: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
-  <div data-sidebar="footer" className={cn('flex flex-col gap-2 p-2', className)} {...props} />
+export type SidebarFooterProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarFooter: FC<SidebarFooterProps> = ({
+  className,
+  dataTestId = 'sidebar-footer',
+  ...props
+}) => (
+  <div
+    data-testid={dataTestId}
+    data-sidebar="footer"
+    className={cn('flex flex-col gap-2 p-2', className)}
+    {...props}
+  />
 );
 SidebarFooter.displayName = 'SidebarFooter';
 
-const SidebarSeparator: FC<ComponentProps<typeof Separator>> = ({ className, ...props }) => (
+export type SidebarSeparatorProps = ComponentProps<typeof Separator> & { dataTestId?: string };
+
+const SidebarSeparator: FC<SidebarSeparatorProps> = ({
+  className,
+  dataTestId = 'sidebar-separator',
+  ...props
+}) => (
   <Separator
+    dataTestId={dataTestId}
     data-sidebar="separator"
     className={cn('bg-sidebar-border mx-2 w-auto', className)}
     {...props}
@@ -332,8 +395,15 @@ const SidebarSeparator: FC<ComponentProps<typeof Separator>> = ({ className, ...
 );
 SidebarSeparator.displayName = 'SidebarSeparator';
 
-const SidebarContent: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
+export type SidebarContentProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarContent: FC<SidebarContentProps> = ({
+  className,
+  dataTestId = 'sidebar-content',
+  ...props
+}) => (
   <div
+    data-testid={dataTestId}
     data-sidebar="content"
     className={cn(
       'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden',
@@ -344,8 +414,15 @@ const SidebarContent: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
 );
 SidebarContent.displayName = 'SidebarContent';
 
-const SidebarGroup: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
+export type SidebarGroupProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarGroup: FC<SidebarGroupProps> = ({
+  className,
+  dataTestId = 'sidebar-group',
+  ...props
+}) => (
   <div
+    data-testid={dataTestId}
     data-sidebar="group"
     className={cn('relative flex w-full min-w-0 flex-col p-2', className)}
     {...props}
@@ -353,15 +430,22 @@ const SidebarGroup: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
 );
 SidebarGroup.displayName = 'SidebarGroup';
 
-const SidebarGroupLabel: FC<ComponentProps<'div'> & { asChild?: boolean }> = ({
+export type SidebarGroupLabelProps = ComponentProps<'div'> & {
+  asChild?: boolean;
+  dataTestId?: string;
+};
+
+const SidebarGroupLabel: FC<SidebarGroupLabelProps> = ({
   className,
   asChild = false,
+  dataTestId = 'sidebar-group-label',
   ...props
 }) => {
   const Comp = asChild ? Slot : 'div';
 
   return (
     <Comp
+      data-testid={dataTestId}
       data-sidebar="group-label"
       className={cn(
         'text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-none transition-[margin,opa] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
@@ -374,15 +458,22 @@ const SidebarGroupLabel: FC<ComponentProps<'div'> & { asChild?: boolean }> = ({
 };
 SidebarGroupLabel.displayName = 'SidebarGroupLabel';
 
-const SidebarGroupAction: FC<ComponentProps<'button'> & { asChild?: boolean }> = ({
+export type SidebarGroupActionProps = ComponentProps<'button'> & {
+  asChild?: boolean;
+  dataTestId?: string;
+};
+
+const SidebarGroupAction: FC<SidebarGroupActionProps> = ({
   className,
   asChild = false,
+  dataTestId = 'sidebar-group-action',
   ...props
 }) => {
   const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
+      data-testid={dataTestId}
       data-sidebar="group-action"
       className={cn(
         'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-none transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
@@ -397,13 +488,31 @@ const SidebarGroupAction: FC<ComponentProps<'button'> & { asChild?: boolean }> =
 };
 SidebarGroupAction.displayName = 'SidebarGroupAction';
 
-const SidebarGroupContent: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
-  <div data-sidebar="group-content" className={cn('w-full text-sm', className)} {...props} />
+export type SidebarGroupContentProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarGroupContent: FC<SidebarGroupContentProps> = ({
+  className,
+  dataTestId = 'sidebar-group-content',
+  ...props
+}) => (
+  <div
+    data-testid={dataTestId}
+    data-sidebar="group-content"
+    className={cn('w-full text-sm', className)}
+    {...props}
+  />
 );
 SidebarGroupContent.displayName = 'SidebarGroupContent';
 
-const SidebarMenu: FC<ComponentProps<'ul'>> = ({ className, ...props }) => (
+export type SidebarMenuProps = ComponentProps<'ul'> & { dataTestId?: string };
+
+const SidebarMenu: FC<SidebarMenuProps> = ({
+  className,
+  dataTestId = 'sidebar-menu',
+  ...props
+}) => (
   <ul
+    data-testid={dataTestId}
     data-sidebar="menu"
     className={cn('flex w-full min-w-0 flex-col gap-1', className)}
     {...props}
@@ -411,8 +520,19 @@ const SidebarMenu: FC<ComponentProps<'ul'>> = ({ className, ...props }) => (
 );
 SidebarMenu.displayName = 'SidebarMenu';
 
-const SidebarMenuItem: FC<ComponentProps<'li'>> = ({ className, ...props }) => (
-  <li data-sidebar="menu-item" className={cn('group/menu-item relative', className)} {...props} />
+export type SidebarMenuItemProps = ComponentProps<'li'> & { dataTestId?: string };
+
+const SidebarMenuItem: FC<SidebarMenuItemProps> = ({
+  className,
+  dataTestId = 'sidebar-menu-item',
+  ...props
+}) => (
+  <li
+    data-testid={dataTestId}
+    data-sidebar="menu-item"
+    className={cn('group/menu-item relative', className)}
+    {...props}
+  />
 );
 SidebarMenuItem.displayName = 'SidebarMenuItem';
 
@@ -438,19 +558,21 @@ const sidebarMenuButtonVariants = cva(
   },
 );
 
-const SidebarMenuButton: FC<
-  ComponentProps<'button'> & {
-    asChild?: boolean;
-    isActive?: boolean;
-    tooltip?: string | ComponentProps<typeof Tooltip>;
-  } & VariantProps<typeof sidebarMenuButtonVariants>
-> = ({
+export type SidebarMenuButtonProps = ComponentProps<'button'> & {
+  asChild?: boolean;
+  isActive?: boolean;
+  tooltip?: string | ComponentProps<typeof Tooltip>;
+  dataTestId?: string;
+} & VariantProps<typeof sidebarMenuButtonVariants>;
+
+const SidebarMenuButton: FC<SidebarMenuButtonProps> = ({
   asChild = false,
   isActive = false,
   variant = 'default',
   size = 'default',
   tooltip,
   className,
+  dataTestId = 'sidebar-menu-button',
   ...props
 }) => {
   const Comp = asChild ? Slot : 'button';
@@ -458,6 +580,7 @@ const SidebarMenuButton: FC<
 
   const button = (
     <Comp
+      data-testid={dataTestId}
       data-sidebar="menu-button"
       data-size={size}
       data-active={isActive}
@@ -484,16 +607,24 @@ const SidebarMenuButton: FC<
 };
 SidebarMenuButton.displayName = 'SidebarMenuButton';
 
-const SidebarMenuAction: FC<
-  ComponentProps<'button'> & {
-    asChild?: boolean;
-    showOnHover?: boolean;
-  }
-> = ({ className, asChild = false, showOnHover = false, ...props }) => {
+export type SidebarMenuActionProps = ComponentProps<'button'> & {
+  asChild?: boolean;
+  showOnHover?: boolean;
+  dataTestId?: string;
+};
+
+const SidebarMenuAction: FC<SidebarMenuActionProps> = ({
+  className,
+  asChild = false,
+  showOnHover = false,
+  dataTestId = 'sidebar-menu-action',
+  ...props
+}) => {
   const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
+      data-testid={dataTestId}
       data-sidebar="menu-action"
       className={cn(
         'text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute right-1 top-1.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-none transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
@@ -513,8 +644,15 @@ const SidebarMenuAction: FC<
 };
 SidebarMenuAction.displayName = 'SidebarMenuAction';
 
-const SidebarMenuBadge: FC<ComponentProps<'div'>> = ({ className, ...props }) => (
+export type SidebarMenuBadgeProps = ComponentProps<'div'> & { dataTestId?: string };
+
+const SidebarMenuBadge: FC<SidebarMenuBadgeProps> = ({
+  className,
+  dataTestId = 'sidebar-menu-badge',
+  ...props
+}) => (
   <div
+    data-testid={dataTestId}
     data-sidebar="menu-badge"
     className={cn(
       'text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 select-none items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums',
@@ -530,11 +668,17 @@ const SidebarMenuBadge: FC<ComponentProps<'div'>> = ({ className, ...props }) =>
 );
 SidebarMenuBadge.displayName = 'SidebarMenuBadge';
 
-const SidebarMenuSkeleton: FC<
-  ComponentProps<'div'> & {
-    showIcon?: boolean;
-  }
-> = ({ className, showIcon = false, ...props }) => {
+export type SidebarMenuSkeletonProps = ComponentProps<'div'> & {
+  showIcon?: boolean;
+  dataTestId?: string;
+};
+
+const SidebarMenuSkeleton: FC<SidebarMenuSkeletonProps> = ({
+  className,
+  showIcon = false,
+  dataTestId = 'sidebar-menu-skeleton',
+  ...props
+}) => {
   // Random width between 50 to 90%.
   const width = useMemo(() => {
     return `${Math.floor(Math.random() * 40) + 50}%`;
@@ -542,6 +686,7 @@ const SidebarMenuSkeleton: FC<
 
   return (
     <div
+      data-testid={dataTestId}
       data-sidebar="menu-skeleton"
       className={cn('flex h-8 items-center gap-2 rounded-md px-2', className)}
       {...props}
@@ -561,8 +706,15 @@ const SidebarMenuSkeleton: FC<
 };
 SidebarMenuSkeleton.displayName = 'SidebarMenuSkeleton';
 
-const SidebarMenuSub: FC<ComponentProps<'ul'>> = ({ className, ...props }) => (
+export type SidebarMenuSubProps = ComponentProps<'ul'> & { dataTestId?: string };
+
+const SidebarMenuSub: FC<SidebarMenuSubProps> = ({
+  className,
+  dataTestId = 'sidebar-menu-sub',
+  ...props
+}) => (
   <ul
+    data-testid={dataTestId}
     data-sidebar="menu-sub"
     className={cn(
       'border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5',
@@ -574,7 +726,12 @@ const SidebarMenuSub: FC<ComponentProps<'ul'>> = ({ className, ...props }) => (
 );
 SidebarMenuSub.displayName = 'SidebarMenuSub';
 
-const SidebarMenuSubItem: FC<ComponentProps<'li'>> = ({ ...props }) => <li {...props} />;
+export type SidebarMenuSubItemProps = ComponentProps<'li'> & { dataTestId?: string };
+
+const SidebarMenuSubItem: FC<SidebarMenuSubItemProps> = ({
+  dataTestId = 'sidebar-menu-sub-item',
+  ...props
+}) => <li data-testid={dataTestId} {...props} />;
 SidebarMenuSubItem.displayName = 'SidebarMenuSubItem';
 
 const SidebarMenuSubButton: FC<
@@ -582,12 +739,21 @@ const SidebarMenuSubButton: FC<
     asChild?: boolean;
     size?: 'sm' | 'md';
     isActive?: boolean;
+    dataTestId?: string;
   }
-> = ({ asChild = false, size = 'md', isActive, className, ...props }) => {
+> = ({
+  asChild = false,
+  size = 'md',
+  isActive,
+  className,
+  dataTestId = 'sidebar-menu-sub-button',
+  ...props
+}) => {
   const Comp = asChild ? Slot : 'button';
 
   return (
     <Comp
+      data-testid={dataTestId}
       data-sidebar="menu-sub-button"
       data-size={size}
       data-active={isActive}
