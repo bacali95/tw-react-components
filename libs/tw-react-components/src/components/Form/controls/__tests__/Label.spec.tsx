@@ -64,7 +64,7 @@ describe('Label', () => {
     const label = screen.getByTestId('label');
     expect(label).toHaveClass('dark:text-red-500');
 
-    const { rerender } = render(<Label>Test Label</Label>);
+    render(<Label>Test Label</Label>);
     const normalLabel = screen.getAllByTestId('label')[1];
     expect(normalLabel).toHaveClass('dark:text-slate-100');
   });

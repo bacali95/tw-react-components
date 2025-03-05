@@ -128,7 +128,7 @@ export const BasicInput = <Type extends InputType>({
           {label}
         </Label>
       ),
-    [description, hasErrors, id, label, props.required, size],
+    [description, hasErrors, id, label, props.required, size, dataTestId],
   );
 
   const handleClear = (event: MouseEvent) => {

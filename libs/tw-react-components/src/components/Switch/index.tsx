@@ -5,11 +5,13 @@ import { cn } from '../../helpers';
 
 export type SwitchProps = ComponentProps<typeof SwitchPrimitives.Root> & {
   thumbProps?: ComponentProps<typeof SwitchPrimitives.Thumb>;
+  dataTestId?: string;
 };
 
-const Switch: FC<SwitchProps> = ({
+export const Switch: FC<SwitchProps> = ({
   className,
   thumbProps: { className: thumbClassName, ...thumbProps } = {},
+  dataTestId = 'switch',
   ...props
 }) => (
   <SwitchPrimitives.Root
@@ -20,6 +22,7 @@ const Switch: FC<SwitchProps> = ({
       'dark:focus-visible:ring-slate-200 dark:focus-visible:ring-offset-slate-800 dark:data-[state=checked]:bg-blue-700 dark:data-[state=unchecked]:bg-slate-700',
       className,
     )}
+    data-testid={dataTestId}
     {...props}
   >
     <SwitchPrimitives.Thumb
@@ -28,11 +31,10 @@ const Switch: FC<SwitchProps> = ({
         'data-[state=checked]:translate-x-6 data-[state=unchecked]:translate-x-0 dark:bg-slate-900',
         thumbClassName,
       )}
+      data-testid={`${dataTestId}-thumb`}
       {...thumbProps}
     />
   </SwitchPrimitives.Root>
 );
 
 Switch.displayName = SwitchPrimitives.Root.displayName;
-
-export { Switch };

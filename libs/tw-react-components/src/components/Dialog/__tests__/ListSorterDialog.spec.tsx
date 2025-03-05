@@ -1,6 +1,5 @@
-import type { DndContextProps, DragEndEvent } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { type ReactNode, act } from 'react';
 
 import { ListSorterDialog } from '..';

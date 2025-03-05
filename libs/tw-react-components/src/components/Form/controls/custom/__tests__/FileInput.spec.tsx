@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CloudUploadIcon } from 'lucide-react';
 
 import { FileInput } from '../file';
 
