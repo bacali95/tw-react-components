@@ -15,7 +15,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 
-import type { SidebarProps } from 'tw-react-components';
+import type { LayoutSidebarProps } from 'tw-react-components';
 import { Layout, Sidebar, ThemeSelector } from 'tw-react-components';
 
 import { Badges } from './pages/Badges';
@@ -29,7 +29,7 @@ import { Tables } from './pages/Tables';
 import { Tabs } from './pages/Tabs';
 
 export const App: FC = () => {
-  const sidebarProps: SidebarProps = useMemo(
+  const sidebarProps: LayoutSidebarProps = useMemo(
     () => ({
       header: (
         <Link to="/">

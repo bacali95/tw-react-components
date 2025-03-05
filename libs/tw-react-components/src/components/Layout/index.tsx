@@ -11,34 +11,34 @@ import type { NavbarProps } from '../Navbar';
 import { Navbar } from '../Navbar';
 import { Sidebar, useSidebar } from '../Sidebar';
 
-export type SidebarItem = {
+export type LayoutSidebarItem = {
   pathname: string;
   title: string;
   Icon?: LucideIcon;
   hidden?: boolean;
-  items?: SidebarItem[];
+  items?: LayoutSidebarItem[];
 };
 
-export type SidebarProps = ComponentProps<typeof Sidebar> & {
+export type LayoutSidebarProps = ComponentProps<typeof Sidebar> & {
   basePath?: string;
   header?: ReactNode;
   items: (
-    | ({ type: 'item' } & SidebarItem)
-    | { type: 'group'; title?: string; hidden?: boolean; items: SidebarItem[] }
+    | ({ type: 'item' } & LayoutSidebarItem)
+    | { type: 'group'; title?: string; hidden?: boolean; items: LayoutSidebarItem[] }
   )[];
   extraContent?: ReactNode;
   footer?: ReactNode;
 };
 
-type Props = {
+export type LayoutProps = {
   className?: string;
-  sidebarProps: SidebarProps;
+  sidebarProps: LayoutSidebarProps;
   navbarProps?: NavbarProps;
   NavLink: FC<NavLinkProps>;
   useLocation: typeof useLocation;
 };
 
-export const Layout: FC<PropsWithChildren<Props>> = ({
+export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   children,
   className,
   sidebarProps: { basePath, header, items, extraContent, footer, ...sidebarProps },
@@ -119,7 +119,7 @@ export const Layout: FC<PropsWithChildren<Props>> = ({
 };
 
 const RenderSideBarItem: FC<
-  SidebarItem & { basePath?: string } & Pick<Props, 'NavLink' | 'useLocation'>
+  LayoutSidebarItem & { basePath?: string } & Pick<LayoutProps, 'NavLink' | 'useLocation'>
 > = ({ basePath = '/', pathname, title, Icon, items, NavLink, useLocation }) => {
   const location = useLocation();
   const { open } = useSidebar();
