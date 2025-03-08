@@ -94,34 +94,22 @@ describe('ThemeSelector Component', () => {
       // In a real scenario, we'd test for the presence of the dropdown items
     });
 
-    it('calls setTheme with "light" when light option is clicked', async () => {
-      // Mock the implementation to simulate dropdown being open
-      render(<ThemeSelector />);
+    ['light', 'dark', 'system'].forEach((theme) => {
+      it(`calls setTheme with "${theme}" when ${theme} option is clicked`, async () => {
+        // Mock the implementation to simulate dropdown being open
+        render(<ThemeSelector />);
 
-      // Simulate opening the dropdown (in real testing we'd click the trigger)
-      // For simplicity in this test, we'll directly test the click handlers
+        // Simulate opening the dropdown (in real testing we'd click the trigger)
+        // For simplicity in this test, we'll directly test the click handlers
+        const triggerButton = screen.getByTestId('theme-selector-trigger');
+        await userEvent.click(triggerButton);
 
-      // Find the light theme option and click it (mocking this interaction)
-      const setThemeToLight = () => mockSetTheme('light');
-      setThemeToLight();
+        // Find the light theme option and click it (mocking this interaction)
+        const lightThemeOption = screen.getByTestId(`theme-selector-${theme}`);
+        await userEvent.click(lightThemeOption);
 
-      expect(mockSetTheme).toHaveBeenCalledWith('light');
-    });
-
-    it('calls setTheme with "dark" when dark option is clicked', async () => {
-      // Similar approach as the light theme test
-      const setThemeToDark = () => mockSetTheme('dark');
-      setThemeToDark();
-
-      expect(mockSetTheme).toHaveBeenCalledWith('dark');
-    });
-
-    it('calls setTheme with "system" when system option is clicked', async () => {
-      // Similar approach as the previous tests
-      const setThemeToSystem = () => mockSetTheme('system');
-      setThemeToSystem();
-
-      expect(mockSetTheme).toHaveBeenCalledWith('system');
+        expect(mockSetTheme).toHaveBeenCalledWith(theme);
+      });
     });
   });
 });

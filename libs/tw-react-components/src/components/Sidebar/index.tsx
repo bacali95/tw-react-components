@@ -227,7 +227,6 @@ const SidebarComp: FC<SidebarProps> = ({
         )}
       />
       <div
-        data-testid={dataTestId}
         className={cn(
           'fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex',
           side === 'left'
@@ -240,6 +239,8 @@ const SidebarComp: FC<SidebarProps> = ({
           className,
         )}
         {...props}
+        data-testid={dataTestId}
+        data-state={state}
       >
         <div
           data-sidebar="sidebar"

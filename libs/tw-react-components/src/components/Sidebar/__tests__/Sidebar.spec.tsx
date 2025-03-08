@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { Sidebar, SidebarContextProvider } from '..';
 
@@ -7,17 +8,6 @@ jest.mock('../../../hooks', () => ({
   ...jest.requireActual('../../../hooks'),
   useIsMobile: jest.fn().mockReturnValue(false),
   useOnSwipe: jest.fn(),
-}));
-
-// Mock Sheet component
-jest.mock('../../Sheet', () => ({
-  Sheet: {
-    Content: ({ children, ...props }: any) => (
-      <div data-testid={props['data-testid']} data-mocked="sheet-content" {...props}>
-        {children}
-      </div>
-    ),
-  },
 }));
 
 describe('Sidebar Component', () => {
@@ -116,6 +106,47 @@ describe('Sidebar Component', () => {
       expect(trigger).toBeInTheDocument();
       expect(trigger).toHaveAttribute('data-testid', 'custom-trigger');
       expect(screen.queryByTestId('sidebar-trigger')).not.toBeInTheDocument();
+    });
+
+    it('opens the sidebar when clicked', async () => {
+      const setOpen = jest.fn();
+      render(
+        <SidebarContextProvider defaultOpen={false}>
+          <Sidebar.Trigger>Toggle</Sidebar.Trigger>
+          <Sidebar>
+            <Sidebar.Content>
+              <div>Sidebar Content</div>
+            </Sidebar.Content>
+          </Sidebar>
+        </SidebarContextProvider>,
+      );
+
+      const trigger = screen.getByTestId('sidebar-trigger');
+      await userEvent.click(trigger);
+
+      expect(screen.getByTestId('sidebar')).toBeInTheDocument();
+      const sidebar = screen.getByTestId('sidebar');
+      expect(sidebar).toBeInTheDocument();
+      expect(sidebar).toHaveAttribute('data-state', 'expanded');
+    });
+
+    it('calls onOpenChange when the sidebar is opened', async () => {
+      const setOpen = jest.fn();
+      render(
+        <SidebarContextProvider defaultOpen={false} onOpenChange={setOpen}>
+          <Sidebar.Trigger>Toggle</Sidebar.Trigger>
+          <Sidebar>
+            <Sidebar.Content>
+              <div>Sidebar Content</div>
+            </Sidebar.Content>
+          </Sidebar>
+        </SidebarContextProvider>,
+      );
+
+      const trigger = screen.getByTestId('sidebar-trigger');
+      await userEvent.click(trigger);
+
+      expect(setOpen).toHaveBeenCalledWith(true);
     });
   });
 
