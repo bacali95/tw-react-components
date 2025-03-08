@@ -44,7 +44,7 @@ export const Tables: FC = () => {
     birthDate: {
       header: 'Birth Date',
       field: 'birthDate',
-      render: (item) => getDisplayDate(new Date(item.birthDate), 'LL'),
+      render: (item) => getDisplayDate(new Date(item.birthDate), { format: 'LL' }),
     },
     ipAddress: { header: 'IP Address', field: 'ipAddress' },
   };

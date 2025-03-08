@@ -77,7 +77,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
     return result;
   }, [step, maxDate, minDate, value]);
   const displayDate = useMemo(
-    () => value && getDisplayDate(date, displayFormat, displayLocale),
+    () => value && getDisplayDate(date, { format: displayFormat, locale: displayLocale }),
     [date, value, displayFormat, displayLocale],
   );
 
