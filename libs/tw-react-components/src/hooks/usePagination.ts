@@ -4,7 +4,7 @@ export function usePagination(currentIndex: number, totalPages: number): (number
   return useMemo(() => {
     const result: (number | '...')[] = [];
 
-    result.push(currentIndex);
+    result.push(Math.min(currentIndex, totalPages));
 
     if (totalPages > 7 && currentIndex > 4) {
       for (
@@ -17,7 +17,7 @@ export function usePagination(currentIndex: number, totalPages: number): (number
       result.push('...');
       result.push(1);
     } else {
-      for (let index = currentIndex - 1; index > 0; index--) {
+      for (let index = Math.min(currentIndex, totalPages) - 1; index > 0; index--) {
         result.push(index);
       }
     }
