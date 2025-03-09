@@ -245,7 +245,7 @@ describe('LayoutContext', () => {
 
   describe('useLayoutContext hook', () => {
     it('throws an error when used outside of LayoutContextProvider', () => {
-      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => void 0);
 
       expect(() => {
         renderHook(() => useLayoutContext());

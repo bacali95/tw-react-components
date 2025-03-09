@@ -57,8 +57,12 @@ describe('isEmpty helper function', () => {
     });
 
     it('returns false for functions', () => {
-      expect(isEmpty(() => {})).toBe(false);
-      expect(isEmpty(function () {})).toBe(false);
+      expect(isEmpty(() => void 0)).toBe(false);
+      expect(
+        isEmpty(function () {
+          // empty
+        }),
+      ).toBe(false);
     });
 
     it('returns false for dates', () => {

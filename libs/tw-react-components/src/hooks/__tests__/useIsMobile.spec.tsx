@@ -92,7 +92,7 @@ describe('useIsMobile hook', () => {
     });
 
     // Create a mock for the match media event handler
-    let mediaQueryChangeHandler: Function | null = null;
+    let mediaQueryChangeHandler: any = null;
 
     // Mock addEventListener to capture the handler
     const addEventListener = jest.fn().mockImplementation((event, handler) => {

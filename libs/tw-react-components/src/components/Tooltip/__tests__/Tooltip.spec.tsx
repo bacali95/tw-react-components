@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
+import { type PropsWithChildren } from 'react';
 
 import { Tooltip } from '..';
 
@@ -132,7 +132,7 @@ describe('Tooltip Component', () => {
   });
 
   it('renders with asChild and a custom component', () => {
-    const CustomButton = ({ children, ...props }: React.PropsWithChildren<{}>) => (
+    const CustomButton = ({ children, ...props }: PropsWithChildren) => (
       <button {...props} data-testid="custom-button">
         {children}
       </button>
