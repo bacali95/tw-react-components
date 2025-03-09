@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.165](https://github.com/bacali95/tw-react-components/compare/v0.0.164...v0.0.165) (2025-03-09)
+
+
+### Features
+
+* enhance FileInput and add comprehensive test coverage ([1307b72](https://github.com/bacali95/tw-react-components/commit/1307b7242060dead44752a8bd9f33abf75b043ca))
+* enhance getDisplayDate helper with flexible formatting and localization ([7f9affb](https://github.com/bacali95/tw-react-components/commit/7f9affb23c3482fb9a72efccdfabbd1fde20cfc5))
+* improve getValueFromCookie helper with robust type support and parsing ([2626fa1](https://github.com/bacali95/tw-react-components/commit/2626fa1fe13f970f94d3b766cabc2e312cf8d9e1))
+
+
+### Bug Fixes
+
+* improve usePagination hook to handle edge cases with total pages ([035dd97](https://github.com/bacali95/tw-react-components/commit/035dd9745abf79cd598883d3e9d26c9afab3037f))
+
 ### [0.0.164](https://github.com/bacali95/tw-react-components/compare/v0.0.163...v0.0.164) (2025-02-25)
 
 
