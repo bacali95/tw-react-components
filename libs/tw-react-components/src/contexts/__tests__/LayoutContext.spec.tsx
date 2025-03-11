@@ -1,9 +1,8 @@
 import { fireEvent, render, renderHook, screen } from '@testing-library/react';
-import { type PropsWithChildren, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import * as helpers from '../../helpers';
 import {
-  type LayoutContext,
   LayoutContextProvider,
   SHOW_IDS_COOKIE_NAME,
   THEME_COOKIE_NAME,

@@ -72,21 +72,14 @@ describe('getDisplayDate helper function', () => {
     ];
 
     localeTests.forEach(({ locale, expectedPattern }) => {
-      try {
-        const result = getDisplayDate(testDate, {
-          format: 'MMMM D, YYYY',
-          locale,
-        });
+      const result = getDisplayDate(testDate, {
+        format: 'MMMM D, YYYY',
+        locale,
+      });
 
-        // If locale is successfully applied, the month name should be localized
-        // We use expectedPattern to match part of the result in case of differences in localization formats
-        expect(result).toMatch(expectedPattern);
-      } catch (error) {
-        // Skip if locale isn't available - prevents test failures in environments without locale support
-        console.warn(
-          `Locale '${locale}' test skipped. It might not be available in the test environment.`,
-        );
-      }
+      // If locale is successfully applied, the month name should be localized
+      // We use expectedPattern to match part of the result in case of differences in localization formats
+      expect(result).toMatch(expectedPattern);
     });
   });
 
@@ -126,37 +119,23 @@ describe('getDisplayDate helper function', () => {
   });
 
   it('combines locale and custom format', () => {
-    try {
-      const result = getDisplayDate(testDate, {
-        format: 'dddd, D MMMM YYYY',
-        locale: 'fr',
-      });
+    const result = getDisplayDate(testDate, {
+      format: 'dddd, D MMMM YYYY',
+      locale: 'fr',
+    });
 
-      // French formatting for Monday, May 15, 2023
-      expect(result).toMatch(/lundi, 15 mai 2023/i);
-    } catch (error) {
-      // Skip if French locale isn't available
-      console.warn(
-        'French locale test skipped. It might not be available in the test environment.',
-      );
-    }
+    // French formatting for Monday, May 15, 2023
+    expect(result).toMatch(/lundi, 15 mai 2023/i);
   });
 
   it('combines locale, offset and custom format', () => {
-    try {
-      const result = getDisplayDate(testDate, {
-        format: 'dddd, D MMMM YYYY HH:mm',
-        locale: 'de',
-        offset: 120, // +2 hours
-      });
+    const result = getDisplayDate(testDate, {
+      format: 'dddd, D MMMM YYYY HH:mm',
+      locale: 'de',
+      offset: 120, // +2 hours
+    });
 
-      // German formatting for Monday, May 15, 2023, 16:30 (+2 hours from 14:30 UTC)
-      expect(result).toMatch(/Montag, 15 Mai 2023 16:30/i);
-    } catch (error) {
-      // Skip if German locale isn't available
-      console.warn(
-        'German locale test skipped. It might not be available in the test environment.',
-      );
-    }
+    // German formatting for Monday, May 15, 2023, 16:30 (+2 hours from 14:30 UTC)
+    expect(result).toMatch(/Montag, 15 Mai 2023 16:30/i);
   });
 });

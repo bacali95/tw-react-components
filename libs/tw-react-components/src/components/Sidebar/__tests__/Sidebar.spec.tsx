@@ -109,7 +109,6 @@ describe('Sidebar Component', () => {
     });
 
     it('opens the sidebar when clicked', async () => {
-      const setOpen = jest.fn();
       render(
         <SidebarContextProvider defaultOpen={false}>
           <Sidebar.Trigger>Toggle</Sidebar.Trigger>
