@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.167](https://github.com/bacali95/tw-react-components/compare/v0.0.166...v0.0.167) (2025-03-11)
+
+
+### Bug Fixes
+
+* fix dayjs local import ([03e284e](https://github.com/bacali95/tw-react-components/commit/03e284ea0a0edb3a8419757ae96e0009bca8df24))
+
 ### [0.0.166](https://github.com/bacali95/tw-react-components/compare/v0.0.165...v0.0.166) (2025-03-09)
 
 ### [0.0.165](https://github.com/bacali95/tw-react-components/compare/v0.0.164...v0.0.165) (2025-03-09)
