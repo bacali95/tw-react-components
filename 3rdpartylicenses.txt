@@ -397,6 +397,9 @@ SOFTWARE.
 react-remove-scroll-bar
 MIT
 
+react-resizable-panels
+MIT
+
 react-style-singleton
 MIT
 MIT License
