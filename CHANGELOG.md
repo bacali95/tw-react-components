@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.168](https://github.com/bacali95/tw-react-components/compare/v0.0.167...v0.0.168) (2025-03-20)
+
+
+### Features
+
+* add Resizable component ([2e55467](https://github.com/bacali95/tw-react-components/commit/2e554677394b569a10c46292035c4bdebc9405dc))
+
 ### [0.0.167](https://github.com/bacali95/tw-react-components/compare/v0.0.166...v0.0.167) (2025-03-11)
 
 
