@@ -6,6 +6,7 @@ import {
   HomeIcon,
   LayersIcon,
   MenuIcon,
+  MoveHorizontalIcon,
   RectangleHorizontalIcon,
   SquareDotIcon,
   TableIcon,
@@ -25,6 +26,7 @@ import { FormControls } from './pages/FormControls';
 import { Hints } from './pages/Hints';
 import { Home } from './pages/Home';
 import { Menus } from './pages/Menus';
+import { ResizablePage } from './pages/Resizable';
 import { Tables } from './pages/Tables';
 import { Tabs } from './pages/Tabs';
 
@@ -79,6 +81,11 @@ export const App: FC = () => {
                   pathname: 'form-controls',
                   title: 'Form Controls',
                   Icon: TextCursorIcon,
+                },
+                {
+                  pathname: 'resizable',
+                  title: 'Resizable',
+                  Icon: MoveHorizontalIcon,
                 },
               ],
             },
@@ -138,6 +145,7 @@ export const App: FC = () => {
           <Route path="badges" element={<Badges />} />
           <Route path="hints" element={<Hints />} />
           <Route path="form-controls" element={<FormControls />} />
+          <Route path="resizable" element={<ResizablePage />} />
           <Route path="*" element={<Navigate to="" replace />} />
         </Route>
         <Route path="molecules" element={<Outlet />}>

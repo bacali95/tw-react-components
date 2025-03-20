@@ -15,6 +15,7 @@ export * from './ListSorter';
 export * from './Navbar';
 export * from './Pagination';
 export * from './Popover';
+export * from './Resizable';
 export * from './Separator';
 export * from './Sheet';
 export * from './Sidebar';
