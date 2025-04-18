@@ -69,7 +69,7 @@ export const Pagination: FC<PaginationProps> = ({
         <PaginationItem
           title="Next page"
           onClick={() => currentPage + 1 < totalPages && setCurrentPage(currentPage + 1)}
-          disabled={currentPage + 1 === totalPages || disabled}
+          disabled={!totalPages || currentPage + 1 === totalPages || disabled}
           dataTestId={`${dataTestId}-next-page`}
         >
           <ChevronRightIcon className="h-4 w-4" />
@@ -85,7 +85,7 @@ export const Pagination: FC<PaginationProps> = ({
               ),
             )
           }
-          disabled={currentPage + 1 === totalPages || disabled}
+          disabled={!totalPages || currentPage + 1 === totalPages || disabled}
           dataTestId={`${dataTestId}-last-page`}
         >
           <ChevronsRightIcon className="h-4 w-4" />
