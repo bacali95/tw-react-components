@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.170](https://github.com/bacali95/tw-react-components/compare/v0.0.169...v0.0.170) (2025-04-18)
+
+
+### Bug Fixes
+
+* update pagination component to handle cases when totalPages is 0 ([b790169](https://github.com/bacali95/tw-react-components/commit/b790169e8815f2f20433ec49230740cf9de6f682))
+
 ### [0.0.169](https://github.com/bacali95/tw-react-components/compare/v0.0.168...v0.0.169) (2025-04-18)
 
 
