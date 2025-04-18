@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 
 export function usePagination(currentIndex: number, totalPages: number): (number | '...')[] {
   return useMemo(() => {
+    if (totalPages === 0) return [];
+
     const result: (number | '...')[] = [];
 
     result.push(Math.min(currentIndex, totalPages));

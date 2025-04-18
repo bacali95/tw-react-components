@@ -133,4 +133,10 @@ describe('usePagination hook', () => {
     const numericValues = result.current.filter((item) => typeof item === 'number');
     expect(numericValues.length).toBeLessThanOrEqual(5);
   });
+
+  it('handles the case when totalPages is 0', () => {
+    const { result } = renderHook(() => usePagination(1, 0));
+
+    expect(result.current).toEqual([]);
+  });
 });
