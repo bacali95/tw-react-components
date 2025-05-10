@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.174](https://github.com/bacali95/tw-react-components/compare/v0.0.173...v0.0.174) (2025-05-10)
+
+
+### Features
+
+* add loading state to Button component and update styles in demo ([cf44a67](https://github.com/bacali95/tw-react-components/commit/cf44a67e7b8076b115bfcbfd6f830af736251653))
+* enhance dialog components with loading states and async support for onConfirm and onSubmit actions ([cac651c](https://github.com/bacali95/tw-react-components/commit/cac651c1f827db4b474d1ddff11a91164282e07e))
+
 ### [0.0.173](https://github.com/bacali95/tw-react-components/compare/v0.0.172...v0.0.173) (2025-05-10)
 
 ### [0.0.172](https://github.com/bacali95/tw-react-components/compare/v0.0.171...v0.0.172) (2025-05-10)
