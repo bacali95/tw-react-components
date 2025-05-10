@@ -106,7 +106,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
           <ChevronLeftIcon className="h-5 w-5 text-slate-400" />
         </div>
         <div
-          className="flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition duration-100 ease-in-out hover:bg-slate-100 dark:hover:bg-slate-700"
+          className="flex cursor-pointer items-center gap-1 rounded-sm px-2 py-1 transition duration-100 ease-in-out hover:bg-slate-100 dark:hover:bg-slate-700"
           onClick={nextCalendarView}
           data-testid={`${dataTestId}-view-selector`}
         >

@@ -18,7 +18,7 @@ module.exports = plugin(
           border: 'hsl(var(--border))',
           input: 'hsl(var(--input))',
           ring: 'hsl(var(--ring))',
-          background: 'hsl(var(--background))',
+          background: 'var(--background)',
           foreground: 'hsl(var(--foreground))',
           primary: {
             DEFAULT: 'hsl(var(--primary))',
@@ -49,11 +49,11 @@ module.exports = plugin(
             foreground: 'hsl(var(--card-foreground))',
           },
           sidebar: {
-            DEFAULT: 'hsl(var(--sidebar-background))',
+            DEFAULT: 'var(--sidebar-background)',
             foreground: 'hsl(var(--sidebar-foreground))',
             primary: 'hsl(var(--sidebar-primary))',
             'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-            accent: 'hsl(var(--sidebar-accent))',
+            accent: 'var(--sidebar-accent)',
             'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
             border: 'hsl(var(--sidebar-border))',
             ring: 'hsl(var(--sidebar-ring))',

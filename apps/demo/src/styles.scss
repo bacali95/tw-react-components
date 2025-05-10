@@ -1,8 +1,5 @@
-@tailwind components;
-@tailwind base;
-@tailwind utilities;
-
 @import '../../../libs/tw-react-components/index.css';
+@config '../tailwind.config.cjs';
 
 @font-face {
   font-family: 'Inter var';

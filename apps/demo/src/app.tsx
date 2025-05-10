@@ -33,6 +33,7 @@ import { Tabs } from './pages/Tabs';
 export const App: FC = () => {
   const sidebarProps: LayoutSidebarProps = useMemo(
     () => ({
+      variant: 'inset',
       header: (
         <Link to="/">
           <Sidebar.MenuButton

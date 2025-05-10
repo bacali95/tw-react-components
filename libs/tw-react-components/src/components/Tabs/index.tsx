@@ -43,8 +43,8 @@ const TabsTrigger: FC<TabsTriggerProps> = ({
 }) => (
   <TabsPrimitive.Trigger
     className={cn(
-      'inline-flex w-full items-center justify-center whitespace-nowrap rounded-md px-2 py-1.5 font-medium transition-all hover:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800',
-      'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow dark:data-[state=active]:bg-slate-700 dark:data-[state=active]:text-white',
+      'inline-flex w-full items-center justify-center rounded-md px-2 py-1.5 font-medium whitespace-nowrap transition-all hover:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800',
+      'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-700 dark:data-[state=active]:text-white',
       className,
     )}
     data-testid={dataTestId}

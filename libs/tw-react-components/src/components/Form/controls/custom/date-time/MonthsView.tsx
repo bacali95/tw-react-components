@@ -91,14 +91,17 @@ const Month: FC<MonthProps> = ({
 
   return (
     <div
-      className={cn('mx-auto flex w-14 items-center justify-center rounded border py-3 text-sm', {
-        'border-blue-500': isEqualThisMonth,
-        'border-transparent': !isEqualThisMonth,
-        'bg-blue-500 text-white': isSelected,
-        'cursor-pointer': isSelectable,
-        'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
-        'text-slate-400 dark:text-slate-500': !isSelectable,
-      })}
+      className={cn(
+        'mx-auto flex w-14 items-center justify-center rounded-sm border py-3 text-sm',
+        {
+          'border-blue-500': isEqualThisMonth,
+          'border-transparent': !isEqualThisMonth,
+          'bg-blue-500 text-white': isSelected,
+          'cursor-pointer': isSelectable,
+          'hover:bg-blue-100 dark:hover:bg-blue-900': isSelectable && !isSelected,
+          'text-slate-400 dark:text-slate-500': !isSelectable,
+        },
+      )}
       onClick={isSelectable ? selectMonth(month) : undefined}
       data-testid={`${dataTestId}-month-${month}`}
     >

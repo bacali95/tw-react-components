@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import type { NavLinkProps, useLocation } from 'react-router';
 
 import { cn } from '../../helpers';
+import { Block } from '../Block';
 import { Collapsible } from '../Collapsible';
 import { Flex } from '../Flex';
 import type { NavbarProps } from '../Navbar';
@@ -46,9 +47,24 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   NavLink,
   useLocation,
 }) => {
+  const Wrapper = ({ children }: PropsWithChildren) =>
+    sidebarProps.variant === 'inset' ? (
+      <Block className="overflow-hidden p-2" fullHeight fullWidth>
+        <Block className="bg-background overflow-hidden rounded-xl shadow-sm" fullHeight fullWidth>
+          {children}
+        </Block>
+      </Block>
+    ) : (
+      children
+    );
+
   return (
-    <Flex className="h-screen w-screen gap-0 text-black dark:bg-slate-900 dark:text-white">
-      <Sidebar collapsible="icon" {...sidebarProps}>
+    <Flex className="bg-sidebar h-screen w-screen gap-0 text-black dark:text-white">
+      <Sidebar
+        collapsible="icon"
+        {...sidebarProps}
+        className={cn('h-full overflow-hidden', sidebarProps.className)}
+      >
         {header && (
           <Sidebar.Header>
             <Sidebar.Menu>
@@ -101,19 +117,21 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
             </Sidebar.Menu>
           </Sidebar.Footer>
         )}
-        <Sidebar.Rail />
+        {sidebarProps.variant === 'sidebar' && <Sidebar.Rail />}
       </Sidebar>
-      <Flex className="gap-0 overflow-hidden" direction="column" fullHeight fullWidth>
-        {navbarProps && <Navbar {...navbarProps} />}
-        <Flex
-          className={cn('overflow-hidden p-3', className)}
-          direction="column"
-          fullWidth
-          fullHeight
-        >
-          {children}
+      <Wrapper>
+        <Flex className="gap-0 overflow-hidden" direction="column" fullWidth fullHeight>
+          {navbarProps && <Navbar {...navbarProps} />}
+          <Flex
+            className={cn('overflow-hidden p-3', className)}
+            direction="column"
+            fullWidth
+            fullHeight
+          >
+            {children}
+          </Flex>
         </Flex>
-      </Flex>
+      </Wrapper>
     </Flex>
   );
 };

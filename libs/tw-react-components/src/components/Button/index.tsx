@@ -22,7 +22,7 @@ type VariantClassNames = Record<
 const variantClassNames: VariantClassNames = {
   filled: {
     slate: {
-      base: 'bg-slate-100 dark:bg-slate-800',
+      base: 'bg-slate-100 dark:bg-slate-900/70',
       hover: 'hover:bg-slate-200 dark:hover:bg-slate-700',
       focus: 'focus:bg-slate-200 dark:focus:bg-slate-700',
       active: 'active:bg-slate-300 dark:active:bg-slate-800/50',
@@ -511,7 +511,7 @@ export const Button: FC<ButtonProps> = ({
       props.disabled
         ? 'cursor-not-allowed opacity-50'
         : !unstyled
-          ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active}`
+          ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active} cursor-pointer`
           : 'cursor-default',
       children ? `${sizeClassNames[size].withChildren} aspect-[initial]` : 'justify-center',
       className,

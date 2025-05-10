@@ -17,7 +17,7 @@ export const Switch: FC<SwitchProps> = ({
   <SwitchPrimitives.Root
     className={cn(
       'peer inline-flex h-[calc(1.5rem+6px)] w-[calc(3rem+6px)] shrink-0 cursor-pointer items-center rounded-full border-[3px] border-transparent',
-      'transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-600 focus-visible:ring-offset-2',
+      'transition-colors focus-visible:ring-2 focus-visible:ring-slate-600 focus-visible:ring-offset-2 focus-visible:outline-hidden',
       'focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-blue-600 data-[state=unchecked]:bg-slate-300',
       'dark:focus-visible:ring-slate-200 dark:focus-visible:ring-offset-slate-800 dark:data-[state=checked]:bg-blue-700 dark:data-[state=unchecked]:bg-slate-700',
       className,

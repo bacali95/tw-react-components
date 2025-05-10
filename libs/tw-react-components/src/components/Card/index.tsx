@@ -11,7 +11,7 @@ export const Card: FC<BlockProps> = ({
   ...blockProps
 }) => (
   <Block
-    className={cn('rounded-lg border p-2 dark:border-slate-700 dark:bg-slate-900', className)}
+    className={cn('bg-background rounded-lg border p-2 dark:border-slate-700', className)}
     dataTestId={dataTestId}
     {...blockProps}
   >

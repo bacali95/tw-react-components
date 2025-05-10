@@ -262,7 +262,7 @@ export const SelectInput = <T,>({
         {filteredItems.length === 0 &&
           (allowAddition && searchValue ? (
             <button
-              className="rounded bg-slate-100 py-1.5 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
+              className="rounded-sm bg-slate-100 py-1.5 text-center hover:bg-slate-200 dark:bg-slate-900/30 dark:hover:bg-slate-700/30"
               onClick={handleOnAddItemClicked}
               data-testid={`${dataTestId}-add-button`}
             >

@@ -66,7 +66,7 @@ describe('Sidebar Component', () => {
 
     const sidebar = screen.getByTestId('sidebar');
     expect(sidebar).toBeInTheDocument();
-    expect(sidebar).toHaveClass('flex', 'h-full', 'w-[--sidebar-width]');
+    expect(sidebar).toHaveClass('flex', 'h-full', 'w-(--sidebar-width)');
   });
 
   it('applies custom className', () => {

@@ -46,7 +46,7 @@ export function ListSorterDialog<T extends ListSorterItem>({
   const customRenderer = (item: T, index: number, listeners?: SyntheticListenerMap) => (
     <Flex
       align="center"
-      className="gap-4 p-4 focus:outline-none dark:bg-slate-900 hover:dark:bg-slate-800"
+      className="gap-4 p-4 focus:outline-hidden dark:bg-slate-900 hover:dark:bg-slate-800"
       data-testid={`${dataTestId}-item-${index}`}
     >
       <Flex

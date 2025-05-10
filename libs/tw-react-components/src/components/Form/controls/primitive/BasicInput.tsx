@@ -170,7 +170,7 @@ export const BasicInput = <Type extends InputType>({
           <input
             id={id}
             className={cn(
-              'rounded border-slate-300 text-blue-600',
+              'rounded-sm border-slate-300 text-blue-600',
               sizeClasses[size].checkbox.input,
               {
                 [inputClasses.base.disabled]: props.disabled,
@@ -207,7 +207,7 @@ export const BasicInput = <Type extends InputType>({
         {clearable && (onClear || !!props.value) && !props.disabled && (
           <XIcon
             className={cn(
-              'absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-0.5 opacity-0 duration-200 hover:bg-slate-200 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-800',
+              'absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-0.5 opacity-0 duration-200 group-hover:opacity-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-800',
               sizeClasses[size].clearButton.base,
               {
                 [sizeClasses[size].clearButton.withSuffixIcon]: SuffixIcon,

@@ -31,7 +31,7 @@ const TableHead: FC<TableHeadProps> = ({
 }) => (
   <thead
     className={cn(
-      'border-b bg-slate-100 text-slate-800 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300',
+      'bg-background border-b text-slate-800 dark:border-slate-700 dark:text-slate-300',
       className,
     )}
     data-testid={dataTestId}
@@ -67,10 +67,7 @@ const TableBody: FC<TableBodyProps> = ({
   ...props
 }) => (
   <tbody
-    className={cn(
-      'divide-y divide-slate-200 bg-slate-50/80 dark:divide-slate-700 dark:bg-slate-900',
-      className,
-    )}
+    className={cn('bg-background divide-y divide-slate-200 dark:divide-slate-700', className)}
     data-testid={dataTestId}
     {...props}
   >
@@ -114,7 +111,7 @@ const TableFooter: FC<TableFooterProps> = ({
   ...props
 }) => (
   <tfoot
-    className={cn('bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300', className)}
+    className={cn('bg-background text-slate-800 dark:text-slate-300', className)}
     data-testid={dataTestId}
     {...props}
   >

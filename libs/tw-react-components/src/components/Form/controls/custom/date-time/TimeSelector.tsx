@@ -44,13 +44,13 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
       <div className="flex flex-grow justify-center gap-2">
         <div className="flex flex-col items-center justify-center">
           <ChevronUpIcon
-            className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
+            className="h-4 w-4 rounded-sm hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('hours', 1)}
             {...increaseHours}
             data-testid={`${dataTestId}-hours-up`}
           />
           <ChevronDownIcon
-            className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
+            className="h-4 w-4 rounded-sm hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('hours', -1)}
             {...decreaseHours}
             data-testid={`${dataTestId}-hours-down`}
@@ -75,13 +75,13 @@ export const TimeSelector: FC<TimeSelectorProps> = ({
         </div>
         <div className="flex flex-col items-center justify-center">
           <ChevronUpIcon
-            className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
+            className="h-4 w-4 rounded-sm hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('minutes', step)}
             {...increaseMinutes}
             data-testid={`${dataTestId}-minutes-up`}
           />
           <ChevronDownIcon
-            className="h-4 w-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700"
+            className="h-4 w-4 rounded-sm hover:bg-slate-100 dark:hover:bg-slate-700"
             onClick={editDateField('minutes', -step)}
             {...decreaseMinutes}
             data-testid={`${dataTestId}-minutes-down`}

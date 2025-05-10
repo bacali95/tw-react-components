@@ -150,7 +150,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
 
       {isOpen && (
         <div
-          className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+          className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow-sm duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
           tabIndex={0}
           onBlur={handleOnBlur}
           ref={calendarRef}
@@ -171,7 +171,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
           )}
           {calendarView === 'days' && (
             <div
-              className="flex select-none items-center justify-end gap-2 px-3 py-2"
+              className="flex items-center justify-end gap-2 px-3 py-2 select-none"
               data-testid={`${dataTestId}-time-selector`}
             >
               {type?.includes('time') && (
@@ -185,7 +185,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
                 />
               )}
               <div
-                className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold uppercase text-blue-600 transition duration-100 ease-in-out hover:bg-slate-100 dark:text-blue-500 dark:hover:bg-slate-700"
+                className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold text-blue-600 uppercase transition duration-100 ease-in-out hover:bg-slate-100 dark:text-blue-500 dark:hover:bg-slate-700"
                 onClick={() => setIsOpen(false)}
                 data-testid={`${dataTestId}-ok`}
               >

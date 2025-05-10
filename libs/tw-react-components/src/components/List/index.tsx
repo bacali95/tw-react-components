@@ -13,7 +13,7 @@ export type ListContentProps = ComponentProps<'div'> & {
 const ListContent: FC<ListContentProps> = ({ className, dataTestId = 'list', ...props }) => (
   <Block
     className={cn(
-      'z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 bg-white p-1 text-slate-700 shadow-md dark:border-slate-700 dark:bg-slate-900 dark:text-white',
+      'bg-background z-50 min-w-[8rem] overflow-hidden rounded-md border border-slate-100 p-1 text-slate-700 shadow-md dark:border-slate-700 dark:text-white',
       className,
     )}
     dataTestId={dataTestId}
@@ -42,7 +42,7 @@ const ListItem: FC<ListItemProps> = ({
   <Flex
     className={cn(
       labelSizeClasses[size],
-      'relative cursor-default select-none gap-2 rounded-md outline-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
+      'relative cursor-default gap-2 rounded-md outline-hidden select-none focus:bg-slate-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-slate-700',
       inset && 'pl-8',
       className,
     )}
