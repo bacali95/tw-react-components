@@ -9,7 +9,7 @@ import { getDisplayDate } from '../getDisplayDate';
 
 describe('getDisplayDate helper function', () => {
   // Fixed test date to avoid test flakiness
-  const testDate = new Date('2023-05-15T14:30:00Z'); // May 15, 2023, 14:30 UTC
+  const testDate = new Date('2023-05-15T14:30:00'); // May 15, 2023, 14:30
 
   it('formats date with default settings', () => {
     const result = getDisplayDate(testDate, {});
@@ -84,7 +84,7 @@ describe('getDisplayDate helper function', () => {
   });
 
   it('formats dates with timestamps correctly', () => {
-    const dateWithTime = new Date('2023-05-15T14:30:45Z');
+    const dateWithTime = new Date('2023-05-15T14:30:45');
 
     const result = getDisplayDate(dateWithTime, { format: 'YYYY-MM-DD HH:mm:ss' });
     expect(result).toBe('2023-05-15 14:30:45');
@@ -92,18 +92,18 @@ describe('getDisplayDate helper function', () => {
 
   it('handles edge cases correctly', () => {
     // Test with last day of month
-    const lastDayOfMonth = new Date('2023-02-28T12:00:00Z');
+    const lastDayOfMonth = new Date('2023-02-28T12:00:00');
     const result1 = getDisplayDate(lastDayOfMonth, { format: 'YYYY-MM-DD' });
     expect(result1).toBe('2023-02-28');
 
     // Test with leap year
-    const leapYearDate = new Date('2024-02-29T12:00:00Z');
+    const leapYearDate = new Date('2024-02-29T12:00:00');
     const result2 = getDisplayDate(leapYearDate, { format: 'YYYY-MM-DD' });
     expect(result2).toBe('2024-02-29');
 
     // Test with daylight saving time changes
     // Note: This may differ based on the timezone of the test environment
-    const dstDate = new Date('2023-03-12T02:30:00Z'); // Around when DST often changes
+    const dstDate = new Date('2023-03-12T02:30:00'); // Around when DST often changes
     const result3 = getDisplayDate(dstDate, { format: 'YYYY-MM-DD HH:mm' });
     expect(result3).toBe('2023-03-12 02:30');
   });

@@ -84,7 +84,7 @@ describe('Table Component', () => {
       const head = screen.getByTestId('table-head');
       expect(head).toBeInTheDocument();
       expect(head.tagName).toBe('THEAD');
-      expect(head).toHaveClass('border-b', 'bg-slate-100', 'text-slate-800');
+      expect(head).toHaveClass('border-b', 'bg-background', 'text-slate-800');
     });
 
     it('applies custom className while maintaining default classes', () => {
@@ -100,7 +100,7 @@ describe('Table Component', () => {
 
       const head = screen.getByTestId('table-head');
       expect(head).toHaveClass('custom-head-class');
-      expect(head).toHaveClass('border-b', 'bg-slate-100'); // Default classes
+      expect(head).toHaveClass('border-b', 'bg-background'); // Default classes
     });
 
     it('applies custom dataTestId', () => {
@@ -203,7 +203,7 @@ describe('Table Component', () => {
       const body = screen.getByTestId('table-body');
       expect(body).toBeInTheDocument();
       expect(body.tagName).toBe('TBODY');
-      expect(body).toHaveClass('divide-y', 'bg-slate-50/80');
+      expect(body).toHaveClass('divide-y', 'bg-background');
     });
 
     it('applies custom className while maintaining default classes', () => {
@@ -219,7 +219,7 @@ describe('Table Component', () => {
 
       const body = screen.getByTestId('table-body');
       expect(body).toHaveClass('custom-body-class');
-      expect(body).toHaveClass('divide-y', 'bg-slate-50/80'); // Default classes
+      expect(body).toHaveClass('divide-y', 'bg-background'); // Default classes
     });
 
     it('applies custom dataTestId', () => {
@@ -371,7 +371,7 @@ describe('Table Component', () => {
       const footer = screen.getByTestId('table-footer');
       expect(footer).toBeInTheDocument();
       expect(footer.tagName).toBe('TFOOT');
-      expect(footer).toHaveClass('bg-slate-100', 'text-slate-800');
+      expect(footer).toHaveClass('bg-background', 'text-slate-800');
     });
 
     it('applies custom className while maintaining default classes', () => {
@@ -387,7 +387,7 @@ describe('Table Component', () => {
 
       const footer = screen.getByTestId('table-footer');
       expect(footer).toHaveClass('custom-footer-class');
-      expect(footer).toHaveClass('bg-slate-100', 'text-slate-800'); // Default classes
+      expect(footer).toHaveClass('bg-background', 'text-slate-800'); // Default classes
     });
 
     it('applies custom dataTestId', () => {

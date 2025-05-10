@@ -114,8 +114,8 @@ describe('compareDates helper function', () => {
     });
 
     it('returns correct result for different days with startOf day', () => {
-      const date1 = new Date('2023-05-16T02:30:00Z');
-      const date2 = new Date('2023-05-15T23:45:00Z');
+      const date1 = new Date('2023-05-16T02:30:00');
+      const date2 = new Date('2023-05-15T23:45:00');
 
       const result = compareDates(date1, date2, 'day');
 
@@ -124,8 +124,8 @@ describe('compareDates helper function', () => {
     });
 
     it('returns correct result for different months with startOf month', () => {
-      const date1 = new Date('2023-06-01T00:00:00Z');
-      const date2 = new Date('2023-05-31T23:59:59Z');
+      const date1 = new Date('2023-06-01T00:00:00');
+      const date2 = new Date('2023-05-31T23:59:59');
 
       const result = compareDates(date1, date2, 'month');
 
