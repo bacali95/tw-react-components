@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.175](https://github.com/bacali95/tw-react-components/compare/v0.0.174...v0.0.175) (2025-05-10)
+
+
+### Bug Fixes
+
+* improve sidebar swipe gesture handling for mobile and desktop ([27a8a5d](https://github.com/bacali95/tw-react-components/commit/27a8a5d835c373daf582e77f28b92714f9827ba3))
+
 ### [0.0.174](https://github.com/bacali95/tw-react-components/compare/v0.0.173...v0.0.174) (2025-05-10)
 
 
