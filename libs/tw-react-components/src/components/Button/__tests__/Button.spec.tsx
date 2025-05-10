@@ -182,4 +182,14 @@ describe('Button Component', () => {
     expect(buttonElement).toHaveAttribute('id', 'special-button');
     expect(buttonElement).toHaveAttribute('aria-label', 'Special Button');
   });
+
+  it('renders loading state', () => {
+    const { getByTestId } = render(<Button loading>Loading Button</Button>);
+    const buttonElement = getByTestId('button');
+    expect(buttonElement).toHaveAttribute('disabled');
+    expect(buttonElement).toHaveClass('cursor-not-allowed');
+    expect(buttonElement).toHaveClass('opacity-50');
+    const spinner = getByTestId('button-spinner');
+    expect(spinner).toBeInTheDocument();
+  });
 });

@@ -2,6 +2,8 @@ import type { LucideIcon } from 'lucide-react';
 import type { ComponentProps, FC } from 'react';
 
 import { cn } from '../../helpers';
+import { Flex } from '../Flex';
+import { Spinner } from '../Spinner';
 import type { Color, Size } from '../types';
 
 export type ButtonVariant = 'filled' | 'outlined' | 'text';
@@ -483,6 +485,7 @@ export type ButtonProps = ComponentProps<'button'> & {
   color?: Color;
   variant?: ButtonVariant;
   rounded?: boolean;
+  loading?: boolean;
   prefixIcon?: LucideIcon;
   suffixIcon?: LucideIcon;
   unstyled?: boolean;
@@ -496,6 +499,8 @@ export const Button: FC<ButtonProps> = ({
   color = 'slate',
   variant = 'filled',
   rounded,
+  loading,
+  disabled,
   prefixIcon: PrefixIcon,
   suffixIcon: SuffixIcon,
   unstyled,
@@ -508,7 +513,7 @@ export const Button: FC<ButtonProps> = ({
       sizeClassNames[size].base,
       variantClassNames[variant][color].base,
       rounded ? 'rounded-full' : 'rounded-md',
-      props.disabled
+      disabled || loading
         ? 'cursor-not-allowed opacity-50'
         : !unstyled
           ? `${variantClassNames[variant][color].hover} ${variantClassNames[variant][color].focus} ${variantClassNames[variant][color].active} cursor-pointer`
@@ -518,8 +523,21 @@ export const Button: FC<ButtonProps> = ({
     )}
     data-testid={dataTestId}
     type="button"
+    disabled={disabled || loading}
     {...props}
   >
+    {loading && (
+      <Flex
+        className={cn('absolute inset-0', rounded ? 'rounded-full' : 'rounded-md')}
+        align="center"
+        justify="center"
+      >
+        <Spinner
+          className="h-5 w-5 animate-spin bg-transparent dark:bg-transparent"
+          dataTestId={`${dataTestId}-spinner`}
+        />
+      </Flex>
+    )}
     {PrefixIcon && (
       <PrefixIcon
         className={
