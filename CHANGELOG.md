@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.172](https://github.com/bacali95/tw-react-components/compare/v0.0.171...v0.0.172) (2025-05-10)
+
+
+### Bug Fixes
+
+* adjust class order in FormGroup and DaysView components for consistent styling ([7a756d6](https://github.com/bacali95/tw-react-components/commit/7a756d6209391ae85e87b0f9f82b1b2a28855e83))
+
 ### [0.0.171](https://github.com/bacali95/tw-react-components/compare/v0.0.170...v0.0.171) (2025-05-10)
 
 ### [0.0.170](https://github.com/bacali95/tw-react-components/compare/v0.0.169...v0.0.170) (2025-04-18)
