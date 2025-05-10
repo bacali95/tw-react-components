@@ -14,7 +14,7 @@ export const FormGroup: FC<FormGroupProps> = ({ className, label, children }) =>
     direction="column"
     fullWidth
   >
-    <div className="absolute right-0 top-0 rounded-bl-lg rounded-tr-lg bg-slate-500 px-2 py-1 font-medium text-white dark:bg-slate-900 dark:text-white">
+    <div className="absolute top-0 right-0 rounded-tr-lg rounded-bl-lg bg-slate-500 px-2 py-1 font-medium text-white dark:bg-slate-900 dark:text-white">
       {label}
     </div>
     {children}

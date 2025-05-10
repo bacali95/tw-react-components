@@ -111,7 +111,7 @@ export const DaysView: FC<DaysViewProps> = ({
         {days.map((day, index) => (
           <span
             key={index}
-            className="flex h-8 w-8 items-center justify-center text-xs uppercase text-slate-500 dark:text-slate-400"
+            className="flex h-8 w-8 items-center justify-center text-xs text-slate-500 uppercase dark:text-slate-400"
             data-testid={`${dataTestId}-weekday-${index}`}
           >
             {day.shortName}
