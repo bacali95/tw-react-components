@@ -32,6 +32,7 @@ export const Dialogs: FC = () => {
 
   const handleConfirmDialog = (action: string) => () => {
     alert(`${action} clicked!`);
+    toggleDialog('confirm')();
   };
 
   const handleLogin = (login: Login) => {

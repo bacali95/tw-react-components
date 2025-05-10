@@ -67,7 +67,11 @@ export const FormDialog = <T extends FieldValues>({
           {extraAction}
           <As.Footer className="ml-auto" dataTestId={`${dataTestId}-actions`}>
             <As.Close asChild>
-              <Button color="red" dataTestId={`${dataTestId}-cancel-button`}>
+              <Button
+                color="red"
+                dataTestId={`${dataTestId}-cancel-button`}
+                disabled={form.formState.isSubmitting}
+              >
                 {cancelLabel}
               </Button>
             </As.Close>
@@ -75,7 +79,7 @@ export const FormDialog = <T extends FieldValues>({
               color="green"
               type="submit"
               form={`form-${id}`}
-              disabled={form.formState.isSubmitting}
+              loading={form.formState.isSubmitting}
               dataTestId={`${dataTestId}-submit-button`}
             >
               {submitLabel}

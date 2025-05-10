@@ -17,7 +17,7 @@ export type ListSorterDialogProps<T extends ListSorterItem> = {
 } & Omit<ListSorterProps<T>, 'onChange'> & {
     cancelLabel?: string;
     submitLabel?: string;
-    onSubmit: (items: T[]) => void;
+    onSubmit: (items: T[]) => void | Promise<void>;
   };
 
 export function ListSorterDialog<T extends ListSorterItem>({
@@ -34,6 +34,7 @@ export function ListSorterDialog<T extends ListSorterItem>({
   dataTestId = 'list-sorter-dialog',
 }: ListSorterDialogProps<T>) {
   const [sortedItems, setSortedItems] = useState<T[]>(structuredClone(items));
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -41,7 +42,11 @@ export function ListSorterDialog<T extends ListSorterItem>({
     }
   }, [items, open]);
 
-  const preFinish = () => onSubmit(sortedItems);
+  const handleSubmit = async () => {
+    setLoading(true);
+    await onSubmit(sortedItems);
+    setLoading(false);
+  };
 
   const customRenderer = (item: T, index: number, listeners?: SyntheticListenerMap) => (
     <Flex
@@ -82,11 +87,16 @@ export function ListSorterDialog<T extends ListSorterItem>({
         />
         <Dialog.Footer dataTestId={`${dataTestId}-footer`}>
           <Dialog.Close asChild>
-            <Button color="red" dataTestId={`${dataTestId}-cancel-button`}>
+            <Button color="red" disabled={loading} dataTestId={`${dataTestId}-cancel-button`}>
               {cancelLabel ?? 'Cancel'}
             </Button>
           </Dialog.Close>
-          <Button color="green" onClick={preFinish} dataTestId={`${dataTestId}-submit-button`}>
+          <Button
+            color="green"
+            loading={loading}
+            onClick={handleSubmit}
+            dataTestId={`${dataTestId}-submit-button`}
+          >
             {submitLabel ?? 'Submit'}
           </Button>
         </Dialog.Footer>
