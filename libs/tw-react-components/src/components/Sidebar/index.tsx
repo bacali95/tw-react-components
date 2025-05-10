@@ -96,9 +96,15 @@ export const SidebarContextProvider: FC<SidebarContextProviderProps> = ({
   }, [isMobile, setOpen, setOpenMobile]);
 
   // Add swipe gesture support for opening and closing the sidebar.
-  useOnSwipe(screenRef, (direction) =>
-    direction === 'right' ? setOpen(true) : direction === 'left' && setOpen(false),
-  );
+  useOnSwipe(screenRef, (direction) => {
+    const _setOpen = isMobile ? setOpenMobile : setOpen;
+
+    if (direction === 'right') {
+      _setOpen(true);
+    } else if (direction === 'left') {
+      _setOpen(false);
+    }
+  });
 
   // Adds a keyboard shortcut to toggle the sidebar.
   useEffect(() => {
