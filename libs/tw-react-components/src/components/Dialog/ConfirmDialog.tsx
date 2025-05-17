@@ -27,8 +27,13 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
 
   const handleConfirm = async () => {
     setLoading(true);
-    await onConfirm();
-    setLoading(false);
+    try {
+      await onConfirm();
+    } catch {
+      setLoading(false);
+    }
+
+    onClose();
   };
 
   return (

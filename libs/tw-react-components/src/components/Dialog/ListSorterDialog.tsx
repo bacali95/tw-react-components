@@ -44,8 +44,13 @@ export function ListSorterDialog<T extends ListSorterItem>({
 
   const handleSubmit = async () => {
     setLoading(true);
-    await onSubmit(sortedItems);
-    setLoading(false);
+    try {
+      await onSubmit(sortedItems);
+    } catch {
+      setLoading(false);
+    }
+
+    onClose();
   };
 
   const customRenderer = (item: T, index: number, listeners?: SyntheticListenerMap) => (

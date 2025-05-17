@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 import { ConfirmDialog } from '..';
 
@@ -38,14 +38,17 @@ describe('ConfirmDialog', () => {
     expect(screen.queryByTestId('confirm-dialog-no-button')).not.toBeInTheDocument();
   });
 
-  it('calls onConfirm when Yes button is clicked', () => {
+  it('calls onConfirm and onClose when Yes button is clicked', async () => {
     render(<ConfirmDialog {...defaultProps}>Are you sure?</ConfirmDialog>);
 
-    // Click the Yes button
-    fireEvent.click(screen.getByTestId('confirm-dialog-yes-button'));
+    await act(async () => {
+      // Click the Yes button
+      fireEvent.click(screen.getByTestId('confirm-dialog-yes-button'));
+    });
 
     // Check that onConfirm was called
     expect(defaultProps.onConfirm).toHaveBeenCalledTimes(1);
+    expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 
   it('calls onClose when No button is clicked', () => {

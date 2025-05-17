@@ -89,7 +89,7 @@ describe('ListSorterDialog', () => {
     expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onSubmit with sorted items when Submit button is clicked', async () => {
+  it('calls onSubmit and onClose with sorted items when Submit button is clicked', async () => {
     const onSubmitMock = jest.fn();
     render(<ListSorterDialog {...defaultProps} onSubmit={onSubmitMock} />);
 
@@ -105,8 +105,10 @@ describe('ListSorterDialog', () => {
       }
     });
 
-    // Click the Submit button
-    fireEvent.click(screen.getByTestId('list-sorter-dialog-submit-button'));
+    await act(async () => {
+      // Click the Submit button
+      fireEvent.click(screen.getByTestId('list-sorter-dialog-submit-button'));
+    });
 
     // Uncomment and adjust this expectation once the test is working
     expect(onSubmitMock).toHaveBeenCalledWith([
@@ -114,6 +116,7 @@ describe('ListSorterDialog', () => {
       { ...mockItems[0], rank: 1 }, // Item 1 moved down
       { ...mockItems[2], rank: 2 }, // Item 3 unchanged
     ]);
+    expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 
   it('renders custom button labels when provided', () => {
