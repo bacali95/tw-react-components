@@ -29,7 +29,7 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
     setLoading(true);
     try {
       await onConfirm();
-    } catch {
+    } finally {
       setLoading(false);
     }
 

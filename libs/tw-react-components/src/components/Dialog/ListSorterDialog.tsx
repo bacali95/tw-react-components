@@ -46,7 +46,7 @@ export function ListSorterDialog<T extends ListSorterItem>({
     setLoading(true);
     try {
       await onSubmit(sortedItems);
-    } catch {
+    } finally {
       setLoading(false);
     }
 
