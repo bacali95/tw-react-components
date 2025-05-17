@@ -63,6 +63,7 @@ export type DataTableAction<T> = {
   ) => { type: 'badge'; props: HintBadgeProps } | { type: 'dot'; props: HintDotProps } | boolean;
   color?: Color;
   hide?: boolean | ((item: T) => boolean);
+  loading?: boolean;
   onClick: (item: T, rowIndex: number) => void;
 };
 
@@ -325,6 +326,7 @@ export function DataTable<T>({
                             size="small"
                             prefixIcon={action.icon}
                             color={action.color}
+                            loading={action.loading}
                             onClick={handleActionClicked(action, item, rowIndex)}
                             children={action.label}
                             dataTestId={`${dataTestId}-action-button-${rowIndex}-${actionIndex}`}
