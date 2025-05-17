@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.176](https://github.com/bacali95/tw-react-components/compare/v0.0.175...v0.0.176) (2025-05-17)
+
+
+### Bug Fixes
+
+* handle loading state and ensure onClose is called in ConfirmDialog and ListSorterDialog components ([7508132](https://github.com/bacali95/tw-react-components/commit/7508132cc9567c96ac4ef17bbb2bb18cfe6ec44c))
+
 ### [0.0.175](https://github.com/bacali95/tw-react-components/compare/v0.0.174...v0.0.175) (2025-05-10)
 
 
