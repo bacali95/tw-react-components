@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.178](https://github.com/bacali95/tw-react-components/compare/v0.0.177...v0.0.178) (2025-05-17)
+
+
+### Bug Fixes
+
+* ensure loading state is reset after async operations in ConfirmDialog and ListSorterDialog components ([6d71fcf](https://github.com/bacali95/tw-react-components/commit/6d71fcfe7fade8419dac118ab46acb7b3e73e055))
+
 ### [0.0.177](https://github.com/bacali95/tw-react-components/compare/v0.0.176...v0.0.177) (2025-05-17)
 
 
