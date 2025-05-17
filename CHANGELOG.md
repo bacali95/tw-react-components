@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.177](https://github.com/bacali95/tw-react-components/compare/v0.0.176...v0.0.177) (2025-05-17)
+
+
+### Features
+
+* add loading state to DataTable actions for improved user feedback ([8e8339b](https://github.com/bacali95/tw-react-components/commit/8e8339b5aa8842ecde7fa7f287207163112a3296))
+
 ### [0.0.176](https://github.com/bacali95/tw-react-components/compare/v0.0.175...v0.0.176) (2025-05-17)
 
 
