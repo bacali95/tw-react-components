@@ -2,7 +2,7 @@ import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router';
 
-import { LayoutContextProvider, SidebarContextProvider, Spinner } from 'tw-react-components';
+import { LayoutContextProvider, SidebarContextProvider, Spinner, Toaster } from 'tw-react-components';
 
 import { App } from './app';
 
@@ -14,6 +14,8 @@ root.render(
         <LayoutContextProvider>
           <SidebarContextProvider>
             <App />
+      <Toaster />
+
           </SidebarContextProvider>
         </LayoutContextProvider>
       </HashRouter>

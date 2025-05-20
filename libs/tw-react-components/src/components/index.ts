@@ -25,6 +25,8 @@ export * from './Switch';
 export * from './Table';
 export * from './Tabs';
 export * from './ThemeSelector';
+export * from './Toast';
+export * from './Toaster';
 export * from './Tooltip';
 
 export * from './types';

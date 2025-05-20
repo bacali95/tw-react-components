@@ -26,8 +26,11 @@
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --success: var(--color-green-500);
+    --success-foreground: var(--color-neutral-50);
+
+    --destructive: var(--color-red-500);
+    --destructive-foreground: var(--color-neutral-50);
 
     --ring: 215 20.2% 65.1%;
 
@@ -68,8 +71,11 @@
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --success: var(--color-green-600);
+    --success-foreground: var(--color-gray-100);
+
+    --destructive: var(--color-red-600);
+    --destructive-foreground: var(--color-gray-100);
 
     --ring: 216 34% 17%;
 

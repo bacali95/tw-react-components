@@ -1,6 +1,7 @@
 import {
   AtomIcon,
   BadgeIcon,
+  BellIcon,
   Columns2Icon,
   FolderIcon,
   HomeIcon,
@@ -29,6 +30,7 @@ import { Menus } from './pages/Menus';
 import { ResizablePage } from './pages/Resizable';
 import { Tables } from './pages/Tables';
 import { Tabs } from './pages/Tabs';
+import { Toasts } from './pages/Toasts';
 
 export const App: FC = () => {
   const sidebarProps: LayoutSidebarProps = useMemo(
@@ -115,6 +117,11 @@ export const App: FC = () => {
                   title: 'Tabs',
                   Icon: Columns2Icon,
                 },
+                {
+                  pathname: 'toasts',
+                  title: 'Toasts',
+                  Icon: BellIcon,
+                },
               ],
             },
           ],
@@ -155,6 +162,7 @@ export const App: FC = () => {
           <Route path="dialogs" element={<Dialogs />} />
           <Route path="tables" element={<Tables />} />
           <Route path="tabs" element={<Tabs />} />
+          <Route path="toasts" element={<Toasts />} />
           <Route path="*" element={<Navigate to="" replace />} />
         </Route>
       </Route>

@@ -5,3 +5,4 @@ export * from './useMonths';
 export * from './useOnSwipe';
 export * from './useOutsideClick';
 export * from './usePagination';
+export * from './useToast';
