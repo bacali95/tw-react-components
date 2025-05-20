@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.181](https://github.com/bacali95/tw-react-components/compare/v0.0.180...v0.0.181) (2025-05-20)
+
+
+### Features
+
+* integrate toast notifications for error handling in ConfirmDialog, FormDialog, and ListSorterDialog components ([2584754](https://github.com/bacali95/tw-react-components/commit/25847547b9a26a48228f930ba869946e82a77a1d))
+
 ### [0.0.180](https://github.com/bacali95/tw-react-components/compare/v0.0.179...v0.0.180) (2025-05-20)
 
 ### [0.0.179](https://github.com/bacali95/tw-react-components/compare/v0.0.178...v0.0.179) (2025-05-20)
