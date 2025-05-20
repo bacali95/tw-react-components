@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.182](https://github.com/bacali95/tw-react-components/compare/v0.0.181...v0.0.182) (2025-05-20)
+
+
+### Bug Fixes
+
+* update FormDialog to handle synthetic events in onSubmit callback ([288b608](https://github.com/bacali95/tw-react-components/commit/288b6087b9b882713b67eab491d8de64b8dbdf0f))
+
 ### [0.0.181](https://github.com/bacali95/tw-react-components/compare/v0.0.180...v0.0.181) (2025-05-20)
 
 
