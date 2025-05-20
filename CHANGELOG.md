@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.179](https://github.com/bacali95/tw-react-components/compare/v0.0.178...v0.0.179) (2025-05-20)
+
+
+### Features
+
+* add Toast and Toaster components for improved user notifications ([c08206b](https://github.com/bacali95/tw-react-components/commit/c08206b49f1374e059c3c4b9ed1bcee11074c317))
+
 ### [0.0.178](https://github.com/bacali95/tw-react-components/compare/v0.0.177...v0.0.178) (2025-05-17)
 
 
