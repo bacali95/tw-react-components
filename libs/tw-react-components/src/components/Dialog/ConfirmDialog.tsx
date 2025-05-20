@@ -1,5 +1,6 @@
 import { type FC, type PropsWithChildren, type ReactNode, useState } from 'react';
 
+import { useToast } from '../../hooks';
 import { Button } from '../Button';
 import { Dialog } from './Dialog';
 
@@ -23,12 +24,20 @@ export const ConfirmDialog: FC<PropsWithChildren<Props>> = ({
   onClose,
   dataTestId = 'confirm-dialog',
 }) => {
+  const { toast } = useToast();
+
   const [loading, setLoading] = useState(false);
 
   const handleConfirm = async () => {
     setLoading(true);
     try {
       await onConfirm();
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Something went wrong',
+      });
     } finally {
       setLoading(false);
     }

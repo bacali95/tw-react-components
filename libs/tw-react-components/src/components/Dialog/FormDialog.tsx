@@ -9,6 +9,7 @@ import type {
 import { FormProvider } from 'react-hook-form';
 
 import { cn } from '../../helpers';
+import { useToast } from '../../hooks';
 import { Button } from '../Button';
 import { Sheet } from '../Sheet';
 import type { Dialog } from './Dialog';
@@ -46,6 +47,19 @@ export const FormDialog = <T extends FieldValues>({
   dataTestId = 'form-dialog',
 }: PropsWithChildren<Props<T>>) => {
   const id = useId();
+  const { toast } = useToast();
+
+  const handleSubmit = async (data: T) => {
+    try {
+      await onSubmit(data);
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Something went wrong',
+      });
+    }
+  };
 
   return (
     <As open={open} onOpenChange={(value) => !value && onClose()}>
@@ -57,7 +71,7 @@ export const FormDialog = <T extends FieldValues>({
           <form
             id={`form-${id}`}
             className={cn('flex h-full w-full flex-col gap-2 overflow-auto', formClassName)}
-            onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+            onSubmit={form.handleSubmit(handleSubmit, onInvalid)}
             data-testid={`${dataTestId}-form`}
           >
             {children}

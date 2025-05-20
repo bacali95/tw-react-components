@@ -2,6 +2,7 @@ import type { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { ArrowUpDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { useToast } from '../../hooks';
 import { Button } from '../Button';
 import { Flex } from '../Flex';
 import type { ListSorterItem, ListSorterProps } from '../ListSorter';
@@ -33,6 +34,8 @@ export function ListSorterDialog<T extends ListSorterItem>({
   onClose,
   dataTestId = 'list-sorter-dialog',
 }: ListSorterDialogProps<T>) {
+  const { toast } = useToast();
+
   const [sortedItems, setSortedItems] = useState<T[]>(structuredClone(items));
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +49,12 @@ export function ListSorterDialog<T extends ListSorterItem>({
     setLoading(true);
     try {
       await onSubmit(sortedItems);
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Something went wrong',
+      });
     } finally {
       setLoading(false);
     }
