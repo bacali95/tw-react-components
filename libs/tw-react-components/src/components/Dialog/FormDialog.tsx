@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactNode } from 'react';
+import type { BaseSyntheticEvent, PropsWithChildren, ReactNode } from 'react';
 import { useId } from 'react';
 import type {
   FieldValues,
@@ -49,9 +49,9 @@ export const FormDialog = <T extends FieldValues>({
   const id = useId();
   const { toast } = useToast();
 
-  const handleSubmit = async (data: T) => {
+  const handleSubmit = async (data: T, event?: BaseSyntheticEvent) => {
     try {
-      await onSubmit(data);
+      await onSubmit(data, event);
     } catch (error) {
       toast({
         variant: 'destructive',
