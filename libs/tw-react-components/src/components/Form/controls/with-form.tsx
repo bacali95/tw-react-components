@@ -1,4 +1,4 @@
-import type { ComponentProps, FC } from 'react';
+import type { ChangeEvent, ComponentProps, FC } from 'react';
 import type { ControllerRenderProps, Validate } from 'react-hook-form';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -57,19 +57,20 @@ function withForm<
       : BasicInputProps<Type>,
 >(Component: FC<Props>): FC<WithFormProps<Type, Props>> {
   return (props) => {
-    const { name, pattern, validate, ...restProps } = props as WithFormProps<Type, Props>;
+    const { name, pattern, validate, ..._restProps } = props as WithFormProps<Type, Props>;
     const { control, formState } = useFormContext();
+    const restProps = _restProps as ComponentProps<'input'>;
 
     return (
       <Controller
         name={name}
         control={control}
         rules={{
-          required: (restProps as ComponentProps<'input'>).required,
-          min: (restProps as ComponentProps<'input'>).min,
-          max: (restProps as ComponentProps<'input'>).max,
-          minLength: (restProps as ComponentProps<'input'>).minLength,
-          maxLength: (restProps as ComponentProps<'input'>).maxLength,
+          required: restProps.required,
+          min: restProps.min,
+          max: restProps.max,
+          minLength: restProps.minLength,
+          maxLength: restProps.maxLength,
           pattern,
           validate,
         }}
@@ -77,6 +78,12 @@ function withForm<
           <Component
             {...(restProps as Props)}
             {...field}
+            onChange={
+              Component === NumberInput
+                ? (value: ChangeEvent<HTMLInputElement>) =>
+                    field.onChange(value.target.valueAsNumber)
+                : field.onChange
+            }
             value={field.value ?? ''}
             disabled={
               (field.disabled ?? (restProps as ComponentProps<'input'>).disabled) ||
