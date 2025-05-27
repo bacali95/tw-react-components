@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.184](https://github.com/bacali95/tw-react-components/compare/v0.0.183...v0.0.184) (2025-05-27)
+
+
+### Bug Fixes
+
+* update TabsTrigger component to use cursor-pointer for better UX ([be9abec](https://github.com/bacali95/tw-react-components/commit/be9abec902dc2a854aa632d2ecdf59a6f86eea6e))
+
 ### [0.0.183](https://github.com/bacali95/tw-react-components/compare/v0.0.182...v0.0.183) (2025-05-27)
 
 
