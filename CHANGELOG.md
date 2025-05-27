@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.183](https://github.com/bacali95/tw-react-components/compare/v0.0.182...v0.0.183) (2025-05-27)
+
+
+### Bug Fixes
+
+* fix number input value type ([d1f1871](https://github.com/bacali95/tw-react-components/commit/d1f1871c49fbb2cd69fad2a33e571c955104fccd))
+
 ### [0.0.182](https://github.com/bacali95/tw-react-components/compare/v0.0.181...v0.0.182) (2025-05-20)
 
 
