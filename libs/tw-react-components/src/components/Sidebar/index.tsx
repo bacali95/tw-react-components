@@ -13,7 +13,7 @@ import {
 } from 'react';
 
 import { cn, getValueFromCookie } from '../../helpers';
-import { useIsMobile, useOnSwipe } from '../../hooks';
+import { useIsMobile } from '../../hooks';
 import { Button } from '../Button';
 import { BasicInput } from '../Form';
 import { Separator } from '../Separator';
@@ -94,17 +94,6 @@ export const SidebarContextProvider: FC<SidebarContextProviderProps> = ({
   const toggleSidebar = useCallback(() => {
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open);
   }, [isMobile, setOpen, setOpenMobile]);
-
-  // Add swipe gesture support for opening and closing the sidebar.
-  useOnSwipe(screenRef, (direction) => {
-    const _setOpen = isMobile ? setOpenMobile : setOpen;
-
-    if (direction === 'right') {
-      _setOpen(true);
-    } else if (direction === 'left') {
-      _setOpen(false);
-    }
-  });
 
   // Adds a keyboard shortcut to toggle the sidebar.
   useEffect(() => {

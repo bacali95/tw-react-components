@@ -7,7 +7,6 @@ import { Sidebar, SidebarContextProvider } from '..';
 jest.mock('../../../hooks', () => ({
   ...jest.requireActual('../../../hooks'),
   useIsMobile: jest.fn().mockReturnValue(false),
-  useOnSwipe: jest.fn(),
 }));
 
 describe('Sidebar Component', () => {
