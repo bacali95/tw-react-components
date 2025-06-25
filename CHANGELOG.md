@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.185](https://github.com/bacali95/tw-react-components/compare/v0.0.184...v0.0.185) (2025-06-25)
+
+
+### Bug Fixes
+
+* remove sidebar on swipe action ([a3736ef](https://github.com/bacali95/tw-react-components/commit/a3736efbea071f31f7462c70c52ce4c9f7fda301))
+
 ### [0.0.184](https://github.com/bacali95/tw-react-components/compare/v0.0.183...v0.0.184) (2025-05-27)
 
 
