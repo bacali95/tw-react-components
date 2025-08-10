@@ -6,6 +6,7 @@ export default {
   transform: {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
+  transformIgnorePatterns: ['node_modules/(?!(react-resizable-panels)/)'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/tw-react-components',
   coverageReporters: ['lcov', 'html'],

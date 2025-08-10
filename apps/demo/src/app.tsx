@@ -2,6 +2,7 @@ import {
   AtomIcon,
   BadgeIcon,
   BellIcon,
+  ChevronDownIcon,
   Columns2Icon,
   FolderIcon,
   HomeIcon,
@@ -20,6 +21,7 @@ import { Link, NavLink, Navigate, Outlet, Route, Routes, useLocation } from 'rea
 import type { LayoutSidebarProps } from 'tw-react-components';
 import { Layout, Sidebar, ThemeSelector } from 'tw-react-components';
 
+import { Accordions } from './pages/Accordions';
 import { Badges } from './pages/Badges';
 import { Buttons } from './pages/Buttons';
 import { Dialogs } from './pages/Dialogs';
@@ -98,6 +100,11 @@ export const App: FC = () => {
               Icon: FolderIcon,
               items: [
                 {
+                  pathname: 'accordions',
+                  title: 'Accordions',
+                  Icon: ChevronDownIcon,
+                },
+                {
                   pathname: 'menus',
                   title: 'Menus',
                   Icon: MenuIcon,
@@ -157,7 +164,8 @@ export const App: FC = () => {
           <Route path="*" element={<Navigate to="" replace />} />
         </Route>
         <Route path="molecules" element={<Outlet />}>
-          <Route path="" element={<Navigate to="menus" replace />} />
+          <Route path="" element={<Navigate to="accordions" replace />} />
+          <Route path="accordions" element={<Accordions />} />
           <Route path="menus" element={<Menus />} />
           <Route path="dialogs" element={<Dialogs />} />
           <Route path="tables" element={<Tables />} />
