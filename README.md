@@ -71,20 +71,17 @@ Add the following import to your main CSS file:
 This library provides a wide range of components:
 
 - **Layout:** Building blocks for page layouts
-
   - `Layout` - Main container for your application
   - `Flex` - Flexible box layout component
   - `Block` - Block-level layout component
   - `Card` - Container with styling and functionality
 
 - **Navigation:**
-
   - `Navbar` - Top navigation bar
   - `Sidebar` - Side navigation component
   - `Tabs` - Tabbed interface component
 
 - **Data Display:**
-
   - `Table` - Regular table component
   - `DataTable` - Advanced data table with sorting and filtering
   - `List` - Displaying lists of data
@@ -92,13 +89,11 @@ This library provides a wide range of components:
   - `Badge` - Small status indicator
 
 - **Input & Form:**
-
   - `Button` - Various button styles
   - `Form` - Form controls and helpers
   - `Switch` - Toggle switch component
 
 - **Feedback & Overlay:**
-
   - `Dialog` - Modal dialog boxes
   - `Popover` - Content that appears over the UI
   - `Tooltip` - Information shown on hover
