@@ -1,7 +1,7 @@
 # TailwindCSS React Components
 
 ![NPM Version](https://img.shields.io/npm/v/tw-react-components)
-[![codecov](https://codecov.io/gh/bacali95/tw-react-components/graph/badge.svg?token=Z5ER12459R)](https://codecov.io/gh/bacali95/tw-react-components)
+[![codecov](https://codecov.io/gh/bacali95/tw-react-components/branch/main/graph/badge.svg?token=Z5ER12459R)](https://codecov.io/gh/bacali95/tw-react-components)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A comprehensive library of React components built with TailwindCSS for creating beautiful and responsive dashboards.
