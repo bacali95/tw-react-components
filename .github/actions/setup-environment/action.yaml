@@ -9,16 +9,8 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Set Yarn version
-      shell: bash
-      run: yarn set version 4.9.2
-
-    - name: Setup NodeJs 22 💿
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        token: ${{ inputs.npm-token }}
-        registry-url: 'https://registry.npmjs.org'
+    - name: Setup Volta
+      uses: volta-cli/action@v4
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
