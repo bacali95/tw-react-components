@@ -77,7 +77,7 @@ export const FormControls: FC = () => {
           context
         </p>
         <FormProvider {...form}>
-          <form className="w-full" onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
+          <form className="w-full px-1" onSubmit={form.handleSubmit(onSubmit, onInvalid)}>
             <Flex direction="column">
               <FormInputs.Text
                 name="text"
@@ -151,7 +151,7 @@ export const FormControls: FC = () => {
           context
         </p>
         <form
-          className="w-full"
+          className="w-full px-1"
           onSubmit={(event) => {
             event.preventDefault();
             onSubmit(formState);

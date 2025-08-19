@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { Button, Toast, Toaster, type ToasterToast, useToast } from 'tw-react-components';
+import { Button, Toast, type ToasterToast, useToast } from 'tw-react-components';
 
 export const Toasts: FC = () => {
   const { toast } = useToast();

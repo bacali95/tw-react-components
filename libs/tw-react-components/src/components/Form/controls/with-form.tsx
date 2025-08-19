@@ -89,7 +89,7 @@ function withForm<
               (field.disabled ?? (restProps as ComponentProps<'input'>).disabled) ||
               formState.isSubmitting
             }
-            hasErrors={fieldState.error}
+            hasErrors={!!fieldState.error}
           />
         )}
       />

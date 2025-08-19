@@ -33,25 +33,10 @@ export type BasicInputProps<Type extends InputType> = {
   'id' | 'size'
 >;
 
-const inputClasses = {
-  base: {
-    input:
-      'dark:bg-transparent peer w-full border focus:ring-0 rounded-md overflow-hidden text-ellipsis',
-    disabled: 'opacity-60',
-  },
-  withoutErrors: {
-    input:
-      'border-slate-300 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-600 dark:placeholder-slate-400',
-    extension:
-      'bg-white dark:bg-transparent border-slate-300 text-slate-600 peer-focus:border-blue-500 dark:peer-focus:border-blue-600 dark:border-slate-700 dark:text-white',
-  },
-  withErrors: {
-    input:
-      'text-red-600 border-red-500 placeholder-red-500 focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:placeholder-red-600',
-    extension:
-      'text-red-600 border-red-500 peer-focus:border-red-500 dark:border-red-600 dark:peer-focus:border-red-600 dark:text-red-500',
-  },
-};
+const baseInputClasses =
+  'peer file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex w-full min-w-0 rounded-md border bg-transparent' +
+  'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 transition-color outline-none file:inline-flex file:border-0 file:bg-transparent file:font-medium' +
+  'border-input focus:ring-0';
 
 const sizeClasses: Record<
   Size,
@@ -65,7 +50,7 @@ const sizeClasses: Record<
 > = {
   small: {
     label: 'text-xs',
-    input: 'text-xs py-1 px-2 h-6',
+    input: 'text-sm md:text-xs py-0.5 px-2 h-6 file:h-5 file:text-xs',
     checkbox: {
       input: 'w-3 h-3',
       wrapper: 'h-6 gap-1',
@@ -81,7 +66,7 @@ const sizeClasses: Record<
   },
   medium: {
     label: 'text-sm',
-    input: 'text-sm py-2 px-3 h-9',
+    input: 'text-base md:text-sm py-1 px-3 h-9 file:h-7 file:text-sm',
     checkbox: {
       input: 'w-4 h-4',
       wrapper: 'h-8 gap-2',
@@ -143,23 +128,26 @@ export const BasicInput = <Type extends InputType>({
       {type !== 'checkbox' && memoLabel}
       <div
         className={cn('group relative flex', {
+          errors: hasErrors,
           'mt-1': label && type !== 'checkbox',
           [`items-center ${sizeClasses[size].checkbox.wrapper}`]: type === 'checkbox',
+          'has-[input:focus-visible]:border-ring has-[input:focus-visible]:ring-ring/50 has-[textarea:focus-visible]:border-ring has-[textarea:focus-visible]:ring-ring/50 rounded-md has-[input:focus-visible]:ring-[3px] has-[textarea:focus-visible]:ring-[3px]':
+            type !== 'checkbox',
+          'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:[&>input,&>textarea,&>div]:border-destructive':
+            type !== 'checkbox',
+          'shadow-xs transition-[color,box-shadow]': type !== 'checkbox',
         })}
         title={type !== 'textarea' && typeof props.value === 'string' ? props.value : undefined}
+        aria-invalid={hasErrors}
       >
         {type === 'textarea' ? (
           <textarea
             id={id}
             className={cn(
-              inputClasses.base.input,
+              baseInputClasses,
               sizeClasses[size].input.replace(/ h-\d/g, ''),
-              {
-                [inputClasses.base.disabled]: props.disabled,
-                [inputClasses.withoutErrors.input]: !hasErrors,
-                [inputClasses.withErrors.input]: hasErrors,
-                'rounded-r-none border-r-0': SuffixIcon,
-              },
+              'field-sizing-content min-h-16 py-2',
+              SuffixIcon && 'rounded-r-none border-r-0',
               inputClassName,
             )}
             {...(props as ComponentProps<'textarea'>)}
@@ -172,10 +160,7 @@ export const BasicInput = <Type extends InputType>({
             className={cn(
               'rounded-sm border-slate-300 text-blue-600',
               sizeClasses[size].checkbox.input,
-              {
-                [inputClasses.base.disabled]: props.disabled,
-                'bg-red-100': hasErrors,
-              },
+              hasErrors && 'bg-red-100',
               inputClassName,
             )}
             type={type}
@@ -187,14 +172,9 @@ export const BasicInput = <Type extends InputType>({
           <input
             id={id}
             className={cn(
-              inputClasses.base.input,
+              baseInputClasses,
               sizeClasses[size].input,
-              {
-                [inputClasses.base.disabled]: props.disabled,
-                [inputClasses.withoutErrors.input]: !hasErrors,
-                [inputClasses.withErrors.input]: hasErrors,
-                'rounded-r-none border-r-0': SuffixIcon,
-              },
+              SuffixIcon && 'rounded-r-none border-r-0',
               inputClassName,
             )}
             type={type ?? 'text'}
@@ -221,7 +201,6 @@ export const BasicInput = <Type extends InputType>({
         {type !== 'checkbox' && SuffixIcon && (
           <BasicInputExtension
             className={extensionClassName}
-            hasErrors={hasErrors}
             size={size}
             disabled={props.disabled}
             onClick={onSuffixIconClick}
@@ -239,27 +218,22 @@ export const BasicInputExtension: FC<
   PropsWithChildren<{
     className?: string;
     size: Size;
-    hasErrors?: boolean;
     disabled?: boolean;
     dataTestId?: string;
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   }>
-> = ({ children, className, size, hasErrors, disabled, onClick, dataTestId }) => (
+> = ({ children, className, size, disabled, onClick, dataTestId }) => (
   <div
     className={cn(
-      'flex aspect-square items-center justify-center rounded-r-md border border-l-0',
+      'dark:bg-input/30 border-input flex aspect-square items-center justify-center rounded-r-md border border-l-0 bg-transparent',
       sizeClasses[size].suffix.wrapper,
-      {
-        [inputClasses.base.disabled]: disabled,
-        [inputClasses.withoutErrors.extension]: !hasErrors,
-        [inputClasses.withErrors.extension]: hasErrors,
-        'cursor-pointer': onClick,
-      },
+      onClick && 'cursor-pointer',
       className,
     )}
     onClick={!disabled ? onClick : undefined}
     onPointerDown={(event) => event.stopPropagation()}
     data-testid={dataTestId}
+    aria-disabled={disabled}
   >
     {children}
   </div>
