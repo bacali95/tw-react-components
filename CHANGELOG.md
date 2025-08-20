@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.188](https://github.com/bacali95/tw-react-components/compare/v0.0.187...v0.0.188) (2025-08-20)
+
+
+### Features
+
+* add primary and secondary color options, enhance button component with size variations, and update styles for form controls ([a9efdee](https://github.com/bacali95/tw-react-components/commit/a9efdeed4fca67029f63fc5ffecbbe858aeb084c))
+
 ### [0.0.187](https://github.com/bacali95/tw-react-components/compare/v0.0.186...v0.0.187) (2025-08-10)
 
 ### [0.0.186](https://github.com/bacali95/tw-react-components/compare/v0.0.185...v0.0.186) (2025-08-10)
