@@ -11,8 +11,13 @@ runs:
   steps:
     - name: Setup Volta
       uses: volta-cli/action@v4
-      env:
-        NODE_AUTH_TOKEN: ${{ inputs.npm-token }}
+
+    - name: Setup NodeJs 24 💿
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        token: ${{ inputs.npm-token }}
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
