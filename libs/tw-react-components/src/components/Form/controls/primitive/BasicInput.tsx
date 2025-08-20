@@ -138,6 +138,7 @@ export const BasicInput = <Type extends InputType>({
           'shadow-xs transition-[color,box-shadow]': type !== 'checkbox',
         })}
         title={type !== 'textarea' && typeof props.value === 'string' ? props.value : undefined}
+        data-testid={`${dataTestId}-wrapper`}
         aria-invalid={hasErrors}
       >
         {type === 'textarea' ? (
@@ -158,7 +159,9 @@ export const BasicInput = <Type extends InputType>({
           <input
             id={id}
             className={cn(
-              'rounded-sm border-slate-300 text-blue-600',
+              'border-input rounded-sm disabled:opacity-50',
+              'focus:ring-ring/50 focus:border-ring focus:ring-[3px] focus:ring-offset-0',
+              'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
               sizeClasses[size].checkbox.input,
               hasErrors && 'bg-red-100',
               inputClassName,
@@ -167,6 +170,7 @@ export const BasicInput = <Type extends InputType>({
             checked={Boolean(props.value)}
             {...(props as ComponentProps<'input'>)}
             data-testid={`${dataTestId}-checkbox`}
+            aria-invalid={hasErrors}
           />
         ) : (
           <input
@@ -225,7 +229,7 @@ export const BasicInputExtension: FC<
 > = ({ children, className, size, disabled, onClick, dataTestId }) => (
   <div
     className={cn(
-      'dark:bg-input/30 border-input flex aspect-square items-center justify-center rounded-r-md border border-l-0 bg-transparent',
+      'dark:bg-input/30 border-input flex aspect-square items-center justify-center rounded-r-md border border-l-0 bg-transparent aria-disabled:opacity-50',
       sizeClasses[size].suffix.wrapper,
       onClick && 'cursor-pointer',
       className,

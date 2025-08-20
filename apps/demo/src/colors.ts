@@ -1,6 +1,8 @@
 import type { Color } from 'tw-react-components';
 
 export const colors: Color[] = [
+  'primary',
+  'secondary',
   'slate',
   'gray',
   'zinc',

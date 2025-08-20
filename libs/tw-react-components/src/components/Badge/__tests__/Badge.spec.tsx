@@ -15,7 +15,7 @@ describe('Badge Component', () => {
     const { getByTestId } = render(<Badge>Small Badge</Badge>);
     const button = getByTestId('badge');
     // The Button component applies specific classes for size
-    expect(button).toHaveClass('text-sm');
+    expect(button).toHaveClass('text-xs');
     expect(button).toHaveClass('h-6');
   });
 
@@ -23,7 +23,7 @@ describe('Badge Component', () => {
     const { getByTestId } = render(<Badge size="medium">Medium Badge</Badge>);
     const button = getByTestId('badge');
     // The Button component applies different classes for medium size
-    expect(button).toHaveClass('text-base');
+    expect(button).toHaveClass('text-sm');
     expect(button).toHaveClass('h-9');
   });
 
@@ -31,7 +31,7 @@ describe('Badge Component', () => {
     const { getByTestId } = render(<Badge variant="outlined">Outlined Badge</Badge>);
     const button = getByTestId('badge');
     // The Button component applies border styles for outlined variant
-    expect(button).toHaveClass('border-2');
+    expect(button).toHaveClass('border');
   });
 
   it('allows customizing the dataTestId', () => {

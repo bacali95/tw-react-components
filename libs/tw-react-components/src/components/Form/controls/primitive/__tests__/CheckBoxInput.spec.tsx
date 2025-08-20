@@ -60,7 +60,7 @@ describe('CheckboxInput', () => {
 
     const checkbox = screen.getByTestId('checkbox-input-checkbox');
     expect(checkbox).toBeDisabled();
-    expect(checkbox).toHaveClass('opacity-60');
+    expect(checkbox).toHaveClass('disabled:opacity-50');
   });
 
   it('should apply error styles when hasErrors is true', () => {

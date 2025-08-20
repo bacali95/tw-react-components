@@ -1,6 +1,8 @@
 export type Size = 'small' | 'medium';
 
 export type Color =
+  | 'primary'
+  | 'secondary'
   | 'slate'
   | 'gray'
   | 'zinc'

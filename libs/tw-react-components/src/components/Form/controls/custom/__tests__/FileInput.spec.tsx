@@ -74,7 +74,9 @@ describe('FileInput', () => {
     expect(visibleInput).toHaveAttribute('placeholder', 'Choose a file');
     expect(visibleInput).toHaveAttribute('required');
     expect(visibleInput).toBeDisabled();
-    expect(visibleInput).toHaveClass('text-red-600', 'border-red-500');
+    expect(visibleInput.parentElement).toHaveClass(
+      'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:[&>input,&>textarea,&>div]:border-destructive',
+    );
   });
 
   it('should handle disabled state', () => {
@@ -84,7 +86,7 @@ describe('FileInput', () => {
     const uploadIcon = screen.getByTestId('file-input-suffix');
 
     expect(visibleInput).toBeDisabled();
-    expect(uploadIcon).toHaveClass('opacity-60');
+    expect(uploadIcon).toHaveClass('aria-disabled:opacity-50');
   });
 
   it('should apply custom classes', () => {

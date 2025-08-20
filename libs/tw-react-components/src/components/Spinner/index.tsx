@@ -2,9 +2,19 @@ import type { FC } from 'react';
 
 import { cn } from '../../helpers';
 
-type Props = { className?: string; fullScreen?: boolean; dataTestId?: string };
+type Props = {
+  className?: string;
+  spinnerClassName?: string;
+  fullScreen?: boolean;
+  dataTestId?: string;
+};
 
-export const Spinner: FC<Props> = ({ className, fullScreen, dataTestId = 'spinner' }) => (
+export const Spinner: FC<Props> = ({
+  className,
+  spinnerClassName,
+  fullScreen,
+  dataTestId = 'spinner',
+}) => (
   <div
     className={cn(
       'flex w-full items-center justify-center bg-white dark:bg-slate-900',
@@ -17,7 +27,7 @@ export const Spinner: FC<Props> = ({ className, fullScreen, dataTestId = 'spinne
     data-testid={dataTestId}
   >
     <svg
-      className="h-8 w-8 animate-spin text-black dark:text-white"
+      className={cn('h-8 w-8 animate-spin text-black dark:text-white', spinnerClassName)}
       fill="none"
       viewBox="0 0 24 24"
     >

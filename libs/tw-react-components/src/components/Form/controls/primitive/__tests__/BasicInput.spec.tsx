@@ -12,7 +12,7 @@ describe('BasicInput', () => {
       const input = screen.getByTestId('basic-input-input');
       expect(input).toBeInTheDocument();
       expect(input).toHaveAttribute('type', 'text');
-      expect(input).toHaveClass('text-sm', 'py-2', 'px-3', 'h-9'); // medium size classes
+      expect(input).toHaveClass('text-base', 'md:text-sm', 'py-1', 'px-3', 'h-9'); // medium size classes
     });
 
     it('should handle value changes', async () => {
@@ -48,8 +48,10 @@ describe('BasicInput', () => {
     it('should apply error styles when hasErrors is true', () => {
       render(<BasicInput hasErrors />);
 
-      const input = screen.getByTestId('basic-input-input');
-      expect(input).toHaveClass('text-red-600', 'border-red-500');
+      const input = screen.getByTestId('basic-input-wrapper');
+      expect(input).toHaveClass(
+        'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:[&>input,&>textarea,&>div]:border-destructive',
+      );
     });
 
     it('should handle clearable functionality', async () => {
@@ -81,11 +83,11 @@ describe('BasicInput', () => {
       const { rerender } = render(<BasicInput size="small" />);
 
       let input = screen.getByTestId('basic-input-input');
-      expect(input).toHaveClass('text-xs', 'py-1', 'px-2', 'h-6');
+      expect(input).toHaveClass('text-sm', 'md:text-xs', 'py-0.5', 'px-2', 'h-6');
 
       rerender(<BasicInput size="medium" />);
       input = screen.getByTestId('basic-input-input');
-      expect(input).toHaveClass('text-sm', 'py-2', 'px-3', 'h-9');
+      expect(input).toHaveClass('text-base', 'md:text-sm', 'py-1', 'px-3', 'h-9');
     });
 
     it('should handle disabled state', () => {
@@ -93,7 +95,7 @@ describe('BasicInput', () => {
 
       const input = screen.getByTestId('basic-input-input');
       expect(input).toBeDisabled();
-      expect(input).toHaveClass('opacity-60');
+      expect(input).toHaveClass('disabled:opacity-50');
     });
   });
 
@@ -165,7 +167,7 @@ describe('BasicInput', () => {
       render(<BasicInput suffixIcon={XIcon} hasErrors disabled />);
 
       const extension = screen.getByTestId('basic-input-suffix');
-      expect(extension).toHaveClass('text-red-600', 'border-red-500', 'opacity-60');
+      expect(extension).toHaveClass('aria-disabled:opacity-50');
     });
 
     it('should handle click events', async () => {

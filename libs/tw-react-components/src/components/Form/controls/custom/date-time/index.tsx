@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { cn, getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
 import type { BasicInputProps } from '../../primitive';
-import { BasicInput } from '../../primitive';
+import { BasicInput, TextInput } from '../../primitive';
 import type { View } from './DateSelector';
 import { DateSelector } from './DateSelector';
 import { TimeSelector } from './TimeSelector';
@@ -133,9 +133,8 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
 
   return (
     <div className={cn('relative w-full', className)} ref={ref}>
-      <BasicInput
+      <TextInput
         {...props}
-        type="text"
         readOnly
         value={displayDate ?? ''}
         hasErrors={hasErrors}

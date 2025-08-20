@@ -34,7 +34,7 @@
 
     --ring: 215 20.2% 65.1%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
     --sidebar-background: var(--color-slate-100);
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -79,7 +79,7 @@
 
     --ring: 216 34% 17%;
 
-    --radius: 0.5rem;
+    --radius: 0.625rem;
 
     --sidebar-background: var(--color-slate-900);
     --sidebar-foreground: 240 4.8% 95.9%;

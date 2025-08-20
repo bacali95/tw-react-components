@@ -15,14 +15,14 @@ describe('Button Component', () => {
   it('applies medium size by default', () => {
     const { getByTestId } = render(<Button>Default Size</Button>);
     const buttonElement = getByTestId('button');
-    expect(buttonElement).toHaveClass('text-base');
+    expect(buttonElement).toHaveClass('text-sm');
     expect(buttonElement).toHaveClass('h-9');
   });
 
   it('applies small size when specified', () => {
     const { getByTestId } = render(<Button size="small">Small Button</Button>);
     const buttonElement = getByTestId('button');
-    expect(buttonElement).toHaveClass('text-sm');
+    expect(buttonElement).toHaveClass('text-xs');
     expect(buttonElement).toHaveClass('h-6');
   });
 
@@ -36,7 +36,7 @@ describe('Button Component', () => {
   it('applies outlined variant correctly', () => {
     const { getByTestId } = render(<Button variant="outlined">Outlined Button</Button>);
     const buttonElement = getByTestId('button');
-    expect(buttonElement).toHaveClass('border-2');
+    expect(buttonElement).toHaveClass('border');
   });
 
   it('applies text variant correctly', () => {
@@ -103,8 +103,7 @@ describe('Button Component', () => {
     const { getByTestId } = render(<Button disabled>Disabled Button</Button>);
     const buttonElement = getByTestId('button');
     expect(buttonElement).toBeDisabled();
-    expect(buttonElement).toHaveClass('cursor-not-allowed');
-    expect(buttonElement).toHaveClass('opacity-50');
+    expect(buttonElement).toHaveClass('disabled:opacity-50');
   });
 
   it('does not apply hover classes when unstyled prop is true', () => {
@@ -186,9 +185,8 @@ describe('Button Component', () => {
   it('renders loading state', () => {
     const { getByTestId } = render(<Button loading>Loading Button</Button>);
     const buttonElement = getByTestId('button');
-    expect(buttonElement).toHaveAttribute('disabled');
-    expect(buttonElement).toHaveClass('cursor-not-allowed');
-    expect(buttonElement).toHaveClass('opacity-50');
+    expect(buttonElement).toBeDisabled();
+    expect(buttonElement).toHaveClass('disabled:opacity-50');
     const spinner = getByTestId('button-spinner');
     expect(spinner).toBeInTheDocument();
   });

@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon, HomeIcon } from 'lucide-react';
-import type { FC } from 'react';
+import { type FC, Fragment } from 'react';
 
 import { Button, Flex } from 'tw-react-components';
 
@@ -8,14 +8,18 @@ import { colors } from '../colors';
 export const Buttons: FC = () => (
   <Flex className="gap-2 overflow-auto" direction="column">
     <p className="text-lg">Loading buttons</p>
-    <Flex className="gap-2" wrap>
-      <Button className="capitalize" loading>
-        Loading
-      </Button>
-      <Button className="capitalize" prefixIcon={HomeIcon} loading>
-        Loading prefix icon
-      </Button>
-      <Button prefixIcon={HomeIcon} loading />
+    <Flex className="gap-2" align="center" wrap>
+      {(['small', 'medium'] as const).map((size) => (
+        <Fragment key={size}>
+          <Button className="capitalize" loading size={size}>
+            Loading
+          </Button>
+          <Button className="capitalize" prefixIcon={HomeIcon} loading size={size}>
+            Loading prefix icon
+          </Button>
+          <Button prefixIcon={HomeIcon} loading size={size} />
+        </Fragment>
+      ))}
     </Flex>
     <p className="text-lg">Filled buttons</p>
     <Flex className="gap-2" wrap>

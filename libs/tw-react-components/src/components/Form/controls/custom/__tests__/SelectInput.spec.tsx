@@ -131,7 +131,8 @@ describe('SelectInput', () => {
     render(<SelectInput items={options} disabled />);
 
     const select = screen.getByTestId('select-input-input');
-    expect(select).toHaveClass('opacity-60');
+    expect(select).toHaveClass('disabled:opacity-50');
+    expect(select).toHaveAttribute('disabled');
   });
 
   it('should handle loading state', async () => {
@@ -146,8 +147,10 @@ describe('SelectInput', () => {
   it('should handle error state', () => {
     render(<SelectInput items={options} hasErrors />);
 
-    const select = screen.getByTestId('select-input-input');
-    expect(select).toHaveClass('text-red-600', 'border-red-500');
+    const select = screen.getByTestId('select-input-wrapper');
+    expect(select).toHaveClass(
+      'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:[&>input,&>textarea,&>div]:border-destructive',
+    );
   });
 
   it('should close on Escape', async () => {

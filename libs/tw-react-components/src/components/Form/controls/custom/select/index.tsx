@@ -227,15 +227,15 @@ export const SelectInput = <T,>({
         dataTestId={`${dataTestId}-trigger`}
       >
         <TextInput
-          className="[&>div>*]:cursor-pointer"
-          inputClassName="text-left"
           {...props}
+          readOnly
+          className="[&>div>*]:cursor-pointer"
+          inputClassName={cn('text-left', props.inputClassName)}
           value={text ?? ''}
           clearable={clearable && !!selectedItems.length}
           onClear={handleOnClear}
           suffixIcon={ChevronDownIcon}
           onSuffixIconClick={() => setOpen((open) => !open)}
-          readOnly
           dataTestId={dataTestId}
         />
       </DropdownMenu.Trigger>
@@ -246,6 +246,7 @@ export const SelectInput = <T,>({
         {search && (
           <>
             <TextInput
+              autoFocus
               value={searchValue}
               placeholder="Search..."
               size={props.size}

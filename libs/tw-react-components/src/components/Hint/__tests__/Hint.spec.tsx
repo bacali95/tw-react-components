@@ -154,9 +154,7 @@ describe('Hint Component', () => {
       );
       const badgeElement = getByTestId('hint-badge');
       expect(badgeElement).toHaveClass(
-        variant === 'filled'
-          ? 'bg-slate-100 dark:bg-slate-900/70'
-          : 'border-2 dark:border-slate-600',
+        variant === 'filled' ? 'bg-slate-100 dark:bg-slate-900/70' : 'border dark:border-slate-600',
       );
 
       unmount();

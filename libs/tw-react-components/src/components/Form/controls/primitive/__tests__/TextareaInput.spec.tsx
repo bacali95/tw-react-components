@@ -65,7 +65,9 @@ describe('TextareaInput', () => {
   it('should apply error styles when hasErrors is true', () => {
     render(<TextareaInput hasErrors />);
 
-    const textarea = screen.getByTestId('textarea-input-textarea');
-    expect(textarea).toHaveClass('text-red-600', 'border-red-500');
+    const textarea = screen.getByTestId('textarea-input-wrapper');
+    expect(textarea).toHaveClass(
+      'aria-invalid:!ring-destructive/20 dark:aria-invalid:!ring-destructive/40 aria-invalid:[&>input,&>textarea,&>div]:border-destructive',
+    );
   });
 });

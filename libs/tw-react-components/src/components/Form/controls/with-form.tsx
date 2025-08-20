@@ -21,6 +21,7 @@ import type {
   TextareaInputProps,
 } from './primitive';
 import {
+  BasicInput,
   CheckboxInput,
   EmailInput,
   NumberInput,
@@ -98,6 +99,7 @@ function withForm<
 }
 
 export const FormInputs = {
+  BasicInput: withForm<InputType, BasicInputProps<InputType>>(BasicInput),
   Text: withForm<'text', TextInputProps>(TextInput),
   Email: withForm<'email', EmailInputProps>(EmailInput),
   Password: withForm<'password', PasswordInputProps>(PasswordInput),
