@@ -66,9 +66,6 @@ export const SidebarContextProvider: FC<SidebarContextProviderProps> = ({
 }) => {
   const isMobile = useIsMobile();
   const [openMobile, setOpenMobile] = useState(false);
-  const screenRef = useRef<HTMLElement>(
-    typeof document === 'undefined' ? null : document.documentElement,
-  );
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.

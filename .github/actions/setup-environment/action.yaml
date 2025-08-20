@@ -11,6 +11,8 @@ runs:
   steps:
     - name: Setup Volta
       uses: volta-cli/action@v4
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.npm-token }}
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path

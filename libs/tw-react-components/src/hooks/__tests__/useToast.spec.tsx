@@ -51,14 +51,11 @@ describe('useToast Hook', () => {
   it('should update an existing toast', () => {
     const { result } = renderHook(() => useToast());
 
-    let toastId: string | undefined;
-
     act(() => {
-      const { id } = result.current.toast({
+      result.current.toast({
         title: 'Original Title',
         description: 'Original Description',
       });
-      toastId = id;
     });
 
     act(() => {

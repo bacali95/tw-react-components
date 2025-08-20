@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { cn, getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
 import type { BasicInputProps } from '../../primitive';
-import { BasicInput, TextInput } from '../../primitive';
+import { TextInput } from '../../primitive';
 import type { View } from './DateSelector';
 import { DateSelector } from './DateSelector';
 import { TimeSelector } from './TimeSelector';

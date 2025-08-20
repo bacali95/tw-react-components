@@ -2,7 +2,6 @@ import type { LucideIcon } from 'lucide-react';
 import type { ComponentProps, FC } from 'react';
 
 import { cn } from '../../helpers';
-import { Flex } from '../Flex';
 import { Spinner } from '../Spinner';
 import type { Color, Size } from '../types';
 
