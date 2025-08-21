@@ -511,21 +511,22 @@ export const Button: FC<ButtonProps> = ({
     disabled={disabled || loading}
     {...props}
   >
-    {PrefixIcon && !loading && (
-      <PrefixIcon
-        className={
-          children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
-        }
-      />
-    )}
-    {loading && (
+    {loading ? (
       <Spinner
-        className="bg-transparent dark:bg-transparent"
+        className="w-fit bg-transparent dark:bg-transparent"
         spinnerClassName={
           children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
         }
         dataTestId={`${dataTestId}-spinner`}
       />
+    ) : (
+      PrefixIcon && (
+        <PrefixIcon
+          className={
+            children ? sizeClassNames[size].icon.withChildren : sizeClassNames[size].icon.base
+          }
+        />
+      )
     )}
     {children}
     {SuffixIcon && !loading && (
