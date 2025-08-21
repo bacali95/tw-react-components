@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
-import { Card } from 'tw-react-components';
+import { Block } from 'tw-react-components';
 
 export const Home: FC = () => {
-  return <Card>Home</Card>;
+  return <Block>Home</Block>;
 };
