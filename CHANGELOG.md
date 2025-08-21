@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.191](https://github.com/bacali95/tw-react-components/compare/v0.0.190...v0.0.191) (2025-08-21)
+
+
+### Features
+
+* enhance Card component with additional sub-components and improved styling ([fdb3ba0](https://github.com/bacali95/tw-react-components/commit/fdb3ba0d052cb57b0e6a09857a947fa3d268f1d6))
+
 ### [0.0.190](https://github.com/bacali95/tw-react-components/compare/v0.0.189...v0.0.190) (2025-08-20)
 
 ### [0.0.189](https://github.com/bacali95/tw-react-components/compare/v0.0.188...v0.0.189) (2025-08-20)
