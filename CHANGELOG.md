@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.192](https://github.com/bacali95/tw-react-components/compare/v0.0.191...v0.0.192) (2025-08-21)
+
+
+### Bug Fixes
+
+* **Button:** correct loading state rendering logic and adjust Spinner class for better styling ([dce7009](https://github.com/bacali95/tw-react-components/commit/dce700952a714d776d8fdaf6d0118baa4fad5da7))
+
 ### [0.0.191](https://github.com/bacali95/tw-react-components/compare/v0.0.190...v0.0.191) (2025-08-21)
 
 
