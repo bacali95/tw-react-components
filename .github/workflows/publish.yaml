@@ -7,12 +7,14 @@ on:
 
 concurrency: ${{ github.ref }}
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - name: Check out the code 🗄
         uses: actions/checkout@v4
