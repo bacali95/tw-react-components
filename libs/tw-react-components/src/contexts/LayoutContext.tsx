@@ -46,6 +46,7 @@ export const LayoutContextProvider: FC<
 
   useEffect(() => {
     if (theme !== 'system') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setResolvedTheme(theme);
       return;
     }

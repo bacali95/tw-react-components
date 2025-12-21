@@ -2,15 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeft } from 'lucide-react';
 import type { CSSProperties, ComponentProps, FC } from 'react';
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { cn, getValueFromCookie } from '../../helpers';
 import { useIsMobile } from '../../hooks';
@@ -673,9 +665,8 @@ const SidebarMenuSkeleton: FC<SidebarMenuSkeletonProps> = ({
   ...props
 }) => {
   // Random width between 50 to 90%.
-  const width = useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`;
-  }, []);
+  // eslint-disable-next-line react-hooks/purity
+  const width = useMemo(() => `${Math.floor(Math.random() * 40) + 50}%`, []);
 
   return (
     <div

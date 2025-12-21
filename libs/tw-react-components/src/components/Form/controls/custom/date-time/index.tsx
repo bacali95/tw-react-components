@@ -62,20 +62,22 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>();
   const [calendarView, setCalendarView] = useState<View>('days');
 
+  const now = useMemo(() => new Date(), []);
+
   const date = useMemo(() => {
     const result = value
       ? new Date(value)
       : new Date(
           Math.min(
-            Math.max(new Date(minDate ?? Date.now()).getTime(), Date.now()),
-            new Date(maxDate ?? Date.now()).getTime(),
+            Math.max(new Date(minDate ?? now).getTime(), now.getTime()),
+            new Date(maxDate ?? now).getTime(),
           ),
         );
 
     result.setMinutes(result.getMinutes() - ((result.getMinutes() + step) % step));
 
     return result;
-  }, [step, maxDate, minDate, value]);
+  }, [step, maxDate, minDate, value, now]);
   const displayDate = useMemo(
     () => value && getDisplayDate(date, { format: displayFormat, locale: displayLocale }),
     [date, value, displayFormat, displayLocale],
@@ -87,6 +89,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
 
   useEffect(() => {
     if (!isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCalendarView('days');
     }
   }, [isOpen]);

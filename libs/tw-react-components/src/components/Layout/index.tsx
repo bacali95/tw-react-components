@@ -10,7 +10,7 @@ import { Collapsible } from '../Collapsible';
 import { Flex } from '../Flex';
 import type { NavbarProps } from '../Navbar';
 import { Navbar } from '../Navbar';
-import { Sidebar, useSidebar } from '../Sidebar';
+import { Sidebar, type SidebarProps, useSidebar } from '../Sidebar';
 
 export type LayoutSidebarItem = {
   pathname: string;
@@ -39,6 +39,17 @@ export type LayoutProps = {
   useLocation: typeof useLocation;
 };
 
+const Wrapper = ({ children, variant }: PropsWithChildren<{ variant: SidebarProps['variant'] }>) =>
+  variant === 'inset' ? (
+    <Block className="overflow-hidden p-2" fullHeight fullWidth>
+      <Block className="bg-background overflow-hidden rounded-xl shadow-sm" fullHeight fullWidth>
+        {children}
+      </Block>
+    </Block>
+  ) : (
+    children
+  );
+
 export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   children,
   className,
@@ -47,17 +58,6 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
   NavLink,
   useLocation,
 }) => {
-  const Wrapper = ({ children }: PropsWithChildren) =>
-    sidebarProps.variant === 'inset' ? (
-      <Block className="overflow-hidden p-2" fullHeight fullWidth>
-        <Block className="bg-background overflow-hidden rounded-xl shadow-sm" fullHeight fullWidth>
-          {children}
-        </Block>
-      </Block>
-    ) : (
-      children
-    );
-
   return (
     <Flex className="bg-sidebar h-screen w-screen gap-0 text-black dark:text-white">
       <Sidebar
@@ -119,7 +119,7 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
         )}
         {sidebarProps.variant === 'sidebar' && <Sidebar.Rail />}
       </Sidebar>
-      <Wrapper>
+      <Wrapper variant={sidebarProps.variant}>
         <Flex className="gap-0 overflow-hidden" direction="column" fullWidth fullHeight>
           {navbarProps && <Navbar {...navbarProps} />}
           <Flex
