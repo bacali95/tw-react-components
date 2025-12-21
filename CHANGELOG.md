@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.195](https://github.com/bacali95/tw-react-components/compare/v0.0.194...v0.0.195) (2025-12-21)
+
+
+### Bug Fixes
+
+* **DateTimeInput:** improve date calculation logic and ensure proper state handling in effects ([0969412](https://github.com/bacali95/tw-react-components/commit/09694128d783224450ab2057fd9f1eb28c4abb3d))
+
 ### [0.0.194](https://github.com/bacali95/tw-react-components/compare/v0.0.193...v0.0.194) (2025-12-21)
 
 ### [0.0.193](https://github.com/bacali95/tw-react-components/compare/v0.0.192...v0.0.193) (2025-12-21)
