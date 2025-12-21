@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.196](https://github.com/bacali95/tw-react-components/compare/v0.0.195...v0.0.196) (2025-12-21)
+
+
+### Bug Fixes
+
+* **Resizable:** update Resizable components to use 'id' instead of 'data-testid' for accessibility, and add mock for ResizeObserver in test setup ([37c3de5](https://github.com/bacali95/tw-react-components/commit/37c3de519e46509de261ab843e813634b1ca5e83))
+
 ### [0.0.195](https://github.com/bacali95/tw-react-components/compare/v0.0.194...v0.0.195) (2025-12-21)
 
 
