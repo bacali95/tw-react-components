@@ -8,14 +8,10 @@ export type ResizableGroupProps = React.ComponentProps<typeof ResizablePrimitive
   dataTestId?: string;
 };
 
-const ResizableGroup: FC<ResizableGroupProps> = ({
-  className,
-  dataTestId = 'resizable-group',
-  ...props
-}) => (
+const ResizableGroup: FC<ResizableGroupProps> = ({ className, dataTestId, ...props }) => (
   <ResizablePrimitive.Group
     className={cn('flex h-full w-full', className)}
-    data-testid={dataTestId}
+    id={dataTestId}
     {...props}
   />
 );
@@ -24,8 +20,8 @@ export type ResizablePanelProps = React.ComponentProps<typeof ResizablePrimitive
   dataTestId?: string;
 };
 
-const ResizablePanel: FC<ResizablePanelProps> = ({ dataTestId = 'resizable-panel', ...props }) => (
-  <ResizablePrimitive.Panel data-testid={dataTestId} {...props} />
+const ResizablePanel: FC<ResizablePanelProps> = ({ dataTestId, ...props }) => (
+  <ResizablePrimitive.Panel id={dataTestId} {...props} />
 );
 
 export type ResizableSeparatorProps = React.ComponentProps<typeof ResizablePrimitive.Separator> & {
@@ -36,7 +32,7 @@ export type ResizableSeparatorProps = React.ComponentProps<typeof ResizablePrimi
 const ResizableSeparator: FC<ResizableSeparatorProps> = ({
   withHandle,
   className,
-  dataTestId = 'resizable-handle',
+  dataTestId,
   ...props
 }) => (
   <ResizablePrimitive.Separator
@@ -45,7 +41,7 @@ const ResizableSeparator: FC<ResizableSeparatorProps> = ({
       'aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:left-0 aria-[orientation=horizontal]:after:h-1 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 [&[aria-orientation=horizontal]>div]:rotate-90',
       className,
     )}
-    data-testid={dataTestId}
+    id={dataTestId}
     {...props}
   >
     {withHandle && (
