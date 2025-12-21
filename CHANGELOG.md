@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.197](https://github.com/bacali95/tw-react-components/compare/v0.0.196...v0.0.197) (2025-12-21)
+
 ### [0.0.196](https://github.com/bacali95/tw-react-components/compare/v0.0.195...v0.0.196) (2025-12-21)
 
 
