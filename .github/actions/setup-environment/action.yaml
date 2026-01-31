@@ -9,9 +9,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Derive appropriate SHAs for base and head for `nx affected` commands
-      uses: nrwl/nx-set-shas@v3
-
     - name: Setup Bun
       uses: oven-sh/setup-bun@v2
       with:

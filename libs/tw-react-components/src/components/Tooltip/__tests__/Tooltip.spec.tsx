@@ -90,7 +90,9 @@ describe('Tooltip Component', () => {
 
       await userEvent.hover(screen.getByTestId('tooltip-trigger'));
 
-      expect(await screen.findByTestId('tooltip-content')).toHaveAttribute('data-side', placement);
+      await waitFor(() =>
+        expect(screen.getByTestId('tooltip-content')).toHaveAttribute('data-side', placement),
+      );
 
       unmount();
     }
