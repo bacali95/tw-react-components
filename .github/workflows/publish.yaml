@@ -24,16 +24,16 @@ jobs:
           npm-token: ${{ secrets.NPM_TOKEN }}
 
       - name: Lint the code 🕵
-        run: yarn nx run tw-react-components:lint
+        run: bunx nx run tw-react-components:lint
 
       - name: Check the prettiness of the code 💅
-        run: yarn prettier:check
+        run: bun run prettier:check
 
       - name: Run unit tests 🧪
-        run: yarn nx run tw-react-components:test
+        run: bunx nx run tw-react-components:test
 
       - name: Build code 🛠
-        run: yarn nx run tw-react-components:build
+        run: bunx nx run tw-react-components:build
 
       - name: Publish the library 🚀
         run: |

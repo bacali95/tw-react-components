@@ -2,7 +2,6 @@
   "name": "tw-react-components",
   "version": "0.0.0",
   "license": "MIT",
-  "packageManager": "yarn@4.12.0",
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
@@ -10,9 +9,7 @@
     "lint": "nx lint",
     "prettier:check": "nx format:check",
     "prettier:fix": "nx format:write",
-    "release": "standard-version",
-    "deduplicate": "yarn-berry-deduplicate && yarn",
-    "deduplicate:list": "yarn-berry-deduplicate -l"
+    "release": "standard-version"
   },
   "private": true,
   "dependencies": {
@@ -31,14 +28,14 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "core-js": "3.47.0",
+    "core-js": "3.48.0",
     "dayjs": "^1.11.19",
-    "lucide-react": "^0.562.0",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "lucide-react": "^0.563.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-hook-form": "^7.69.0",
     "react-resizable-panels": "^4.0.13",
-    "react-router": "^7.11.0",
+    "react-router": "7.13.0",
     "regenerator-runtime": "^0.14.1",
     "tailwind-merge": "^3.4.0",
     "tslib": "^2.8.1"
@@ -48,15 +45,15 @@
     "@babel/preset-react": "^7.28.5",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
-    "@nx/eslint": "22.3.3",
-    "@nx/eslint-plugin": "22.3.3",
-    "@nx/jest": "22.3.3",
-    "@nx/js": "22.3.3",
-    "@nx/react": "22.3.3",
-    "@nx/rollup": "22.3.3",
-    "@nx/web": "22.3.3",
-    "@nx/webpack": "22.3.3",
-    "@nx/workspace": "22.3.3",
+    "@nx/eslint": "22.4.4",
+    "@nx/eslint-plugin": "22.4.4",
+    "@nx/jest": "22.4.4",
+    "@nx/js": "22.4.4",
+    "@nx/react": "22.4.4",
+    "@nx/rollup": "22.4.4",
+    "@nx/web": "22.4.4",
+    "@nx/webpack": "22.4.4",
+    "@nx/workspace": "22.4.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/forms": "^0.5.11",
@@ -77,7 +74,7 @@
     "css-loader": "^7.1.2",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-cypress": "5.2.0",
+    "eslint-plugin-cypress": "5.2.1",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
@@ -86,7 +83,7 @@
     "jest": "30.2.0",
     "jest-environment-jsdom": "30.2.0",
     "jest-util": "30.2.0",
-    "nx": "22.3.3",
+    "nx": "22.4.4",
     "postcss": "8.5.6",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -102,16 +99,11 @@
     "typescript": "5.9.3",
     "url-loader": "^4.1.1",
     "webpack": "5.104.1",
-    "webpack-merge": "^6.0.1",
-    "yarn-berry-deduplicate": "^6.1.3"
+    "webpack-merge": "^6.0.1"
   },
   "standard-version": {
     "commitAll": true,
     "packageFiles": "libs/tw-react-components/package.json",
     "bumpFiles": "libs/tw-react-components/package.json"
-  },
-  "volta": {
-    "node": "24.12.0",
-    "yarn": "4.12.0"
   }
 }

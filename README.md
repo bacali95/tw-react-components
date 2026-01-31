@@ -22,6 +22,9 @@ Check out the [live demo](https://bacali95.github.io/tw-react-components) to see
 ## Installation
 
 ```bash
+# Using bun
+bun add tw-react-components
+
 # Using npm
 npm install tw-react-components
 
@@ -133,26 +136,26 @@ function MyComponent() {
 
 ## Development
 
-This project uses [Nx](https://nx.dev) as a build system and [Yarn](https://yarnpkg.com/) as a package manager.
+This project uses [Nx](https://nx.dev) as a build system and [Bun](https://bun.sh/) as a package manager.
 
 ```bash
 # Install dependencies
-yarn
+bun install
 
 # Start the development server
-yarn start
+bun run start
 
 # Build the library
-yarn build
+bun run build
 
 # Run tests
-yarn test
+bun run test
 
 # Lint the code
-yarn lint
+bun run lint
 
 # Format the code
-yarn prettier:fix
+bun run prettier:fix
 ```
 
 ## Contributing
