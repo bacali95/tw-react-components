@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.198](https://github.com/bacali95/tw-react-components/compare/v0.0.197...v0.0.198) (2026-02-07)
+
+
+### Bug Fixes
+
+* **types:** exclude Date type from Paths utility to prevent incorrect path generation ([11afaff](https://github.com/bacali95/tw-react-components/commit/11afafff4d3e2e60433be1d49ec09164e76c5787))
+
 ### [0.0.197](https://github.com/bacali95/tw-react-components/compare/v0.0.196...v0.0.197) (2025-12-21)
 
 ### [0.0.196](https://github.com/bacali95/tw-react-components/compare/v0.0.195...v0.0.196) (2025-12-21)
