@@ -42,11 +42,13 @@ type NextDepth = {
 export type Paths<T, Depth extends keyof NextDepth = '10'> = Depth extends keyof NextDepth
   ? T extends ReadonlyArray<infer R>
     ? `${number}` | `${number}.${Paths<R, NextDepth[Depth]>}`
-    : T extends object
-      ? {
-          [K in keyof T]: `${Exclude<K, symbol>}${'' | `.${Paths<T[K], NextDepth[Depth]>}`}`;
-        }[keyof T]
-      : never
+    : T extends Date
+      ? never
+      : T extends object
+        ? {
+            [K in keyof T]: `${Exclude<K, symbol>}${'' | `.${Paths<T[K], NextDepth[Depth]>}`}`;
+          }[keyof T]
+        : never
   : never;
 
 export type ResolvePath<T, Path extends Paths<T>> = Path extends ''
