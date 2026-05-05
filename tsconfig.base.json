@@ -4,7 +4,6 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -13,9 +12,8 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "tw-react-components": ["libs/tw-react-components/src/index.ts"]
+      "tw-react-components": ["./libs/tw-react-components/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

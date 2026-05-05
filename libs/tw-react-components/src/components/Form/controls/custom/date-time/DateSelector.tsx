@@ -39,6 +39,7 @@ export const DateSelector: FC<DateSelectorProps> = ({
   const [yearOffset, setYearOffset] = useState<number>(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMonth(date.getMonth());
     setYear(date.getFullYear());
   }, [date]);

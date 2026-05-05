@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'tw-react-components',
   preset: '../../jest.preset.js',

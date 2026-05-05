@@ -45,6 +45,8 @@
     "@babel/preset-react": "^7.28.5",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "~10.0.1",
     "@nx/eslint": "22.7.1",
     "@nx/eslint-plugin": "22.7.1",
     "@nx/jest": "22.7.1",
@@ -97,6 +99,7 @@
     "ts-jest": "29.4.9",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
+    "typescript-eslint": "^8.40.0",
     "url-loader": "^4.1.1",
     "webpack": "5.106.2",
     "webpack-merge": "^6.0.1"
