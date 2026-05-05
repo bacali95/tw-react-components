@@ -105,6 +105,9 @@
     "unrs-resolver",
     "less",
   ],
+  "patchedDependencies": {
+    "eslint-plugin-react@7.37.5": "patches/eslint-plugin-react@7.37.5.patch",
+  },
   "packages": {
     "@adobe/css-tools": ["@adobe/css-tools@4.4.4", "", {}, "sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg=="],
 
