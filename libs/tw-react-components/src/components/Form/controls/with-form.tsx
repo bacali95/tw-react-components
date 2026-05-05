@@ -83,7 +83,7 @@ function withForm<
               Component === NumberInput
                 ? (value: ChangeEvent<HTMLInputElement>) =>
                     field.onChange(value.target.valueAsNumber)
-                : field.onChange
+                : (value: unknown) => field.onChange(value === undefined ? null : value)
             }
             value={field.value ?? ''}
             disabled={
