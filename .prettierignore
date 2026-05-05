@@ -11,3 +11,5 @@ CHANGELOG.md
 /.nx/workspace-data
 
 /skills
+
+.nx/self-healing

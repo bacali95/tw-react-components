@@ -1,7 +1,7 @@
 import {
   CloudIcon,
   CreditCardIcon,
-  GithubIcon,
+  GitBranchIcon,
   LifeBuoyIcon,
   LogOutIcon,
   MailIcon,
@@ -71,7 +71,7 @@ export const Menus: FC = () => {
         </DropdownMenu.Group>
         <DropdownMenu.Separator />
         <DropdownMenu.Item>
-          <DropdownMenu.Icon icon={GithubIcon} />
+          <DropdownMenu.Icon icon={GitBranchIcon} />
           <span>GitHub</span>
         </DropdownMenu.Item>
         <DropdownMenu.Item>

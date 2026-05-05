@@ -187,7 +187,11 @@ export const SelectInput = <T,>({
   const handleOnClear = () => {
     if (readOnly) return;
 
-    onChange?.(undefined);
+    if (multiple) {
+      onChange?.([]);
+    } else {
+      onChange?.(undefined);
+    }
   };
 
   const handleOnAddItemClicked = () => {
