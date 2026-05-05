@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.206](https://github.com/bacali95/tw-react-components/compare/v0.0.205...v0.0.206) (2026-05-05)
+
+
+### Bug Fixes
+
+* handle undefined values in form field change handler ([59735a9](https://github.com/bacali95/tw-react-components/commit/59735a954476f35f83001d21f95927089468e107))
+
 ### [0.0.205](https://github.com/bacali95/tw-react-components/compare/v0.0.204...v0.0.205) (2026-05-05)
 
 ### [0.0.204](https://github.com/bacali95/tw-react-components/compare/v0.0.203...v0.0.204) (2026-05-05)
