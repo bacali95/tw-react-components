@@ -117,6 +117,7 @@
     "unrs-resolver"
   ],
   "patchedDependencies": {
-    "eslint-plugin-react@7.37.5": "patches/eslint-plugin-react@7.37.5.patch"
+    "eslint-plugin-react@7.37.5": "patches/eslint-plugin-react@7.37.5.patch",
+    "@nx/rollup@22.7.1": "patches/@nx%2Frollup@22.7.1.patch"
   }
 }
