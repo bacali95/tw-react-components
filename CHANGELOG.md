@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.211](https://github.com/bacali95/tw-react-components/compare/v0.0.210...v0.0.211) (2026-08-07)
+
+
+### Bug Fixes
+
+* simplify class names in DateTimeInput and Sidebar components for improved readability ([33fdb5d](https://github.com/bacali95/tw-react-components/commit/33fdb5d833f4cfefd9b2638d76ec21ed04f54dad))
+
 ### [0.0.210](https://github.com/bacali95/tw-react-components/compare/v0.0.209...v0.0.210) (2026-08-07)
 
 
