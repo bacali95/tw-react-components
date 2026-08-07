@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.213](https://github.com/bacali95/tw-react-components/compare/v0.0.212...v0.0.213) (2026-08-07)
+
+
+### Bug Fixes
+
+* update DateTimeInput component to use Popover for improved accessibility and refactor event handling ([412fd1f](https://github.com/bacali95/tw-react-components/commit/412fd1fbaf358d66f4427dde843249978709f705))
+
 ### [0.0.212](https://github.com/bacali95/tw-react-components/compare/v0.0.211...v0.0.212) (2026-08-07)
 
 ### [0.0.211](https://github.com/bacali95/tw-react-components/compare/v0.0.210...v0.0.211) (2026-08-07)
