@@ -13,6 +13,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "ignoreDeprecations": "6.0",
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
     "paths": {
       "tw-react-components": ["./libs/tw-react-components/src/index.ts"]
     }

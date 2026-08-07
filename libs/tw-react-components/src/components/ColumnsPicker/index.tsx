@@ -35,7 +35,7 @@ export function ColumnsPicker<T>({
           renderer={(field, _index, listeners) => {
             const column = columns.find((c) => String(c.field) === field)!;
             return (
-              <Flex align="center" justify="between" className="gap-2 py-1">
+              <Flex align="center" justify="between" className="bg-background gap-2 py-1">
                 <Flex align="center" className="w-48 min-w-0 gap-2">
                   <GripVerticalIcon
                     className="text-muted-foreground h-4 w-4 shrink-0 cursor-grab"
