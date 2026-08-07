@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 
+import { cn } from '../../helpers';
 import type { ButtonProps, ButtonVariant } from '../Button';
 import { Button } from '../Button';
 
@@ -10,6 +11,19 @@ export type BadgeProps = Omit<ButtonProps, 'variant'> & {
   dataTestId?: string;
 };
 
-export const Badge: FC<BadgeProps> = ({ size = 'small', dataTestId = 'badge', ...props }) => (
-  <Button size={size} dataTestId={dataTestId} {...props} />
+export const Badge: FC<BadgeProps> = ({
+  size = 'small',
+  dataTestId = 'badge',
+  className,
+  ...props
+}) => (
+  <Button
+    size={size}
+    dataTestId={dataTestId}
+    className={cn(className, {
+      'cursor-default': !props.onClick,
+      'cursor-pointer': props.onClick,
+    })}
+    {...props}
+  />
 );
