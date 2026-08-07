@@ -31,7 +31,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Build code 🛠
-        run: bun run build --baseHref=/tw-react-components/
+        run: bun run build --base=/tw-react-components/
 
       - name: Deploy the demo website 🚀
         uses: JamesIves/github-pages-deploy-action@v4
