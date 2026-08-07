@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.207](https://github.com/bacali95/tw-react-components/compare/v0.0.206...v0.0.207) (2026-08-07)
+
+
+### Features
+
+* add Switches page and ColumnsPicker component for table column management ([9de4b0b](https://github.com/bacali95/tw-react-components/commit/9de4b0b4154584955ae44ccb86d5850ba43301e1))
+
 ### [0.0.206](https://github.com/bacali95/tw-react-components/compare/v0.0.205...v0.0.206) (2026-05-05)
 
 
