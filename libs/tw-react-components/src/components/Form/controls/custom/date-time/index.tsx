@@ -135,7 +135,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
   };
 
   return (
-    <div className={cn('relative w-full', className)} ref={ref}>
+    <div className={cn('w-full', className)} ref={ref}>
       <TextInput
         {...props}
         readOnly
