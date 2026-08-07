@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.209](https://github.com/bacali95/tw-react-components/compare/v0.0.208...v0.0.209) (2026-08-07)
+
+
+### Bug Fixes
+
+* fix ColumnsPicker popover background color ([ac1efb3](https://github.com/bacali95/tw-react-components/commit/ac1efb3e28d37e223d1d2af43662b5da72327811))
+
 ### [0.0.208](https://github.com/bacali95/tw-react-components/compare/v0.0.207...v0.0.208) (2026-08-07)
 
 ### [0.0.207](https://github.com/bacali95/tw-react-components/compare/v0.0.206...v0.0.207) (2026-08-07)
