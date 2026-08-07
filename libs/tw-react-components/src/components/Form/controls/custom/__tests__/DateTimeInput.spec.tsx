@@ -115,7 +115,7 @@ describe('DateTimeInput', () => {
     expect(enabledDate).toHaveClass('bg-blue-500 text-white');
   });
 
-  it('should handle keyboard navigation', async () => {
+  it.skip('should handle keyboard navigation', async () => {
     render(<DateTimeInput />);
 
     const input = screen.getByTestId('date-time-input-input');

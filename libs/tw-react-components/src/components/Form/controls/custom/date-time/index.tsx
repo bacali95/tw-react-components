@@ -135,12 +135,12 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
     }
   };
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <Popover.Trigger
         className={cn('w-full', className)}
         onKeyUp={handleOnKeyUp}
-        ref={ref}
         disabled={props.readOnly}
+        ref={ref}
       >
         <TextInput
           {...props}
@@ -176,21 +176,19 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
               dataTestId={`${dataTestId}-date-selector`}
             />
           )}
-          {calendarView === 'days' && (
+          {calendarView === 'days' && type?.includes('time') && (
             <div
               className="flex items-center justify-end gap-2 px-3 py-2 select-none"
               data-testid={`${dataTestId}-time-selector`}
             >
-              {type?.includes('time') && (
-                <TimeSelector
-                  date={date}
-                  step={step}
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  setNewDate={setNewDate}
-                  dataTestId={`${dataTestId}-time-selector`}
-                />
-              )}
+              <TimeSelector
+                date={date}
+                step={step}
+                minDate={minDate}
+                maxDate={maxDate}
+                setNewDate={setNewDate}
+                dataTestId={`${dataTestId}-time-selector`}
+              />
               <div
                 className="cursor-pointer rounded-lg border border-transparent p-1 text-sm font-bold text-blue-600 uppercase transition duration-100 ease-in-out hover:bg-slate-100 dark:text-blue-500 dark:hover:bg-slate-700"
                 onClick={() => setIsOpen(false)}
