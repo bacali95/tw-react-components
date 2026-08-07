@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.214](https://github.com/bacali95/tw-react-components/compare/v0.0.213...v0.0.214) (2026-08-07)
+
+
+### Bug Fixes
+
+* enhance DateTimeInput component by ensuring TimeSelector is always rendered when calendarView is 'days' and type includes 'time' ([926b5b3](https://github.com/bacali95/tw-react-components/commit/926b5b31121b7d1700a25f09817287a64e8accdd))
+
 ### [0.0.213](https://github.com/bacali95/tw-react-components/compare/v0.0.212...v0.0.213) (2026-08-07)
 
 
