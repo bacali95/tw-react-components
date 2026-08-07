@@ -1,5 +1,3 @@
-import './polyfills';
-
 import { StrictMode, Suspense } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router';
@@ -12,6 +10,7 @@ import {
 } from 'tw-react-components';
 
 import { App } from './app';
+import './polyfills';
 import './styles.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
