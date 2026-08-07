@@ -1,13 +1,9 @@
 import { useCallback, useMemo } from 'react';
 
 import type { DataTableColumn, DataTableColumns } from '../components/DataTable';
-import { useLayoutContext } from '../contexts';
+import { DEFAULT_COLUMNS_STATE, useLayoutContext } from '../contexts';
 
 export type ColumnsState = { order: string[]; hidden: string[] };
-
-export const DEFAULT_COLUMNS_STATE: ColumnsState = { order: [], hidden: [] };
-export const COLUMNS_COOKIE_NAME = 'tables:columns:state';
-export const COLUMNS_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
 function applyColumnsState<T extends { field: string; hide?: boolean }>(
   columns: T[],

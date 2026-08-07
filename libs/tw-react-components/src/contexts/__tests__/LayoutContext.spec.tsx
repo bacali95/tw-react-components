@@ -2,8 +2,8 @@ import { fireEvent, render, renderHook, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
 import * as helpers from '../../helpers';
-import { COLUMNS_COOKIE_NAME } from '../../hooks/useColumns';
 import {
+  COLUMNS_COOKIE_NAME,
   LayoutContextProvider,
   SHOW_IDS_COOKIE_NAME,
   THEME_COOKIE_NAME,

@@ -2,11 +2,7 @@ import type { FC, PropsWithChildren } from 'react';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 import { getValueFromCookie } from '../helpers';
-import {
-  COLUMNS_COOKIE_MAX_AGE,
-  COLUMNS_COOKIE_NAME,
-  type ColumnsState,
-} from '../hooks/useColumns';
+import type { ColumnsState } from '../hooks/useColumns';
 
 export type ThemeState = 'dark' | 'light' | 'system';
 
@@ -28,6 +24,10 @@ export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
 export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
 export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+
+export const DEFAULT_COLUMNS_STATE: ColumnsState = { order: [], hidden: [] };
+export const COLUMNS_COOKIE_NAME = 'tables:columns:state';
+export const COLUMNS_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
 function parseColumnsStateMap(raw: string): Record<string, ColumnsState> {
   try {

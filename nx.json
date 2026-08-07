@@ -66,5 +66,13 @@
   "defaultProject": "demo",
   "useInferencePlugins": false,
   "analytics": false,
-  "nxCloudId": "6a75714694f37bf56f236c67"
+  "nxCloudId": "6a75714694f37bf56f236c67",
+  "plugins": [
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build"
+      }
+    }
+  ]
 }

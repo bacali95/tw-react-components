@@ -5,30 +5,6 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "project": "libs/tw-react-components/package.json",
-        "outputPath": "dist/libs/tw-react-components",
-        "main": "libs/tw-react-components/src/index.ts",
-        "tsConfig": "libs/tw-react-components/tsconfig.lib.json",
-        "format": ["esm"],
-        "compiler": "tsc",
-        "external": "all",
-        "generateExportsField": true,
-        "rollupConfig": "libs/tw-react-components/rollup.config.cjs",
-        "babelUpwardRootMode": true,
-        "updateBuildableProjectDepsInPackageJson": true,
-        "assets": [
-          {
-            "glob": "(index.css|tailwindcss-plugin.cjs)",
-            "input": "libs/tw-react-components",
-            "output": "/"
-          }
-        ]
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

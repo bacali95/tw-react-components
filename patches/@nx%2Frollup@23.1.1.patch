@@ -1,8 +1,8 @@
-diff --git a/src/plugins/with-nx/with-nx.js b/src/plugins/with-nx/with-nx.js
-index 747921b173e0aa27030d1c8bd518248daf8885a9..957276f334845d3f1b614abc55f15a5bcc0de37b 100644
---- a/src/plugins/with-nx/with-nx.js
-+++ b/src/plugins/with-nx/with-nx.js
-@@ -39,7 +39,7 @@ function ensureTypeScript() {
+diff --git a/dist/src/plugins/with-nx/with-nx.js b/dist/src/plugins/with-nx/with-nx.js
+index ac6c3e960b1d463bbfd1c63339ffaed82b57f95a..97f1f4b9a64ba46bc98aa59c8fbb2ae4ed0f45ad 100644
+--- a/dist/src/plugins/with-nx/with-nx.js
++++ b/dist/src/plugins/with-nx/with-nx.js
+@@ -38,7 +38,7 @@ function ensureTypeScript() {
      }
      return ts;
  }
@@ -11,7 +11,7 @@ index 747921b173e0aa27030d1c8bd518248daf8885a9..957276f334845d3f1b614abc55f15a5b
  // Passed by @nx/rollup:rollup executor to previous behavior of remapping tsconfig paths based on buildable dependencies remains intact.
  dependencies) {
      const finalConfig = { ...rollupConfig };
-@@ -122,7 +122,7 @@ dependencies) {
+@@ -121,7 +121,7 @@ dependencies) {
      if (!rollupConfig.external && !global.NX_GRAPH_CREATION) {
          const npmDeps = (projectGraph.dependencies[projectNode.name] ?? [])
              .filter((d) => d.target.startsWith('npm:'))
