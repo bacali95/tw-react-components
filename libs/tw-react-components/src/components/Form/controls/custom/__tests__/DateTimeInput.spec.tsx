@@ -85,7 +85,7 @@ describe('DateTimeInput', () => {
     await userEvent.click(screen.getByTestId('date-time-input-ok'));
 
     expect(onChange).toHaveBeenCalled();
-    const selectedTime = onChange.mock.calls.at(-1)?.[0];
+    const selectedTime = onChange.mock.calls[onChange.mock.calls.length - 1][0];
     expect(selectedTime.getHours()).toBe(15);
     expect(selectedTime.getMinutes()).toBe(45);
   });

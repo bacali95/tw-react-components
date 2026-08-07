@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { cn, getDisplayDate } from '../../../../../helpers';
 import { useOutsideClick } from '../../../../../hooks';
+import { Popover } from '../../../../Popover';
 import type { BasicInputProps } from '../../primitive';
 import { TextInput } from '../../primitive';
 import type { View } from './DateSelector';
@@ -23,7 +24,7 @@ export type DateTimeInputProps = {
   maxDate?: Date | null;
   displayFormat?: string;
   displayLocale?: string;
-  ref?: Ref<HTMLDivElement>;
+  ref?: Ref<HTMLButtonElement>;
   onChange?: (date?: Date | null) => void;
 } & Pick<
   BasicInputProps<'text'>,
@@ -124,7 +125,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
     onBlur?.(event);
   };
 
-  const handleOnKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleOnKeyUp = (event: KeyboardEvent<HTMLButtonElement>) => {
     switch (event.key) {
       case ' ':
         setIsOpen(!isOpen);
@@ -133,26 +134,30 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
         setIsOpen(false);
     }
   };
-
   return (
-    <div className={cn('w-full', className)} ref={ref}>
-      <TextInput
-        {...props}
-        readOnly
-        value={displayDate ?? ''}
-        hasErrors={hasErrors}
-        onClick={handleOnClick}
+    <Popover>
+      <Popover.Trigger
+        className={cn('w-full', className)}
         onKeyUp={handleOnKeyUp}
-        clearable={clearable && !!displayDate}
-        onClear={clearDate}
-        suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
-        onSuffixIconClick={handleOnClick}
-        dataTestId={dataTestId}
-      />
-
-      {isOpen && (
+        ref={ref}
+        disabled={props.readOnly}
+      >
+        <TextInput
+          {...props}
+          readOnly
+          value={displayDate ?? ''}
+          hasErrors={hasErrors}
+          onClick={handleOnClick}
+          clearable={clearable && !!displayDate}
+          onClear={clearDate}
+          suffixIcon={type?.includes('date') ? CalendarIcon : ClockIcon}
+          onSuffixIconClick={handleOnClick}
+          dataTestId={dataTestId}
+        />
+      </Popover.Trigger>
+      <Popover.Content asChild align="start">
         <div
-          className="absolute z-20 mt-2 flex origin-top-left flex-col rounded-md border bg-white shadow-sm duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+          className="z-20 mt-1 flex flex-col rounded-md border bg-white shadow-sm duration-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
           tabIndex={0}
           onBlur={handleOnBlur}
           ref={calendarRef}
@@ -196,7 +201,7 @@ export const DateTimeInput: FC<DateTimeInputProps> = ({
             </div>
           )}
         </div>
-      )}
-    </div>
+      </Popover.Content>
+    </Popover>
   );
 };
