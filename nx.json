@@ -65,5 +65,6 @@
   },
   "defaultProject": "demo",
   "useInferencePlugins": false,
-  "analytics": false
+  "analytics": false,
+  "nxCloudId": "6a75714694f37bf56f236c67"
 }
