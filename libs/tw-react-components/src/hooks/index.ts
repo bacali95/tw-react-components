@@ -1,3 +1,4 @@
+export * from './useColumns';
 export * from './useDays';
 export * from './useIsMobile';
 export * from './useLongPress';

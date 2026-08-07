@@ -1,7 +1,12 @@
 import type { FC, PropsWithChildren } from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 import { getValueFromCookie } from '../helpers';
+import {
+  COLUMNS_COOKIE_MAX_AGE,
+  COLUMNS_COOKIE_NAME,
+  type ColumnsState,
+} from '../hooks/useColumns';
 
 export type ThemeState = 'dark' | 'light' | 'system';
 
@@ -11,6 +16,8 @@ export type LayoutContext = {
   setTheme: (theme: ThemeState) => void;
   showIds: boolean;
   toggleShowIds: () => void;
+  columnsState: Record<string, ColumnsState>;
+  setColumnsState: (key: string, state: ColumnsState) => void;
 };
 
 export const LayoutContext = createContext<LayoutContext | undefined>(undefined);
@@ -22,14 +29,33 @@ export const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 export const SHOW_IDS_COOKIE_NAME = 'show-ids:state';
 export const SHOW_IDS_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 
+function parseColumnsStateMap(raw: string): Record<string, ColumnsState> {
+  try {
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
 export const LayoutContextProvider: FC<
-  PropsWithChildren<Partial<Pick<LayoutContext, 'theme' | 'showIds'>>>
-> = ({ children, theme: defaultTheme, showIds: defaultShowIds }) => {
+  PropsWithChildren<Partial<Pick<LayoutContext, 'theme' | 'showIds' | 'columnsState'>>>
+> = ({
+  children,
+  theme: defaultTheme,
+  showIds: defaultShowIds,
+  columnsState: defaultColumnsState,
+}) => {
   const [theme, _setTheme] = useState(
     defaultTheme ?? getValueFromCookie<ThemeState>(THEME_COOKIE_NAME, 'system'),
   );
   const [showIds, _setShowIds] = useState(
     defaultShowIds ?? getValueFromCookie<boolean>(SHOW_IDS_COOKIE_NAME, false),
+  );
+  const [columnsState, _setColumnsState] = useState<Record<string, ColumnsState>>(
+    () =>
+      defaultColumnsState ??
+      parseColumnsStateMap(getValueFromCookie<string>(COLUMNS_COOKIE_NAME, '{}')),
   );
 
   const [resolvedTheme, setResolvedTheme] = useState(() =>
@@ -63,25 +89,50 @@ export const LayoutContextProvider: FC<
     return () => mediaQuery.removeEventListener('change', handleMediaQuery);
   }, [theme]);
 
-  const setTheme = (theme: ThemeState) => {
+  const setTheme = useCallback((theme: ThemeState) => {
     _setTheme(theme);
 
     // This sets the cookie to keep the theme state.
     document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${THEME_COOKIE_MAX_AGE}`;
-  };
+  }, []);
 
-  const toggleShowIds = () =>
-    _setShowIds((showIds) => {
-      const newValue = !showIds;
+  const toggleShowIds = useCallback(
+    () =>
+      _setShowIds((showIds) => {
+        const newValue = !showIds;
 
-      // This sets the cookie to keep the showIds state.
-      document.cookie = `${SHOW_IDS_COOKIE_NAME}=${newValue}; path=/; max-age=${SHOW_IDS_COOKIE_MAX_AGE}`;
+        // This sets the cookie to keep the showIds state.
+        document.cookie = `${SHOW_IDS_COOKIE_NAME}=${newValue}; path=/; max-age=${SHOW_IDS_COOKIE_MAX_AGE}`;
 
-      return newValue;
-    });
+        return newValue;
+      }),
+    [],
+  );
+
+  const setColumnsState = useCallback(
+    (key: string, state: ColumnsState) =>
+      _setColumnsState((prev) => {
+        const newState = { ...prev, [key]: state };
+
+        document.cookie = `${COLUMNS_COOKIE_NAME}=${JSON.stringify(newState)}; path=/; max-age=${COLUMNS_COOKIE_MAX_AGE}`;
+
+        return newState;
+      }),
+    [],
+  );
 
   return (
-    <LayoutContext.Provider value={{ theme, resolvedTheme, setTheme, showIds, toggleShowIds }}>
+    <LayoutContext.Provider
+      value={{
+        theme,
+        resolvedTheme,
+        setTheme,
+        showIds,
+        toggleShowIds,
+        columnsState,
+        setColumnsState,
+      }}
+    >
       {children}
     </LayoutContext.Provider>
   );

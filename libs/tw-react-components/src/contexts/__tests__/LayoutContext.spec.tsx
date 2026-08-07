@@ -2,6 +2,7 @@ import { fireEvent, render, renderHook, screen } from '@testing-library/react';
 import type { ReactNode } from 'react';
 
 import * as helpers from '../../helpers';
+import { COLUMNS_COOKIE_NAME } from '../../hooks/useColumns';
 import {
   LayoutContextProvider,
   SHOW_IDS_COOKIE_NAME,
@@ -9,6 +10,12 @@ import {
   THEME_MEDIA_QUERY,
   useLayoutContext,
 } from '../LayoutContext';
+
+function extractCookieJson(name: string) {
+  const prefix = `${name}=`;
+  if (!document.cookie.startsWith(prefix)) return undefined;
+  return JSON.parse(document.cookie.slice(prefix.length).split('; path=')[0]);
+}
 
 // Mock the helpers module to control cookie values
 jest.mock('../../helpers', () => ({
@@ -242,6 +249,160 @@ describe('LayoutContext', () => {
     });
   });
 
+  describe('Columns state functionality', () => {
+    const ColumnsTestComponent = () => {
+      const { columnsState, setColumnsState } = useLayoutContext();
+
+      return (
+        <div>
+          <div data-testid="orders-state">{JSON.stringify(columnsState['orders'] ?? null)}</div>
+          <button
+            data-testid="set-orders"
+            onClick={() => setColumnsState('orders', { order: ['b', 'a'], hidden: ['a'] })}
+          >
+            Set orders
+          </button>
+        </div>
+      );
+    };
+
+    it('defaults to an empty columns state map', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation(
+        (name, defaultValue) => defaultValue,
+      );
+
+      renderWithProvider(<ColumnsTestComponent />);
+
+      expect(screen.getByTestId('orders-state').textContent).toBe('null');
+    });
+
+    it('bootstraps columnsState from the columnsState prop', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation(
+        (name, defaultValue) => defaultValue,
+      );
+
+      render(
+        <LayoutContextProvider columnsState={{ orders: { order: ['id'], hidden: [] } }}>
+          <ColumnsTestComponent />
+        </LayoutContextProvider>,
+      );
+
+      expect(screen.getByTestId('orders-state').textContent).toBe(
+        JSON.stringify({ order: ['id'], hidden: [] }),
+      );
+    });
+
+    it('updates columnsState for the given key when setColumnsState is called', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation(
+        (name, defaultValue) => defaultValue,
+      );
+
+      renderWithProvider(<ColumnsTestComponent />);
+
+      fireEvent.click(screen.getByTestId('set-orders'));
+
+      expect(screen.getByTestId('orders-state').textContent).toBe(
+        JSON.stringify({ order: ['b', 'a'], hidden: ['a'] }),
+      );
+    });
+
+    it('reads columnsState from the cookie when no columnsState prop is provided', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation((name, defaultValue) =>
+        name === COLUMNS_COOKIE_NAME
+          ? JSON.stringify({ orders: { order: ['id'], hidden: [] } })
+          : defaultValue,
+      );
+
+      renderWithProvider(<ColumnsTestComponent />);
+
+      expect(screen.getByTestId('orders-state').textContent).toBe(
+        JSON.stringify({ order: ['id'], hidden: [] }),
+      );
+    });
+
+    it('prefers the columnsState prop over the cookie', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation((name, defaultValue) =>
+        name === COLUMNS_COOKIE_NAME
+          ? JSON.stringify({ orders: { order: ['id'], hidden: [] } })
+          : defaultValue,
+      );
+
+      render(
+        <LayoutContextProvider columnsState={{ orders: { order: ['name'], hidden: ['name'] } }}>
+          <ColumnsTestComponent />
+        </LayoutContextProvider>,
+      );
+
+      expect(screen.getByTestId('orders-state').textContent).toBe(
+        JSON.stringify({ order: ['name'], hidden: ['name'] }),
+      );
+    });
+
+    it('writes the full columns state map to a single cookie when setColumnsState is called', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation(
+        (name, defaultValue) => defaultValue,
+      );
+
+      render(
+        <LayoutContextProvider columnsState={{ invoices: { order: ['x'], hidden: [] } }}>
+          <ColumnsTestComponent />
+        </LayoutContextProvider>,
+      );
+
+      fireEvent.click(screen.getByTestId('set-orders'));
+
+      expect(extractCookieJson(COLUMNS_COOKIE_NAME)).toEqual({
+        invoices: { order: ['x'], hidden: [] },
+        orders: { order: ['b', 'a'], hidden: ['a'] },
+      });
+    });
+
+    it('leaves other keys untouched when setColumnsState updates a key', () => {
+      (helpers.getValueFromCookie as jest.Mock).mockImplementation(
+        (name, defaultValue) => defaultValue,
+      );
+
+      const ColumnsTestComponentWithTwoKeys = () => {
+        const { columnsState, setColumnsState } = useLayoutContext();
+
+        return (
+          <div>
+            <div data-testid="orders-state">{JSON.stringify(columnsState['orders'] ?? null)}</div>
+            <div data-testid="invoices-state">
+              {JSON.stringify(columnsState['invoices'] ?? null)}
+            </div>
+            <button
+              data-testid="set-orders"
+              onClick={() => setColumnsState('orders', { order: ['b', 'a'], hidden: [] })}
+            >
+              Set orders
+            </button>
+          </div>
+        );
+      };
+
+      render(
+        <LayoutContextProvider
+          columnsState={{
+            orders: { order: ['a'], hidden: [] },
+            invoices: { order: ['x'], hidden: [] },
+          }}
+        >
+          <ColumnsTestComponentWithTwoKeys />
+        </LayoutContextProvider>,
+      );
+
+      fireEvent.click(screen.getByTestId('set-orders'));
+
+      expect(screen.getByTestId('orders-state').textContent).toBe(
+        JSON.stringify({ order: ['b', 'a'], hidden: [] }),
+      );
+      expect(screen.getByTestId('invoices-state').textContent).toBe(
+        JSON.stringify({ order: ['x'], hidden: [] }),
+      );
+    });
+  });
+
   describe('useLayoutContext hook', () => {
     it('throws an error when used outside of LayoutContextProvider', () => {
       const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => void 0);
@@ -270,6 +431,8 @@ describe('LayoutContext', () => {
         setTheme: expect.any(Function),
         showIds: false,
         toggleShowIds: expect.any(Function),
+        columnsState: {},
+        setColumnsState: expect.any(Function),
       });
     });
   });

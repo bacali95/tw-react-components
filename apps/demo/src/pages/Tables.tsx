@@ -5,7 +5,7 @@ import type { FC } from 'react';
 import { useMemo, useState } from 'react';
 
 import type { DataTableColumns, DataTablePageSize, DataTableSorting } from 'tw-react-components';
-import { DataTable, Flex, getDisplayDate } from 'tw-react-components';
+import { ColumnsPicker, DataTable, Flex, getDisplayDate, useColumns } from 'tw-react-components';
 
 import type { Person } from '../data/people';
 import { people } from '../data/people';
@@ -35,7 +35,7 @@ export const Tables: FC = () => {
     [page, pageSize, sortedPeople],
   );
 
-  const columns: DataTableColumns<Person> = {
+  const baseColumns: DataTableColumns<Person> = {
     id: { header: 'ID', field: 'id' },
     firstName: { header: 'First Name', field: 'firstName' },
     lastLame: { header: 'Last Name', field: 'lastLame' },
@@ -49,9 +49,14 @@ export const Tables: FC = () => {
     ipAddress: { header: 'IP Address', field: 'ipAddress' },
   };
 
+  const { columns, pickerProps } = useColumns<Person>('tables-demo', baseColumns);
+
   return (
     <>
-      Data Table
+      <Flex align="center" justify="between" fullWidth>
+        Data Table
+        <ColumnsPicker {...pickerProps} />
+      </Flex>
       <DataTable
         rows={rows}
         columns={columns}

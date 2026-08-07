@@ -10,6 +10,7 @@ import {
   MenuIcon,
   MoveHorizontalIcon,
   RectangleHorizontalIcon,
+  SlidersHorizontalIcon,
   SquareDotIcon,
   TableIcon,
   TextCursorIcon,
@@ -30,6 +31,7 @@ import { Hints } from './pages/Hints';
 import { Home } from './pages/Home';
 import { Menus } from './pages/Menus';
 import { ResizablePage } from './pages/Resizable';
+import { Switches } from './pages/Switches';
 import { Tables } from './pages/Tables';
 import { Tabs } from './pages/Tabs';
 import { Toasts } from './pages/Toasts';
@@ -76,6 +78,11 @@ export const App: FC = () => {
                   pathname: 'badges',
                   title: 'Badges',
                   Icon: BadgeIcon,
+                },
+                {
+                  pathname: 'switches',
+                  title: 'Switches',
+                  Icon: SlidersHorizontalIcon,
                 },
                 {
                   pathname: 'hints',
@@ -158,6 +165,7 @@ export const App: FC = () => {
           <Route path="" element={<Navigate to="buttons" replace />} />
           <Route path="buttons" element={<Buttons />} />
           <Route path="badges" element={<Badges />} />
+          <Route path="switches" element={<Switches />} />
           <Route path="hints" element={<Hints />} />
           <Route path="form-controls" element={<FormControls />} />
           <Route path="resizable" element={<ResizablePage />} />
