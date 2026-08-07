@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.210](https://github.com/bacali95/tw-react-components/compare/v0.0.209...v0.0.210) (2026-08-07)
+
+
+### Bug Fixes
+
+* fix Badge hover state when no onClick passed ([553db61](https://github.com/bacali95/tw-react-components/commit/553db61d46b9fed663ca20889589f73ea0ecdb52))
+
 ### [0.0.209](https://github.com/bacali95/tw-react-components/compare/v0.0.208...v0.0.209) (2026-08-07)
 
 
