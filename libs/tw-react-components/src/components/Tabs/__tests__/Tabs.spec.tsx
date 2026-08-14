@@ -81,7 +81,7 @@ describe('Tabs Component', () => {
 
       const list = screen.getByTestId('tabs-list');
       expect(list).toBeInTheDocument();
-      expect(list).toHaveClass('inline-flex', 'w-full', 'rounded-lg', 'border');
+      expect(list).toHaveClass('inline-flex', 'w-full', 'rounded-lg');
     });
 
     it('applies custom className while maintaining default classes', () => {
@@ -127,7 +127,12 @@ describe('Tabs Component', () => {
 
       const trigger = screen.getByTestId('tabs-trigger');
       expect(trigger).toBeInTheDocument();
-      expect(trigger).toHaveClass('inline-flex', 'w-full', 'rounded-md');
+      expect(trigger).toHaveClass(
+        'inline-flex',
+        'w-full',
+        'first:rounded-l-lg',
+        'last:rounded-r-lg',
+      );
       expect(trigger).toHaveAttribute('data-state', 'active');
       expect(trigger).toHaveTextContent('Tab 1');
     });
@@ -146,7 +151,12 @@ describe('Tabs Component', () => {
 
       const trigger = screen.getByTestId('tabs-trigger');
       expect(trigger).toHaveClass('custom-trigger-class');
-      expect(trigger).toHaveClass('inline-flex', 'w-full', 'rounded-md'); // Default classes
+      expect(trigger).toHaveClass(
+        'inline-flex',
+        'w-full',
+        'first:rounded-l-lg',
+        'last:rounded-r-lg',
+      ); // Default classes
     });
 
     it('applies custom dataTestId', () => {

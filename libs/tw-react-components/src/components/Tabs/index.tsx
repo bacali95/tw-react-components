@@ -23,7 +23,7 @@ type TabsListProps = ComponentProps<typeof TabsPrimitive.List> & {
 const TabsList: FC<TabsListProps> = ({ className, dataTestId = 'tabs-list', ...props }) => (
   <TabsPrimitive.List
     className={cn(
-      'inline-flex w-full items-center justify-center gap-1 rounded-lg border bg-slate-100 p-1 text-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-500',
+      'inline-flex w-full items-center justify-center rounded-lg bg-slate-100 text-slate-400 dark:bg-slate-900 dark:text-slate-500',
       className,
     )}
     data-testid={dataTestId}
@@ -43,8 +43,8 @@ const TabsTrigger: FC<TabsTriggerProps> = ({
 }) => (
   <TabsPrimitive.Trigger
     className={cn(
-      'inline-flex w-full cursor-pointer items-center justify-center rounded-md px-2 py-1.5 font-medium whitespace-nowrap transition-all hover:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800',
-      'data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-700 dark:data-[state=active]:text-white',
+      'inline-flex w-full cursor-pointer items-center justify-center px-2 py-1.5 font-medium whitespace-nowrap transition-all hover:bg-slate-200 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-slate-800',
+      'first:rounded-l-lg last:rounded-r-lg data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-700 dark:data-[state=active]:text-white',
       className,
     )}
     data-testid={dataTestId}
