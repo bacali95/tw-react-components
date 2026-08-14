@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.216](https://github.com/bacali95/tw-react-components/compare/v0.0.215...v0.0.216) (2026-08-14)
+
+
+### Features
+
+* **Layout:** update item filtering logic to include visible sub-items and add comprehensive tests for Layout component ([6a933bc](https://github.com/bacali95/tw-react-components/commit/6a933bc55a6289b19b4ca7a0a2911ad02e7ab12f))
+
 ### [0.0.215](https://github.com/bacali95/tw-react-components/compare/v0.0.214...v0.0.215) (2026-08-14)
 
 ### [0.0.214](https://github.com/bacali95/tw-react-components/compare/v0.0.213...v0.0.214) (2026-08-07)
