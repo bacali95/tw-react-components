@@ -74,7 +74,7 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({
         )}
         <Sidebar.Content className="gap-0">
           {items
-            .filter((item) => !item.hidden)
+            .filter((item) => !item.hidden || item.items?.some((subItem) => !subItem.hidden))
             .map((item, index) =>
               item.type === 'item' ? (
                 <Sidebar.Group key={index}>
