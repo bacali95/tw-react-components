@@ -69,15 +69,3 @@ export type ResolvePath<T, Path extends Paths<T>> = Path extends ''
             ? T[Field]
             : never
         : T;
-
-type TrimDot<T> = T extends `${infer Head}.` ? TrimDot<Head> : T;
-
-export type ExcludeIndex<T> = TrimDot<
-  T extends `${infer Head}.${infer Tail}`
-    ? Head extends `${number}`
-      ? ExcludeIndex<Tail>
-      : `${Head}.${ExcludeIndex<Tail>}`
-    : T extends `${number}`
-      ? ''
-      : T
->;
