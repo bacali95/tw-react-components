@@ -21,12 +21,13 @@ import type { PaginationProps } from '../Pagination';
 import { Pagination } from '../Pagination';
 import { Spinner } from '../Spinner';
 import { Table } from '../Table';
-import type { Color, Paths, ResolvePath } from '../types';
+import type { Color, ExcludeIndex, Paths, ResolvePath } from '../types';
 
 export type DataTableColumn<T, Field extends Paths<T> = Paths<T>> = {
   className?: string;
   header: ReactNode;
   field: Field;
+  sortingField?: ExcludeIndex<Field>;
   noSorting?: boolean;
   hide?: boolean;
   align?: ComponentProps<'td'>['align'];
@@ -39,7 +40,7 @@ export type DataTableColumns<T> = Partial<{
 }>;
 
 export type DataTableSorting<T, Field extends Paths<T> = Paths<T>> = {
-  field: Field;
+  field: ExcludeIndex<Field>;
   direction: 'asc' | 'desc';
   comparator: (a: ResolvePath<T, Field>, b: ResolvePath<T, Field>) => number;
 };
@@ -216,7 +217,10 @@ export function DataTable<T>({
               align={column.align ?? 'left'}
               onClick={
                 !isLoading && sorting && !column.noSorting
-                  ? handleSorting(column.field, column.comparator)
+                  ? handleSorting(
+                      column.sortingField ?? (column.field as ExcludeIndex<Paths<T>>),
+                      column.comparator,
+                    )
                   : undefined
               }
               dataTestId={`${dataTestId}-column-${column.field}`}
@@ -224,7 +228,7 @@ export function DataTable<T>({
               {column.header}
               {sorting &&
                 !column.noSorting &&
-                (sorting.sorting?.field !== column.field ? (
+                (sorting.sorting?.field !== (column.sortingField ?? column.field) ? (
                   <ArrowUpDownIcon className="absolute top-1/2 float-right ml-1 hidden h-4 w-4 -translate-y-1/2 group-hover:inline-block" />
                 ) : sorting.sorting?.direction === 'asc' ? (
                   <SortAscIcon className="absolute top-1/2 float-right ml-1 inline-block h-4 w-4 -translate-y-1/2" />
