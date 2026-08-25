@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.217](https://github.com/bacali95/tw-react-components/compare/v0.0.216...v0.0.217) (2026-08-25)
+
+
+### Features
+
+* **DataTable:** add ExcludeIndex type for improved field handling and update sorting logic ([62c0b57](https://github.com/bacali95/tw-react-components/commit/62c0b57506ba2512253d287cb17722a8ca9e0213))
+
 ### [0.0.216](https://github.com/bacali95/tw-react-components/compare/v0.0.215...v0.0.216) (2026-08-14)
 
 
