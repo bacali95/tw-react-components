@@ -26,30 +26,25 @@ export type Color =
   | 'pink'
   | 'rose';
 
-type NextDepth = {
-  '1': never;
-  '2': '1';
-  '3': '2';
-  '4': '3';
-  '5': '4';
-  '6': '5';
-  '7': '6';
-  '8': '7';
-  '9': '8';
-  '10': '9';
-};
+type Primitive = string | number | boolean | bigint | symbol | undefined | null | Date;
 
-export type Paths<T, Depth extends keyof NextDepth = '10'> = Depth extends keyof NextDepth
-  ? T extends ReadonlyArray<infer R>
-    ? `${number}` | `${number}.${Paths<R, NextDepth[Depth]>}`
-    : T extends Date
-      ? never
+type Prev = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+export type Paths<T, D extends number = 10> = D extends 0
+  ? never
+  : T extends Primitive
+    ? never
+    : T extends readonly (infer U)[]
+      ? `${number}` | (Paths<U, Prev[D]> extends infer P extends string ? `${number}.${P}` : never)
       : T extends object
         ? {
-            [K in keyof T]: `${Exclude<K, symbol>}${'' | `.${Paths<T[K], NextDepth[Depth]>}`}`;
-          }[keyof T]
-        : never
-  : never;
+            [K in Extract<keyof T, string>]: T[K] extends Primitive
+              ? K
+              : Paths<T[K], Prev[D]> extends infer P extends string
+                ? K | `${K}.${P}`
+                : K;
+          }[Extract<keyof T, string>]
+        : never;
 
 export type ResolvePath<T, Path extends Paths<T>> = Path extends ''
   ? T
